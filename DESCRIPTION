@@ -1,0 +1,43 @@
+Package: twdata
+Type: Package
+Title: National Timing Windows Dataset
+Version: 0.0.0.9000
+Authors@R: c(
+    person("David", "Beauchesne", email = "david.beauchesne@insileco.io", role = c("aut","cre"),
+           comment = c(ORCID = "0000-0001-6619-9874")),
+    person("Kevin", "Cazelles", email = "kevin.cazelles@insileco.io", role = c("aut"),
+           comment = c(ORCID = "0000-0002-3590-8161")))
+Description: Research Compendium used to create the National Timing Windows Dataset
+URL: https://github.com/inSilecoInc/timingWindowsData
+BugReports: https://github.com/inSilecoInc/timingWindowsData/issues
+License: GPL (>= 2)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 4.0)
+Imports: 
+    archive,
+    data.table,
+    dplyr,
+    exactextractr,
+    fasterize,
+    fs,
+    glue,
+    graphicsutils,
+    here,
+    mapview,
+    quarto,
+    raster,
+    rlang,
+    sf,
+    smoothr,
+    stars,
+    stringr,
+    suncalc,
+    units,
+    vroom,
+    whisker,
+    yaml,
+    xaringan,
+    xaringanExtra

@@ -1,0 +1,33 @@
+---
+title: "Introduction"
+---
+
+
+# Introduction
+
+## Background 
+
+
+
+## Objective & scope
+
+
+### Specific tasks
+
+
+
+## Area of interest {#sec-aoi}
+
+```{r aoiarea, echo = FALSE}
+# aoi <- sf::st_read("../../workspace/data/harvested/aoi-1.0.0/processed/aoi.gpkg", quiet = TRUE)
+# aoi_area <- aoi |>
+#   sf::st_make_valid() |>
+#   sf::st_area() |>
+#   units::set_units(km^2) |>
+#   sum() |>
+#   as.numeric() |>
+#   round(0)
+```
+
+
+## Notes & references
