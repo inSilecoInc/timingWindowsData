@@ -1,0 +1,95 @@
+pipeline:
+  id: e950ce9d-5743-4901-91bd-a6d7e4a1fd55
+  name: atlas_of_canada_hydrology
+  version: 1.0.0
+  package_version: 0.0.0.9000
+  created_at: 2024-10-01 14:46:52
+  last_modified: 2024-10-01 14:46:52
+  description: "The Atlas of Canada National Scale Data 1:1,000,000 Series consists of boundary, coast, island, place name, railway, river, road, road ferry and waterbody data sets that were compiled to be used for atlas large scale mapping. These data sets have been integrated so that their relative positions are cartographically correct."
+
+  metadata:
+    source_name: "Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies & Rivers"
+    data_type: "GIS Data"
+    file_size: "Not specified"
+    license: "Open Government Licence - Canada"
+    last_updated: "2022-02-22"
+    geographic_coverage:
+      region: "Canada"
+      bounding_box:
+        - 40.0    # Latitude min
+        - -142.0  # Longitude min
+        - 90.0    # Latitude max
+        - -50.0   # Longitude max
+    temporal_coverage:
+      start_date: "2014-09-05"
+    variables:
+      - boundary
+      - coast
+      - island
+      - place name
+      - railway
+      - river
+      - road
+      - road ferry
+      - waterbody
+    data_quality: 
+      - "Data integrated to maintain cartographic correctness"
+      - "Data outside Canada included only for contextual completeness"
+
+  bibliography:
+    - "@TechReport{nrcan2022a,
+        title = {Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies},
+        author = {Natural Resources Canada},
+        year = {2022},
+        institution = {Natural Resources Canada},
+        url = {https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065},
+      }"
+    - "@TechReport{nrcan2022b,
+        title = {Atlas of Canada National Scale Data 1:1,000,000 - Rivers},
+        author = {Natural Resources Canada},
+        year = {2022},
+        institution = {Natural Resources Canada},
+        url = {https://open.canada.ca/data/en/dataset/87bb794c-eabf-5eea-bdb3-61d0338d9594},
+      }"
+
+  download:
+    sources:
+      - name: "Schema PDF"
+        source_type: "http"
+        urls: "https://ftp.geogratis.gc.ca/pub/nrcan_rncan/vector/framework_cadre/Atlas_of_Canada_1M/AC_1M_Schema_Dissemination_2017.pdf"
+        output: "AC_1M_Schema_Dissemination_2017.pdf"
+        format: "pdf"
+      
+      - name: "English Metadata PDF"
+        source_type: "http"
+        urls: "https://ftp.geogratis.gc.ca/pub/nrcan_rncan/vector/framework_cadre/Atlas_of_Canada_1M/AC_1M_metadata_EN_201705.pdf"
+        output: "AC_1M_metadata_EN_201705.pdf"
+        format: "pdf"
+      
+      - name: "Waterbodies GDB"
+        source_type: "http"
+        urls: "https://ftp.geogratis.gc.ca/pub/nrcan_rncan/vector/framework_cadre/Atlas_of_Canada_1M/hydrology/AC_1M_Waterbodies.gdb.zip"
+        output: "AC_1M_Waterbodies.gdb.zip"
+        format: "zip"
+      
+      - name: "Rivers GDB"
+        source_type: "http"
+        urls: "https://ftp.geogratis.gc.ca/pub/nrcan_rncan/vector/framework_cadre/Atlas_of_Canada_1M/hydrology/AC_1M_Rivers.gdb.zip"
+        output: "AC_1M_Rivers.gdb.zip"
+        format: "zip"
+
+  processing:
+    sources:
+      - name: hydrology
+        script: prc_atlas_of_canada_hydrology
+        input_files:
+          - Waterbodies GDB
+          - Rivers GDB
+        output_files: 
+          - waterbodies.gpkg
+          - rivers.gpkg
+
+  output:
+    output_dir: "workspace/data/harvested/"
+    log_dir: "workspace/logs/"
+    archive_raw: true

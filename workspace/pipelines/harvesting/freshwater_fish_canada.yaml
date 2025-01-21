@@ -1,0 +1,61 @@
+pipeline:
+  id: e36167b9-1aa9-499b-a242-e9e85b7479cb
+  name: freshwater_fish_canada
+  version: 1.0.0
+  package_version: 0.0.0.9000
+  created_at: 2024-10-17 16:41:08
+  last_modified: 2025-01-21 10:30:00
+  description: "Harvest fish species data from FishBase for freshwater species in Canada"
+
+  metadata:
+    source_name: "FishBase Species Checklist"     # Name of the data source
+    data_type: "HTML Table"                       # Data format
+    license: "Creative Commons Attribution"       # License information
+    last_updated: "2023-08-01"                    # Date of the last update from the source
+    geographic_coverage:
+      region: "Canada"
+    temporal_coverage:
+      start_date: "2000-01-01"
+      end_date: "2023-12-31"
+    variables:                                   # List of key variables in the table
+      - id
+      - species
+      - family
+      - order
+      - habitat
+    data_quality:
+      - "Reviewed on 2023-08-01"
+
+  bibliography:
+    - "@TechReport{fishbase2024,
+        title = {FishBase Freshwater Species Checklist},
+        author = {{Froese, R. and Pauly, D.}},
+        year = {2024},
+        institution = {{FishBase}},
+        note = {Data retrieved from FishBase database},
+      }"
+
+  download:
+    sources:
+      - name: "FishBase Freshwater Species"
+        source_type: "http_table"                 # Use web scraping for HTML tables
+        urls:
+          - "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=fresh"
+        next_button_selector: "a:contains('Next')" # Selector to paginate the website
+        table_index: 2                            # Index of the table to extract
+        output: "fishbase_freshwater_fish_canada.csv"      # Removed manual output file naming
+        format: "csv"                             # Output format
+        credentials: null                         # No credentials required for public data
+
+  processing:
+    sources:
+      - name: freshwater fish species canada
+        script: prc_freshwater_fish_canada
+        input_files:
+          - FishBase Freshwater Species
+        output_files: freshwater_fish_species_canada.csv
+
+  output:
+    output_dir: harvest/freshwater_fish_canada/   # Updated to include pipeline name dynamically
+    log_dir: logs/freshwater_fish_canada/         # Updated to include pipeline name dynamically
+    archive_raw: yes
