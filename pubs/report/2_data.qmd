@@ -39,63 +39,97 @@ data.frame(
   knitr::kable()
 ```
 
-## Canadian Hydrological Features {#sec-canadian-hydrology}
+### Canadian Hydrological Features {#sec-canadian-hydrology}
 
-### Source and Description
+#### Source and Description
 
-The dataset, titled **Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies & Rivers**, was harvested from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065) [@nrcan2022a; @nrcan2022b]. This comprehensive GIS dataset includes spatial and tabular data representing Canada's hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. 
+The dataset, titled **Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies & Rivers**, was harvested from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065) [@nrcan2022a; @nrcan2022b]. This comprehensive GIS dataset includes spatial and tabular data representing Canada's hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.
 
-### Processing Steps
+#### Processing Steps
 
 The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` script. The following steps were performed:
 
 1. **Unzipping**: The compressed GDB files were extracted to a temporary directory for processing.
-2. **Waterbody Processing**:
+2. **Lake Processing**:
    - Loaded the "AC_1M_Waterbodies" layer using the `sf::st_read` function.
-   - Calculated the area and perimeter of each waterbody using `sf::st_area` and `lwgeom::st_perimeter_lwgeom`.
-   - Generated a unique `waterbody_id` for each feature.
-   - Retained relevant columns: `waterbody_id`, `name`, `name_fr`, `area`, and `perimeter`.
-   - Exported the processed data as `waterbodies.gpkg`.
+   - Calculated the area and perimeter of each lake using `sf::st_area` and `lwgeom::st_perimeter_lwgeom`.
+   - Generated a unique `waterbody_id` for each lake and classified it as type `lake`.
+   - Retained relevant columns: `waterbody_id`, `wb_type`, `name`, `name_fr`, `area`, and `perimeter`.
+   - Transformed the data to CRS 4326 and exported it as `lakes_polygons.gpkg`.
+   - Generated centroids for each lake and exported the point layer as `lakes_points.gpkg`.
 3. **River Processing**:
    - Loaded the "AC_1M_Rivers_dense" layer using the `sf::st_read` function.
-   - Calculated the length of each river feature using `sf::st_length`.
-   - Generated a unique `river_id` for each feature.
-   - Retained relevant columns: `river_id`, `name`, `name_fr`, and `length`.
-   - Exported the processed data as `rivers.gpkg`.
+   - Calculated the length of each river segment using `sf::st_length`.
+   - Generated a unique `waterbody_id` for each river and classified it as type `river`.
+   - Retained relevant columns: `waterbody_id`, `wb_type`, `name`, `name_fr`, and `length`.
+   - Transformed the data to CRS 4326 and exported it as `rivers_lines.gpkg`.
+   - Sampled points along each river segment at the mid-point of each rivers, cast the lines to points, and exported as `rivers_points.gpkg`.
 4. **Cleanup**: Temporary files created during processing were deleted.
 
-### Processed Data Structure
+#### Processed Data Structure
 
-The structure of the processed waterbody dataset is as follows:
+The structure of the processed lake polygon dataset is as follows:
 
 ```{r}
-#| label: tbl-waterbodies
-#| tbl-cap: "Structure of the processed waterbody dataset for Canada"
+#| label: tbl-lakes-polygons
+#| tbl-cap: "Structure of the processed lake polygon dataset for Canada"
 data.frame(
-  Column_Name = c("waterbody_id", "name", "name_fr", "area", "perimeter"),
+  Column_Name = c("waterbody_id", "wb_type", "name", "name_fr", "area", "perimeter"),
   Description = c(
-    "Unique identifier for each waterbody feature.",
-    "Name of the waterbody in English.",
-    "Name of the waterbody in French.",
-    "Surface area of the waterbody in square kilometers.",
-    "Perimeter of the waterbody in kilometers."
+    "Unique identifier for each lake feature.",
+    "Type of waterbody, always 'lake' for this dataset.",
+    "Name of the lake in English.",
+    "Name of the lake in French.",
+    "Surface area of the lake in square kilometers.",
+    "Perimeter of the lake in kilometers."
   )
 ) |>
   knitr::kable()
 ```
 
-The structure of the processed river dataset is as follows:
+The structure of the processed lake point dataset is as follows:
 
 ```{r}
-#| label: tbl-rivers
-#| tbl-cap: "Structure of the processed river dataset for Canada"
+#| label: tbl-lakes-points
+#| tbl-cap: "Structure of the processed lake point dataset for Canada"
 data.frame(
-  Column_Name = c("river_id", "name", "name_fr", "length"),
+  Column_Name = c("waterbody_id", "geom"),
   Description = c(
-    "Unique identifier for each river feature.",
+    "Unique identifier for each lake feature.",
+    "Centroid geometry of the lake in geographic coordinates (CRS 4326)."
+  )
+) |>
+  knitr::kable()
+```
+
+The structure of the processed river line dataset is as follows:
+
+```{r}
+#| label: tbl-rivers-lines
+#| tbl-cap: "Structure of the processed river line dataset for Canada"
+data.frame(
+  Column_Name = c("waterbody_id", "wb_type", "name", "name_fr", "length"),
+  Description = c(
+    "Unique identifier for each river segment.",
+    "Type of waterbody, always 'river' for this dataset.",
     "Name of the river in English.",
     "Name of the river in French.",
-    "Length of the river in kilometers."
+    "Length of the river segment in kilometers."
+  )
+) |>
+  knitr::kable()
+```
+
+The structure of the processed river point dataset is as follows:
+
+```{r}
+#| label: tbl-rivers-points
+#| tbl-cap: "Structure of the processed river point dataset for Canada"
+data.frame(
+  Column_Name = c("waterbody_id", "geom"),
+  Description = c(
+    "Unique identifier for each river segment.",
+    "Sampled point geometry at the mid-point of the river."
   )
 ) |>
   knitr::kable()

@@ -86,8 +86,10 @@ pipeline:
           - Waterbodies GDB
           - Rivers GDB
         output_files: 
-          - waterbodies.gpkg
-          - rivers.gpkg
+          - lakes_polygons.gpkg
+          - lakes_points.gpkg
+          - rivers_lines.gpkg
+          - rivers_points.gpkg
 
   output:
     output_dir: "workspace/data/harvested/"

@@ -26,8 +26,10 @@ list(
             prc_atlas_of_canada_hydrology(output_path = "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed", 
                 input_files = list(tg_e950ce9d_5743_4901_91bd_a6d7e4a1fd55_Waterbodies_GDB, 
                   tg_e950ce9d_5743_4901_91bd_a6d7e4a1fd55_Rivers_GDB))
-            c("workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/waterbodies.gpkg", 
-            "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/rivers.gpkg"
+            c("workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/lakes_polygons.gpkg", 
+            "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/lakes_points.gpkg", 
+            "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/rivers_lines.gpkg", 
+            "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/rivers_points.gpkg"
             )
         }, format = "file")),
     list(tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Freshwater_Species, 
