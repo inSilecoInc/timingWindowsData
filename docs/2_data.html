@@ -88,6 +88,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -160,14 +189,9 @@ div.csl-indent {
   <li><a href="#source-and-description" id="toc-source-and-description" class="nav-link" data-scroll-target="#source-and-description"><span class="header-section-number">4.1.1</span> Source and Description</a></li>
   <li><a href="#processing-steps" id="toc-processing-steps" class="nav-link" data-scroll-target="#processing-steps"><span class="header-section-number">4.1.2</span> Processing Steps</a></li>
   <li><a href="#processed-data-structure" id="toc-processed-data-structure" class="nav-link" data-scroll-target="#processed-data-structure"><span class="header-section-number">4.1.3</span> Processed Data Structure</a></li>
+  <li><a href="#sec-canadian-hydrology" id="toc-sec-canadian-hydrology" class="nav-link" data-scroll-target="#sec-canadian-hydrology"><span class="header-section-number">4.1.4</span> Canadian Hydrological Features</a></li>
   </ul></li>
-  <li><a href="#sec-canadian-hydrology" id="toc-sec-canadian-hydrology" class="nav-link" data-scroll-target="#sec-canadian-hydrology"><span class="header-section-number">4.2</span> Canadian Hydrological Features</a>
-  <ul class="collapse">
-  <li><a href="#source-and-description-1" id="toc-source-and-description-1" class="nav-link" data-scroll-target="#source-and-description-1"><span class="header-section-number">4.2.1</span> Source and Description</a></li>
-  <li><a href="#processing-steps-1" id="toc-processing-steps-1" class="nav-link" data-scroll-target="#processing-steps-1"><span class="header-section-number">4.2.2</span> Processing Steps</a></li>
-  <li><a href="#processed-data-structure-1" id="toc-processed-data-structure-1" class="nav-link" data-scroll-target="#processed-data-structure-1"><span class="header-section-number">4.2.3</span> Processed Data Structure</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4.3</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4.2</span> References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -263,47 +287,50 @@ Table&nbsp;4.1: Structure of the processed freshwater fish species dataset for C
 </div>
 </div>
 </section>
+<section id="sec-canadian-hydrology" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="sec-canadian-hydrology"><span class="header-section-number">4.1.4</span> Canadian Hydrological Features</h3>
+<section id="source-and-description-1" class="level4" data-number="4.1.4.1">
+<h4 data-number="4.1.4.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">4.1.4.1</span> Source and Description</h4>
+<p>The dataset, titled <strong>Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies &amp; Rivers</strong>, was harvested from <a href="https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022a nrcan2022b">(<a href="#ref-nrcan2022a" role="doc-biblioref">Canada, 2022b</a>, <a href="#ref-nrcan2022b" role="doc-biblioref">2022a</a>)</span>. This comprehensive GIS dataset includes spatial and tabular data representing Canada’s hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.</p>
 </section>
-<section id="sec-canadian-hydrology" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="sec-canadian-hydrology"><span class="header-section-number">4.2</span> Canadian Hydrological Features</h2>
-<section id="source-and-description-1" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">4.2.1</span> Source and Description</h3>
-<p>The dataset, titled <strong>Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies &amp; Rivers</strong>, was harvested from <a href="https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022a nrcan2022b">(<a href="#ref-nrcan2022a" role="doc-biblioref">Canada, 2022b</a>, <a href="#ref-nrcan2022b" role="doc-biblioref">2022a</a>)</span>. This comprehensive GIS dataset includes spatial and tabular data representing Canada’s hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale.</p>
-</section>
-<section id="processing-steps-1" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">4.2.2</span> Processing Steps</h3>
+<section id="processing-steps-1" class="level4" data-number="4.1.4.2">
+<h4 data-number="4.1.4.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">4.1.4.2</span> Processing Steps</h4>
 <p>The harvested raw data was processed using the <code>prc_atlas_of_canada_hydrology</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Unzipping</strong>: The compressed GDB files were extracted to a temporary directory for processing.</li>
-<li><strong>Waterbody Processing</strong>:
+<li><strong>Lake Processing</strong>:
 <ul>
 <li>Loaded the “AC_1M_Waterbodies” layer using the <code>sf::st_read</code> function.</li>
-<li>Calculated the area and perimeter of each waterbody using <code>sf::st_area</code> and <code>lwgeom::st_perimeter_lwgeom</code>.</li>
-<li>Generated a unique <code>waterbody_id</code> for each feature.</li>
-<li>Retained relevant columns: <code>waterbody_id</code>, <code>name</code>, <code>name_fr</code>, <code>area</code>, and <code>perimeter</code>.</li>
-<li>Exported the processed data as <code>waterbodies.gpkg</code>.</li>
+<li>Calculated the area and perimeter of each lake using <code>sf::st_area</code> and <code>lwgeom::st_perimeter_lwgeom</code>.</li>
+<li>Filter lakes to keep only lakes with area &gt; 5 <span class="math inline">\(km^2\)</span>.</li>
+<li>Generated a unique <code>waterbody_id</code> for each lake and classified it as type <code>lake</code>.</li>
+<li>Retained relevant columns: <code>waterbody_id</code>, <code>wb_type</code>, <code>name</code>, <code>name_fr</code>, <code>area</code>, and <code>perimeter</code>.</li>
+<li>Transformed the data to CRS 4326 and exported it as <code>lakes_polygons.gpkg</code>.</li>
+<li>Generated centroids for each lake and exported the point layer as <code>lakes_points.gpkg</code>.</li>
 </ul></li>
 <li><strong>River Processing</strong>:
 <ul>
 <li>Loaded the “AC_1M_Rivers_dense” layer using the <code>sf::st_read</code> function.</li>
-<li>Calculated the length of each river feature using <code>sf::st_length</code>.</li>
-<li>Generated a unique <code>river_id</code> for each feature.</li>
-<li>Retained relevant columns: <code>river_id</code>, <code>name</code>, <code>name_fr</code>, and <code>length</code>.</li>
-<li>Exported the processed data as <code>rivers.gpkg</code>.</li>
+<li>Calculated the length of each river segment using <code>sf::st_length</code>.</li>
+<li>Filter lakes to keep only lakes with length &gt; 10 km.</li>
+<li>Generated a unique <code>waterbody_id</code> for each river and classified it as type <code>river</code>.</li>
+<li>Retained relevant columns: <code>waterbody_id</code>, <code>wb_type</code>, <code>name</code>, <code>name_fr</code>, and <code>length</code>.</li>
+<li>Transformed the data to CRS 4326 and exported it as <code>rivers_lines.gpkg</code>.</li>
+<li>Sampled points along each river segment at the mid-point of each rivers, cast the lines to points, and exported as <code>rivers_points.gpkg</code>.</li>
 </ul></li>
 <li><strong>Cleanup</strong>: Temporary files created during processing were deleted.</li>
 </ol>
 </section>
-<section id="processed-data-structure-1" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">4.2.3</span> Processed Data Structure</h3>
-<p>The structure of the processed waterbody dataset is as follows:</p>
+<section id="processed-data-structure-1" class="level4" data-number="4.1.4.3">
+<h4 data-number="4.1.4.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">4.1.4.3</span> Processed Data Structure</h4>
+<p>The structure of the processed lake polygon dataset is as follows:</p>
 <div class="cell">
-<div id="tbl-waterbodies" class="cell quarto-float anchored">
+<div id="tbl-lakes-polygons" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-waterbodies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.2: Structure of the processed waterbody dataset for Canada
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lakes-polygons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.2: Structure of the processed lake polygon dataset for Canada
 </figcaption>
-<div aria-describedby="tbl-waterbodies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-lakes-polygons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <thead>
@@ -315,23 +342,27 @@ Table&nbsp;4.2: Structure of the processed waterbody dataset for Canada
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">waterbody_id</td>
-<td style="text-align: left;">Unique identifier for each waterbody feature.</td>
+<td style="text-align: left;">Unique identifier for each lake feature.</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">wb_type</td>
+<td style="text-align: left;">Type of waterbody, always ‘lake’ for this dataset.</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">name</td>
-<td style="text-align: left;">Name of the waterbody in English.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">name_fr</td>
-<td style="text-align: left;">Name of the waterbody in French.</td>
+<td style="text-align: left;">Name of the lake in English.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">area</td>
-<td style="text-align: left;">Surface area of the waterbody in square kilometers.</td>
+<td style="text-align: left;">name_fr</td>
+<td style="text-align: left;">Name of the lake in French.</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">area</td>
+<td style="text-align: left;">Surface area of the lake in square kilometers.</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">perimeter</td>
-<td style="text-align: left;">Perimeter of the waterbody in kilometers.</td>
+<td style="text-align: left;">Perimeter of the lake in kilometers.</td>
 </tr>
 </tbody>
 </table>
@@ -340,14 +371,50 @@ Table&nbsp;4.2: Structure of the processed waterbody dataset for Canada
 </figure>
 </div>
 </div>
-<p>The structure of the processed river dataset is as follows:</p>
+<p>The structure of the processed lake point dataset is as follows:</p>
 <div class="cell">
-<div id="tbl-rivers" class="cell quarto-float anchored">
+<div id="tbl-lakes-points" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rivers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.3: Structure of the processed river dataset for Canada
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lakes-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.3: Structure of the processed lake point dataset for Canada
 </figcaption>
-<div aria-describedby="tbl-rivers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-lakes-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column_Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">waterbody_id</td>
+<td style="text-align: left;">Unique identifier for each lake feature.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geom</td>
+<td style="text-align: left;">Centroid geometry of the lake in geographic coordinates (CRS 4326).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The structure of the processed river line dataset is as follows:</p>
+<div class="cell">
+<div id="tbl-rivers-lines" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rivers-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: Structure of the processed river line dataset for Canada
+</figcaption>
+<div aria-describedby="tbl-rivers-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <thead>
@@ -358,20 +425,56 @@ Table&nbsp;4.3: Structure of the processed river dataset for Canada
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">river_id</td>
-<td style="text-align: left;">Unique identifier for each river feature.</td>
+<td style="text-align: left;">waterbody_id</td>
+<td style="text-align: left;">Unique identifier for each river segment.</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">wb_type</td>
+<td style="text-align: left;">Type of waterbody, always ‘river’ for this dataset.</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">name</td>
 <td style="text-align: left;">Name of the river in English.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">name_fr</td>
 <td style="text-align: left;">Name of the river in French.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">length</td>
-<td style="text-align: left;">Length of the river in kilometers.</td>
+<td style="text-align: left;">Length of the river segment in kilometers.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The structure of the processed river point dataset is as follows:</p>
+<div class="cell">
+<div id="tbl-rivers-points" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rivers-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.5: Structure of the processed river point dataset for Canada
+</figcaption>
+<div aria-describedby="tbl-rivers-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column_Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">waterbody_id</td>
+<td style="text-align: left;">Unique identifier for each river segment.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geom</td>
+<td style="text-align: left;">Sampled point geometry at the mid-point of the river.</td>
 </tr>
 </tbody>
 </table>
@@ -382,8 +485,9 @@ Table&nbsp;4.3: Structure of the processed river dataset for Canada
 </div>
 </section>
 </section>
-<section id="references" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="references"><span class="header-section-number">4.3</span> References</h2>
+</section>
+<section id="references" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="references"><span class="header-section-number">4.2</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">

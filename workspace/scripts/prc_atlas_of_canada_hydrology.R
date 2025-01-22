@@ -22,7 +22,7 @@ prc_atlas_of_canada_hydrology <- function(input_files, output_path) {
   lakes$area <- units::set_units(sf::st_area(lakes), km2)
   lakes$perimeter <- units::set_units(lwgeom::st_perimeter_lwgeom(lakes), km)
   lakes <- lakes |>
-    # dplyr::filter(area > units::set_units(5, km2)) |>
+    dplyr::filter(area > units::set_units(5, km2)) |>
     dplyr::mutate(
       waterbody_id = sprintf("wb_lak_%06d", seq_len(dplyr::n())),
       wb_type = "lake"
@@ -41,7 +41,7 @@ prc_atlas_of_canada_hydrology <- function(input_files, output_path) {
   rivers <- sf::st_read(file.path(tmp, "AC_1M_Rivers_dense.gdb"), layer = "AC_1M_Rivers_dense", quiet = TRUE)
   rivers$length <- units::set_units(sf::st_length(rivers), km)
   rivers <- rivers |>
-    # dplyr::filter(area > units::set_units(5, km2)) |>
+    dplyr::filter(length > units::set_units(10, km)) |>
     dplyr::mutate(
       waterbody_id = sprintf("wb_riv_%06d", seq_len(dplyr::n())),
       wb_type = "river"

@@ -53,6 +53,7 @@ The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` s
 2. **Lake Processing**:
    - Loaded the "AC_1M_Waterbodies" layer using the `sf::st_read` function.
    - Calculated the area and perimeter of each lake using `sf::st_area` and `lwgeom::st_perimeter_lwgeom`.
+   - Filter lakes to keep only lakes with area > 5 $km^2$.
    - Generated a unique `waterbody_id` for each lake and classified it as type `lake`.
    - Retained relevant columns: `waterbody_id`, `wb_type`, `name`, `name_fr`, `area`, and `perimeter`.
    - Transformed the data to CRS 4326 and exported it as `lakes_polygons.gpkg`.
@@ -60,6 +61,7 @@ The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` s
 3. **River Processing**:
    - Loaded the "AC_1M_Rivers_dense" layer using the `sf::st_read` function.
    - Calculated the length of each river segment using `sf::st_length`.
+   - Filter lakes to keep only lakes with length > 10 km.
    - Generated a unique `waterbody_id` for each river and classified it as type `river`.
    - Retained relevant columns: `waterbody_id`, `wb_type`, `name`, `name_fr`, and `length`.
    - Transformed the data to CRS 4326 and exported it as `rivers_lines.gpkg`.
