@@ -28,7 +28,7 @@ prc_atlas_of_canada_hydrology <- function(input_files, output_path) {
       wb_type = "lake"
     ) |>
     dplyr::select(waterbody_id, wb_type, name = NAME, name_fr = NOM, area, perimeter) |>
-    sf::st_transform(crs = 4326)
+    sf::st_transform(crs = 3857)
   sf::st_write(lakes, file.path(output_path, "lakes_polygons.gpkg"), delete_dsn = TRUE, quiet = TRUE)
 
   # Points
@@ -47,17 +47,15 @@ prc_atlas_of_canada_hydrology <- function(input_files, output_path) {
       wb_type = "river"
     ) |>
     dplyr::select(waterbody_id, wb_type, name = NAME, name_fr = NOM, length) |>
-    sf::st_transform(crs = 4326)
+    sf::st_transform(crs = 3857)
 
   sf::st_write(rivers, file.path(output_path, "rivers_lines.gpkg"), delete_dsn = TRUE, quiet = TRUE)
 
   # Points
   rivers_pt <- rivers |>
     sf::st_cast("LINESTRING") |>
-    sf::st_transform(crs = 3857) |>
     sf::st_line_sample(sample = 0.5, 1) |>
-    sf::st_cast("POINT") |>
-    sf::st_transform(crs = 4326)
+    sf::st_cast("POINT")
 
   sf::st_sf(
     data.frame(waterbody_id = rivers$waterbody_id),

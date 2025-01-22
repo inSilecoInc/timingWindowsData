@@ -30,6 +30,7 @@ Imports:
     mapview,
     quarto,
     raster,
+    rgbif,
     rlang,
     sf,
     smoothr,

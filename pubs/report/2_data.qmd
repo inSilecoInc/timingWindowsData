@@ -2,8 +2,6 @@
 title: "Data Sources Overview"
 ---
 
-# Data Sources Overview
-
 ## Canadian Outline {#sec-canada-outline}
 
 ### Source and Description
@@ -188,5 +186,75 @@ data.frame(
 ) |>
   knitr::kable()
 ```
+
+## Freshwater Fish Species Occurrences {#sec-freshwater-fish-occurrences}
+
+### Source and Description
+
+The dataset, titled **Global Freshwater Fish Species Occurrences Database**, was retrieved from [Figshare](https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145) [@figshare2025]. This comprehensive dataset compiles freshwater fish species occurrences aggregated at the drainage basin level. The data is associated with the data paper by @tedesco2017 and is designed for analyzing global freshwater biodiversity patterns. 
+
+The dataset includes both spatial data (drainage basins) and tabular data (species occurrences). The drainage basin data covers 3,119 polygons worldwide, while the occurrence table provides over 110,000 records of species distributions across basins. The data has been validated using established taxonomic references such as FishBase.
+
+### Processing Steps
+
+The harvested data was processed using the `prc_freshwater_fish_occurrences` script. The following steps were performed:
+
+1. **Data Extraction**:
+   - The compressed dataset (`freshwater_fish_occurrences.zip`) was unzipped into a temporary directory.
+2. **Drainage Basin Data Processing**:
+   - The shapefile `Basin042017_3119.shp` was loaded using the `sf::st_read` function.
+   - Column names were cleaned and renamed to remove unnecessary prefixes using `janitor::clean_names` and `dplyr::rename_with`.
+   - The cleaned data was exported as `bassins.gpkg` in GeoPackage format.
+3. **Species Occurrence Data Processing**:
+   - The `Occurrence_Table.csv` file was loaded using the `vroom::vroom` function.
+   - Column names were cleaned and renamed similarly to the drainage basin data.
+   - Species names in the `species_name_in_source` and `fishbase_valid_species_name` columns were updated to replace periods (`.`) with spaces.
+   - The processed data was exported as `occurrences.csv`.
+
+### Processed Data Structure
+
+The structure of the processed drainage basin dataset (`bassins.gpkg`) is as follows:
+
+```{r}
+#| label: tbl-bassins
+#| tbl-cap: "Structure of the processed drainage basin dataset"
+data.frame(
+  Column_Name = c("basin_name", "country", "ecoregion", "endorheic", "out_longit", "out_latit", "med_longit", "med_latit", "surf_area", "geometry"),
+  Description = c(
+    "Name of the drainage basin.",
+    "Country where the basin is located.",
+    "Ecoregion associated with the basin.",
+    "Indicator of whether the basin is endorheic (closed basin).",
+    "Longitude of the basin outlet.",
+    "Latitude of the basin outlet.",
+    "Median longitude of the basin.",
+    "Median latitude of the basin.",
+    "Surface area of the basin in square kilometers.",
+    "Polygon geometry of the basin."
+  )
+) |>
+  knitr::kable()
+```
+
+The structure of the processed species occurrence dataset (`occurrences.csv`) is as follows:
+
+```{r}
+#| label: tbl-occurrences
+#| tbl-cap: "Structure of the processed species occurrence dataset"
+data.frame(
+  Column_Name = c("basin_name", "species_name_in_source", "native_exotic_status", "tsn_itis_code", "fishbase_species_code", "fishbase_valid_species_name", "occurrence_status"),
+  Description = c(
+    "Name of the drainage basin.",
+    "Species name as recorded in the source.",
+    "Status of the species in the basin (native or exotic).",
+    "Taxonomic Serial Number (TSN) from ITIS.",
+    "Species code from FishBase.",
+    "Valid species name from FishBase.",
+    "Occurrence status of the species in the basin (valid or invalid)."
+  )
+) |>
+  knitr::kable()
+```
+
 
 ## References

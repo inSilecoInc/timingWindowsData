@@ -1,0 +1,75 @@
+pipeline:
+  id: d1c88f68-2fd3-4f3d-afd1-431a4f0630e0
+  name: freshwater_fish_occurrences
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-22 17:43:09
+  last_modified: 2025-01-22 17:43:09
+  description: >
+    This pipeline retrieves the global database of freshwater fish species
+    occurrences in drainage basins published on Figshare. The data is associated
+    with the data paper published in Scientific Data.
+
+  metadata:
+    source_name: "Global Freshwater Fish Species Occurrences Database"
+    data_type: "CSV"
+    file_size: "Variable"
+    license: "Open Data Commons Attribution License"
+    last_updated: null
+    geographic_coverage:
+      region: "Global"
+    temporal_coverage:
+      start_date: null
+      end_date: null
+    variables:
+      - species
+      - drainage_basin
+      - latitude
+      - longitude
+      - occurrence
+    data_quality:
+      - "Data aggregated at the drainage basin level"
+      - "Occurrence validated using established taxonomic references"
+
+  bibliography:
+    - "@Article{tedesco2017,
+        title = {A global database on freshwater fish species occurrences in drainage basins},
+        author = {Tedesco, Pablo A. and Beauchard, Olivier and Bigorne, Rémy and others},
+        journal = {Scientific Data},
+        year = {2017},
+        volume = {4},
+        pages = {170141},
+        doi = {10.1038/sdata.2017.141},
+        url = {https://www.nature.com/articles/sdata2017141},
+      }"
+    - "@TechReport{figshare2025,
+        title = {A global database on freshwater fish species occurrences in drainage basins},
+        author = {Tedesco, Pablo A. and others},
+        year = {2017},
+        institution = {Figshare},
+        url = {https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145},
+      }"
+
+  download:
+    sources:
+      - name: "Freshwater Fish Species Occurrences"
+        source_type: "http_manual"
+        urls:
+          - "https://figshare.com/ndownloader/files/8964583"
+        output: "freshwater_fish_occurrences.zip"
+        credentials: null
+
+  processing:
+    sources:
+      - name: freshwater fish occurrences
+        script: prc_freshwater_fish_occurrences
+        input_files:
+          - Freshwater Fish Species Occurrences
+        output_files:
+          - bassins.gpkg
+          - occurrences.csv
+
+  output:
+    output_dir: "workspace/data/harvested/freshwater_fish_occurrences/"
+    log_dir: "workspace/logs/"
+    archive_raw: true
