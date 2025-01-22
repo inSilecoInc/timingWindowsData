@@ -4,6 +4,58 @@ title: "Data Sources Overview"
 
 # Data Sources Overview
 
+## Canadian Outline {#sec-canada-outline}
+
+### Source and Description
+
+The dataset, titled **Canada Outline**, was generated to create a simplified polygon of Canada's national boundaries. This dataset was produced using the [GADM](https://gadm.org) Level 1 administrative boundary data for Canada, with the geometry simplified for efficient large-scale spatial analysis [@gadm2023]. The resulting GeoPackage file represents Canada and its provinces/territories with reduced geometric complexity. The dataset is suitable for mapping and spatial analysis tasks requiring simplified boundaries.
+
+### Processing Steps
+
+The processed data was generated using the `prc_canada_outline` script. The following steps were undertaken:
+
+1. **Data Acquisition**:
+   - GADM Level 1 administrative boundary data for Canada was retrieved using the `geodata::gadm` function.
+2. **Geometry Simplification**:
+   - Simplified the polygon geometry to reduce data complexity using the `terra::simplifyGeom` function with a tolerance of 0.1.
+3. **Output Generation**:
+   - The simplified boundary dataset was saved as `can_1_simplified.gpkg` in GeoPackage format.
+
+
+### Processed Data Structure
+
+The structure of the simplified dataset is as follows:
+
+```{r}
+#| label: tbl-canada-outline
+#| tbl-cap: "Structure of the simplified Canada outline dataset"
+data.frame(
+  Column_Name = c(
+    "gid_1", "gid_0", "country", "name_1", "varname_1", "nl_name_1",
+    "type_1", "engtype_1", "cc_1", "hasc_1", "iso_1", "geom"
+  ),
+  Description = c(
+    "Unique identifier for the first administrative level.",
+    "Country code for Canada.",
+    "Name of the country (Canada).",
+    "Name of the first administrative level (Province/Territory).",
+    "Alternative or variant names for the region.",
+    "Native language names for the region.",
+    "Type of administrative unit (Province/Territory).",
+    "English type name for the administrative unit.",
+    "Internal code for the administrative region.",
+    "Hierarchical administrative subdivision code.",
+    "ISO code for the administrative region.",
+    "Simplified polygon geometry for the region."
+  )
+) |>
+  knitr::kable()
+```
+
+#### References
+
+- GADM (2025). GADM database of Global Administrative Areas. Retrieved from [https://gadm.org](https://gadm.org).
+
 ## Canadian Freshwater Fish Species {#sec-freshwater-fish}
 
 ### Source and Description
@@ -39,13 +91,13 @@ data.frame(
   knitr::kable()
 ```
 
-### Canadian Hydrological Features {#sec-canadian-hydrology}
+## Canadian Hydrological Features {#sec-canadian-hydrology}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies & Rivers**, was harvested from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065) [@nrcan2022a; @nrcan2022b]. This comprehensive GIS dataset includes spatial and tabular data representing Canada's hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` script. The following steps were performed:
 
@@ -68,7 +120,7 @@ The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` s
    - Sampled points along each river segment at the mid-point of each rivers, cast the lines to points, and exported as `rivers_points.gpkg`.
 4. **Cleanup**: Temporary files created during processing were deleted.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed lake polygon dataset is as follows:
 

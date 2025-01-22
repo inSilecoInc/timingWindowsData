@@ -33,6 +33,7 @@ pipeline:
         year = {2024},
         institution = {{FishBase}},
         note = {Data retrieved from FishBase database},
+        url = {https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=fresh},
       }"
 
   download:

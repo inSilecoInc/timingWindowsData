@@ -32,6 +32,12 @@ list(
             "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/rivers_points.gpkg"
             )
         }, format = "file")),
+    list(tar_target(tg_d7a59fef_4cd1_4941_bea6_70d84ae53a5d_canada_outline, 
+    {
+        prc_canada_outline(output_path = "workspace/data/harvested/canada_outline-1.0.0/processed", 
+            input_files = list())
+        "workspace/data/harvested/canada_outline-1.0.0/processed/can_1_simplified.gpkg"
+    }, format = "file")),
     list(tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Freshwater_Species, 
     {
         extract_tables_from_url(urls = "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=fresh", 
