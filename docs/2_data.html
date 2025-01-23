@@ -191,8 +191,6 @@ window.Quarto = {
   <li><a href="#sec-freshwater-fish" id="toc-sec-freshwater-fish" class="nav-link" data-scroll-target="#sec-freshwater-fish"><span class="header-section-number">3.2</span> Canadian Freshwater Fish Species</a>
   <ul class="collapse">
   <li><a href="#source-and-description-1" id="toc-source-and-description-1" class="nav-link" data-scroll-target="#source-and-description-1"><span class="header-section-number">3.2.1</span> Source and Description</a></li>
-  <li><a href="#processing-steps-1" id="toc-processing-steps-1" class="nav-link" data-scroll-target="#processing-steps-1"><span class="header-section-number">3.2.2</span> Processing Steps</a></li>
-  <li><a href="#processed-data-structure-1" id="toc-processed-data-structure-1" class="nav-link" data-scroll-target="#processed-data-structure-1"><span class="header-section-number">3.2.3</span> Processed Data Structure</a></li>
   </ul></li>
   <li><a href="#sec-canadian-hydrology" id="toc-sec-canadian-hydrology" class="nav-link" data-scroll-target="#sec-canadian-hydrology"><span class="header-section-number">3.3</span> Canadian Hydrological Features</a>
   <ul class="collapse">
@@ -218,7 +216,7 @@ window.Quarto = {
   <li><a href="#processing-steps-5" id="toc-processing-steps-5" class="nav-link" data-scroll-target="#processing-steps-5"><span class="header-section-number">3.6.2</span> Processing Steps</a></li>
   <li><a href="#processed-data-structure-5" id="toc-processed-data-structure-5" class="nav-link" data-scroll-target="#processed-data-structure-5"><span class="header-section-number">3.6.3</span> Processed Data Structure</a></li>
   </ul></li>
-  <li><a href="#references-1" id="toc-references-1" class="nav-link" data-scroll-target="#references-1"><span class="header-section-number">3.7</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.7</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -346,45 +344,55 @@ Table&nbsp;3.1: Structure of the simplified Canada outline dataset
 </figure>
 </div>
 </div>
-<section id="references" class="level4" data-number="3.1.3.1">
-<h4 data-number="3.1.3.1" class="anchored" data-anchor-id="references"><span class="header-section-number">3.1.3.1</span> References</h4>
-<ul>
-<li>GADM (2025). GADM database of Global Administrative Areas. Retrieved from <a href="https://gadm.org">https://gadm.org</a>.</li>
-</ul>
-</section>
 </section>
 </section>
 <section id="sec-freshwater-fish" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-freshwater-fish"><span class="header-section-number">3.2</span> Canadian Freshwater Fish Species</h2>
 <section id="source-and-description-1" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">3.2.1</span> Source and Description</h3>
-<p>The dataset, titled <strong>FishBase Freshwater Species Checklist</strong>, was harvested from <a href="https://www.fishbase.se/">FishBase</a> <span class="citation" data-cites="fishbase2024">(<a href="#ref-fishbase2024" role="doc-biblioref">Froese, R. and Pauly, D., 2024</a>)</span>. This comprehensive dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, and order. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.</p>
-</section>
-<section id="processing-steps-1" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">3.2.2</span> Processing Steps</h3>
-<p>The harvested raw data was processed using the <code>prc_freshwater_fish_canada</code> script, which included the following steps:</p>
+<p>The dataset, titled <strong>FishBase Freshwater Species Checklist</strong>, was harvested from <a href="https://www.fishbase.se/">FishBase</a> <span class="citation" data-cites="fishbase2024">(<a href="#ref-fishbase2024" role="doc-biblioref">Froese, R. and Pauly, D., 2024</a>)</span>. This dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, order, and occurrence status. Additional datasets retrieved from FishBase include species status (e.g., threat categories from the <a href="https://www.iucnredlist.org/">IUCN Red List of Threatened Species</a>), and whether the species is classified as game or commercial. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.</p>
+<section id="processing-steps-1" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">3.2.1.1</span> Processing Steps</h4>
+<p>The harvested raw data was processed using the <code>prc_freshwater_fish_canada</code> script. The following steps were performed:</p>
 <ol type="1">
-<li><strong>Data Cleaning</strong>: Column names were standardized using the <code>janitor::clean_names</code> function.</li>
-<li><strong>Field Selection</strong>: The column <code>name_in_country</code> was removed as it was not relevant for this analysis.</li>
-<li><strong>Column Renaming</strong>: The <code>fish_base_name</code> column was renamed to <code>vernacular</code> to provide clarity.</li>
-<li><strong>Data Export</strong>: The processed data was saved as a CSV file named <code>freshwater_fish_species_canada.csv</code>.</li>
+<li><strong>Data Cleaning</strong>:
+<ul>
+<li>Column names in all input files were standardized using the <code>janitor::clean_names</code> function.</li>
+<li>Unnecessary columns, such as <code>name_in_country</code>, were removed.</li>
+</ul></li>
+<li><strong>Field Selection and Renaming</strong>:
+<ul>
+<li>The <code>fish_base_name</code> column was renamed to <code>vernacular</code> for clarity.</li>
+</ul></li>
+<li><strong>Integration</strong>:
+<ul>
+<li>Species occurrence data was joined with additional tables for status, game species, and commercial species using the <code>species</code> column as a key.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>A unique <code>species_id</code> was generated for each species record.</li>
+</ul></li>
+<li><strong>Data Export</strong>:
+<ul>
+<li>The fully integrated and processed dataset was saved as <code>freshwater_fish_species_canada.csv</code>.</li>
+</ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-1" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">3.2.3</span> Processed Data Structure</h3>
+<section id="processed-data-structure-1" class="level4" data-number="3.2.1.2">
+<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">3.2.1.2</span> Processed Data Structure</h4>
 <p>The processed dataset retains the following structure:</p>
 <div class="cell">
-<div id="tbl-freshwater-fish" class="cell quarto-float anchored">
+<div id="tbl-freshwater-fish-extended" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freshwater-fish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freshwater-fish-extended-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for Canada
 </figcaption>
-<div aria-describedby="tbl-freshwater-fish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-freshwater-fish-extended-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 83%">
+<col style="width: 14%">
+<col style="width: 85%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -394,24 +402,40 @@ Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for C
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">species_id</td>
+<td style="text-align: left;">Unique identifier for each fish species entry.</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">species</td>
 <td style="text-align: left;">Scientific name of the fish species.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">vernacular</td>
 <td style="text-align: left;">Common name of the fish species.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">order</td>
 <td style="text-align: left;">Taxonomic order to which the species belongs.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">family</td>
 <td style="text-align: left;">Taxonomic family to which the species belongs.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">occurrence</td>
 <td style="text-align: left;">Occurrence status of the species in Canada (e.g., native).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">threat_category</td>
+<td style="text-align: left;">Threat category assigned to the species, if applicable (e.g., Vulnerable (VU), Endangered (EN)).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">game</td>
+<td style="text-align: left;">Indicator of whether the species is classified as a game species (1 = yes, NA = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">commercial</td>
+<td style="text-align: left;">Indicator of whether the species is classified as a commercial species (1 = yes, NA = no).</td>
 </tr>
 </tbody>
 </table>
@@ -420,6 +444,7 @@ Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for C
 </figure>
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="sec-canadian-hydrology" class="level2" data-number="3.3">
@@ -937,8 +962,8 @@ Table&nbsp;3.10: Structure of the processed watershed dataset
 </div>
 </section>
 </section>
-<section id="references-1" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="references-1"><span class="header-section-number">3.7</span> References</h2>
+<section id="references" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="references"><span class="header-section-number">3.7</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">

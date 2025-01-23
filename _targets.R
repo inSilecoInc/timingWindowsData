@@ -44,10 +44,31 @@ list(
             next_button_selector = "a:contains('Next')", table_index = 2L, 
             header_contains = NULL, output = "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_freshwater_fish_canada.csv")
         "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_freshwater_fish_canada.csv"
+    }, format = "file"), tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Species_Status, 
+    {
+        extract_tables_from_url(urls = "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=threatened", 
+            next_button_selector = "a:contains('Next')", table_index = 2L, 
+            header_contains = NULL, output = "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_fish_status_canada.csv")
+        "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_fish_status_canada.csv"
+    }, format = "file"), tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Game_Species, 
+    {
+        extract_tables_from_url(urls = "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=sports", 
+            next_button_selector = "a:contains('Next')", table_index = 2L, 
+            header_contains = NULL, output = "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_game_fish_canada.csv")
+        "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_game_fish_canada.csv"
+    }, format = "file"), tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Commercial_Species, 
+    {
+        extract_tables_from_url(urls = "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=commercial", 
+            next_button_selector = "a:contains('Next')", table_index = 2L, 
+            header_contains = NULL, output = "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_commercial_fish_canada.csv")
+        "workspace/data/harvested/freshwater_fish_canada-1.0.0/raw/fishbase_commercial_fish_canada.csv"
     }, format = "file"), tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_freshwater_fish_species_canada, 
     {
         prc_freshwater_fish_canada(output_path = "workspace/data/harvested/freshwater_fish_canada-1.0.0/processed", 
-            input_files = list(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Freshwater_Species))
+            input_files = list(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Freshwater_Species, 
+                tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Species_Status, 
+                tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Game_Species, 
+                tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Commercial_Species))
         "workspace/data/harvested/freshwater_fish_canada-1.0.0/processed/freshwater_fish_species_canada.csv"
     }, format = "file")),
     list(tar_target(tg_d1c88f68_2fd3_4f3d_afd1_431a4f0630e0_Freshwater_Fish_Species_Occurrences, 

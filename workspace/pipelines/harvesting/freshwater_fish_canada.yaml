@@ -48,12 +48,46 @@ pipeline:
         format: "csv"                             # Output format
         credentials: null                         # No credentials required for public data
 
+      - name: "FishBase Species Status"
+        source_type: "http_table"                 # Use web scraping for HTML tables
+        urls:
+          - "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=threatened"
+        next_button_selector: "a:contains('Next')" # Selector to paginate the website
+        table_index: 2                            # Index of the table to extract
+        output: "fishbase_fish_status_canada.csv"      # Removed manual output file naming
+        format: "csv"                             # Output format
+        credentials: null                         # No credentials required for public data
+
+      - name: "FishBase Game Species"
+        source_type: "http_table"                 # Use web scraping for HTML tables
+        urls:
+          - "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=sports"
+        next_button_selector: "a:contains('Next')" # Selector to paginate the website
+        table_index: 2                            # Index of the table to extract
+        output: "fishbase_game_fish_canada.csv"      # Removed manual output file naming
+        format: "csv"                             # Output format
+        credentials: null                         # No credentials required for public data
+
+      - name: "FishBase Commercial Species"
+        source_type: "http_table"                 # Use web scraping for HTML tables
+        urls:
+          - "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=commercial"
+        next_button_selector: "a:contains('Next')" # Selector to paginate the website
+        table_index: 2                            # Index of the table to extract
+        output: "fishbase_commercial_fish_canada.csv"      # Removed manual output file naming
+        format: "csv"                             # Output format
+        credentials: null                         # No credentials required for public data
+
+
   processing:
     sources:
       - name: freshwater fish species canada
         script: prc_freshwater_fish_canada
         input_files:
           - FishBase Freshwater Species
+          - FishBase Species Status
+          - FishBase Game Species
+          - FishBase Commercial Species
         output_files: freshwater_fish_species_canada.csv
 
   output:

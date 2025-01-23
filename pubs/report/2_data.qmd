@@ -50,44 +50,53 @@ data.frame(
   knitr::kable()
 ```
 
-#### References
-
-- GADM (2025). GADM database of Global Administrative Areas. Retrieved from [https://gadm.org](https://gadm.org).
 
 ## Canadian Freshwater Fish Species {#sec-freshwater-fish}
 
 ### Source and Description
 
-The dataset, titled **FishBase Freshwater Species Checklist**, was harvested from [FishBase](https://www.fishbase.se/) [@fishbase2024]. This comprehensive dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, and order. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.
+The dataset, titled **FishBase Freshwater Species Checklist**, was harvested from [FishBase](https://www.fishbase.se/) [@fishbase2024]. This dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, order, and occurrence status. Additional datasets retrieved from FishBase include species status (e.g., threat categories from the [IUCN Red List of Threatened Species](https://www.iucnredlist.org/)), and whether the species is classified as game or commercial. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.
 
-### Processing Steps
+#### Processing Steps
 
-The harvested raw data was processed using the `prc_freshwater_fish_canada` script, which included the following steps:
+The harvested raw data was processed using the `prc_freshwater_fish_canada` script. The following steps were performed:
 
-1. **Data Cleaning**: Column names were standardized using the `janitor::clean_names` function.
-2. **Field Selection**: The column `name_in_country` was removed as it was not relevant for this analysis.
-3. **Column Renaming**: The `fish_base_name` column was renamed to `vernacular` to provide clarity.
-4. **Data Export**: The processed data was saved as a CSV file named `freshwater_fish_species_canada.csv`.
+1. **Data Cleaning**: 
+   - Column names in all input files were standardized using the `janitor::clean_names` function.
+   - Unnecessary columns, such as `name_in_country`, were removed.
+2. **Field Selection and Renaming**:
+   - The `fish_base_name` column was renamed to `vernacular` for clarity.
+3. **Integration**:
+   - Species occurrence data was joined with additional tables for status, game species, and commercial species using the `species` column as a key.
+4. **Data Transformation**:
+   - A unique `species_id` was generated for each species record.
+5. **Data Export**:
+   - The fully integrated and processed dataset was saved as `freshwater_fish_species_canada.csv`.
 
-### Processed Data Structure
+#### Processed Data Structure
 
 The processed dataset retains the following structure:
 
 ```{r}
-#| label: tbl-freshwater-fish
+#| label: tbl-freshwater-fish-extended
 #| tbl-cap: "Structure of the processed freshwater fish species dataset for Canada"
 data.frame(
-  Column_Name = c("species", "vernacular", "order", "family", "occurrence"),
+  Column_Name = c("species_id", "species", "vernacular", "order", "family", "occurrence", "threat_category", "game", "commercial"),
   Description = c(
+    "Unique identifier for each fish species entry.",
     "Scientific name of the fish species.",
     "Common name of the fish species.",
     "Taxonomic order to which the species belongs.",
     "Taxonomic family to which the species belongs.",
-    "Occurrence status of the species in Canada (e.g., native)."
+    "Occurrence status of the species in Canada (e.g., native).",
+    "Threat category assigned to the species, if applicable (e.g., Vulnerable (VU), Endangered (EN)).",
+    "Indicator of whether the species is classified as a game species (1 = yes, NA = no).",
+    "Indicator of whether the species is classified as a commercial species (1 = yes, NA = no)."
   )
 ) |>
   knitr::kable()
 ```
+
 
 ## Canadian Hydrological Features {#sec-canadian-hydrology}
 
