@@ -37,7 +37,7 @@ ana_watersheds_species <- function(input_files, output_path) {
     if (length(watersheds_species[[i]] > 0)) {
       watersheds_species[[i]] <- data.frame(
         watershed_id = watersheds$watershed_id[i],
-        species = species$species_id[watersheds_species[[i]]]
+        species_id = species$species_id[watersheds_species[[i]]]
       )
     }
   }

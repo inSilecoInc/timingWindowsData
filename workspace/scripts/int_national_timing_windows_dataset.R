@@ -7,7 +7,9 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
   #   "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/lakes_points.gpkg",
   #   "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/rivers_lines.gpkg",
   #   "workspace/data/harvested/atlas_of_canada_hydrology-1.0.0/processed/rivers_points.gpkg",
-  #   "workspace/data/harvested/national_hydro_network-1.0.0/processed/watersheds.gpkg"
+  #   "workspace/data/harvested/national_hydro_network-1.0.0/processed/watersheds.gpkg",
+  #   "workspace/data/analyzed/waterbodies_species-1.0.0/waterbodies_species.csv",
+  #   "workspace/data/analyzed/watersheds_species-1.0.0/watersheds_species.csv"
   # )
   input_files <- unlist(input_files)
 
@@ -73,13 +75,16 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
   #   description = character(0)
   # )
 
-  # # -----------------------------------------------------------------
-  # # Waterbodies - species
-  # waterbodies_species <- data.frame(
-  #   waterbody_id = character(0),
-  #   species_id = character(0),
-  #   waterbody_species_id = character(0)
-  # )
+  # -----------------------------------------------------------------
+  # Watersheds - species
+  watersheds_species <- input_files[grepl("watersheds_species.csv", input_files)] |>
+    vroom::vroom(progress = FALSE, show_col_types = FALSE)
+
+  # -----------------------------------------------------------------
+  # Waterbodies - species
+  waterbodies_species <- input_files[grepl("waterbodies_species.csv", input_files)] |>
+    vroom::vroom(progress = FALSE, show_col_types = FALSE)
+
 
   # # -----------------------------------------------------------------
   # # Waterbody - species - life processes
@@ -130,7 +135,8 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
   # DBI::dbWriteTable(con, "traits", traits, overwrite = TRUE)
   # DBI::dbWriteTable(con, "wua", wua, overwrite = TRUE)
   # DBI::dbWriteTable(con, "stressors", stressors, overwrite = TRUE)
-  # DBI::dbWriteTable(con, "waterbodies_species", waterbodies_species, overwrite = TRUE)
+  DBI::dbWriteTable(con, "waterbodies_species", waterbodies_species, overwrite = TRUE)
+  DBI::dbWriteTable(con, "watersheds_species", watersheds_species, overwrite = TRUE)
   # DBI::dbWriteTable(con, "waterbodies_species_life_processes", waterbodies_species_life_processes, overwrite = TRUE)
   # DBI::dbWriteTable(con, "wua_stressors", wua_stressors, overwrite = TRUE)
   # DBI::dbWriteTable(con, "species_traits", species_traits, overwrite = TRUE)
@@ -147,8 +153,10 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
     # dm::dm_add_pk(table = "wua", "wua_id") |>
     # dm::dm_add_pk(table = "stressors", "stressor_id") |>
     # dm::dm_add_pk(table = "waterbodies_species", "waterbody_species_id") |>
-    # dm::dm_add_fk(table = "waterbodies_species", "waterbody_id", "waterbodies") |>
-    # dm::dm_add_fk(table = "waterbodies_species", "species_id", "species") |>
+    dm::dm_add_fk(table = "waterbodies_species", "waterbody_id", "waterbodies") |>
+    dm::dm_add_fk(table = "waterbodies_species", "species_id", "species") |>
+    dm::dm_add_fk(table = "watersheds_species", "watershed_id", "watersheds") |>
+    dm::dm_add_fk(table = "watersheds_species", "species_id", "species") |>
     # dm::dm_add_fk(table = "waterbodies_species_life_processes", "waterbody_species_id", "waterbodies_species") |>
     # dm::dm_add_fk(table = "waterbodies_species_life_processes", "life_process_id", "life_processes") |>
     # dm::dm_add_fk(table = "wua_stressors", "wua_id", "wua") |>

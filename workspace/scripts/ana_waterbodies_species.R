@@ -46,7 +46,7 @@ ana_waterbodies_species <- function(input_files, output_path) {
     if (length(lakes_species[[i]] > 0)) {
       lakes_species[[i]] <- data.frame(
         waterbody_id = lakes$waterbody_id[i],
-        species = species$species_id[lakes_species[[i]]]
+        species_id = species$species_id[lakes_species[[i]]]
       )
     }
   }
@@ -61,7 +61,7 @@ ana_waterbodies_species <- function(input_files, output_path) {
     if (length(rivers_species[[i]] > 0)) {
       rivers_species[[i]] <- data.frame(
         waterbody_id = rivers$waterbody_id[i],
-        species = species$species_id[rivers_species[[i]]]
+        species_id = species$species_id[rivers_species[[i]]]
       )
     }
   }

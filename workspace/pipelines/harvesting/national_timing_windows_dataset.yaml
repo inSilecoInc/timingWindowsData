@@ -59,6 +59,10 @@ pipeline:
           name: hydrology
         - id: 217d3c1a-8b05-499c-8d39-9ad96fe305d9
           name: watersheds
+        - id: 4e7387b0-19f5-4951-8dac-6215e3224144
+          name: waterbodies and species intersect
+        - id: 867509cc-57d1-4be5-9750-ab397153a7ee
+          name: watersheds and species intersect
         output_files:
           - national_timing_windows_database.sqlite
           - national_timing_windows_database.svg
