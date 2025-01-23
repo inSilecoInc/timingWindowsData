@@ -1,0 +1,68 @@
+---
+title: "National Timing Windows Dataset"
+---
+
+
+The **National Timing Windows Database** serves as a comprehensive repository for managing and analyzing ecological data related to the assessment of optimal timing windows for human interventions in Canadian waterbodies. This chapter details the step-by-step methodology for integrating diverse datasets into the relational database. The process ensures the data is harmonized, relationships are preserved, and schema integrity is maintained. 
+
+The integration relies on datasets from the following sources:
+
+- **FishBase Freshwater Species Checklist**: Provides information on species distribution and ecological traits for freshwater fish across Canada.
+- **Atlas of Canada Hydrology**: Offers geospatial data on lakes, rivers, and watersheds.
+- **National Hydro Network (NHN)**: Supplies detailed geospatial data on watersheds.
+- **GBIF Species Occurrences**: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.
+
+## Initial Data Preparation
+
+The integration process begins with the preparation of core datasets:
+1. **Watersheds**: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers.
+2. **Waterbodies**: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies.
+3. **Species Data**: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species.
+4. **Spatial Intersections**: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.
+
+## Integration Workflow
+
+The integration is performed using the script `int_national_timing_windows_dataset`, which processes datasets and populates the SQLite relational database:
+
+1. **Database Initialization**:
+   - A SQLite database is created with an initial schema for tables such as `watersheds`, `waterbodies`, `species`, `waterbodies_species`, and `watersheds_species`.
+
+2. **Watershed Data**:
+   - Watershed geometries are read from GeoPackage files and stripped of geometry for relational storage.
+   - The `watersheds` table is populated with watershed attributes such as `watershed_id`.
+
+3. **Waterbody Data**:
+   - Lakes and rivers are processed into separate datasets and concatenated into a single `waterbodies` table.
+   - Attributes include `waterbody_id` and other relevant identifiers.
+
+4. **Species Data**:
+   - Fish species data is enriched with status and trait information.
+   - The `species` table is populated with `species_id`, `species`, and additional attributes such as threat categories.
+
+5. **Spatial Intersections**:
+   - Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in `ana_waterbodies_species`.
+   - Similarly, relationships between species and watersheds are identified using the script `ana_watersheds_species`.
+   - Results are stored in `waterbodies_species` and `watersheds_species` tables.
+
+## Database Structure and Schema
+
+The resulting relational database schema is visualized as part of the integration process. Using the `dm` package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include:
+- `watersheds_species`: Links species to watersheds through `watershed_id` and `species_id`.
+- `waterbodies_species`: Links species to waterbodies (lakes or rivers) through `waterbody_id` and `species_id`.
+- `species`: Serves as the central table connecting species to waterbodies, watersheds, and traits.
+
+```{r}
+#| label: fig-data-schema
+#| fig-cap: "Relational schema of the National Timing Windows Database."
+knitr::include_graphics("../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.png")
+```
+
+## Processed Data Overview
+
+Key tables in the relational database:
+
+- **Watersheds**: Contains metadata on watersheds across Canada, such as `watershed_id`.
+- **Waterbodies**: Includes lakes and rivers with attributes such as `waterbody_id`.
+- **Species**: Comprehensive list of fish species with ecological attributes and status.
+- **Waterbodies-Species Relationship**: Spatial relationships between species and waterbodies.
+- **Watersheds-Species Relationship**: Spatial relationships between species and watersheds.

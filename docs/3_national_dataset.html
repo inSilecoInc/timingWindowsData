@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="David Beauchesne">
-<meta name="author" content="Kevin Cazelles">
 
-<title>National Timing Windows Dataset</title>
+<title>National Timing Windows Dataset - 4&nbsp; National Timing Windows Dataset</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_research_compendium.html" rel="next">
+<link href="./2_data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_national_dataset.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">National Timing Windows Dataset</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -109,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -127,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_national_dataset.html" class="sidebar-item-text sidebar-link">
+  <a href="./3_national_dataset.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">National Timing Windows Dataset</span></span></a>
   </div>
 </li>
@@ -141,16 +139,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
-  <ul class="collapse">
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">1.1</span> Background</a></li>
-  <li><a href="#objective-scope" id="toc-objective-scope" class="nav-link" data-scroll-target="#objective-scope"><span class="header-section-number">1.2</span> Objective &amp; scope</a>
-  <ul class="collapse">
-  <li><a href="#specific-tasks" id="toc-specific-tasks" class="nav-link" data-scroll-target="#specific-tasks"><span class="header-section-number">1.2.1</span> Specific tasks</a></li>
-  </ul></li>
-  <li><a href="#sec-aoi" id="toc-sec-aoi" class="nav-link" data-scroll-target="#sec-aoi"><span class="header-section-number">1.3</span> Area of interest</a></li>
-  <li><a href="#notes-references" id="toc-notes-references" class="nav-link" data-scroll-target="#notes-references"><span class="header-section-number">1.4</span> Notes &amp; references</a></li>
-  </ul></li>
+  <li><a href="#initial-data-preparation" id="toc-initial-data-preparation" class="nav-link active" data-scroll-target="#initial-data-preparation"><span class="header-section-number">4.1</span> Initial Data Preparation</a></li>
+  <li><a href="#integration-workflow" id="toc-integration-workflow" class="nav-link" data-scroll-target="#integration-workflow"><span class="header-section-number">4.2</span> Integration Workflow</a></li>
+  <li><a href="#database-structure-and-schema" id="toc-database-structure-and-schema" class="nav-link" data-scroll-target="#database-structure-and-schema"><span class="header-section-number">4.3</span> Database Structure and Schema</a></li>
+  <li><a href="#processed-data-overview" id="toc-processed-data-overview" class="nav-link" data-scroll-target="#processed-data-overview"><span class="header-section-number">4.4</span> Processed Data Overview</a></li>
   </ul>
 </nav>
     </div>
@@ -159,21 +151,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">National Timing Windows Dataset</h1>
-<p class="subtitle lead">Presentation of datasets</p>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">National Timing Windows Dataset</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Authors</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Beauchesne, PhD </p>
-             <p>Kevin Cazelles, PhD </p>
-          </div>
-  </div>
     
   
     
@@ -184,25 +168,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<section id="background" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="background"><span class="header-section-number">1.1</span> Background</h2>
+<p>The <strong>National Timing Windows Database</strong> serves as a comprehensive repository for managing and analyzing ecological data related to the assessment of optimal timing windows for human interventions in Canadian waterbodies. This chapter details the step-by-step methodology for integrating diverse datasets into the relational database. The process ensures the data is harmonized, relationships are preserved, and schema integrity is maintained.</p>
+<p>The integration relies on datasets from the following sources:</p>
+<ul>
+<li><strong>FishBase Freshwater Species Checklist</strong>: Provides information on species distribution and ecological traits for freshwater fish across Canada.</li>
+<li><strong>Atlas of Canada Hydrology</strong>: Offers geospatial data on lakes, rivers, and watersheds.</li>
+<li><strong>National Hydro Network (NHN)</strong>: Supplies detailed geospatial data on watersheds.</li>
+<li><strong>GBIF Species Occurrences</strong>: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.</li>
+</ul>
+<section id="initial-data-preparation" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="initial-data-preparation"><span class="header-section-number">4.1</span> Initial Data Preparation</h2>
+<p>The integration process begins with the preparation of core datasets: 1. <strong>Watersheds</strong>: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers. 2. <strong>Waterbodies</strong>: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies. 3. <strong>Species Data</strong>: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species. 4. <strong>Spatial Intersections</strong>: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.</p>
 </section>
-<section id="objective-scope" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="objective-scope"><span class="header-section-number">1.2</span> Objective &amp; scope</h2>
-<section id="specific-tasks" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="specific-tasks"><span class="header-section-number">1.2.1</span> Specific tasks</h3>
+<section id="integration-workflow" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="integration-workflow"><span class="header-section-number">4.2</span> Integration Workflow</h2>
+<p>The integration is performed using the script <code>int_national_timing_windows_dataset</code>, which processes datasets and populates the SQLite relational database:</p>
+<ol type="1">
+<li><strong>Database Initialization</strong>:
+<ul>
+<li>A SQLite database is created with an initial schema for tables such as <code>watersheds</code>, <code>waterbodies</code>, <code>species</code>, <code>waterbodies_species</code>, and <code>watersheds_species</code>.</li>
+</ul></li>
+<li><strong>Watershed Data</strong>:
+<ul>
+<li>Watershed geometries are read from GeoPackage files and stripped of geometry for relational storage.</li>
+<li>The <code>watersheds</code> table is populated with watershed attributes such as <code>watershed_id</code>.</li>
+</ul></li>
+<li><strong>Waterbody Data</strong>:
+<ul>
+<li>Lakes and rivers are processed into separate datasets and concatenated into a single <code>waterbodies</code> table.</li>
+<li>Attributes include <code>waterbody_id</code> and other relevant identifiers.</li>
+</ul></li>
+<li><strong>Species Data</strong>:
+<ul>
+<li>Fish species data is enriched with status and trait information.</li>
+<li>The <code>species</code> table is populated with <code>species_id</code>, <code>species</code>, and additional attributes such as threat categories.</li>
+</ul></li>
+<li><strong>Spatial Intersections</strong>:
+<ul>
+<li>Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in <code>ana_waterbodies_species</code>.</li>
+<li>Similarly, relationships between species and watersheds are identified using the script <code>ana_watersheds_species</code>.</li>
+<li>Results are stored in <code>waterbodies_species</code> and <code>watersheds_species</code> tables.</li>
+</ul></li>
+</ol>
 </section>
+<section id="database-structure-and-schema" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="database-structure-and-schema"><span class="header-section-number">4.3</span> Database Structure and Schema</h2>
+<p>The resulting relational database schema is visualized as part of the integration process. Using the <code>dm</code> package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include: - <code>watersheds_species</code>: Links species to watersheds through <code>watershed_id</code> and <code>species_id</code>. - <code>waterbodies_species</code>: Links species to waterbodies (lakes or rivers) through <code>waterbody_id</code> and <code>species_id</code>. - <code>species</code>: Serves as the central table connecting species to waterbodies, watersheds, and traits.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-data-schema" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.png" class="img-fluid figure-img" width="810">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Relational schema of the National Timing Windows Database.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="sec-aoi" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="sec-aoi"><span class="header-section-number">1.3</span> Area of interest</h2>
-</section>
-<section id="notes-references" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="notes-references"><span class="header-section-number">1.4</span> Notes &amp; references</h2>
+<section id="processed-data-overview" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="processed-data-overview"><span class="header-section-number">4.4</span> Processed Data Overview</h2>
+<p>Key tables in the relational database:</p>
+<ul>
+<li><strong>Watersheds</strong>: Contains metadata on watersheds across Canada, such as <code>watershed_id</code>.</li>
+<li><strong>Waterbodies</strong>: Includes lakes and rivers with attributes such as <code>waterbody_id</code>.</li>
+<li><strong>Species</strong>: Comprehensive list of fish species with ecological attributes and status.</li>
+<li><strong>Waterbodies-Species Relationship</strong>: Spatial relationships between species and waterbodies.</li>
+<li><strong>Watersheds-Species Relationship</strong>: Spatial relationships between species and watersheds.</li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -617,11 +655,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./2_data.html" class="pagination-link" aria-label="Data Sources Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Sources Overview</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_research_compendium.html" class="pagination-link" aria-label="Research compendium">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research compendium</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

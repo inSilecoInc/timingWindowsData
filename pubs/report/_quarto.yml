@@ -14,6 +14,7 @@ book:
     - index.qmd
     - 1_research_compendium.qmd
     - 2_data.qmd
+    - 3_national_dataset.qmd
 
 bibliography: [references.bib, ../../workspace/bibliographies/data.bib]
 csl: frontiers.csl
