@@ -19,7 +19,11 @@ Depends:
 Imports: 
     archive,
     data.table,
+    DBI,
+    DiagrammeR,
+    DiagrammeRsvg,
     dplyr,
+    dm,
     exactextractr,
     fasterize,
     fs,

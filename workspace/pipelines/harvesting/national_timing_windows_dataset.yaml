@@ -1,0 +1,69 @@
+pipeline:
+  id: 47a31643-e5a1-4126-9070-909f742c85cd
+  name: national_timing_windows_dataset
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-23 14:02:07
+  last_modified: 2025-01-23 14:02:07
+  description: >
+    This pipeline creates and maintains the structure of the National Timing Windows Dataset 
+    as a relational SQLite database. The database integrates tables for waterbodies, species, 
+    life processes, traits, stressors, and other entities, with relationships described using 
+    primary and foreign keys. A schema diagram is generated to document the database structure.
+
+  metadata:
+    source_name: "National Timing Windows Database"
+    data_type: "SQLite Database"
+    file_size: "Variable"
+    license: "Internal Use Only"
+    last_updated: null
+    geographic_coverage:
+      region: "Canada"
+    temporal_coverage:
+      start_date: null
+      end_date: null
+    variables:
+      - waterbodies
+      - species
+      - life_processes
+      - traits
+      - stressors
+      - waterbodies_species
+      - waterbodies_species_life_processes
+      - wua
+      - wua_stressors
+      - species_traits
+      - stressors_traits
+      - species_stressor_sensitivity
+    data_quality:
+      - "Database schema updated dynamically based on project orchestration."
+      - "Relational integrity enforced through primary and foreign keys."
+
+  bibliography:
+    - "@TechReport{timingwindowsdb2025,
+        title = {National Timing Windows Dataset - Relational Database},
+        author = {inSileco Inc.},
+        year = {2025},
+        institution = {inSileco Inc.}
+      }"
+
+  analysis:
+    sources:
+      - name: national timing windows database
+        description: relational database for the assessment of timing windows in Canada
+        script: int_national_timing_windows_dataset
+        input_files:
+        - id: e36167b9-1aa9-499b-a242-e9e85b7479cb
+          name: freshwater fish species canada
+        - id: e950ce9d-5743-4901-91bd-a6d7e4a1fd55
+          name: hydrology
+        - id: 217d3c1a-8b05-499c-8d39-9ad96fe305d9
+          name: watersheds
+        output_files:
+          - national_timing_windows_database.sqlite
+          - national_timing_windows_database.svg
+
+  output:
+    output_dir: "workspace/data/analyzed/national_timing_windows_db/"
+    log_dir: "workspace/logs/"
+    archive_raw: false
