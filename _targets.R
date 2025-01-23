@@ -111,5 +111,13 @@ list(
         c("workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.sqlite", 
         "workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg"
         )
+    }, format = "file")),
+    list(tar_target(tg_4e7387b0_19f5_4951_8dac_6215e3224144_waterbodies_and_species_intersect, 
+    {
+        ana_waterbodies_species(output_path = "workspace/data/analyzed/waterbodies_species-1.0.0", 
+            input_files = list(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_freshwater_fish_species_canada, 
+                tg_e950ce9d_5743_4901_91bd_a6d7e4a1fd55_hydrology, 
+                tg_8dac83b6_9c80_4faa_ab5a_8e351d9c55fc_gbif_gcs))
+        "workspace/data/analyzed/waterbodies_species-1.0.0/waterbodies_species.csv"
     }, format = "file"))
 )

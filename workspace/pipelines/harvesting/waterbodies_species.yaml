@@ -1,0 +1,28 @@
+pipeline:
+  id: 4e7387b0-19f5-4951-8dac-6215e3224144
+  name: waterbodies_species
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-23 16:00:25
+  last_modified: 2025-01-23 16:00:25
+  description: "This analytical pipeline intersects species occurrence records from the GBIF dataset with geospatial data on lakes from the National Hydro Network. The goal is to identify which species have been observed in specific lakes across Canada. The pipeline determines whether species occurrence points from GBIF fall within the boundaries of lakes and rivers."
+
+  analysis:
+    sources:
+      - name: waterbodies and species intersect
+        description: spatial intersections between species and waterbodies
+        script: ana_waterbodies_species
+        input_files:
+        - id: e36167b9-1aa9-499b-a242-e9e85b7479cb
+          name: freshwater fish species canada
+        - id: e950ce9d-5743-4901-91bd-a6d7e4a1fd55
+          name: hydrology
+        - id: 8dac83b6-9c80-4faa-ab5a-8e351d9c55fc
+          name: gbif gcs
+        output_files:
+          - waterbodies_species.csv
+
+  output:
+    output_dir: "workspace/data/analyzed/national_timing_windows_db/"
+    log_dir: "workspace/logs/"
+    archive_raw: false
