@@ -1,0 +1,59 @@
+pipeline:
+  id: 8dac83b6-9c80-4faa-ab5a-8e351d9c55fc
+  name: gbif
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-22 16:19:24
+  last_modified: 2025-01-22 16:19:24
+  description: >
+    This pipeline retrieves occurrence data for a specified taxonomic group 
+    from the Global Biodiversity Information Facility (GBIF) for analysis.
+
+  metadata:
+    source_name: "GBIF Occurrence Data"
+    data_type: "JSON"
+    file_size: "Variable based on query"
+    license: "GBIF Data User Agreement"
+    last_updated: null
+    geographic_coverage:
+      region: "Global"
+      bounding_box:
+        - -90.0    # Latitude min
+        - -180.0   # Longitude min
+        - 90.0     # Latitude max
+        - 180.0    # Longitude max
+    temporal_coverage:
+      start_date: "2000-01-01"
+      end_date: null
+    variables:
+      - taxonKey
+      - scientificName
+      - countryCode
+      - eventDate
+      - decimalLatitude
+      - decimalLongitude
+    data_quality: 
+      - "Data validated by GBIF"
+      - "Occurrences may include georeferencing errors"
+
+  bibliography:
+    - "@TechReport{gbif2025,
+        title = {GBIF Occurrence Download https://doi.org/10.15468/dl.fxqrjh Accessed from R via rgbif (https://github.com/ropensci/rgbif) on 2025-01-23},
+        author = {{Global Biodiversity Information Facility}},
+        year = {2025},
+        institution = {{GBIF Secretariat}},
+      }"
+
+  download:
+    sources:
+    - name: gbif gcs
+      description: retrieving gbif data from gcs
+      source_type: "gcs"
+      urls: "timing-windows"
+      asset: "GBIF/species_occurrences_gbif.gpkg"
+      credentials: "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json"
+
+  output:
+    output_dir: "workspace/data/harvested/gbif_species_data/"
+    log_dir: "workspace/logs/"
+    archive_raw: true

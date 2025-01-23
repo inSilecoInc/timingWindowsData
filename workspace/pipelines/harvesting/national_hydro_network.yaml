@@ -1,0 +1,70 @@
+pipeline:
+  id: 217d3c1a-8b05-499c-8d39-9ad96fe305d9
+  name: national_hydro_network
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-23 10:08:40
+  last_modified: 2025-01-23 10:08:40
+  description: >
+    This pipeline retrieves the National Hydro Network (NHN) GeoBase dataset,
+    which provides a geometric description and attributes of Canada's inland surface waters.
+    The dataset includes lakes, reservoirs, watercourses, canals, islands, drainage networks,
+    and other related features. Data is sourced from federal, provincial, and territorial
+    partners, and produced to be compliant with the NHN standard.
+
+  metadata:
+    source_name: "National Hydro Network (NHN) GeoBase Series"
+    data_type: "GeoPackage (GPKG)"
+    file_size: "Variable"
+    license: "Open Government Licence - Canada"
+    last_updated: "2022-11-07"
+    geographic_coverage:
+      region: "Canada"
+      bounding_box:
+        - -141.003  # Longitude min
+        - 42.000    # Latitude min
+        - -43.000   # Longitude max
+        - 84.000    # Latitude max
+    temporal_coverage:
+      start_date: null
+      end_date: null
+    variables:
+      - lakes
+      - rivers
+      - drainage networks
+    data_quality:
+      - "Data complies with the NHN standard."
+      - "Produced using the best available federal and provincial data."
+
+  bibliography:
+    - "@TechReport{nrcan2022,
+        title = {National Hydro Network (NHN) - GeoBase Series},
+        author = {Natural Resources Canada},
+        year = {2022},
+        institution = {Natural Resources Canada},
+        url = {https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977},
+      }"
+
+  download:
+    sources:
+      - name: "National Hydro Network GeoBase GPKG"
+        source_type: "http"
+        urls:
+          - "https://ftp.maps.canada.ca/pub/nrcan_rncan/vector/geobase_nhn_rhn/gpkg_en/CA/rhn_nhn_decoupage.gpkg.zip"
+        output: "rhn_nhn_decoupage.gpkg.zip"
+        credentials: null
+        format: "zip"
+
+  processing:
+    sources:
+      - name: watersheds
+        script: prc_national_hydro_network
+        input_files:
+          - National Hydro Network GeoBase GPKG
+        output_files:
+          - watersheds.gpkg
+
+  output:
+    output_dir: "workspace/data/harvested/national_hydro_network/"
+    log_dir: "workspace/logs/"
+    archive_raw: true

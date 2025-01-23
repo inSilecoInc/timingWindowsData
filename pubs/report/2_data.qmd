@@ -257,4 +257,90 @@ data.frame(
 ```
 
 
+## GBIF Species Occurrences {#sec-gbif-species-occurrences}
+
+### Source and Description
+
+The dataset, titled **GBIF Occurrence Data**, was retrieved from the [Global Biodiversity Information Facility (GBIF)](https://www.gbif.org/) [@gbif2025]. This dataset compiles species occurrence records for a specified taxonomic group and geographic region. The retrieved dataset includes spatial and tabular data for over 850,000 records of species occurrences across Canada, starting from 2000. 
+
+It should be noted that the processing steps described below show how the data is downloaded and processed programmatically. However, due to how GBIF manages their data request, we elected to store the downloaded data on our secure Google Cloud Storage and to retrieve them programmatically from there rather than directly on GBIF.
+
+### Processing Steps
+
+The harvested data was processed using the `dwn_gbif` and `prc_gbif` scripts. The following steps were performed:
+
+1. **Data Download**:
+   - A query for specified taxonomic groups and geographic boundaries was submitted to the GBIF API using the `rgbif` package.
+2. **Data Extraction**:
+   - The compressed ZIP file was extracted into a temporary directory.
+   - The occurrence data was read from `occurrence.txt` using the `vroom::vroom` function.
+3. **Data Cleaning and Transformation**:
+   - Selected relevant columns: `species`, `year`, `month`, `day`, `eventDate`, `decimalLatitude`, `decimalLongitude`, and `lifeStage`.
+   - Converted the cleaned data to a spatial data frame using the `sf::st_as_sf` function with geographic coordinates (CRS 4326).
+4. **Export**:
+   - The cleaned and spatially enabled dataset was exported as `species_occurrences_gbif.gpkg` in GeoPackage format.
+
+### Processed Data Structure
+
+The structure of the processed dataset (`species_occurrences_gbif.gpkg`) is as follows:
+
+```{r}
+#| label: tbl-gbif-occurrences
+#| tbl-cap: "Structure of the processed GBIF occurrence dataset"
+data.frame(
+  Column_Name = c("species", "year", "month", "day", "eventDate", "lifeStage", "geometry"),
+  Description = c(
+    "Scientific name of the species.",
+    "Year of the recorded occurrence.",
+    "Month of the recorded occurrence.",
+    "Day of the recorded occurrence.",
+    "Full date and time of the recorded occurrence.",
+    "Life stage of the species at the time of the occurrence (if available).",
+    "Point geometry of the occurrence in geographic coordinates (CRS 4326)."
+  )
+) |>
+  knitr::kable()
+```
+
+
+## National Hydro Network {#sec-national-hydro-network}
+
+### Source and Description
+
+The dataset, titled **National Hydro Network (NHN) GeoBase Series**, was retrieved from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977) [@nrcan2022]. This dataset provides a comprehensive geometric description and a set of basic attributes describing Canada's inland surface waters. The data includes lakes, reservoirs, rivers, canals, drainage networks, and associated features. 
+
+### Processing Steps
+
+The NHN data was processed using the `prc_national_hydro_network` script. The following steps were performed:
+
+1. **Data Extraction**:
+   - The compressed GeoPackage dataset (`rhn_nhn_decoupage.gpkg.zip`) was unzipped into a temporary directory.
+2. **Watershed Data Processing**:
+   - The GeoPackage file (`rhn_nhn_decoupage.gpkg`) was read using the `sf::st_read` function.
+   - All geometries were cast to polygons using `sf::st_cast("GEOMETRYCOLLECTION")` and `sf::st_collection_extract("POLYGON")`.
+   - The geometries were simplified using `sf::st_simplify(dTolerance = 100)` to reduce complexity while maintaining accuracy.
+   - A unique `watershed_id` was generated for each feature using the `dplyr::mutate` function.
+   - Only the `watershed_id` and geometry columns were retained.
+3. **Export**:
+   - The processed watershed data was exported as `watersheds.gpkg` in GeoPackage format.
+
+### Processed Data Structure
+
+The structure of the processed dataset (`watersheds.gpkg`) is as follows:
+
+```{r}
+#| label: tbl-watersheds
+#| tbl-cap: "Structure of the processed watershed dataset"
+data.frame(
+  Column_Name = c("watershed_id", "geom"),
+  Description = c(
+    "Unique identifier for each watershed feature.",
+    "Polygon geometry of the watershed in geographic coordinates (CRS 4326)."
+  )
+) |>
+  knitr::kable()
+```
+
+
+
 ## References

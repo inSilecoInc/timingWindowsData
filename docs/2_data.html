@@ -206,7 +206,19 @@ window.Quarto = {
   <li><a href="#processing-steps-3" id="toc-processing-steps-3" class="nav-link" data-scroll-target="#processing-steps-3"><span class="header-section-number">3.4.2</span> Processing Steps</a></li>
   <li><a href="#processed-data-structure-3" id="toc-processed-data-structure-3" class="nav-link" data-scroll-target="#processed-data-structure-3"><span class="header-section-number">3.4.3</span> Processed Data Structure</a></li>
   </ul></li>
-  <li><a href="#references-1" id="toc-references-1" class="nav-link" data-scroll-target="#references-1"><span class="header-section-number">3.5</span> References</a></li>
+  <li><a href="#sec-gbif-species-occurrences" id="toc-sec-gbif-species-occurrences" class="nav-link" data-scroll-target="#sec-gbif-species-occurrences"><span class="header-section-number">3.5</span> GBIF Species Occurrences</a>
+  <ul class="collapse">
+  <li><a href="#source-and-description-4" id="toc-source-and-description-4" class="nav-link" data-scroll-target="#source-and-description-4"><span class="header-section-number">3.5.1</span> Source and Description</a></li>
+  <li><a href="#processing-steps-4" id="toc-processing-steps-4" class="nav-link" data-scroll-target="#processing-steps-4"><span class="header-section-number">3.5.2</span> Processing Steps</a></li>
+  <li><a href="#processed-data-structure-4" id="toc-processed-data-structure-4" class="nav-link" data-scroll-target="#processed-data-structure-4"><span class="header-section-number">3.5.3</span> Processed Data Structure</a></li>
+  </ul></li>
+  <li><a href="#sec-national-hydro-network" id="toc-sec-national-hydro-network" class="nav-link" data-scroll-target="#sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</a>
+  <ul class="collapse">
+  <li><a href="#source-and-description-5" id="toc-source-and-description-5" class="nav-link" data-scroll-target="#source-and-description-5"><span class="header-section-number">3.6.1</span> Source and Description</a></li>
+  <li><a href="#processing-steps-5" id="toc-processing-steps-5" class="nav-link" data-scroll-target="#processing-steps-5"><span class="header-section-number">3.6.2</span> Processing Steps</a></li>
+  <li><a href="#processed-data-structure-5" id="toc-processed-data-structure-5" class="nav-link" data-scroll-target="#processed-data-structure-5"><span class="header-section-number">3.6.3</span> Processed Data Structure</a></li>
+  </ul></li>
+  <li><a href="#references-1" id="toc-references-1" class="nav-link" data-scroll-target="#references-1"><span class="header-section-number">3.7</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -766,8 +778,167 @@ Table&nbsp;3.8: Structure of the processed species occurrence dataset
 </div>
 </section>
 </section>
-<section id="references-1" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="references-1"><span class="header-section-number">3.5</span> References</h2>
+<section id="sec-gbif-species-occurrences" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-gbif-species-occurrences"><span class="header-section-number">3.5</span> GBIF Species Occurrences</h2>
+<section id="source-and-description-4" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="source-and-description-4"><span class="header-section-number">3.5.1</span> Source and Description</h3>
+<p>The dataset, titled <strong>GBIF Occurrence Data</strong>, was retrieved from the <a href="https://www.gbif.org/">Global Biodiversity Information Facility (GBIF)</a> <span class="citation" data-cites="gbif2025">(<a href="#ref-gbif2025" role="doc-biblioref">Global Biodiversity Information Facility, 2025</a>)</span>. This dataset compiles species occurrence records for a specified taxonomic group and geographic region. The retrieved dataset includes spatial and tabular data for over 850,000 records of species occurrences across Canada, starting from 2000.</p>
+<p>It should be noted that the processing steps described below show how the data is downloaded and processed programmatically. However, due to how GBIF manages their data request, we elected to store the downloaded data on our secure Google Cloud Storage and to retrieve them programmatically from there rather than directly on GBIF.</p>
+</section>
+<section id="processing-steps-4" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="processing-steps-4"><span class="header-section-number">3.5.2</span> Processing Steps</h3>
+<p>The harvested data was processed using the <code>dwn_gbif</code> and <code>prc_gbif</code> scripts. The following steps were performed:</p>
+<ol type="1">
+<li><strong>Data Download</strong>:
+<ul>
+<li>A query for specified taxonomic groups and geographic boundaries was submitted to the GBIF API using the <code>rgbif</code> package.</li>
+</ul></li>
+<li><strong>Data Extraction</strong>:
+<ul>
+<li>The compressed ZIP file was extracted into a temporary directory.</li>
+<li>The occurrence data was read from <code>occurrence.txt</code> using the <code>vroom::vroom</code> function.</li>
+</ul></li>
+<li><strong>Data Cleaning and Transformation</strong>:
+<ul>
+<li>Selected relevant columns: <code>species</code>, <code>year</code>, <code>month</code>, <code>day</code>, <code>eventDate</code>, <code>decimalLatitude</code>, <code>decimalLongitude</code>, and <code>lifeStage</code>.</li>
+<li>Converted the cleaned data to a spatial data frame using the <code>sf::st_as_sf</code> function with geographic coordinates (CRS 4326).</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>The cleaned and spatially enabled dataset was exported as <code>species_occurrences_gbif.gpkg</code> in GeoPackage format.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-4" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="processed-data-structure-4"><span class="header-section-number">3.5.3</span> Processed Data Structure</h3>
+<p>The structure of the processed dataset (<code>species_occurrences_gbif.gpkg</code>) is as follows:</p>
+<div class="cell">
+<div id="tbl-gbif-occurrences" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-gbif-occurrences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.9: Structure of the processed GBIF occurrence dataset
+</figcaption>
+<div aria-describedby="tbl-gbif-occurrences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column_Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">Year of the recorded occurrence.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">month</td>
+<td style="text-align: left;">Month of the recorded occurrence.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">day</td>
+<td style="text-align: left;">Day of the recorded occurrence.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">eventDate</td>
+<td style="text-align: left;">Full date and time of the recorded occurrence.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifeStage</td>
+<td style="text-align: left;">Life stage of the species at the time of the occurrence (if available).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">geometry</td>
+<td style="text-align: left;">Point geometry of the occurrence in geographic coordinates (CRS 4326).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-national-hydro-network" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</h2>
+<section id="source-and-description-5" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="source-and-description-5"><span class="header-section-number">3.6.1</span> Source and Description</h3>
+<p>The dataset, titled <strong>National Hydro Network (NHN) GeoBase Series</strong>, was retrieved from <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022">(<a href="#ref-nrcan2022" role="doc-biblioref">Canada, 2022c</a>)</span>. This dataset provides a comprehensive geometric description and a set of basic attributes describing Canada’s inland surface waters. The data includes lakes, reservoirs, rivers, canals, drainage networks, and associated features.</p>
+</section>
+<section id="processing-steps-5" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="processing-steps-5"><span class="header-section-number">3.6.2</span> Processing Steps</h3>
+<p>The NHN data was processed using the <code>prc_national_hydro_network</code> script. The following steps were performed:</p>
+<ol type="1">
+<li><strong>Data Extraction</strong>:
+<ul>
+<li>The compressed GeoPackage dataset (<code>rhn_nhn_decoupage.gpkg.zip</code>) was unzipped into a temporary directory.</li>
+</ul></li>
+<li><strong>Watershed Data Processing</strong>:
+<ul>
+<li>The GeoPackage file (<code>rhn_nhn_decoupage.gpkg</code>) was read using the <code>sf::st_read</code> function.</li>
+<li>All geometries were cast to polygons using <code>sf::st_cast("GEOMETRYCOLLECTION")</code> and <code>sf::st_collection_extract("POLYGON")</code>.</li>
+<li>The geometries were simplified using <code>sf::st_simplify(dTolerance = 100)</code> to reduce complexity while maintaining accuracy.</li>
+<li>A unique <code>watershed_id</code> was generated for each feature using the <code>dplyr::mutate</code> function.</li>
+<li>Only the <code>watershed_id</code> and geometry columns were retained.</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>The processed watershed data was exported as <code>watersheds.gpkg</code> in GeoPackage format.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-5" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="processed-data-structure-5"><span class="header-section-number">3.6.3</span> Processed Data Structure</h3>
+<p>The structure of the processed dataset (<code>watersheds.gpkg</code>) is as follows:</p>
+<div class="cell">
+<div id="tbl-watersheds" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-watersheds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.10: Structure of the processed watershed dataset
+</figcaption>
+<div aria-describedby="tbl-watersheds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column_Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">watershed_id</td>
+<td style="text-align: left;">Unique identifier for each watershed feature.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geom</td>
+<td style="text-align: left;">Polygon geometry of the watershed in geographic coordinates (CRS 4326).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="references-1" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="references-1"><span class="header-section-number">3.7</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
@@ -777,11 +948,17 @@ Canada, N. R. (2022a). Atlas of canada national scale data 1:1,000,000 - rivers.
 <div id="ref-nrcan2022a" class="csl-entry" role="listitem">
 Canada, N. R. (2022b). Atlas of canada national scale data 1:1,000,000 - waterbodies. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065">https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065</a>.
 </div>
+<div id="ref-nrcan2022" class="csl-entry" role="listitem">
+Canada, N. R. (2022c). National hydro network (NHN) - GeoBase series. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977</a>.
+</div>
 <div id="ref-fishbase2024" class="csl-entry" role="listitem">
 Froese, R. and Pauly, D. (2024). FishBase freshwater species checklist. <span>FishBase</span> Available at: <a href="https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh">https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh</a>.
 </div>
 <div id="ref-gadm2023" class="csl-entry" role="listitem">
 Global Administrative Areas, G. (Database of (2023). GADM database of global administrative areas, version 4.1. GADM Available at: <a href="https://gadm.org">https://gadm.org</a>.
+</div>
+<div id="ref-gbif2025" class="csl-entry" role="listitem">
+Global Biodiversity Information Facility (2025). GBIF occurrence download https://doi.org/10.15468/dl.fxqrjh accessed from r via rgbif (https://github.com/ropensci/rgbif) on 2025-01-23. <span>GBIF Secretariat</span>.
 </div>
 <div id="ref-figshare2025" class="csl-entry" role="listitem">
 Tedesco, P. A. et al. (2017a). A global database on freshwater fish species occurrences in drainage basins. Figshare Available at: <a href="https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145">https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145</a>.
