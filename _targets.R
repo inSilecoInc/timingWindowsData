@@ -38,6 +38,21 @@ list(
             input_files = list())
         "workspace/data/harvested/canada_outline-1.0.0/processed/can_1_simplified.gpkg"
     }, format = "file")),
+    list(tar_target(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_database, 
+    {
+        curl::curl_download("https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.fqz612jwj/download", 
+            "workspace/data/harvested/fishpass-1.0.0/raw/FishPass_Database.zip")
+        "workspace/data/harvested/fishpass-1.0.0/raw/FishPass_Database.zip"
+    }, format = "file"), tar_target(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_processed, 
+    {
+        prc_fishpass(output_path = "workspace/data/harvested/fishpass-1.0.0/processed", 
+            input_files = list(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_database))
+        c("workspace/data/harvested/fishpass-1.0.0/processed/fishpass_behaviour.csv", 
+        "workspace/data/harvested/fishpass-1.0.0/processed/fishpass_morphology.csv", 
+        "workspace/data/harvested/fishpass-1.0.0/processed/fishpass_phenology.csv", 
+        "workspace/data/harvested/fishpass-1.0.0/processed/fishpass_physiology.csv"
+        )
+    }, format = "file")),
     list(tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Freshwater_Species, 
     {
         extract_tables_from_url(urls = "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=fresh", 

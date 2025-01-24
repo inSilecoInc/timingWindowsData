@@ -430,6 +430,146 @@ data.frame(
   knitr::kable()
 ```
 
+## FishPass Database {#sec-fishpass}
+
+The [FishPass Database](https://doi.org/10.5061/dryad.fqz612jwj) [@benoit2023] provides a comprehensive collection of biological attributes that influence fish movement and passage, with a particular focus on species from the Laurentian Great Lakes. This dataset is essential for designing selective fish passage systems that aim to balance connectivity while managing the spread of invasive species. It includes 21 biological attributes, covering phenology, morphology, physiology, and behavioral characteristics for 220 fish species. Data coverage varies across species and attributes, highlighting gaps in knowledge about behavioral traits and potential invasive species.
+
+### Source and Accessibility
+
+- **Source**: Dryad Repository
+- **DOI**: [10.5061/dryad.fqz612jwj](https://doi.org/10.5061/dryad.fqz612jwj)
+- **Accessibility**: CC0 Public Domain Dedication
+- **Data Type**: Tabular CSV files
+- **Coverage**: Laurentian Great Lakes, North America
+- **Processing Script**: `prc_fishpass.R`
+- **Output Files**:
+  - `fishpass_behaviour.csv`
+  - `fishpass_morphology.csv`
+  - `fishpass_phenology.csv`
+  - `fishpass_physiology.csv`
+
+### Processing Steps
+
+1. **Data Cleaning**:
+   - Column names were standardized using `janitor::clean_names()`.
+   - Missing or malformed data were handled appropriately.
+2. **Data Structuring**:
+   - Each CSV file was parsed into tidy data tables, retaining only relevant fields.
+   - Attributes such as migratory status, body morphology, spawning season, and vertical stationing were included.
+3. **Export**:
+   - Cleaned data tables were saved into separate CSV files for each attribute dimension, enabling modular analysis.
+
+### Processed Data Structure
+
+The cleaned dataset is divided into four tables, each containing data for 220 species:
+
+#### Behaviour Data Table
+
+```{r}
+#| label: tbl-fishpass-behaviour
+#| tbl-cap: "Structure of the FishPass Behaviour Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "vertical_station", "schooling_behaviour",
+    "reference_vs", "reference_sb"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Vertical stationing behavior (e.g., demersal, pelagic).",
+    "Tendency for schooling behavior (e.g., schooling, non-schooling).",
+    "Reference for vertical station data.",
+    "Reference for schooling behavior data."
+  )
+) |>
+  knitr::kable()
+```
+
+#### Morphology Data Table
+
+```{r}
+#| label: tbl-fishpass-morphology
+#| tbl-cap: "Structure of the FishPass Morphology Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "maximum_total_length_cm", "body_shape",
+    "aspect_ratio", "eye_size_percent_hl", "reference_mtl"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Maximum recorded total length (cm).",
+    "Overall body shape (e.g., fusiform, elongated).",
+    "Aspect ratio of the fins.",
+    "Eye size as a percentage of head length.",
+    "Reference for maximum total length data."
+  )
+) |>
+  knitr::kable()
+```
+
+#### Phenology Data Table
+
+```{r}
+#| label: tbl-fishpass-phenology
+#| tbl-cap: "Structure of the FishPass Phenology Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "migratory_status", "spatial_scale_of_movement",
+    "spawning_frequency", "spring_spawner", "reference_sf"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Whether the species is migratory or non-migratory.",
+    "Scale of spatial movement (e.g., diadromous, potamodromous).",
+    "Frequency of spawning (e.g., iteroparous).",
+    "Indicates if the species spawns in spring (binary).",
+    "Reference for spawning frequency data."
+  )
+) |>
+  knitr::kable()
+```
+
+#### Physiology Data Table
+
+```{r}
+#| label: tbl-fishpass-physiology
+#| tbl-cap: "Structure of the FishPass Physiology Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "climbing_ability", "hearing_specialization",
+    "trophic_level", "presence_of_ampullary_electroreceptors", "reference_ca"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Ability to climb barriers (binary).",
+    "Hearing specialization (binary).",
+    "Trophic level of the species.",
+    "Presence of ampullary electroreceptors (binary).",
+    "Reference for climbing ability data."
+  )
+) |>
+  knitr::kable()
+```
+
 
 
 ## References

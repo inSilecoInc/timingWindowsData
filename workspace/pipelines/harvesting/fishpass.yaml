@@ -1,0 +1,68 @@
+pipeline:
+  id: 44238b88-cc41-4468-b1fc-7b770c4a4be4
+  name: fishpass
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-24 12:47:54
+  last_modified: 2025-01-24 12:47:54
+  description: |
+    This dataset compiles biological attributes influencing fish movement and passage, 
+    with a focus on species from the Laurentian Great Lakes. It includes data on 
+    phenology, morphology, physiology, and behavior for 220 fish species, 
+    supporting the design of selective fish passage systems to balance connectivity 
+    and invasive species management.
+
+  # Metadata section providing details about the data being harvested
+  metadata:
+    source_name: "Dryad Dataset: fqz612jwj"
+    data_type: "Multiple files"
+    file_size: "Unknown"
+    license: "CC0 Public Domain Dedication"
+    last_updated: "Unknown"
+    geographic_coverage:
+      region: "Great Lakes, North America"
+    temporal_coverage:
+      start_date: "Unknown"
+    variables:
+      - species_data
+      - ecological_parameters
+      - environmental_factors
+    data_quality:
+      - "Data downloaded directly from the Dryad repository."
+
+  # Bibliographic Information
+  bibliography:
+    - "@Misc{benoit2023,
+        title = {FishPass Sortable Attribute Database: Phenological, morphological, physiological, and behavioural characteristics related to passage and movement of Great Lakes fishes [Dataset]},
+        author = {Benoit, David and Zielinski, Dan and Swanson, Reid et al.},
+        year = {2023},
+        publisher = {Dryad},
+        url = {https://doi.org/10.5061/dryad.fqz612jwj}
+      }"
+
+  # Harvest section: Define the sources to download and process
+  download:
+    sources:
+      - name: "FishPass database"
+        source_type: "http_manual"
+        urls:
+          - "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.fqz612jwj/download"
+        output: "FishPass_Database.zip"
+
+  processing:
+    sources:
+      - name: FishPass processed
+        script: prc_fishpass
+        input_files:
+          - FishPass database
+        output_files:
+          - fishpass_behaviour.csv
+          - fishpass_morphology.csv
+          - fishpass_phenology.csv
+          - fishpass_physiology.csv
+
+  # Output section: final output of the processed data
+  output:
+    output_dir: "workspace/data/harvested/dryad_dataset/"
+    log_dir: "workspace/logs/dryad_dataset/"
+    archive_raw: true
