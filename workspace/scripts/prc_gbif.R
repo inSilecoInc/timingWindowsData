@@ -1,4 +1,4 @@
-download_gbif <- function(input_files, output_path) {
+prc_gbif <- function(input_files, output_path) {
   # output_path <- "workspace/data/analyzed/gbif-1.0.0/"
   # # dir.create(output_path)
   # input_files <- c(

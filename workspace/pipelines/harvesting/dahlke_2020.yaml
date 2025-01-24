@@ -1,0 +1,98 @@
+pipeline:
+  id: c54f4d0a-9b58-444d-9afe-90ea795cb212
+  name: dahlke_2020
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-24 14:46:43
+  last_modified: 2025-01-24 14:46:43
+  description: |
+    This dataset includes experimental and imputed tolerance data, thermal safety margins, 
+    thermal responsiveness, and thermal tolerance for various species, as detailed in Dahlke et al. (2020). 
+    The data supports the publication on global warming's potential effects on species distribution and survival.
+
+  # Metadata section providing details about the data being harvested
+  metadata:
+    source_name: "PANGAEA Dataset: Experimental and Thermal Data"
+    data_type: "Excel Spreadsheets"
+    file_size: "Unknown"
+    license: "CC BY 4.0"
+    last_updated: "2020-05-12"
+    geographic_coverage:
+      region: "Global"
+    temporal_coverage:
+      start_date: "2020-01-01"
+    variables:
+      - experimental_tolerance
+      - thermal_safety_margins
+      - thermal_responsiveness
+      - thermal_tolerance
+    data_quality:
+      - "Data retrieved from the PANGAEA repository, verified for completeness."
+
+  # Bibliographic Information
+  bibliography:
+    - "@Article{dahlke2020,
+        title = {Fish survival at the upper thermal limits: Effects of size-dependent oxygen supply and climate change},
+        author = {Dahlke, F.T. and Wohlrab, S. and Butzin, M. and P{\"o}rtner, H.-O.},
+        year = {2020},
+        journal = {Science},
+        volume = {369},
+        number = {6499},
+        pages = {65--70},
+        doi = {10.1126/science.aaz3658},
+        url = {https://doi.org/10.1126/science.aaz3658}
+      }"
+    - "@Dataset{dahlke2020dataset,
+        title = {Experimental data compilation, thermal tolerance and thermal responsiveness of fish species and life stages [dataset]},
+        author = {Dahlke, Flemming and Wohlrab, Sylke and Butzin, Martin and P{\"o}rtner, Hans-Otto},
+        year = {2020},
+        publisher = {PANGAEA - Data Publisher for Earth & Environmental Science},
+        doi = {10.1594/PANGAEA.917796},
+        url = {https://doi.org/10.1594/PANGAEA.917796}
+      }"
+
+  # Harvest section: Define the sources to download and process
+  download:
+    sources:
+      - name: "Experimental and Imputed Tolerance Data"
+        source_type: "http"
+        urls: "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Experimental_and_imputed_tolerance_data.xlsx"
+        output: "experimental_and_imputed_tolerance_data.xlsx"
+        format: "xlsx"
+      - name: "Thermal Safety Margins"
+        source_type: "http"
+        urls: "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_Safety_Margins.xlsx"
+        output: "thermal_safety_margins.xlsx"
+        format: "xlsx"
+      - name: "Thermal Responsiveness"
+        source_type: "http"
+        urls: "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_responsiveness.xlsx"
+        output: "thermal_responsiveness.xlsx"
+        format: "xlsx"
+      - name: "Thermal Tolerance"
+        source_type: "http"
+        urls: "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_tolerance.xlsx"
+        output: "thermal_tolerance.xlsx"
+        format: "xlsx"
+
+  processing: 
+    sources:
+      - name: dahlke processed
+        script: prc_dahlke_2020
+        input_files:
+          - Experimental and Imputed Tolerance Data
+          - Thermal Safety Margins
+          - Thermal Responsiveness
+          - Thermal Tolerance
+        output_files: 
+          - experimental_imputed_tolerance.csv
+          - thermal_safety_margins.csv
+          - thermal_responsiveness.csv
+          - thermal_tolerance.csv
+
+
+  # Output section: final output of the processed data
+  output:
+    output_dir: "workspace/data/harvested/dahlke_2020/"
+    log_dir: "workspace/logs/dahlke_2020/"
+    archive_raw: true

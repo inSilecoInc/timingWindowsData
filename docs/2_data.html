@@ -188,14 +188,19 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#sec-canada-outline" id="toc-sec-canada-outline" class="nav-link active" data-scroll-target="#sec-canada-outline"><span class="header-section-number">3.1</span> Canadian Outline</a></li>
   <li><a href="#sec-freshwater-fish" id="toc-sec-freshwater-fish" class="nav-link" data-scroll-target="#sec-freshwater-fish"><span class="header-section-number">3.2</span> Canadian Freshwater Fish Species</a></li>
   <li><a href="#sec-canadian-hydrology" id="toc-sec-canadian-hydrology" class="nav-link" data-scroll-target="#sec-canadian-hydrology"><span class="header-section-number">3.3</span> Canadian Hydrological Features</a></li>
   <li><a href="#sec-freshwater-fish-occurrences" id="toc-sec-freshwater-fish-occurrences" class="nav-link" data-scroll-target="#sec-freshwater-fish-occurrences"><span class="header-section-number">3.4</span> Freshwater Fish Species Occurrences</a></li>
   <li><a href="#sec-gbif-species-occurrences" id="toc-sec-gbif-species-occurrences" class="nav-link" data-scroll-target="#sec-gbif-species-occurrences"><span class="header-section-number">3.5</span> GBIF Species Occurrences</a></li>
   <li><a href="#sec-national-hydro-network" id="toc-sec-national-hydro-network" class="nav-link" data-scroll-target="#sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.7</span> References</a></li>
+  <li><a href="#sec-ontario_fishes" id="toc-sec-ontario_fishes" class="nav-link" data-scroll-target="#sec-ontario_fishes"><span class="header-section-number">3.7</span> Ontario Freshwater Fishes Life History Database</a></li>
+  <li><a href="#sec-fishpass" id="toc-sec-fishpass" class="nav-link" data-scroll-target="#sec-fishpass"><span class="header-section-number">3.8</span> FishPass Database</a></li>
+  <li><a href="#sec-nafmfd" id="toc-sec-nafmfd" class="nav-link" data-scroll-target="#sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</a></li>
+  <li><a href="#sec-roberge" id="toc-sec-roberge" class="nav-link" data-scroll-target="#sec-roberge"><span class="header-section-number">3.10</span> Roberge et al.&nbsp;(2002)</a></li>
+  <li><a href="#sec-dahlke" id="toc-sec-dahlke" class="nav-link" data-scroll-target="#sec-dahlke"><span class="header-section-number">3.11</span> Dahlke et al.&nbsp;(2020)</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.12</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -223,12 +228,12 @@ window.Quarto = {
 
 <section id="sec-canada-outline" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-canada-outline"><span class="header-section-number">3.1</span> Canadian Outline</h2>
-<section id="source-and-description" class="level4" data-number="3.1.0.1">
-<h4 data-number="3.1.0.1" class="anchored" data-anchor-id="source-and-description"><span class="header-section-number">3.1.0.1</span> Source and Description</h4>
+<section id="source-and-description" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="source-and-description"><span class="header-section-number">3.1.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>Canada Outline</strong>, was generated to create a simplified polygon of Canada’s national boundaries. This dataset was produced using the <a href="https://gadm.org">GADM</a> Level 1 administrative boundary data for Canada, with the geometry simplified for efficient large-scale spatial analysis <span class="citation" data-cites="gadm2023">(<a href="#ref-gadm2023" role="doc-biblioref">Global Administrative Areas, 2023</a>)</span>. The resulting GeoPackage file represents Canada and its provinces/territories with reduced geometric complexity. The dataset is suitable for mapping and spatial analysis tasks requiring simplified boundaries.</p>
 </section>
-<section id="processing-steps" class="level4" data-number="3.1.0.2">
-<h4 data-number="3.1.0.2" class="anchored" data-anchor-id="processing-steps"><span class="header-section-number">3.1.0.2</span> Processing Steps</h4>
+<section id="processing-steps" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="processing-steps"><span class="header-section-number">3.1.2</span> Processing Steps</h3>
 <p>The processed data was generated using the <code>prc_canada_outline</code> script. The following steps were undertaken:</p>
 <ol type="1">
 <li><strong>Data Acquisition</strong>:
@@ -245,8 +250,8 @@ window.Quarto = {
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure" class="level4" data-number="3.1.0.3">
-<h4 data-number="3.1.0.3" class="anchored" data-anchor-id="processed-data-structure"><span class="header-section-number">3.1.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="processed-data-structure"><span class="header-section-number">3.1.3</span> Processed Data Structure</h3>
 <p>The structure of the simplified dataset is as follows:</p>
 <div class="cell">
 <div id="tbl-canada-outline" class="cell quarto-float anchored">
@@ -327,12 +332,12 @@ Table&nbsp;3.1: Structure of the simplified Canada outline dataset
 </section>
 <section id="sec-freshwater-fish" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-freshwater-fish"><span class="header-section-number">3.2</span> Canadian Freshwater Fish Species</h2>
-<section id="source-and-description-1" class="level4" data-number="3.2.0.1">
-<h4 data-number="3.2.0.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">3.2.0.1</span> Source and Description</h4>
+<section id="source-and-description-1" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">3.2.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>FishBase Freshwater Species Checklist</strong>, was harvested from <a href="https://www.fishbase.se/">FishBase</a> <span class="citation" data-cites="fishbase2024">(<a href="#ref-fishbase2024" role="doc-biblioref">Froese, R. and Pauly, D., 2024</a>)</span>. This dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, order, and occurrence status. Additional datasets retrieved from FishBase include species status (e.g., threat categories from the <a href="https://www.iucnredlist.org/">IUCN Red List of Threatened Species</a>), and whether the species is classified as game or commercial. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.</p>
 </section>
-<section id="processing-steps-1" class="level4" data-number="3.2.0.2">
-<h4 data-number="3.2.0.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">3.2.0.2</span> Processing Steps</h4>
+<section id="processing-steps-1" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">3.2.2</span> Processing Steps</h3>
 <p>The harvested raw data was processed using the <code>prc_freshwater_fish_canada</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Cleaning</strong>:
@@ -358,8 +363,8 @@ Table&nbsp;3.1: Structure of the simplified Canada outline dataset
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-1" class="level4" data-number="3.2.0.3">
-<h4 data-number="3.2.0.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">3.2.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-1" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">3.2.3</span> Processed Data Structure</h3>
 <p>The processed dataset retains the following structure:</p>
 <div class="cell">
 <div id="tbl-freshwater-fish-extended" class="cell quarto-float anchored">
@@ -428,12 +433,12 @@ Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for C
 </section>
 <section id="sec-canadian-hydrology" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-canadian-hydrology"><span class="header-section-number">3.3</span> Canadian Hydrological Features</h2>
-<section id="source-and-description-2" class="level4" data-number="3.3.0.1">
-<h4 data-number="3.3.0.1" class="anchored" data-anchor-id="source-and-description-2"><span class="header-section-number">3.3.0.1</span> Source and Description</h4>
+<section id="source-and-description-2" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="source-and-description-2"><span class="header-section-number">3.3.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies &amp; Rivers</strong>, was harvested from <a href="https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022a nrcan2022b">(<a href="#ref-nrcan2022a" role="doc-biblioref">Canada, 2022b</a>, <a href="#ref-nrcan2022b" role="doc-biblioref">2022a</a>)</span>. This comprehensive GIS dataset includes spatial and tabular data representing Canada’s hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.</p>
 </section>
-<section id="processing-steps-2" class="level4" data-number="3.3.0.2">
-<h4 data-number="3.3.0.2" class="anchored" data-anchor-id="processing-steps-2"><span class="header-section-number">3.3.0.2</span> Processing Steps</h4>
+<section id="processing-steps-2" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="processing-steps-2"><span class="header-section-number">3.3.2</span> Processing Steps</h3>
 <p>The harvested raw data was processed using the <code>prc_atlas_of_canada_hydrology</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Unzipping</strong>: The compressed GDB files were extracted to a temporary directory for processing.</li>
@@ -460,8 +465,8 @@ Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for C
 <li><strong>Cleanup</strong>: Temporary files created during processing were deleted.</li>
 </ol>
 </section>
-<section id="processed-data-structure-2" class="level4" data-number="3.3.0.3">
-<h4 data-number="3.3.0.3" class="anchored" data-anchor-id="processed-data-structure-2"><span class="header-section-number">3.3.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-2" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="processed-data-structure-2"><span class="header-section-number">3.3.3</span> Processed Data Structure</h3>
 <p>The structure of the processed lake polygon dataset is as follows:</p>
 <div class="cell">
 <div id="tbl-lakes-polygons" class="cell quarto-float anchored">
@@ -626,13 +631,13 @@ Table&nbsp;3.6: Structure of the processed river point dataset for Canada
 </section>
 <section id="sec-freshwater-fish-occurrences" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-freshwater-fish-occurrences"><span class="header-section-number">3.4</span> Freshwater Fish Species Occurrences</h2>
-<section id="source-and-description-3" class="level4" data-number="3.4.0.1">
-<h4 data-number="3.4.0.1" class="anchored" data-anchor-id="source-and-description-3"><span class="header-section-number">3.4.0.1</span> Source and Description</h4>
+<section id="source-and-description-3" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="source-and-description-3"><span class="header-section-number">3.4.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>Global Freshwater Fish Species Occurrences Database</strong>, was retrieved from <a href="https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145">Figshare</a> <span class="citation" data-cites="figshare2025">(<a href="#ref-figshare2025" role="doc-biblioref">Tedesco et al., 2017a</a>)</span>. This comprehensive dataset compiles freshwater fish species occurrences aggregated at the drainage basin level. The data is associated with the data paper by <span class="citation" data-cites="tedesco2017">Tedesco et al. (<a href="#ref-tedesco2017" role="doc-biblioref">2017b</a>)</span> and is designed for analyzing global freshwater biodiversity patterns.</p>
 <p>The dataset includes both spatial data (drainage basins) and tabular data (species occurrences). The drainage basin data covers 3,119 polygons worldwide, while the occurrence table provides over 110,000 records of species distributions across basins. The data has been validated using established taxonomic references such as FishBase.</p>
 </section>
-<section id="processing-steps-3" class="level4" data-number="3.4.0.2">
-<h4 data-number="3.4.0.2" class="anchored" data-anchor-id="processing-steps-3"><span class="header-section-number">3.4.0.2</span> Processing Steps</h4>
+<section id="processing-steps-3" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="processing-steps-3"><span class="header-section-number">3.4.2</span> Processing Steps</h3>
 <p>The harvested data was processed using the <code>prc_freshwater_fish_occurrences</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Extraction</strong>:
@@ -654,8 +659,8 @@ Table&nbsp;3.6: Structure of the processed river point dataset for Canada
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-3" class="level4" data-number="3.4.0.3">
-<h4 data-number="3.4.0.3" class="anchored" data-anchor-id="processed-data-structure-3"><span class="header-section-number">3.4.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-3" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="processed-data-structure-3"><span class="header-section-number">3.4.3</span> Processed Data Structure</h3>
 <p>The structure of the processed drainage basin dataset (<code>bassins.gpkg</code>) is as follows:</p>
 <div class="cell">
 <div id="tbl-bassins" class="cell quarto-float anchored">
@@ -784,13 +789,13 @@ Table&nbsp;3.8: Structure of the processed species occurrence dataset
 </section>
 <section id="sec-gbif-species-occurrences" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-gbif-species-occurrences"><span class="header-section-number">3.5</span> GBIF Species Occurrences</h2>
-<section id="source-and-description-4" class="level4" data-number="3.5.0.1">
-<h4 data-number="3.5.0.1" class="anchored" data-anchor-id="source-and-description-4"><span class="header-section-number">3.5.0.1</span> Source and Description</h4>
+<section id="source-and-description-4" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="source-and-description-4"><span class="header-section-number">3.5.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>GBIF Occurrence Data</strong>, was retrieved from the <a href="https://www.gbif.org/">Global Biodiversity Information Facility (GBIF)</a> <span class="citation" data-cites="gbif2025">(<a href="#ref-gbif2025" role="doc-biblioref">Global Biodiversity Information Facility, 2025</a>)</span>. This dataset compiles species occurrence records for a specified taxonomic group and geographic region. The retrieved dataset includes spatial and tabular data for over 850,000 records of species occurrences across Canada, starting from 2000.</p>
 <p>It should be noted that the processing steps described below show how the data is downloaded and processed programmatically. However, due to how GBIF manages their data request, we elected to store the downloaded data on our secure Google Cloud Storage and to retrieve them programmatically from there rather than directly on GBIF.</p>
 </section>
-<section id="processing-steps-4" class="level4" data-number="3.5.0.2">
-<h4 data-number="3.5.0.2" class="anchored" data-anchor-id="processing-steps-4"><span class="header-section-number">3.5.0.2</span> Processing Steps</h4>
+<section id="processing-steps-4" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="processing-steps-4"><span class="header-section-number">3.5.2</span> Processing Steps</h3>
 <p>The harvested data was processed using the <code>dwn_gbif</code> and <code>prc_gbif</code> scripts. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Download</strong>:
@@ -813,8 +818,8 @@ Table&nbsp;3.8: Structure of the processed species occurrence dataset
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-4" class="level4" data-number="3.5.0.3">
-<h4 data-number="3.5.0.3" class="anchored" data-anchor-id="processed-data-structure-4"><span class="header-section-number">3.5.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-4" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="processed-data-structure-4"><span class="header-section-number">3.5.3</span> Processed Data Structure</h3>
 <p>The structure of the processed dataset (<code>species_occurrences_gbif.gpkg</code>) is as follows:</p>
 <div class="cell">
 <div id="tbl-gbif-occurrences" class="cell quarto-float anchored">
@@ -875,12 +880,12 @@ Table&nbsp;3.9: Structure of the processed GBIF occurrence dataset
 </section>
 <section id="sec-national-hydro-network" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</h2>
-<section id="source-and-description-5" class="level4" data-number="3.6.0.1">
-<h4 data-number="3.6.0.1" class="anchored" data-anchor-id="source-and-description-5"><span class="header-section-number">3.6.0.1</span> Source and Description</h4>
+<section id="source-and-description-5" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="source-and-description-5"><span class="header-section-number">3.6.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>National Hydro Network (NHN) GeoBase Series</strong>, was retrieved from <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022">(<a href="#ref-nrcan2022" role="doc-biblioref">Canada, 2022c</a>)</span>. This dataset provides a comprehensive geometric description and a set of basic attributes describing Canada’s inland surface waters. The data includes lakes, reservoirs, rivers, canals, drainage networks, and associated features.</p>
 </section>
-<section id="processing-steps-5" class="level4" data-number="3.6.0.2">
-<h4 data-number="3.6.0.2" class="anchored" data-anchor-id="processing-steps-5"><span class="header-section-number">3.6.0.2</span> Processing Steps</h4>
+<section id="processing-steps-5" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="processing-steps-5"><span class="header-section-number">3.6.2</span> Processing Steps</h3>
 <p>The NHN data was processed using the <code>prc_national_hydro_network</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Extraction</strong>:
@@ -901,8 +906,8 @@ Table&nbsp;3.9: Structure of the processed GBIF occurrence dataset
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-5" class="level4" data-number="3.6.0.3">
-<h4 data-number="3.6.0.3" class="anchored" data-anchor-id="processed-data-structure-5"><span class="header-section-number">3.6.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-5" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="processed-data-structure-5"><span class="header-section-number">3.6.3</span> Processed Data Structure</h3>
 <p>The structure of the processed dataset (<code>watersheds.gpkg</code>) is as follows:</p>
 <div class="cell">
 <div id="tbl-watersheds" class="cell quarto-float anchored">
@@ -941,11 +946,951 @@ Table&nbsp;3.10: Structure of the processed watershed dataset
 </div>
 </section>
 </section>
-<section id="references" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="references"><span class="header-section-number">3.7</span> References</h2>
+<section id="sec-ontario_fishes" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-ontario_fishes"><span class="header-section-number">3.7</span> Ontario Freshwater Fishes Life History Database</h2>
+<p>The <a href="https://www.ontariofishes.ca/home.htm">Ontario Freshwater Fishes Life History Database</a> <span class="citation" data-cites="eakins2024">(<a href="#ref-eakins2024" role="doc-biblioref">Eakins, 2024</a>)</span> provides comprehensive life history information for 161 freshwater fish species in Ontario, Canada. The dataset includes 43 characteristics per species, covering taxonomic, ecological, reproductive, and habitat-related information. It also provides a bibliography of references used to compile this data.</p>
+<section id="source-and-accessibility" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="source-and-accessibility"><span class="header-section-number">3.7.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: Ontario Freshwater Fishes Life History Database</li>
+<li><strong>Accessibility</strong>: Open Government Licence - Canada</li>
+<li><strong>Data Type</strong>: HTML Scraped Dataset</li>
+<li><strong>Coverage</strong>: Freshwater systems in Ontario, Canada</li>
+<li><strong>Geographic Coverage</strong>: Ontario (Bounding Box: -95.1539, 41.6770, -74.3435, 56.8595)</li>
+<li><strong>Temporal Coverage</strong>: 2024</li>
+<li><strong>Processing Script</strong>: <code>dwn_ontario_freshwater_fishes_life_history.R</code></li>
+<li><strong>Output Files</strong>: <code>ontario_fishes_characteristics.csv</code>, <code>ontario_fishes_references.csv</code></li>
+</ul>
+</section>
+<section id="processing-steps-6" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="processing-steps-6"><span class="header-section-number">3.7.2</span> Processing Steps</h3>
+<p>Data was harvested from the website by scraping individual fish detail pages for 161 species. The harvesting script used the <code>rvest</code> package in R to extract structured data for each species, including:</p>
+<ol type="1">
+<li><strong>Characteristics Extraction</strong>: Scraped 43 life history attributes such as family, common name, habitat preference, spawning season, thermal regime, and abundance.</li>
+<li><strong>References Compilation</strong>: Extracted all bibliographic references associated with each species.</li>
+<li><strong>Data Cleaning</strong>: Cleaned and pivoted the raw data into a tidy format using <code>tidyr::pivot_wider()</code> and <code>janitor::clean_names()</code>.</li>
+<li><strong>Export</strong>: Saved the processed data into two CSV files:
+<ul>
+<li><code>ontario_fishes_characteristics.csv</code>: A structured table of life history characteristics.</li>
+<li><code>ontario_fishes_references.csv</code>: A table of species-referenced bibliographies.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-6" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="processed-data-structure-6"><span class="header-section-number">3.7.3</span> Processed Data Structure</h3>
+<p>The structure of the processed data includes the following key variables:</p>
+<div class="cell">
+<div id="tbl-ontario-fishes-structure" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ontario-fishes-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.11: Structure of the Ontario Fishes Characteristics Table
+</figcaption>
+<div aria-describedby="tbl-ontario-fishes-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">Taxonomic family, including common name.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name, including genus.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">taxonomic_authority</td>
+<td style="text-align: left;">Author of the taxonomic classification.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">common_name_s</td>
+<td style="text-align: left;">Common name in English.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">french_name</td>
+<td style="text-align: left;">Common name in French.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ontario_origin</td>
+<td style="text-align: left;">Origin status in Ontario (e.g., native, introduced).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">general_abundance</td>
+<td style="text-align: left;">General abundance in freshwater systems.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">thermal_regime</td>
+<td style="text-align: left;">Thermal regime preference (coldwater, coolwater, warmwater).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">habitat_preference</td>
+<td style="text-align: left;">Preferred habitats for the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spawning_season</td>
+<td style="text-align: left;">Season of spawning activity.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fecundity</td>
+<td style="text-align: left;">Number of eggs produced by the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">adult_length_cm</td>
+<td style="text-align: left;">Length of adult individuals in centimeters.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_length_cm</td>
+<td style="text-align: left;">Maximum recorded length of the species in centimeters.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lifespan_yrs</td>
+<td style="text-align: left;">Expected lifespan in years.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-ontario-fishes-references" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ontario-fishes-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.12: Structure of the Ontario Fishes References Table
+</figcaption>
+<div aria-describedby="tbl-ontario-fishes-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Scientific name of the species associated with the reference.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Reference citation for the data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-fishpass" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-fishpass"><span class="header-section-number">3.8</span> FishPass Database</h2>
+<p>The <a href="https://doi.org/10.5061/dryad.fqz612jwj">FishPass Database</a> <span class="citation" data-cites="benoit2023">(<a href="#ref-benoit2023" role="doc-biblioref">Benoit et al., 2023</a>)</span> provides a comprehensive collection of biological attributes that influence fish movement and passage, with a particular focus on species from the Laurentian Great Lakes. This dataset is essential for designing selective fish passage systems that aim to balance connectivity while managing the spread of invasive species. It includes 21 biological attributes, covering phenology, morphology, physiology, and behavioral characteristics for 220 fish species. Data coverage varies across species and attributes, highlighting gaps in knowledge about behavioral traits and potential invasive species.</p>
+<section id="source-and-accessibility-1" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="source-and-accessibility-1"><span class="header-section-number">3.8.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: Dryad Repository</li>
+<li><strong>DOI</strong>: <a href="https://doi.org/10.5061/dryad.fqz612jwj">10.5061/dryad.fqz612jwj</a></li>
+<li><strong>Accessibility</strong>: CC0 Public Domain Dedication</li>
+<li><strong>Data Type</strong>: Tabular CSV files</li>
+<li><strong>Coverage</strong>: Laurentian Great Lakes, North America</li>
+<li><strong>Processing Script</strong>: <code>prc_fishpass.R</code></li>
+<li><strong>Output Files</strong>:
+<ul>
+<li><code>fishpass_behaviour.csv</code></li>
+<li><code>fishpass_morphology.csv</code></li>
+<li><code>fishpass_phenology.csv</code></li>
+<li><code>fishpass_physiology.csv</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-steps-7" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="processing-steps-7"><span class="header-section-number">3.8.2</span> Processing Steps</h3>
+<ol type="1">
+<li><strong>Data Cleaning</strong>:
+<ul>
+<li>Column names were standardized using <code>janitor::clean_names()</code>.</li>
+<li>Missing or malformed data were handled appropriately.</li>
+</ul></li>
+<li><strong>Data Structuring</strong>:
+<ul>
+<li>Each CSV file was parsed into tidy data tables, retaining only relevant fields.</li>
+<li>Attributes such as migratory status, body morphology, spawning season, and vertical stationing were included.</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>Cleaned data tables were saved into separate CSV files for each attribute dimension, enabling modular analysis.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-7" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="processed-data-structure-7"><span class="header-section-number">3.8.3</span> Processed Data Structure</h3>
+<p>The cleaned dataset is divided into four tables, each containing data for 220 species:</p>
+<div class="cell">
+<div id="tbl-fishpass-behaviour" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fishpass-behaviour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.13: Structure of the FishPass Behaviour Data Table
+</figcaption>
+<div aria-describedby="tbl-fishpass-behaviour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">order</td>
+<td style="text-align: left;">Taxonomic order of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">Taxonomic family of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">genus</td>
+<td style="text-align: left;">Genus of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientific_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">common_name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">vertical_station</td>
+<td style="text-align: left;">Vertical stationing behavior (e.g., demersal, pelagic).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">schooling_behaviour</td>
+<td style="text-align: left;">Tendency for schooling behavior (e.g., schooling, non-schooling).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference_vs</td>
+<td style="text-align: left;">Reference for vertical station data.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">reference_sb</td>
+<td style="text-align: left;">Reference for schooling behavior data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-fishpass-morphology" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fishpass-morphology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.14: Structure of the FishPass Morphology Data Table
+</figcaption>
+<div aria-describedby="tbl-fishpass-morphology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">order</td>
+<td style="text-align: left;">Taxonomic order of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">Taxonomic family of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">genus</td>
+<td style="text-align: left;">Genus of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientific_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">common_name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_total_length_cm</td>
+<td style="text-align: left;">Maximum recorded total length (cm).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">body_shape</td>
+<td style="text-align: left;">Overall body shape (e.g., fusiform, elongated).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">aspect_ratio</td>
+<td style="text-align: left;">Aspect ratio of the fins.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">eye_size_percent_hl</td>
+<td style="text-align: left;">Eye size as a percentage of head length.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference_mtl</td>
+<td style="text-align: left;">Reference for maximum total length data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-fishpass-phenology" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fishpass-phenology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.15: Structure of the FishPass Phenology Data Table
+</figcaption>
+<div aria-describedby="tbl-fishpass-phenology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">order</td>
+<td style="text-align: left;">Taxonomic order of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">Taxonomic family of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">genus</td>
+<td style="text-align: left;">Genus of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientific_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">common_name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">migratory_status</td>
+<td style="text-align: left;">Whether the species is migratory or non-migratory.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spatial_scale_of_movement</td>
+<td style="text-align: left;">Scale of spatial movement (e.g., diadromous, potamodromous).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spawning_frequency</td>
+<td style="text-align: left;">Frequency of spawning (e.g., iteroparous).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spring_spawner</td>
+<td style="text-align: left;">Indicates if the species spawns in spring (binary).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference_sf</td>
+<td style="text-align: left;">Reference for spawning frequency data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-fishpass-physiology" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fishpass-physiology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.16: Structure of the FishPass Physiology Data Table
+</figcaption>
+<div aria-describedby="tbl-fishpass-physiology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">order</td>
+<td style="text-align: left;">Taxonomic order of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">Taxonomic family of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">genus</td>
+<td style="text-align: left;">Genus of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientific_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">common_name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">climbing_ability</td>
+<td style="text-align: left;">Ability to climb barriers (binary).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hearing_specialization</td>
+<td style="text-align: left;">Hearing specialization (binary).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trophic_level</td>
+<td style="text-align: left;">Trophic level of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">presence_of_ampullary_electroreceptors</td>
+<td style="text-align: left;">Presence of ampullary electroreceptors (binary).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference_ca</td>
+<td style="text-align: left;">Reference for climbing ability data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-nafmfd" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</h2>
+<p>The <a href="https://doi.org/10.5066/P9WDLLP0">North American Freshwater Migratory Fish Database (NAFMFD)</a> <span class="citation" data-cites="dean2021 dean2022">(<a href="#ref-dean2021" role="doc-biblioref">Dean et al., 2021</a>, <a href="#ref-dean2022" role="doc-biblioref">2022</a>)</span> synthesizes comprehensive data on the migratory behavior of freshwater fishes across Canada, the United States, and Mexico. It includes information for 1,241 species spanning 79 families and 322 genera, characterizing migratory status, patterns, and behaviors.</p>
+<section id="source-and-accessibility-2" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="source-and-accessibility-2"><span class="header-section-number">3.9.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: U.S. Geological Survey ScienceBase-Catalog</li>
+<li><strong>DOI</strong>: <a href="https://doi.org/10.5066/P9WDLLP0">10.5066/P9WDLLP0</a></li>
+<li><strong>Accessibility</strong>: Public Domain</li>
+<li><strong>Data Type</strong>: Excel Spreadsheet and Metadata (XML)</li>
+<li><strong>Coverage</strong>: North America</li>
+<li><strong>Processing Script</strong>: <code>prc_north_american_freshwater_migratory_fish_database.R</code></li>
+<li><strong>Output Files</strong>:
+<ul>
+<li><code>north_american_freshwater_migratory_fish_database.csv</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-steps-8" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="processing-steps-8"><span class="header-section-number">3.9.2</span> Processing Steps</h3>
+<p>The data was harvested from the ScienceBase-Catalog using two files: an Excel spreadsheet containing species information and a metadata XML file. The processing involved the following steps:</p>
+<ol type="1">
+<li><strong>Data Extraction</strong>:
+<ul>
+<li>The Excel file was read using the <code>readxl</code> package.</li>
+<li>Column names were standardized using <code>janitor::clean_names()</code> for consistency.</li>
+</ul></li>
+<li><strong>Data Cleaning</strong>:
+<ul>
+<li>Removed unnecessary whitespace and formatted data fields for analysis.</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>The processed data was saved as a CSV file for ease of use in further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-8" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="processed-data-structure-8"><span class="header-section-number">3.9.3</span> Processed Data Structure</h3>
+<p>The final processed dataset contains 28 fields and 2,198 rows. Key variables include species taxonomy, migratory behavior, and references for data sources.</p>
+<div class="cell">
+<div id="tbl-nafmfd-structure" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nafmfd-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.17: Structure of the NAFMFD Processed Data
+</figcaption>
+<div aria-describedby="tbl-nafmfd-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">itis_family</td>
+<td style="text-align: left;">Integrated Taxonomic Information System (ITIS) identifier for the family.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family_name</td>
+<td style="text-align: left;">Taxonomic family name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scientific_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">common_name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">migratory</td>
+<td style="text-align: left;">Indicator of whether the species is migratory (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">anadromous</td>
+<td style="text-align: left;">Indicator of anadromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">catadromous</td>
+<td style="text-align: left;">Indicator of catadromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">potamodromous</td>
+<td style="text-align: left;">Indicator of potamodromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">diadromous</td>
+<td style="text-align: left;">Indicator of diadromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">suspected_migrant</td>
+<td style="text-align: left;">Indicator of suspected migratory status (1 = yes, 0 = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">non_migratory</td>
+<td style="text-align: left;">Indicator of non-migratory status (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Reference for data source and assignment.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-roberge" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="sec-roberge"><span class="header-section-number">3.10</span> Roberge et al.&nbsp;(2002)</h2>
+<p>The <a href="https://console.cloud.google.com/storage/roberge_2002">Roberge et al.&nbsp;(2002) dataset</a> <span class="citation" data-cites="roberge2002">(<a href="#ref-roberge2002" role="doc-biblioref">Roberge et al., 2002</a>)</span> summarizes associations between stream habitat characteristics and life history stages of 86 species and 13 additional subspecies/forms of freshwater fishes in British Columbia and Yukon. The dataset focuses on stream habitat requirements across four life stages: spawning, young-of-the-year, juvenile, and adult. It highlights significant gaps in knowledge for species groups such as green sturgeon, minnows, smelts, ciscos, suckers, sculpins, lampreys, and sticklebacks, emphasizing the need for further research on stream habitat requirements for these taxa.</p>
+<section id="source-and-accessibility-3" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="source-and-accessibility-3"><span class="header-section-number">3.10.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: Fisheries and Oceans Canada, ScienceBase GCS</li>
+<li><strong>Accessibility</strong>: Institutional License</li>
+<li><strong>Data Type</strong>: Tabular Text File (<code>.txt</code>), PDF Report (<code>.pdf</code>)</li>
+<li><strong>Coverage</strong>: British Columbia and Yukon, Canada</li>
+<li><strong>Processing Script</strong>: <code>prc_roberge_2002.R</code></li>
+<li><strong>Output File</strong>: <code>roberge.csv</code></li>
+</ul>
+</section>
+<section id="processing-steps-9" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="processing-steps-9"><span class="header-section-number">3.10.2</span> Processing Steps</h3>
+<p>The dataset was retrieved manually from the report (<code>Fs97-4-2611E.pdf</code>) to create the raw data (<code>Roberge2002.txt</code>). The programmatic processing steps involved:</p>
+<ol type="1">
+<li><strong>Data Extraction</strong>:
+<ul>
+<li>Imported the tabular text file with <code>read.delim()</code>.</li>
+<li>Filled missing values for habitat and life stage fields using <code>tidyr::fill()</code>.</li>
+</ul></li>
+<li><strong>Data Restructuring</strong>:
+<ul>
+<li>Split the data by species groups.</li>
+<li>Renamed columns to reflect meaningful variable names (e.g., <code>LifeStage</code>, <code>Value</code>).</li>
+<li>Pivoted columns for different life stages (e.g., spawning, juvenile) into a long format using <code>tidyr::pivot_longer()</code>.</li>
+</ul></li>
+<li><strong>Data Cleaning</strong>:
+<ul>
+<li>Replaced malformed characters and standardized names using <code>stringr</code> functions.</li>
+<li>Filtered rows with missing or invalid values.</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>Saved the processed dataset as a CSV file (<code>roberge.csv</code>) for further analysis.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-9" class="level3" data-number="3.10.3">
+<h3 data-number="3.10.3" class="anchored" data-anchor-id="processed-data-structure-9"><span class="header-section-number">3.10.3</span> Processed Data Structure</h3>
+<p>The processed dataset contains 5,319 rows and six fields, summarizing habitat characteristics across different life stages for freshwater fish species.</p>
+<div class="cell">
+<div id="tbl-roberge-structure" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-roberge-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.18: Structure of the Roberge Processed Data
+</figcaption>
+<div aria-describedby="tbl-roberge-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientificname</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MigrationStrategy</td>
+<td style="text-align: left;">Migration strategy (e.g., anadromous, potamodromous).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">characteristics</td>
+<td style="text-align: left;">Stream habitat characteristics (e.g., depth, flow type).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LifeStage</td>
+<td style="text-align: left;">Life stage (e.g., Spawning, Juvenile).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Value</td>
+<td style="text-align: left;">Habitat value associated with the life stage.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dahlke" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="sec-dahlke"><span class="header-section-number">3.11</span> Dahlke et al.&nbsp;(2020)</h2>
+<p>The <a href="https://doi.org/10.1594/PANGAEA.917796">Dahlke et al.&nbsp;(2020)</a> <span class="citation" data-cites="dahlke2020dataset">(<a href="#ref-dahlke2020dataset" role="doc-biblioref">Dahlke et al., 2020b</a>)</span> compiles experimental and imputed thermal tolerance data, thermal safety margins, and responsiveness for various fish species and life stages. It supports the research on fish survival under warming conditions and size-dependent oxygen supply constraints <span class="citation" data-cites="dahlke2020">(<a href="#ref-dahlke2020" role="doc-biblioref">Dahlke et al., 2020a</a>)</span>.</p>
+<section id="source-and-accessibility-4" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="source-and-accessibility-4"><span class="header-section-number">3.11.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: PANGAEA - Data Publisher for Earth &amp; Environmental Science</li>
+<li><strong>DOI</strong>: <a href="https://doi.org/10.1594/PANGAEA.917796">10.1594/PANGAEA.917796</a></li>
+<li><strong>Accessibility</strong>: CC BY 4.0</li>
+<li><strong>Data Type</strong>: Excel Spreadsheets</li>
+<li><strong>Coverage</strong>: Global</li>
+<li><strong>Processing Script</strong>: <code>prc_dahlke_2020.R</code></li>
+<li><strong>Output Files</strong>:
+<ul>
+<li><code>experimental_imputed_tolerance.csv</code></li>
+<li><code>thermal_safety_margins.csv</code></li>
+<li><code>thermal_responsiveness.csv</code></li>
+<li><code>thermal_tolerance.csv</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-steps-10" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="processing-steps-10"><span class="header-section-number">3.11.2</span> Processing Steps</h3>
+<p>The dataset was harvested and processed from four Excel files hosted on the PANGAEA repository. Each file corresponds to a specific thermal-related aspect, and the processing involved the following steps:</p>
+<ol type="1">
+<li><strong>Loading Data</strong>:
+<ul>
+<li>Read data from Excel files (<code>experimental_and_imputed_tolerance_data.xlsx</code>, <code>thermal_safety_margins.xlsx</code>, <code>thermal_responsiveness.xlsx</code>, and <code>thermal_tolerance.xlsx</code>) using <code>readxl</code>.</li>
+</ul></li>
+<li><strong>Cleaning and Restructuring</strong>:
+<ul>
+<li>Standardized column names using <code>janitor::clean_names()</code>.</li>
+<li>Pivoted wide-format sheets into long-format tables for easier integration.</li>
+<li>Filled missing values and cleaned malformed characters.</li>
+</ul></li>
+<li><strong>Data Integration</strong>:
+<ul>
+<li>Combined multiple sheets within a single Excel file to create unified datasets.</li>
+<li>Merged species-specific attributes across life stages and realms.</li>
+</ul></li>
+<li><strong>Exporting Processed Data</strong>:
+<ul>
+<li>Saved cleaned datasets as CSV files (<code>vroom_write</code>) for further analysis.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-10" class="level3" data-number="3.11.3">
+<h3 data-number="3.11.3" class="anchored" data-anchor-id="processed-data-structure-10"><span class="header-section-number">3.11.3</span> Processed Data Structure</h3>
+<div class="cell">
+<div id="tbl-exp-imp-tolerance" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exp-imp-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.19: Structure of Experimental and Imputed Tolerance Data
+</figcaption>
+<div aria-describedby="tbl-exp-imp-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">life_stage</td>
+<td style="text-align: left;">Life stage of the species (e.g., Spawners, Juvenile).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmin_c</td>
+<td style="text-align: left;">Minimum temperature (°C) tolerance.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tmax_c</td>
+<td style="text-align: left;">Maximum temperature (°C) tolerance.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmid_c</td>
+<td style="text-align: left;">Midpoint temperature (°C) between Tmin and Tmax.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trange_c</td>
+<td style="text-align: left;">Range of temperature tolerance (°C).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Citation for the data source.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-thermal-responsiveness" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-thermal-responsiveness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.20: Structure of Thermal Responsiveness Data
+</figcaption>
+<div aria-describedby="tbl-thermal-responsiveness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifestage</td>
+<td style="text-align: left;">Life stage associated with the thermal response (e.g., Embryos, Juveniles).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">response</td>
+<td style="text-align: left;">Type of response (e.g., Development Rate, Survival).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trange_c</td>
+<td style="text-align: left;">Range of temperature (°C) associated with the response.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmid_c</td>
+<td style="text-align: left;">Midpoint temperature (°C) for the response.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Citation for the data source.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-thermal-safety-margins" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-thermal-safety-margins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.21: Structure of Thermal Safety Margins Data
+</figcaption>
+<div aria-describedby="tbl-thermal-safety-margins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">realm</td>
+<td style="text-align: left;">Habitat realm of the species (e.g., Freshwater, Marine).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">depth_spawners</td>
+<td style="text-align: left;">Spawning depth range in meters.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">depths_embryos</td>
+<td style="text-align: left;">Embryo depth range in meters.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spawning_season</td>
+<td style="text-align: left;">Seasonality of spawning (e.g., MJJ for May–July).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-thermal-tolerance" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-thermal-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.22: Structure of Thermal Tolerance Data
+</figcaption>
+<div aria-describedby="tbl-thermal-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">thermal_tolerance</td>
+<td style="text-align: left;">Thermal tolerance parameter (e.g., Tmax, Tmin).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">species_fish_base</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">latitude</td>
+<td style="text-align: left;">Geographic latitude of observation.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifestage</td>
+<td style="text-align: left;">Life stage of the species (e.g., Spawner, Embryo).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmax_c</td>
+<td style="text-align: left;">Maximum temperature (°C) tolerance.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tmin_c</td>
+<td style="text-align: left;">Minimum temperature (°C) tolerance.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trange_c</td>
+<td style="text-align: left;">Range of temperature tolerance (°C).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">realm</td>
+<td style="text-align: left;">Habitat realm of the species (e.g., Marine, Freshwater).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="references"><span class="header-section-number">3.12</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
+<div id="ref-benoit2023" class="csl-entry" role="listitem">
+Benoit, D., Zielinski, D., and Swanson, R. et al. (2023). FishPass sortable attribute database: Phenological, morphological, physiological, and behavioural characteristics related to passage and movement of great lakes fishes [dataset]. Available at: <a href="https://doi.org/10.5061/dryad.fqz612jwj">https://doi.org/10.5061/dryad.fqz612jwj</a>.
+</div>
 <div id="ref-nrcan2022b" class="csl-entry" role="listitem">
 Canada, N. R. (2022a). Atlas of canada national scale data 1:1,000,000 - rivers. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/87bb794c-eabf-5eea-bdb3-61d0338d9594">https://open.canada.ca/data/en/dataset/87bb794c-eabf-5eea-bdb3-61d0338d9594</a>.
 </div>
@@ -955,6 +1900,21 @@ Canada, N. R. (2022b). Atlas of canada national scale data 1:1,000,000 - waterbo
 <div id="ref-nrcan2022" class="csl-entry" role="listitem">
 Canada, N. R. (2022c). National hydro network (NHN) - GeoBase series. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977</a>.
 </div>
+<div id="ref-dahlke2020" class="csl-entry" role="listitem">
+Dahlke, F. T., Wohlrab, S., Butzin, M., and P"ortner, H.-O. (2020a). Fish survival at the upper thermal limits: Effects of size-dependent oxygen supply and climate change. <em>Science</em> 369, 65–70. doi:<a href="https://doi.org/10.1126/science.aaz3658">10.1126/science.aaz3658</a>.
+</div>
+<div id="ref-dahlke2020dataset" class="csl-entry" role="listitem">
+Dahlke, F., Wohlrab, S., Butzin, M., and P"ortner, H.-O. (2020b). Experimental data compilation, thermal tolerance and thermal responsiveness of fish species and life stages [dataset]. doi:<a href="https://doi.org/10.1594/PANGAEA.917796">10.1594/PANGAEA.917796</a>.
+</div>
+<div id="ref-dean2021" class="csl-entry" role="listitem">
+Dean, E. M., Cooper, A. R., Wang, L., Daniel, W. M., David, S., Ernzen, C., et al. (2021). The north american freshwater migratory fish database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of canada, the united states, and mexico. U.S. Geological Survey Available at: <a href="https://doi.org/10.5066/P9WDLLP0">https://doi.org/10.5066/P9WDLLP0</a>.
+</div>
+<div id="ref-dean2022" class="csl-entry" role="listitem">
+Dean, E. M., Cooper, A. R., Wang, L., Daniel, W., David, S., Ernzen, C., et al. (2022). The north american freshwater migratory fish database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of canada, the united states and mexico. <em>Journal of Biogeography, Early View</em>. Available at: <a href="https://doi.org/10.1111/jbi.14367">https://doi.org/10.1111/jbi.14367</a>.
+</div>
+<div id="ref-eakins2024" class="csl-entry" role="listitem">
+Eakins, R. J. (2024). Ontario freshwater fishes life history database. <span>Ontario Freshwater Fishes</span> Available at: <a href="https://www.ontariofishes.ca/home.htm">https://www.ontariofishes.ca/home.htm</a>.
+</div>
 <div id="ref-fishbase2024" class="csl-entry" role="listitem">
 Froese, R. and Pauly, D. (2024). FishBase freshwater species checklist. <span>FishBase</span> Available at: <a href="https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh">https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh</a>.
 </div>
@@ -963,6 +1923,9 @@ Global Administrative Areas, G. (Database of (2023). GADM database of global adm
 </div>
 <div id="ref-gbif2025" class="csl-entry" role="listitem">
 Global Biodiversity Information Facility (2025). GBIF occurrence download https://doi.org/10.15468/dl.fxqrjh accessed from r via rgbif (https://github.com/ropensci/rgbif) on 2025-01-23. <span>GBIF Secretariat</span>.
+</div>
+<div id="ref-roberge2002" class="csl-entry" role="listitem">
+Roberge, M., Hume, J. M. B., Minns, C. K., and Slaney, T. (2002). Life history characteristics of freshwater fishes occurring in british columbia and the yukon, with major emphasis on stream habitat characteristics. Fisheries; Oceans Canada.
 </div>
 <div id="ref-figshare2025" class="csl-entry" role="listitem">
 Tedesco, P. A. et al. (2017a). A global database on freshwater fish species occurrences in drainage basins. Figshare Available at: <a href="https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145">https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145</a>.

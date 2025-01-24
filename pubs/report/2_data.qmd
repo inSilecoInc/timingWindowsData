@@ -4,11 +4,11 @@ title: "Data Sources Overview"
 
 ## Canadian Outline {#sec-canada-outline}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Canada Outline**, was generated to create a simplified polygon of Canada's national boundaries. This dataset was produced using the [GADM](https://gadm.org) Level 1 administrative boundary data for Canada, with the geometry simplified for efficient large-scale spatial analysis [@gadm2023]. The resulting GeoPackage file represents Canada and its provinces/territories with reduced geometric complexity. The dataset is suitable for mapping and spatial analysis tasks requiring simplified boundaries.
 
-#### Processing Steps
+### Processing Steps
 
 The processed data was generated using the `prc_canada_outline` script. The following steps were undertaken:
 
@@ -20,7 +20,7 @@ The processed data was generated using the `prc_canada_outline` script. The foll
    - The simplified boundary dataset was saved as `can_1_simplified.gpkg` in GeoPackage format.
 
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the simplified dataset is as follows:
 
@@ -53,11 +53,11 @@ data.frame(
 
 ## Canadian Freshwater Fish Species {#sec-freshwater-fish}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **FishBase Freshwater Species Checklist**, was harvested from [FishBase](https://www.fishbase.se/) [@fishbase2024]. This dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, order, and occurrence status. Additional datasets retrieved from FishBase include species status (e.g., threat categories from the [IUCN Red List of Threatened Species](https://www.iucnredlist.org/)), and whether the species is classified as game or commercial. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested raw data was processed using the `prc_freshwater_fish_canada` script. The following steps were performed:
 
@@ -73,7 +73,7 @@ The harvested raw data was processed using the `prc_freshwater_fish_canada` scri
 5. **Data Export**:
    - The fully integrated and processed dataset was saved as `freshwater_fish_species_canada.csv`.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The processed dataset retains the following structure:
 
@@ -100,11 +100,11 @@ data.frame(
 
 ## Canadian Hydrological Features {#sec-canadian-hydrology}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies & Rivers**, was harvested from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065) [@nrcan2022a; @nrcan2022b]. This comprehensive GIS dataset includes spatial and tabular data representing Canada's hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` script. The following steps were performed:
 
@@ -127,7 +127,7 @@ The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` s
    - Sampled points along each river segment at the mid-point of each rivers, cast the lines to points, and exported as `rivers_points.gpkg`.
 4. **Cleanup**: Temporary files created during processing were deleted.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed lake polygon dataset is as follows:
 
@@ -198,13 +198,13 @@ data.frame(
 
 ## Freshwater Fish Species Occurrences {#sec-freshwater-fish-occurrences}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Global Freshwater Fish Species Occurrences Database**, was retrieved from [Figshare](https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145) [@figshare2025]. This comprehensive dataset compiles freshwater fish species occurrences aggregated at the drainage basin level. The data is associated with the data paper by @tedesco2017 and is designed for analyzing global freshwater biodiversity patterns. 
 
 The dataset includes both spatial data (drainage basins) and tabular data (species occurrences). The drainage basin data covers 3,119 polygons worldwide, while the occurrence table provides over 110,000 records of species distributions across basins. The data has been validated using established taxonomic references such as FishBase.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested data was processed using the `prc_freshwater_fish_occurrences` script. The following steps were performed:
 
@@ -220,7 +220,7 @@ The harvested data was processed using the `prc_freshwater_fish_occurrences` scr
    - Species names in the `species_name_in_source` and `fishbase_valid_species_name` columns were updated to replace periods (`.`) with spaces.
    - The processed data was exported as `occurrences.csv`.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed drainage basin dataset (`bassins.gpkg`) is as follows:
 
@@ -268,13 +268,13 @@ data.frame(
 
 ## GBIF Species Occurrences {#sec-gbif-species-occurrences}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **GBIF Occurrence Data**, was retrieved from the [Global Biodiversity Information Facility (GBIF)](https://www.gbif.org/) [@gbif2025]. This dataset compiles species occurrence records for a specified taxonomic group and geographic region. The retrieved dataset includes spatial and tabular data for over 850,000 records of species occurrences across Canada, starting from 2000. 
 
 It should be noted that the processing steps described below show how the data is downloaded and processed programmatically. However, due to how GBIF manages their data request, we elected to store the downloaded data on our secure Google Cloud Storage and to retrieve them programmatically from there rather than directly on GBIF.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested data was processed using the `dwn_gbif` and `prc_gbif` scripts. The following steps were performed:
 
@@ -289,7 +289,7 @@ The harvested data was processed using the `dwn_gbif` and `prc_gbif` scripts. Th
 4. **Export**:
    - The cleaned and spatially enabled dataset was exported as `species_occurrences_gbif.gpkg` in GeoPackage format.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed dataset (`species_occurrences_gbif.gpkg`) is as follows:
 
@@ -314,11 +314,11 @@ data.frame(
 
 ## National Hydro Network {#sec-national-hydro-network}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **National Hydro Network (NHN) GeoBase Series**, was retrieved from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977) [@nrcan2022]. This dataset provides a comprehensive geometric description and a set of basic attributes describing Canada's inland surface waters. The data includes lakes, reservoirs, rivers, canals, drainage networks, and associated features. 
 
-#### Processing Steps
+### Processing Steps
 
 The NHN data was processed using the `prc_national_hydro_network` script. The following steps were performed:
 
@@ -333,7 +333,7 @@ The NHN data was processed using the `prc_national_hydro_network` script. The fo
 3. **Export**:
    - The processed watershed data was exported as `watersheds.gpkg` in GeoPackage format.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed dataset (`watersheds.gpkg`) is as follows:
 
@@ -350,6 +350,438 @@ data.frame(
   knitr::kable()
 ```
 
+
+
+## Ontario Freshwater Fishes Life History Database {#sec-ontario_fishes}
+
+The [Ontario Freshwater Fishes Life History Database](https://www.ontariofishes.ca/home.htm) [@eakins2024] provides comprehensive life history information for 161 freshwater fish species in Ontario, Canada. The dataset includes 43 characteristics per species, covering taxonomic, ecological, reproductive, and habitat-related information. It also provides a bibliography of references used to compile this data. 
+
+### Source and Accessibility
+
+- **Source**: Ontario Freshwater Fishes Life History Database
+- **Accessibility**: Open Government Licence - Canada
+- **Data Type**: HTML Scraped Dataset
+- **Coverage**: Freshwater systems in Ontario, Canada
+- **Geographic Coverage**: Ontario (Bounding Box: -95.1539, 41.6770, -74.3435, 56.8595)
+- **Temporal Coverage**: 2024
+- **Processing Script**: `dwn_ontario_freshwater_fishes_life_history.R`
+- **Output Files**: `ontario_fishes_characteristics.csv`, `ontario_fishes_references.csv`
+
+### Processing Steps
+
+Data was harvested from the website by scraping individual fish detail pages for 161 species. The harvesting script used the `rvest` package in R to extract structured data for each species, including:
+
+1. **Characteristics Extraction**: Scraped 43 life history attributes such as family, common name, habitat preference, spawning season, thermal regime, and abundance.
+2. **References Compilation**: Extracted all bibliographic references associated with each species.
+3. **Data Cleaning**: Cleaned and pivoted the raw data into a tidy format using `tidyr::pivot_wider()` and `janitor::clean_names()`.
+4. **Export**: Saved the processed data into two CSV files:
+   - `ontario_fishes_characteristics.csv`: A structured table of life history characteristics.
+   - `ontario_fishes_references.csv`: A table of species-referenced bibliographies.
+
+
+### Processed Data Structure
+The structure of the processed data includes the following key variables:
+
+```{r}
+#| label: tbl-ontario-fishes-structure
+#| tbl-cap: "Structure of the Ontario Fishes Characteristics Table"
+data.frame(
+  Field = c(
+    "species_name", "family", "species", "taxonomic_authority",
+    "common_name_s", "french_name", "ontario_origin", "general_abundance",
+    "thermal_regime", "habitat_preference", "spawning_season",
+    "fecundity", "adult_length_cm", "maximum_length_cm", "lifespan_yrs"
+  ),
+  Description = c(
+    "Scientific name of the species.",
+    "Taxonomic family, including common name.",
+    "Species name, including genus.",
+    "Author of the taxonomic classification.",
+    "Common name in English.",
+    "Common name in French.",
+    "Origin status in Ontario (e.g., native, introduced).",
+    "General abundance in freshwater systems.",
+    "Thermal regime preference (coldwater, coolwater, warmwater).",
+    "Preferred habitats for the species.",
+    "Season of spawning activity.",
+    "Number of eggs produced by the species.",
+    "Length of adult individuals in centimeters.",
+    "Maximum recorded length of the species in centimeters.",
+    "Expected lifespan in years."
+  )
+) |>
+  knitr::kable()
+```
+
+
+```{r}
+#| label: tbl-ontario-fishes-references
+#| tbl-cap: "Structure of the Ontario Fishes References Table"
+data.frame(
+  Field = c("species", "reference"),
+  Description = c(
+    "Scientific name of the species associated with the reference.",
+    "Reference citation for the data."
+  )
+) |>
+  knitr::kable()
+```
+
+## FishPass Database {#sec-fishpass}
+
+The [FishPass Database](https://doi.org/10.5061/dryad.fqz612jwj) [@benoit2023] provides a comprehensive collection of biological attributes that influence fish movement and passage, with a particular focus on species from the Laurentian Great Lakes. This dataset is essential for designing selective fish passage systems that aim to balance connectivity while managing the spread of invasive species. It includes 21 biological attributes, covering phenology, morphology, physiology, and behavioral characteristics for 220 fish species. Data coverage varies across species and attributes, highlighting gaps in knowledge about behavioral traits and potential invasive species.
+
+### Source and Accessibility
+
+- **Source**: Dryad Repository
+- **DOI**: [10.5061/dryad.fqz612jwj](https://doi.org/10.5061/dryad.fqz612jwj)
+- **Accessibility**: CC0 Public Domain Dedication
+- **Data Type**: Tabular CSV files
+- **Coverage**: Laurentian Great Lakes, North America
+- **Processing Script**: `prc_fishpass.R`
+- **Output Files**:
+  - `fishpass_behaviour.csv`
+  - `fishpass_morphology.csv`
+  - `fishpass_phenology.csv`
+  - `fishpass_physiology.csv`
+
+### Processing Steps
+
+1. **Data Cleaning**:
+   - Column names were standardized using `janitor::clean_names()`.
+   - Missing or malformed data were handled appropriately.
+2. **Data Structuring**:
+   - Each CSV file was parsed into tidy data tables, retaining only relevant fields.
+   - Attributes such as migratory status, body morphology, spawning season, and vertical stationing were included.
+3. **Export**:
+   - Cleaned data tables were saved into separate CSV files for each attribute dimension, enabling modular analysis.
+
+### Processed Data Structure
+
+The cleaned dataset is divided into four tables, each containing data for 220 species:
+
+```{r}
+#| label: tbl-fishpass-behaviour
+#| tbl-cap: "Structure of the FishPass Behaviour Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "vertical_station", "schooling_behaviour",
+    "reference_vs", "reference_sb"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Vertical stationing behavior (e.g., demersal, pelagic).",
+    "Tendency for schooling behavior (e.g., schooling, non-schooling).",
+    "Reference for vertical station data.",
+    "Reference for schooling behavior data."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-fishpass-morphology
+#| tbl-cap: "Structure of the FishPass Morphology Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "maximum_total_length_cm", "body_shape",
+    "aspect_ratio", "eye_size_percent_hl", "reference_mtl"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Maximum recorded total length (cm).",
+    "Overall body shape (e.g., fusiform, elongated).",
+    "Aspect ratio of the fins.",
+    "Eye size as a percentage of head length.",
+    "Reference for maximum total length data."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-fishpass-phenology
+#| tbl-cap: "Structure of the FishPass Phenology Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "migratory_status", "spatial_scale_of_movement",
+    "spawning_frequency", "spring_spawner", "reference_sf"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Whether the species is migratory or non-migratory.",
+    "Scale of spatial movement (e.g., diadromous, potamodromous).",
+    "Frequency of spawning (e.g., iteroparous).",
+    "Indicates if the species spawns in spring (binary).",
+    "Reference for spawning frequency data."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-fishpass-physiology
+#| tbl-cap: "Structure of the FishPass Physiology Data Table"
+data.frame(
+  Field = c(
+    "order", "family", "genus", "scientific_name",
+    "common_name", "climbing_ability", "hearing_specialization",
+    "trophic_level", "presence_of_ampullary_electroreceptors", "reference_ca"
+  ),
+  Description = c(
+    "Taxonomic order of the species.",
+    "Taxonomic family of the species.",
+    "Genus of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Ability to climb barriers (binary).",
+    "Hearing specialization (binary).",
+    "Trophic level of the species.",
+    "Presence of ampullary electroreceptors (binary).",
+    "Reference for climbing ability data."
+  )
+) |>
+  knitr::kable()
+```
+
+## North American Freshwater Migratory Fish Database (NAFMFD) {#sec-nafmfd}
+
+The [North American Freshwater Migratory Fish Database (NAFMFD)](https://doi.org/10.5066/P9WDLLP0) [@dean2021; @dean2022] synthesizes comprehensive data on the migratory behavior of freshwater fishes across Canada, the United States, and Mexico. It includes information for 1,241 species spanning 79 families and 322 genera, characterizing migratory status, patterns, and behaviors. 
+
+### Source and Accessibility
+
+- **Source**: U.S. Geological Survey ScienceBase-Catalog
+- **DOI**: [10.5066/P9WDLLP0](https://doi.org/10.5066/P9WDLLP0)
+- **Accessibility**: Public Domain
+- **Data Type**: Excel Spreadsheet and Metadata (XML)
+- **Coverage**: North America
+- **Processing Script**: `prc_north_american_freshwater_migratory_fish_database.R`
+- **Output Files**:
+  - `north_american_freshwater_migratory_fish_database.csv`
+
+### Processing Steps
+
+The data was harvested from the ScienceBase-Catalog using two files: an Excel spreadsheet containing species information and a metadata XML file. The processing involved the following steps:
+
+1. **Data Extraction**:
+   - The Excel file was read using the `readxl` package.
+   - Column names were standardized using `janitor::clean_names()` for consistency.
+2. **Data Cleaning**:
+   - Removed unnecessary whitespace and formatted data fields for analysis.
+3. **Export**:
+   - The processed data was saved as a CSV file for ease of use in further analyses.
+
+### Processed Data Structure
+
+The final processed dataset contains 28 fields and 2,198 rows. Key variables include species taxonomy, migratory behavior, and references for data sources.
+
+```{r}
+#| label: tbl-nafmfd-structure
+#| tbl-cap: "Structure of the NAFMFD Processed Data"
+data.frame(
+  Field = c(
+    "itis_family", "family_name", "scientific_name", "common_name",
+    "migratory", "anadromous", "catadromous", "potamodromous",
+    "diadromous", "suspected_migrant", "non_migratory", "reference"
+  ),
+  Description = c(
+    "Integrated Taxonomic Information System (ITIS) identifier for the family.",
+    "Taxonomic family name of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Indicator of whether the species is migratory (1 = yes, 0 = no).",
+    "Indicator of anadromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of catadromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of potamodromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of diadromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of suspected migratory status (1 = yes, 0 = no).",
+    "Indicator of non-migratory status (1 = yes, 0 = no).",
+    "Reference for data source and assignment."
+  )
+) |>
+  knitr::kable()
+```
+
+
+## Roberge et al. (2002) {#sec-roberge}
+
+The [Roberge et al. (2002) dataset](https://console.cloud.google.com/storage/roberge_2002) [@roberge2002] summarizes associations between stream habitat characteristics and life history stages of 86 species and 13 additional subspecies/forms of freshwater fishes in British Columbia and Yukon. The dataset focuses on stream habitat requirements across four life stages: spawning, young-of-the-year, juvenile, and adult. It highlights significant gaps in knowledge for species groups such as green sturgeon, minnows, smelts, ciscos, suckers, sculpins, lampreys, and sticklebacks, emphasizing the need for further research on stream habitat requirements for these taxa.
+
+
+### Source and Accessibility
+
+- **Source**: Fisheries and Oceans Canada, ScienceBase GCS
+- **Accessibility**: Institutional License
+- **Data Type**: Tabular Text File (`.txt`), PDF Report (`.pdf`)
+- **Coverage**: British Columbia and Yukon, Canada
+- **Processing Script**: `prc_roberge_2002.R`
+- **Output File**: `roberge.csv`
+
+
+### Processing Steps
+
+The dataset was retrieved manually from the report (`Fs97-4-2611E.pdf`) to create the raw data (`Roberge2002.txt`). The programmatic processing steps involved:
+
+1. **Data Extraction**:
+   - Imported the tabular text file with `read.delim()`.
+   - Filled missing values for habitat and life stage fields using `tidyr::fill()`.
+2. **Data Restructuring**:
+   - Split the data by species groups.
+   - Renamed columns to reflect meaningful variable names (e.g., `LifeStage`, `Value`).
+   - Pivoted columns for different life stages (e.g., spawning, juvenile) into a long format using `tidyr::pivot_longer()`.
+3. **Data Cleaning**:
+   - Replaced malformed characters and standardized names using `stringr` functions.
+   - Filtered rows with missing or invalid values.
+4. **Export**:
+   - Saved the processed dataset as a CSV file (`roberge.csv`) for further analysis.
+
+
+### Processed Data Structure
+
+The processed dataset contains 5,319 rows and six fields, summarizing habitat characteristics across different life stages for freshwater fish species.
+
+```{r}
+#| label: tbl-roberge-structure
+#| tbl-cap: "Structure of the Roberge Processed Data"
+data.frame(
+  Field = c(
+    "name", "scientificname", "MigrationStrategy",
+    "characteristics", "LifeStage", "Value"
+  ),
+  Description = c(
+    "Common name of the species.",
+    "Scientific name of the species.",
+    "Migration strategy (e.g., anadromous, potamodromous).",
+    "Stream habitat characteristics (e.g., depth, flow type).",
+    "Life stage (e.g., Spawning, Juvenile).",
+    "Habitat value associated with the life stage."
+  )
+) |>
+  knitr::kable()
+```
+
+## Dahlke et al. (2020) {#sec-dahlke}
+
+The [Dahlke et al. (2020)](https://doi.org/10.1594/PANGAEA.917796) [@dahlke2020dataset] compiles experimental and imputed thermal tolerance data, thermal safety margins, and responsiveness for various fish species and life stages. It supports the research on fish survival under warming conditions and size-dependent oxygen supply constraints [@dahlke2020]. 
+
+
+### Source and Accessibility
+
+- **Source**: PANGAEA - Data Publisher for Earth & Environmental Science
+- **DOI**: [10.1594/PANGAEA.917796](https://doi.org/10.1594/PANGAEA.917796)
+- **Accessibility**: CC BY 4.0
+- **Data Type**: Excel Spreadsheets
+- **Coverage**: Global
+- **Processing Script**: `prc_dahlke_2020.R`
+- **Output Files**:
+  - `experimental_imputed_tolerance.csv`
+  - `thermal_safety_margins.csv`
+  - `thermal_responsiveness.csv`
+  - `thermal_tolerance.csv`
+
+
+### Processing Steps
+
+The dataset was harvested and processed from four Excel files hosted on the PANGAEA repository. Each file corresponds to a specific thermal-related aspect, and the processing involved the following steps:
+
+1. **Loading Data**:
+   - Read data from Excel files (`experimental_and_imputed_tolerance_data.xlsx`, `thermal_safety_margins.xlsx`, `thermal_responsiveness.xlsx`, and `thermal_tolerance.xlsx`) using `readxl`.
+2. **Cleaning and Restructuring**:
+   - Standardized column names using `janitor::clean_names()`.
+   - Pivoted wide-format sheets into long-format tables for easier integration.
+   - Filled missing values and cleaned malformed characters.
+3. **Data Integration**:
+   - Combined multiple sheets within a single Excel file to create unified datasets.
+   - Merged species-specific attributes across life stages and realms.
+4. **Exporting Processed Data**:
+   - Saved cleaned datasets as CSV files (`vroom_write`) for further analysis.
+
+### Processed Data Structure
+
+```{r}
+#| label: tbl-exp-imp-tolerance
+#| tbl-cap: "Structure of Experimental and Imputed Tolerance Data"
+data.frame(
+  Field = c("life_stage", "species", "tmin_c", "tmax_c", "tmid_c", "trange_c", "reference"),
+  Description = c(
+    "Life stage of the species (e.g., Spawners, Juvenile).",
+    "Species name following FishBase taxonomy.",
+    "Minimum temperature (°C) tolerance.",
+    "Maximum temperature (°C) tolerance.",
+    "Midpoint temperature (°C) between Tmin and Tmax.",
+    "Range of temperature tolerance (°C).",
+    "Citation for the data source."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-thermal-responsiveness
+#| tbl-cap: "Structure of Thermal Responsiveness Data"
+data.frame(
+  Field = c("species", "lifestage", "response", "trange_c", "tmid_c", "reference"),
+  Description = c(
+    "Species name following FishBase taxonomy.",
+    "Life stage associated with the thermal response (e.g., Embryos, Juveniles).",
+    "Type of response (e.g., Development Rate, Survival).",
+    "Range of temperature (°C) associated with the response.",
+    "Midpoint temperature (°C) for the response.",
+    "Citation for the data source."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-thermal-safety-margins
+#| tbl-cap: "Structure of Thermal Safety Margins Data"
+data.frame(
+  Field = c("species", "realm", "depth_spawners", "depths_embryos", "spawning_season"),
+  Description = c(
+    "Species name following FishBase taxonomy.",
+    "Habitat realm of the species (e.g., Freshwater, Marine).",
+    "Spawning depth range in meters.",
+    "Embryo depth range in meters.",
+    "Seasonality of spawning (e.g., MJJ for May–July)."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-thermal-tolerance
+#| tbl-cap: "Structure of Thermal Tolerance Data"
+data.frame(
+  Field = c("thermal_tolerance", "species_fish_base", "latitude", "lifestage", "tmax_c", "tmin_c", "trange_c", "realm"),
+  Description = c(
+    "Thermal tolerance parameter (e.g., Tmax, Tmin).",
+    "Species name following FishBase taxonomy.",
+    "Geographic latitude of observation.",
+    "Life stage of the species (e.g., Spawner, Embryo).",
+    "Maximum temperature (°C) tolerance.",
+    "Minimum temperature (°C) tolerance.",
+    "Range of temperature tolerance (°C).",
+    "Habitat realm of the species (e.g., Marine, Freshwater)."
+  )
+) |>
+  knitr::kable()
+```
 
 
 ## References

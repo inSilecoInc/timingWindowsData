@@ -38,6 +38,46 @@ list(
             input_files = list())
         "workspace/data/harvested/canada_outline-1.0.0/processed/can_1_simplified.gpkg"
     }, format = "file")),
+    list(tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Experimental_and_Imputed_Tolerance_Data, 
+    url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Experimental_and_imputed_tolerance_data.xlsx", 
+    path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/experimental_and_imputed_tolerance_data.xlsx"), 
+    tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Safety_Margins, 
+        url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_Safety_Margins.xlsx", 
+        path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/thermal_safety_margins.xlsx"), 
+    tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Responsiveness, 
+        url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_responsiveness.xlsx", 
+        path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/thermal_responsiveness.xlsx"), 
+    tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Tolerance, 
+        url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_tolerance.xlsx", 
+        path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/thermal_tolerance.xlsx"), 
+    tar_target(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_dahlke_processed, 
+        {
+            prc_dahlke_2020(output_path = "workspace/data/harvested/dahlke_2020-1.0.0/processed", 
+                input_files = list(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Experimental_and_Imputed_Tolerance_Data, 
+                  tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Safety_Margins, 
+                  tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Responsiveness, 
+                  tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Tolerance))
+            c("workspace/data/harvested/dahlke_2020-1.0.0/processed/experimental_imputed_tolerance.csv", 
+            "workspace/data/harvested/dahlke_2020-1.0.0/processed/thermal_safety_margins.csv", 
+            "workspace/data/harvested/dahlke_2020-1.0.0/processed/thermal_responsiveness.csv", 
+            "workspace/data/harvested/dahlke_2020-1.0.0/processed/thermal_tolerance.csv"
+            )
+        }, format = "file")),
+    list(tar_target(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_database, 
+    {
+        curl::curl_download("https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.fqz612jwj/download", 
+            "workspace/data/harvested/fishpass-1.0.0/raw/FishPass_Database.zip")
+        "workspace/data/harvested/fishpass-1.0.0/raw/FishPass_Database.zip"
+    }, format = "file"), tar_target(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_processed, 
+    {
+        prc_fishpass(output_path = "workspace/data/harvested/fishpass-1.0.0/processed", 
+            input_files = list(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_database))
+        c("workspace/data/harvested/fishpass-1.0.0/processed/fishpass_behaviour.csv", 
+        "workspace/data/harvested/fishpass-1.0.0/processed/fishpass_morphology.csv", 
+        "workspace/data/harvested/fishpass-1.0.0/processed/fishpass_phenology.csv", 
+        "workspace/data/harvested/fishpass-1.0.0/processed/fishpass_physiology.csv"
+        )
+    }, format = "file")),
     list(tar_target(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_FishBase_Freshwater_Species, 
     {
         extract_tables_from_url(urls = "https://www.fishbase.se/country/CountryChecklist.php?what=list&trpp=50&c_code=124&csub_code=&cpresence=present&sortby=alpha2&vhabitat=fresh", 
@@ -102,6 +142,52 @@ list(
                 input_files = list(tg_217d3c1a_8b05_499c_8d39_9ad96fe305d9_National_Hydro_Network_GeoBase_GPKG))
             "workspace/data/harvested/national_hydro_network-1.0.0/processed/watersheds.gpkg"
         }, format = "file")),
+    list(tar_target(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_Data, 
+    {
+        curl::curl_download("https://www.sciencebase.gov/catalog/file/get/619d2dbcd34eb622f6951e8a?name=NAFMFD_finalcopy.xlsx", 
+            "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_finalcopy.xlsx")
+        "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_finalcopy.xlsx"
+    }, format = "file"), tar_target(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_Metadata, 
+    {
+        curl::curl_download("https://www.sciencebase.gov/catalog/file/get/619d2dbcd34eb622f6951e8a?name=NAFMFD_metadata_12-20-2021.xml", 
+            "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_metadata_12-20-2021.xml")
+        "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_metadata_12-20-2021.xml"
+    }, format = "file"), tar_target(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_processed, 
+    {
+        prc_north_american_freshwater_migratory_fish_database(output_path = "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/processed", 
+            input_files = list(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_Data))
+        "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/processed/north_american_freshwater_migratory_fish_database.csv"
+    }, format = "file")),
+    list(tar_target(tg_1a084fb5_2dbd_4df9_9543_e020ec0ee77a_Ontario_Freshwater_Fishes_Life_History_Database, 
+    {
+        dwn_ontario_freshwater_fishes_life_history(output_path = "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed", 
+            input_files = list())
+        c("workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_characteristics.csv", 
+        "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_references.csv"
+        )
+    }, format = "file")),
+    list(list(tar_target(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Dataset, 
+    {
+        googleCloudStorageR::gcs_auth("workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        Sys.setenv(GCS_AUTH_FILE = "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        googleCloudStorageR::gcs_get_object(object_name = "roberge2002/Roberge2002.txt", 
+            bucket = "timing-windows", saveToDisk = "workspace/data/harvested/roberge_2002-1.0.0/raw/Roberge2002.txt", 
+            overwrite = TRUE)
+        "workspace/data/harvested/roberge_2002-1.0.0/raw/Roberge2002.txt"
+    }, format = "file")), list(tar_target(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Report, 
+    {
+        googleCloudStorageR::gcs_auth("workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        Sys.setenv(GCS_AUTH_FILE = "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        googleCloudStorageR::gcs_get_object(object_name = "roberge2002/Fs97-4-2611E.pdf", 
+            bucket = "timing-windows", saveToDisk = "workspace/data/harvested/roberge_2002-1.0.0/raw/Fs97-4-2611E.pdf", 
+            overwrite = TRUE)
+        "workspace/data/harvested/roberge_2002-1.0.0/raw/Fs97-4-2611E.pdf"
+    }, format = "file")), tar_target(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_roberge_processed, 
+    {
+        prc_roberge_2002(output_path = "workspace/data/harvested/roberge_2002-1.0.0/processed", 
+            input_files = list(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Dataset))
+        "workspace/data/harvested/roberge_2002-1.0.0/processed/roberge.csv"
+    }, format = "file")),
     list(tar_target(tg_47a31643_e5a1_4126_9070_909f742c85cd_national_timing_windows_database, 
     {
         int_national_timing_windows_dataset(output_path = "workspace/data/analyzed/national_timing_windows_dataset-1.0.0", 

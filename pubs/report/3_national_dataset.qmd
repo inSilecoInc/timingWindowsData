@@ -54,7 +54,7 @@ The resulting relational database schema is visualized as part of the integratio
 ```{r}
 #| label: fig-data-schema
 #| fig-cap: "Relational schema of the National Timing Windows Database."
-knitr::include_graphics("../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.png")
+knitr::include_graphics("../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg")
 ```
 
 ## Processed Data Overview
