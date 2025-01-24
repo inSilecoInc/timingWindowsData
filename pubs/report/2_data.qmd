@@ -618,4 +618,62 @@ data.frame(
 ```
 
 
+## Roberge et al. (2002) {#sec-roberge}
+
+The [Roberge et al. (2002) dataset](https://console.cloud.google.com/storage/roberge_2002) [@roberge2002] summarizes associations between stream habitat characteristics and life history stages of 86 species and 13 additional subspecies/forms of freshwater fishes in British Columbia and Yukon. The dataset focuses on stream habitat requirements across four life stages: spawning, young-of-the-year, juvenile, and adult. It highlights significant gaps in knowledge for species groups such as green sturgeon, minnows, smelts, ciscos, suckers, sculpins, lampreys, and sticklebacks, emphasizing the need for further research on stream habitat requirements for these taxa.
+
+
+### Source and Accessibility
+
+- **Source**: Fisheries and Oceans Canada, ScienceBase GCS
+- **Accessibility**: Institutional License
+- **Data Type**: Tabular Text File (`.txt`), PDF Report (`.pdf`)
+- **Coverage**: British Columbia and Yukon, Canada
+- **Processing Script**: `prc_roberge_2002.R`
+- **Output File**: `roberge.csv`
+
+
+### Processing Steps
+
+The dataset was retrieved manually from the report (`Fs97-4-2611E.pdf`) to create the raw data (`Roberge2002.txt`). The programmatic processing steps involved:
+
+1. **Data Extraction**:
+   - Imported the tabular text file with `read.delim()`.
+   - Filled missing values for habitat and life stage fields using `tidyr::fill()`.
+2. **Data Restructuring**:
+   - Split the data by species groups.
+   - Renamed columns to reflect meaningful variable names (e.g., `LifeStage`, `Value`).
+   - Pivoted columns for different life stages (e.g., spawning, juvenile) into a long format using `tidyr::pivot_longer()`.
+3. **Data Cleaning**:
+   - Replaced malformed characters and standardized names using `stringr` functions.
+   - Filtered rows with missing or invalid values.
+4. **Export**:
+   - Saved the processed dataset as a CSV file (`roberge.csv`) for further analysis.
+
+
+### Processed Data Structure
+
+The processed dataset contains 5,319 rows and six fields, summarizing habitat characteristics across different life stages for freshwater fish species.
+
+```{r}
+#| label: tbl-roberge-structure
+#| tbl-cap: "Structure of the Roberge Processed Data"
+data.frame(
+  Field = c(
+    "name", "scientificname", "MigrationStrategy",
+    "characteristics", "LifeStage", "Value"
+  ),
+  Description = c(
+    "Common name of the species.",
+    "Scientific name of the species.",
+    "Migration strategy (e.g., anadromous, potamodromous).",
+    "Stream habitat characteristics (e.g., depth, flow type).",
+    "Life stage (e.g., Spawning, Juvenile).",
+    "Habitat value associated with the life stage."
+  )
+) |>
+  knitr::kable()
+```
+
+
 ## References

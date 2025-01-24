@@ -141,6 +141,28 @@ list(
         "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_references.csv"
         )
     }, format = "file")),
+    list(list(tar_target(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Dataset, 
+    {
+        googleCloudStorageR::gcs_auth("workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        Sys.setenv(GCS_AUTH_FILE = "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        googleCloudStorageR::gcs_get_object(object_name = "roberge2002/Roberge2002.txt", 
+            bucket = "timing-windows", saveToDisk = "workspace/data/harvested/roberge_2002-1.0.0/raw/Roberge2002.txt", 
+            overwrite = TRUE)
+        "workspace/data/harvested/roberge_2002-1.0.0/raw/Roberge2002.txt"
+    }, format = "file")), list(tar_target(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Report, 
+    {
+        googleCloudStorageR::gcs_auth("workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        Sys.setenv(GCS_AUTH_FILE = "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json")
+        googleCloudStorageR::gcs_get_object(object_name = "roberge2002/Fs97-4-2611E.pdf", 
+            bucket = "timing-windows", saveToDisk = "workspace/data/harvested/roberge_2002-1.0.0/raw/Fs97-4-2611E.pdf", 
+            overwrite = TRUE)
+        "workspace/data/harvested/roberge_2002-1.0.0/raw/Fs97-4-2611E.pdf"
+    }, format = "file")), tar_target(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_roberge_processed, 
+    {
+        prc_roberge_2002(output_path = "workspace/data/harvested/roberge_2002-1.0.0/processed", 
+            input_files = list(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Dataset))
+        "workspace/data/harvested/roberge_2002-1.0.0/processed/roberge.csv"
+    }, format = "file")),
     list(tar_target(tg_47a31643_e5a1_4126_9070_909f742c85cd_national_timing_windows_database, 
     {
         int_national_timing_windows_dataset(output_path = "workspace/data/analyzed/national_timing_windows_dataset-1.0.0", 

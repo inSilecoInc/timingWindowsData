@@ -198,7 +198,8 @@ window.Quarto = {
   <li><a href="#sec-ontario_fishes" id="toc-sec-ontario_fishes" class="nav-link" data-scroll-target="#sec-ontario_fishes"><span class="header-section-number">3.7</span> Ontario Freshwater Fishes Life History Database</a></li>
   <li><a href="#sec-fishpass" id="toc-sec-fishpass" class="nav-link" data-scroll-target="#sec-fishpass"><span class="header-section-number">3.8</span> FishPass Database</a></li>
   <li><a href="#sec-nafmfd" id="toc-sec-nafmfd" class="nav-link" data-scroll-target="#sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.10</span> References</a></li>
+  <li><a href="#sec-roberge" id="toc-sec-roberge" class="nav-link" data-scroll-target="#sec-roberge"><span class="header-section-number">3.10</span> Roberge et al.&nbsp;(2002)</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.11</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -1527,8 +1528,104 @@ Table&nbsp;3.17: Structure of the NAFMFD Processed Data
 </div>
 </section>
 </section>
-<section id="references" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="references"><span class="header-section-number">3.10</span> References</h2>
+<section id="sec-roberge" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="sec-roberge"><span class="header-section-number">3.10</span> Roberge et al.&nbsp;(2002)</h2>
+<p>The <a href="https://console.cloud.google.com/storage/roberge_2002">Roberge et al.&nbsp;(2002) dataset</a> <span class="citation" data-cites="roberge2002">(<a href="#ref-roberge2002" role="doc-biblioref">Roberge et al., 2002</a>)</span> summarizes associations between stream habitat characteristics and life history stages of 86 species and 13 additional subspecies/forms of freshwater fishes in British Columbia and Yukon. The dataset focuses on stream habitat requirements across four life stages: spawning, young-of-the-year, juvenile, and adult. It highlights significant gaps in knowledge for species groups such as green sturgeon, minnows, smelts, ciscos, suckers, sculpins, lampreys, and sticklebacks, emphasizing the need for further research on stream habitat requirements for these taxa.</p>
+<section id="source-and-accessibility-3" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="source-and-accessibility-3"><span class="header-section-number">3.10.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: Fisheries and Oceans Canada, ScienceBase GCS</li>
+<li><strong>Accessibility</strong>: Institutional License</li>
+<li><strong>Data Type</strong>: Tabular Text File (<code>.txt</code>), PDF Report (<code>.pdf</code>)</li>
+<li><strong>Coverage</strong>: British Columbia and Yukon, Canada</li>
+<li><strong>Processing Script</strong>: <code>prc_roberge_2002.R</code></li>
+<li><strong>Output File</strong>: <code>roberge.csv</code></li>
+</ul>
+</section>
+<section id="processing-steps-9" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="processing-steps-9"><span class="header-section-number">3.10.2</span> Processing Steps</h3>
+<p>The dataset was retrieved manually from the report (<code>Fs97-4-2611E.pdf</code>) to create the raw data (<code>Roberge2002.txt</code>). The programmatic processing steps involved:</p>
+<ol type="1">
+<li><strong>Data Extraction</strong>:
+<ul>
+<li>Imported the tabular text file with <code>read.delim()</code>.</li>
+<li>Filled missing values for habitat and life stage fields using <code>tidyr::fill()</code>.</li>
+</ul></li>
+<li><strong>Data Restructuring</strong>:
+<ul>
+<li>Split the data by species groups.</li>
+<li>Renamed columns to reflect meaningful variable names (e.g., <code>LifeStage</code>, <code>Value</code>).</li>
+<li>Pivoted columns for different life stages (e.g., spawning, juvenile) into a long format using <code>tidyr::pivot_longer()</code>.</li>
+</ul></li>
+<li><strong>Data Cleaning</strong>:
+<ul>
+<li>Replaced malformed characters and standardized names using <code>stringr</code> functions.</li>
+<li>Filtered rows with missing or invalid values.</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>Saved the processed dataset as a CSV file (<code>roberge.csv</code>) for further analysis.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-9" class="level3" data-number="3.10.3">
+<h3 data-number="3.10.3" class="anchored" data-anchor-id="processed-data-structure-9"><span class="header-section-number">3.10.3</span> Processed Data Structure</h3>
+<p>The processed dataset contains 5,319 rows and six fields, summarizing habitat characteristics across different life stages for freshwater fish species.</p>
+<div class="cell">
+<div id="tbl-roberge-structure" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-roberge-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.18: Structure of the Roberge Processed Data
+</figcaption>
+<div aria-describedby="tbl-roberge-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientificname</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MigrationStrategy</td>
+<td style="text-align: left;">Migration strategy (e.g., anadromous, potamodromous).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">characteristics</td>
+<td style="text-align: left;">Stream habitat characteristics (e.g., depth, flow type).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LifeStage</td>
+<td style="text-align: left;">Life stage (e.g., Spawning, Juvenile).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Value</td>
+<td style="text-align: left;">Habitat value associated with the life stage.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="references"><span class="header-section-number">3.11</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
@@ -1561,6 +1658,9 @@ Global Administrative Areas, G. (Database of (2023). GADM database of global adm
 </div>
 <div id="ref-gbif2025" class="csl-entry" role="listitem">
 Global Biodiversity Information Facility (2025). GBIF occurrence download https://doi.org/10.15468/dl.fxqrjh accessed from r via rgbif (https://github.com/ropensci/rgbif) on 2025-01-23. <span>GBIF Secretariat</span>.
+</div>
+<div id="ref-roberge2002" class="csl-entry" role="listitem">
+Roberge, M., Hume, J. M. B., Minns, C. K., and Slaney, T. (2002). Life history characteristics of freshwater fishes occurring in british columbia and the yukon, with major emphasis on stream habitat characteristics. Fisheries; Oceans Canada.
 </div>
 <div id="ref-figshare2025" class="csl-entry" role="listitem">
 Tedesco, P. A. et al. (2017a). A global database on freshwater fish species occurrences in drainage basins. Figshare Available at: <a href="https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145">https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145</a>.

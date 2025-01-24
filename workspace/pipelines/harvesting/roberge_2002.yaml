@@ -1,0 +1,76 @@
+pipeline:
+  id: d56fc2b3-318b-489a-8000-54501f7ae5e7
+  name: roberge_2002
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-24 14:06:59
+  last_modified: 2025-01-24 14:06:59
+  description: |
+    This dataset summarizes the associations between stream characteristics and 
+    life history stages for 86 species and 13 subspecies/forms of freshwater fishes 
+    in British Columbia and Yukon. The focus is on stream habitat requirements 
+    across four life cycle stages (spawning, young-of-the-year, juvenile, adult). 
+    Despite the comprehensive scope, there is a lack of detailed information for 
+    certain species groups, including green sturgeon, minnows, smelts, ciscos, 
+    suckers, sculpins, lamprey, and sticklebacks.
+
+  # Metadata section providing details about the data being harvested
+  metadata:
+    source_name: "Roberge et al. (2002): Life History Characteristics of Freshwater Fishes"
+    data_type: "CSV and related files"
+    file_size: "Unknown"
+    license: "Institutional License"
+    last_updated: "2002"
+    geographic_coverage:
+      region: "British Columbia and Yukon, Canada"
+    temporal_coverage:
+      start_date: "2002-01-01"
+    variables:
+      - species
+      - habitat_characteristics
+      - life_cycle_stages
+    data_quality:
+      - "Data retrieved directly from the GCS bucket, ensuring the latest version of the dataset."
+
+  # Bibliographic Information
+  bibliography:
+    - "@TechReport{roberge2002,
+        title = {Life history characteristics of freshwater fishes occurring in British Columbia and the Yukon, with major emphasis on stream habitat characteristics},
+        author = {Roberge, M. and Hume, J.M.B. and Minns, C.K. and Slaney, T.},
+        year = {2002},
+        series = {Can. Manuscr. Rep. Fish. Aquat. Sci.},
+        number = {2611},
+        publisher = {Fisheries and Oceans Canada},
+        pages = {xiv + 248}
+      }"
+
+  # Harvest section: Define the sources to download and process
+  download:
+    sources:
+      - name: "Roberge Dataset"
+        description: retrieving Roberge et al. 2002 dataset
+        source_type: "gcs"
+        urls: "timing-windows"
+        asset: "roberge2002/Roberge2002.txt"
+        credentials: "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json"
+      - name: "Roberge Report"
+        description: retrieving Roberge et al. 2002 report
+        source_type: "gcs"
+        urls: "timing-windows"
+        asset: "roberge2002/Fs97-4-2611E.pdf"
+        credentials: "workspace/credentials/pof-stac-insileco-5d20b0cb59ef.json"
+
+  processing:
+    sources:
+      - name: roberge processed
+        script: prc_roberge_2002
+        input_files:
+          - Roberge Dataset
+        output_files:
+          - roberge.csv
+
+  # Output section: final output of the processed data
+  output:
+    output_dir: "workspace/data/harvested/roberge_2002/"
+    log_dir: "workspace/logs/roberge_2002/"
+    archive_raw: true
