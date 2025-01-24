@@ -38,6 +38,31 @@ list(
             input_files = list())
         "workspace/data/harvested/canada_outline-1.0.0/processed/can_1_simplified.gpkg"
     }, format = "file")),
+    list(tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Experimental_and_Imputed_Tolerance_Data, 
+    url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Experimental_and_imputed_tolerance_data.xlsx", 
+    path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/experimental_and_imputed_tolerance_data.xlsx"), 
+    tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Safety_Margins, 
+        url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_Safety_Margins.xlsx", 
+        path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/thermal_safety_margins.xlsx"), 
+    tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Responsiveness, 
+        url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_responsiveness.xlsx", 
+        path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/thermal_responsiveness.xlsx"), 
+    tarchetypes::tar_download(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Tolerance, 
+        url = "https://store.pangaea.de/Publications/DahlkeF-etal_2020/Thermal_tolerance.xlsx", 
+        path = "workspace/data/harvested/dahlke_2020-1.0.0/raw/thermal_tolerance.xlsx"), 
+    tar_target(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_dahlke_processed, 
+        {
+            prc_dahlke_2020(output_path = "workspace/data/harvested/dahlke_2020-1.0.0/processed", 
+                input_files = list(tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Experimental_and_Imputed_Tolerance_Data, 
+                  tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Safety_Margins, 
+                  tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Responsiveness, 
+                  tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_Thermal_Tolerance))
+            c("workspace/data/harvested/dahlke_2020-1.0.0/processed/experimental_imputed_tolerance.csv", 
+            "workspace/data/harvested/dahlke_2020-1.0.0/processed/thermal_safety_margins.csv", 
+            "workspace/data/harvested/dahlke_2020-1.0.0/processed/thermal_responsiveness.csv", 
+            "workspace/data/harvested/dahlke_2020-1.0.0/processed/thermal_tolerance.csv"
+            )
+        }, format = "file")),
     list(tar_target(tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_database, 
     {
         curl::curl_download("https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.fqz612jwj/download", 

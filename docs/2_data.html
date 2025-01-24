@@ -199,7 +199,8 @@ window.Quarto = {
   <li><a href="#sec-fishpass" id="toc-sec-fishpass" class="nav-link" data-scroll-target="#sec-fishpass"><span class="header-section-number">3.8</span> FishPass Database</a></li>
   <li><a href="#sec-nafmfd" id="toc-sec-nafmfd" class="nav-link" data-scroll-target="#sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</a></li>
   <li><a href="#sec-roberge" id="toc-sec-roberge" class="nav-link" data-scroll-target="#sec-roberge"><span class="header-section-number">3.10</span> Roberge et al.&nbsp;(2002)</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.11</span> References</a></li>
+  <li><a href="#sec-dahlke" id="toc-sec-dahlke" class="nav-link" data-scroll-target="#sec-dahlke"><span class="header-section-number">3.11</span> Dahlke et al.&nbsp;(2020)</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.12</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -1624,8 +1625,266 @@ Table&nbsp;3.18: Structure of the Roberge Processed Data
 </div>
 </section>
 </section>
-<section id="references" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="references"><span class="header-section-number">3.11</span> References</h2>
+<section id="sec-dahlke" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="sec-dahlke"><span class="header-section-number">3.11</span> Dahlke et al.&nbsp;(2020)</h2>
+<p>The <a href="https://doi.org/10.1594/PANGAEA.917796">Dahlke et al.&nbsp;(2020)</a> <span class="citation" data-cites="dahlke2020dataset">(<a href="#ref-dahlke2020dataset" role="doc-biblioref">Dahlke et al., 2020b</a>)</span> compiles experimental and imputed thermal tolerance data, thermal safety margins, and responsiveness for various fish species and life stages. It supports the research on fish survival under warming conditions and size-dependent oxygen supply constraints <span class="citation" data-cites="dahlke2020">(<a href="#ref-dahlke2020" role="doc-biblioref">Dahlke et al., 2020a</a>)</span>.</p>
+<section id="source-and-accessibility-4" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="source-and-accessibility-4"><span class="header-section-number">3.11.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: PANGAEA - Data Publisher for Earth &amp; Environmental Science</li>
+<li><strong>DOI</strong>: <a href="https://doi.org/10.1594/PANGAEA.917796">10.1594/PANGAEA.917796</a></li>
+<li><strong>Accessibility</strong>: CC BY 4.0</li>
+<li><strong>Data Type</strong>: Excel Spreadsheets</li>
+<li><strong>Coverage</strong>: Global</li>
+<li><strong>Processing Script</strong>: <code>prc_dahlke_2020.R</code></li>
+<li><strong>Output Files</strong>:
+<ul>
+<li><code>experimental_imputed_tolerance.csv</code></li>
+<li><code>thermal_safety_margins.csv</code></li>
+<li><code>thermal_responsiveness.csv</code></li>
+<li><code>thermal_tolerance.csv</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-steps-10" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="processing-steps-10"><span class="header-section-number">3.11.2</span> Processing Steps</h3>
+<p>The dataset was harvested and processed from four Excel files hosted on the PANGAEA repository. Each file corresponds to a specific thermal-related aspect, and the processing involved the following steps:</p>
+<ol type="1">
+<li><strong>Loading Data</strong>:
+<ul>
+<li>Read data from Excel files (<code>experimental_and_imputed_tolerance_data.xlsx</code>, <code>thermal_safety_margins.xlsx</code>, <code>thermal_responsiveness.xlsx</code>, and <code>thermal_tolerance.xlsx</code>) using <code>readxl</code>.</li>
+</ul></li>
+<li><strong>Cleaning and Restructuring</strong>:
+<ul>
+<li>Standardized column names using <code>janitor::clean_names()</code>.</li>
+<li>Pivoted wide-format sheets into long-format tables for easier integration.</li>
+<li>Filled missing values and cleaned malformed characters.</li>
+</ul></li>
+<li><strong>Data Integration</strong>:
+<ul>
+<li>Combined multiple sheets within a single Excel file to create unified datasets.</li>
+<li>Merged species-specific attributes across life stages and realms.</li>
+</ul></li>
+<li><strong>Exporting Processed Data</strong>:
+<ul>
+<li>Saved cleaned datasets as CSV files (<code>vroom_write</code>) for further analysis.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-10" class="level3" data-number="3.11.3">
+<h3 data-number="3.11.3" class="anchored" data-anchor-id="processed-data-structure-10"><span class="header-section-number">3.11.3</span> Processed Data Structure</h3>
+<div class="cell">
+<div id="tbl-exp-imp-tolerance" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exp-imp-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.19: Structure of Experimental and Imputed Tolerance Data
+</figcaption>
+<div aria-describedby="tbl-exp-imp-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">life_stage</td>
+<td style="text-align: left;">Life stage of the species (e.g., Spawners, Juvenile).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmin_c</td>
+<td style="text-align: left;">Minimum temperature (°C) tolerance.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tmax_c</td>
+<td style="text-align: left;">Maximum temperature (°C) tolerance.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmid_c</td>
+<td style="text-align: left;">Midpoint temperature (°C) between Tmin and Tmax.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trange_c</td>
+<td style="text-align: left;">Range of temperature tolerance (°C).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Citation for the data source.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-thermal-responsiveness" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-thermal-responsiveness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.20: Structure of Thermal Responsiveness Data
+</figcaption>
+<div aria-describedby="tbl-thermal-responsiveness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifestage</td>
+<td style="text-align: left;">Life stage associated with the thermal response (e.g., Embryos, Juveniles).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">response</td>
+<td style="text-align: left;">Type of response (e.g., Development Rate, Survival).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trange_c</td>
+<td style="text-align: left;">Range of temperature (°C) associated with the response.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmid_c</td>
+<td style="text-align: left;">Midpoint temperature (°C) for the response.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Citation for the data source.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-thermal-safety-margins" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-thermal-safety-margins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.21: Structure of Thermal Safety Margins Data
+</figcaption>
+<div aria-describedby="tbl-thermal-safety-margins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">realm</td>
+<td style="text-align: left;">Habitat realm of the species (e.g., Freshwater, Marine).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">depth_spawners</td>
+<td style="text-align: left;">Spawning depth range in meters.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">depths_embryos</td>
+<td style="text-align: left;">Embryo depth range in meters.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spawning_season</td>
+<td style="text-align: left;">Seasonality of spawning (e.g., MJJ for May–July).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-thermal-tolerance" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-thermal-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.22: Structure of Thermal Tolerance Data
+</figcaption>
+<div aria-describedby="tbl-thermal-tolerance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">thermal_tolerance</td>
+<td style="text-align: left;">Thermal tolerance parameter (e.g., Tmax, Tmin).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">species_fish_base</td>
+<td style="text-align: left;">Species name following FishBase taxonomy.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">latitude</td>
+<td style="text-align: left;">Geographic latitude of observation.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifestage</td>
+<td style="text-align: left;">Life stage of the species (e.g., Spawner, Embryo).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmax_c</td>
+<td style="text-align: left;">Maximum temperature (°C) tolerance.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tmin_c</td>
+<td style="text-align: left;">Minimum temperature (°C) tolerance.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trange_c</td>
+<td style="text-align: left;">Range of temperature tolerance (°C).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">realm</td>
+<td style="text-align: left;">Habitat realm of the species (e.g., Marine, Freshwater).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="references"><span class="header-section-number">3.12</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
@@ -1640,6 +1899,12 @@ Canada, N. R. (2022b). Atlas of canada national scale data 1:1,000,000 - waterbo
 </div>
 <div id="ref-nrcan2022" class="csl-entry" role="listitem">
 Canada, N. R. (2022c). National hydro network (NHN) - GeoBase series. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977</a>.
+</div>
+<div id="ref-dahlke2020" class="csl-entry" role="listitem">
+Dahlke, F. T., Wohlrab, S., Butzin, M., and P"ortner, H.-O. (2020a). Fish survival at the upper thermal limits: Effects of size-dependent oxygen supply and climate change. <em>Science</em> 369, 65–70. doi:<a href="https://doi.org/10.1126/science.aaz3658">10.1126/science.aaz3658</a>.
+</div>
+<div id="ref-dahlke2020dataset" class="csl-entry" role="listitem">
+Dahlke, F., Wohlrab, S., Butzin, M., and P"ortner, H.-O. (2020b). Experimental data compilation, thermal tolerance and thermal responsiveness of fish species and life stages [dataset]. doi:<a href="https://doi.org/10.1594/PANGAEA.917796">10.1594/PANGAEA.917796</a>.
 </div>
 <div id="ref-dean2021" class="csl-entry" role="listitem">
 Dean, E. M., Cooper, A. R., Wang, L., Daniel, W. M., David, S., Ernzen, C., et al. (2021). The north american freshwater migratory fish database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of canada, the united states, and mexico. U.S. Geological Survey Available at: <a href="https://doi.org/10.5066/P9WDLLP0">https://doi.org/10.5066/P9WDLLP0</a>.

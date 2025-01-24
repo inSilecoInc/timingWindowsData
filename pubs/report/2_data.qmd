@@ -675,5 +675,113 @@ data.frame(
   knitr::kable()
 ```
 
+## Dahlke et al. (2020) {#sec-dahlke}
+
+The [Dahlke et al. (2020)](https://doi.org/10.1594/PANGAEA.917796) [@dahlke2020dataset] compiles experimental and imputed thermal tolerance data, thermal safety margins, and responsiveness for various fish species and life stages. It supports the research on fish survival under warming conditions and size-dependent oxygen supply constraints [@dahlke2020]. 
+
+
+### Source and Accessibility
+
+- **Source**: PANGAEA - Data Publisher for Earth & Environmental Science
+- **DOI**: [10.1594/PANGAEA.917796](https://doi.org/10.1594/PANGAEA.917796)
+- **Accessibility**: CC BY 4.0
+- **Data Type**: Excel Spreadsheets
+- **Coverage**: Global
+- **Processing Script**: `prc_dahlke_2020.R`
+- **Output Files**:
+  - `experimental_imputed_tolerance.csv`
+  - `thermal_safety_margins.csv`
+  - `thermal_responsiveness.csv`
+  - `thermal_tolerance.csv`
+
+
+### Processing Steps
+
+The dataset was harvested and processed from four Excel files hosted on the PANGAEA repository. Each file corresponds to a specific thermal-related aspect, and the processing involved the following steps:
+
+1. **Loading Data**:
+   - Read data from Excel files (`experimental_and_imputed_tolerance_data.xlsx`, `thermal_safety_margins.xlsx`, `thermal_responsiveness.xlsx`, and `thermal_tolerance.xlsx`) using `readxl`.
+2. **Cleaning and Restructuring**:
+   - Standardized column names using `janitor::clean_names()`.
+   - Pivoted wide-format sheets into long-format tables for easier integration.
+   - Filled missing values and cleaned malformed characters.
+3. **Data Integration**:
+   - Combined multiple sheets within a single Excel file to create unified datasets.
+   - Merged species-specific attributes across life stages and realms.
+4. **Exporting Processed Data**:
+   - Saved cleaned datasets as CSV files (`vroom_write`) for further analysis.
+
+### Processed Data Structure
+
+```{r}
+#| label: tbl-exp-imp-tolerance
+#| tbl-cap: "Structure of Experimental and Imputed Tolerance Data"
+data.frame(
+  Field = c("life_stage", "species", "tmin_c", "tmax_c", "tmid_c", "trange_c", "reference"),
+  Description = c(
+    "Life stage of the species (e.g., Spawners, Juvenile).",
+    "Species name following FishBase taxonomy.",
+    "Minimum temperature (°C) tolerance.",
+    "Maximum temperature (°C) tolerance.",
+    "Midpoint temperature (°C) between Tmin and Tmax.",
+    "Range of temperature tolerance (°C).",
+    "Citation for the data source."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-thermal-responsiveness
+#| tbl-cap: "Structure of Thermal Responsiveness Data"
+data.frame(
+  Field = c("species", "lifestage", "response", "trange_c", "tmid_c", "reference"),
+  Description = c(
+    "Species name following FishBase taxonomy.",
+    "Life stage associated with the thermal response (e.g., Embryos, Juveniles).",
+    "Type of response (e.g., Development Rate, Survival).",
+    "Range of temperature (°C) associated with the response.",
+    "Midpoint temperature (°C) for the response.",
+    "Citation for the data source."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-thermal-safety-margins
+#| tbl-cap: "Structure of Thermal Safety Margins Data"
+data.frame(
+  Field = c("species", "realm", "depth_spawners", "depths_embryos", "spawning_season"),
+  Description = c(
+    "Species name following FishBase taxonomy.",
+    "Habitat realm of the species (e.g., Freshwater, Marine).",
+    "Spawning depth range in meters.",
+    "Embryo depth range in meters.",
+    "Seasonality of spawning (e.g., MJJ for May–July)."
+  )
+) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: tbl-thermal-tolerance
+#| tbl-cap: "Structure of Thermal Tolerance Data"
+data.frame(
+  Field = c("thermal_tolerance", "species_fish_base", "latitude", "lifestage", "tmax_c", "tmin_c", "trange_c", "realm"),
+  Description = c(
+    "Thermal tolerance parameter (e.g., Tmax, Tmin).",
+    "Species name following FishBase taxonomy.",
+    "Geographic latitude of observation.",
+    "Life stage of the species (e.g., Spawner, Embryo).",
+    "Maximum temperature (°C) tolerance.",
+    "Minimum temperature (°C) tolerance.",
+    "Range of temperature tolerance (°C).",
+    "Habitat realm of the species (e.g., Marine, Freshwater)."
+  )
+) |>
+  knitr::kable()
+```
+
 
 ## References
