@@ -102,6 +102,14 @@ list(
                 input_files = list(tg_217d3c1a_8b05_499c_8d39_9ad96fe305d9_National_Hydro_Network_GeoBase_GPKG))
             "workspace/data/harvested/national_hydro_network-1.0.0/processed/watersheds.gpkg"
         }, format = "file")),
+    list(tar_target(tg_1a084fb5_2dbd_4df9_9543_e020ec0ee77a_Ontario_Freshwater_Fishes_Life_History_Database, 
+    {
+        dwn_ontario_freshwater_fishes_life_history(output_path = "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed", 
+            input_files = list())
+        c("workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_characteristics.csv", 
+        "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_references.csv"
+        )
+    }, format = "file")),
     list(tar_target(tg_47a31643_e5a1_4126_9070_909f742c85cd_national_timing_windows_database, 
     {
         int_national_timing_windows_dataset(output_path = "workspace/data/analyzed/national_timing_windows_dataset-1.0.0", 

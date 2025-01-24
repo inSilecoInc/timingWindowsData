@@ -188,14 +188,15 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#sec-canada-outline" id="toc-sec-canada-outline" class="nav-link active" data-scroll-target="#sec-canada-outline"><span class="header-section-number">3.1</span> Canadian Outline</a></li>
   <li><a href="#sec-freshwater-fish" id="toc-sec-freshwater-fish" class="nav-link" data-scroll-target="#sec-freshwater-fish"><span class="header-section-number">3.2</span> Canadian Freshwater Fish Species</a></li>
   <li><a href="#sec-canadian-hydrology" id="toc-sec-canadian-hydrology" class="nav-link" data-scroll-target="#sec-canadian-hydrology"><span class="header-section-number">3.3</span> Canadian Hydrological Features</a></li>
   <li><a href="#sec-freshwater-fish-occurrences" id="toc-sec-freshwater-fish-occurrences" class="nav-link" data-scroll-target="#sec-freshwater-fish-occurrences"><span class="header-section-number">3.4</span> Freshwater Fish Species Occurrences</a></li>
   <li><a href="#sec-gbif-species-occurrences" id="toc-sec-gbif-species-occurrences" class="nav-link" data-scroll-target="#sec-gbif-species-occurrences"><span class="header-section-number">3.5</span> GBIF Species Occurrences</a></li>
   <li><a href="#sec-national-hydro-network" id="toc-sec-national-hydro-network" class="nav-link" data-scroll-target="#sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.7</span> References</a></li>
+  <li><a href="#sec-ontario_fishes" id="toc-sec-ontario_fishes" class="nav-link" data-scroll-target="#sec-ontario_fishes"><span class="header-section-number">3.7</span> Ontario Freshwater Fishes Life History Database</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.8</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -223,12 +224,12 @@ window.Quarto = {
 
 <section id="sec-canada-outline" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-canada-outline"><span class="header-section-number">3.1</span> Canadian Outline</h2>
-<section id="source-and-description" class="level4" data-number="3.1.0.1">
-<h4 data-number="3.1.0.1" class="anchored" data-anchor-id="source-and-description"><span class="header-section-number">3.1.0.1</span> Source and Description</h4>
+<section id="source-and-description" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="source-and-description"><span class="header-section-number">3.1.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>Canada Outline</strong>, was generated to create a simplified polygon of Canada’s national boundaries. This dataset was produced using the <a href="https://gadm.org">GADM</a> Level 1 administrative boundary data for Canada, with the geometry simplified for efficient large-scale spatial analysis <span class="citation" data-cites="gadm2023">(<a href="#ref-gadm2023" role="doc-biblioref">Global Administrative Areas, 2023</a>)</span>. The resulting GeoPackage file represents Canada and its provinces/territories with reduced geometric complexity. The dataset is suitable for mapping and spatial analysis tasks requiring simplified boundaries.</p>
 </section>
-<section id="processing-steps" class="level4" data-number="3.1.0.2">
-<h4 data-number="3.1.0.2" class="anchored" data-anchor-id="processing-steps"><span class="header-section-number">3.1.0.2</span> Processing Steps</h4>
+<section id="processing-steps" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="processing-steps"><span class="header-section-number">3.1.2</span> Processing Steps</h3>
 <p>The processed data was generated using the <code>prc_canada_outline</code> script. The following steps were undertaken:</p>
 <ol type="1">
 <li><strong>Data Acquisition</strong>:
@@ -245,8 +246,8 @@ window.Quarto = {
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure" class="level4" data-number="3.1.0.3">
-<h4 data-number="3.1.0.3" class="anchored" data-anchor-id="processed-data-structure"><span class="header-section-number">3.1.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="processed-data-structure"><span class="header-section-number">3.1.3</span> Processed Data Structure</h3>
 <p>The structure of the simplified dataset is as follows:</p>
 <div class="cell">
 <div id="tbl-canada-outline" class="cell quarto-float anchored">
@@ -327,12 +328,12 @@ Table&nbsp;3.1: Structure of the simplified Canada outline dataset
 </section>
 <section id="sec-freshwater-fish" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-freshwater-fish"><span class="header-section-number">3.2</span> Canadian Freshwater Fish Species</h2>
-<section id="source-and-description-1" class="level4" data-number="3.2.0.1">
-<h4 data-number="3.2.0.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">3.2.0.1</span> Source and Description</h4>
+<section id="source-and-description-1" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="source-and-description-1"><span class="header-section-number">3.2.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>FishBase Freshwater Species Checklist</strong>, was harvested from <a href="https://www.fishbase.se/">FishBase</a> <span class="citation" data-cites="fishbase2024">(<a href="#ref-fishbase2024" role="doc-biblioref">Froese, R. and Pauly, D., 2024</a>)</span>. This dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, order, and occurrence status. Additional datasets retrieved from FishBase include species status (e.g., threat categories from the <a href="https://www.iucnredlist.org/">IUCN Red List of Threatened Species</a>), and whether the species is classified as game or commercial. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.</p>
 </section>
-<section id="processing-steps-1" class="level4" data-number="3.2.0.2">
-<h4 data-number="3.2.0.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">3.2.0.2</span> Processing Steps</h4>
+<section id="processing-steps-1" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="processing-steps-1"><span class="header-section-number">3.2.2</span> Processing Steps</h3>
 <p>The harvested raw data was processed using the <code>prc_freshwater_fish_canada</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Cleaning</strong>:
@@ -358,8 +359,8 @@ Table&nbsp;3.1: Structure of the simplified Canada outline dataset
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-1" class="level4" data-number="3.2.0.3">
-<h4 data-number="3.2.0.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">3.2.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-1" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="processed-data-structure-1"><span class="header-section-number">3.2.3</span> Processed Data Structure</h3>
 <p>The processed dataset retains the following structure:</p>
 <div class="cell">
 <div id="tbl-freshwater-fish-extended" class="cell quarto-float anchored">
@@ -428,12 +429,12 @@ Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for C
 </section>
 <section id="sec-canadian-hydrology" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-canadian-hydrology"><span class="header-section-number">3.3</span> Canadian Hydrological Features</h2>
-<section id="source-and-description-2" class="level4" data-number="3.3.0.1">
-<h4 data-number="3.3.0.1" class="anchored" data-anchor-id="source-and-description-2"><span class="header-section-number">3.3.0.1</span> Source and Description</h4>
+<section id="source-and-description-2" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="source-and-description-2"><span class="header-section-number">3.3.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies &amp; Rivers</strong>, was harvested from <a href="https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022a nrcan2022b">(<a href="#ref-nrcan2022a" role="doc-biblioref">Canada, 2022b</a>, <a href="#ref-nrcan2022b" role="doc-biblioref">2022a</a>)</span>. This comprehensive GIS dataset includes spatial and tabular data representing Canada’s hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.</p>
 </section>
-<section id="processing-steps-2" class="level4" data-number="3.3.0.2">
-<h4 data-number="3.3.0.2" class="anchored" data-anchor-id="processing-steps-2"><span class="header-section-number">3.3.0.2</span> Processing Steps</h4>
+<section id="processing-steps-2" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="processing-steps-2"><span class="header-section-number">3.3.2</span> Processing Steps</h3>
 <p>The harvested raw data was processed using the <code>prc_atlas_of_canada_hydrology</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Unzipping</strong>: The compressed GDB files were extracted to a temporary directory for processing.</li>
@@ -460,8 +461,8 @@ Table&nbsp;3.2: Structure of the processed freshwater fish species dataset for C
 <li><strong>Cleanup</strong>: Temporary files created during processing were deleted.</li>
 </ol>
 </section>
-<section id="processed-data-structure-2" class="level4" data-number="3.3.0.3">
-<h4 data-number="3.3.0.3" class="anchored" data-anchor-id="processed-data-structure-2"><span class="header-section-number">3.3.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-2" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="processed-data-structure-2"><span class="header-section-number">3.3.3</span> Processed Data Structure</h3>
 <p>The structure of the processed lake polygon dataset is as follows:</p>
 <div class="cell">
 <div id="tbl-lakes-polygons" class="cell quarto-float anchored">
@@ -626,13 +627,13 @@ Table&nbsp;3.6: Structure of the processed river point dataset for Canada
 </section>
 <section id="sec-freshwater-fish-occurrences" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-freshwater-fish-occurrences"><span class="header-section-number">3.4</span> Freshwater Fish Species Occurrences</h2>
-<section id="source-and-description-3" class="level4" data-number="3.4.0.1">
-<h4 data-number="3.4.0.1" class="anchored" data-anchor-id="source-and-description-3"><span class="header-section-number">3.4.0.1</span> Source and Description</h4>
+<section id="source-and-description-3" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="source-and-description-3"><span class="header-section-number">3.4.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>Global Freshwater Fish Species Occurrences Database</strong>, was retrieved from <a href="https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145">Figshare</a> <span class="citation" data-cites="figshare2025">(<a href="#ref-figshare2025" role="doc-biblioref">Tedesco et al., 2017a</a>)</span>. This comprehensive dataset compiles freshwater fish species occurrences aggregated at the drainage basin level. The data is associated with the data paper by <span class="citation" data-cites="tedesco2017">Tedesco et al. (<a href="#ref-tedesco2017" role="doc-biblioref">2017b</a>)</span> and is designed for analyzing global freshwater biodiversity patterns.</p>
 <p>The dataset includes both spatial data (drainage basins) and tabular data (species occurrences). The drainage basin data covers 3,119 polygons worldwide, while the occurrence table provides over 110,000 records of species distributions across basins. The data has been validated using established taxonomic references such as FishBase.</p>
 </section>
-<section id="processing-steps-3" class="level4" data-number="3.4.0.2">
-<h4 data-number="3.4.0.2" class="anchored" data-anchor-id="processing-steps-3"><span class="header-section-number">3.4.0.2</span> Processing Steps</h4>
+<section id="processing-steps-3" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="processing-steps-3"><span class="header-section-number">3.4.2</span> Processing Steps</h3>
 <p>The harvested data was processed using the <code>prc_freshwater_fish_occurrences</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Extraction</strong>:
@@ -654,8 +655,8 @@ Table&nbsp;3.6: Structure of the processed river point dataset for Canada
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-3" class="level4" data-number="3.4.0.3">
-<h4 data-number="3.4.0.3" class="anchored" data-anchor-id="processed-data-structure-3"><span class="header-section-number">3.4.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-3" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="processed-data-structure-3"><span class="header-section-number">3.4.3</span> Processed Data Structure</h3>
 <p>The structure of the processed drainage basin dataset (<code>bassins.gpkg</code>) is as follows:</p>
 <div class="cell">
 <div id="tbl-bassins" class="cell quarto-float anchored">
@@ -784,13 +785,13 @@ Table&nbsp;3.8: Structure of the processed species occurrence dataset
 </section>
 <section id="sec-gbif-species-occurrences" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-gbif-species-occurrences"><span class="header-section-number">3.5</span> GBIF Species Occurrences</h2>
-<section id="source-and-description-4" class="level4" data-number="3.5.0.1">
-<h4 data-number="3.5.0.1" class="anchored" data-anchor-id="source-and-description-4"><span class="header-section-number">3.5.0.1</span> Source and Description</h4>
+<section id="source-and-description-4" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="source-and-description-4"><span class="header-section-number">3.5.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>GBIF Occurrence Data</strong>, was retrieved from the <a href="https://www.gbif.org/">Global Biodiversity Information Facility (GBIF)</a> <span class="citation" data-cites="gbif2025">(<a href="#ref-gbif2025" role="doc-biblioref">Global Biodiversity Information Facility, 2025</a>)</span>. This dataset compiles species occurrence records for a specified taxonomic group and geographic region. The retrieved dataset includes spatial and tabular data for over 850,000 records of species occurrences across Canada, starting from 2000.</p>
 <p>It should be noted that the processing steps described below show how the data is downloaded and processed programmatically. However, due to how GBIF manages their data request, we elected to store the downloaded data on our secure Google Cloud Storage and to retrieve them programmatically from there rather than directly on GBIF.</p>
 </section>
-<section id="processing-steps-4" class="level4" data-number="3.5.0.2">
-<h4 data-number="3.5.0.2" class="anchored" data-anchor-id="processing-steps-4"><span class="header-section-number">3.5.0.2</span> Processing Steps</h4>
+<section id="processing-steps-4" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="processing-steps-4"><span class="header-section-number">3.5.2</span> Processing Steps</h3>
 <p>The harvested data was processed using the <code>dwn_gbif</code> and <code>prc_gbif</code> scripts. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Download</strong>:
@@ -813,8 +814,8 @@ Table&nbsp;3.8: Structure of the processed species occurrence dataset
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-4" class="level4" data-number="3.5.0.3">
-<h4 data-number="3.5.0.3" class="anchored" data-anchor-id="processed-data-structure-4"><span class="header-section-number">3.5.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-4" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="processed-data-structure-4"><span class="header-section-number">3.5.3</span> Processed Data Structure</h3>
 <p>The structure of the processed dataset (<code>species_occurrences_gbif.gpkg</code>) is as follows:</p>
 <div class="cell">
 <div id="tbl-gbif-occurrences" class="cell quarto-float anchored">
@@ -875,12 +876,12 @@ Table&nbsp;3.9: Structure of the processed GBIF occurrence dataset
 </section>
 <section id="sec-national-hydro-network" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</h2>
-<section id="source-and-description-5" class="level4" data-number="3.6.0.1">
-<h4 data-number="3.6.0.1" class="anchored" data-anchor-id="source-and-description-5"><span class="header-section-number">3.6.0.1</span> Source and Description</h4>
+<section id="source-and-description-5" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="source-and-description-5"><span class="header-section-number">3.6.1</span> Source and Description</h3>
 <p>The dataset, titled <strong>National Hydro Network (NHN) GeoBase Series</strong>, was retrieved from <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">Natural Resources Canada</a> <span class="citation" data-cites="nrcan2022">(<a href="#ref-nrcan2022" role="doc-biblioref">Canada, 2022c</a>)</span>. This dataset provides a comprehensive geometric description and a set of basic attributes describing Canada’s inland surface waters. The data includes lakes, reservoirs, rivers, canals, drainage networks, and associated features.</p>
 </section>
-<section id="processing-steps-5" class="level4" data-number="3.6.0.2">
-<h4 data-number="3.6.0.2" class="anchored" data-anchor-id="processing-steps-5"><span class="header-section-number">3.6.0.2</span> Processing Steps</h4>
+<section id="processing-steps-5" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="processing-steps-5"><span class="header-section-number">3.6.2</span> Processing Steps</h3>
 <p>The NHN data was processed using the <code>prc_national_hydro_network</code> script. The following steps were performed:</p>
 <ol type="1">
 <li><strong>Data Extraction</strong>:
@@ -901,8 +902,8 @@ Table&nbsp;3.9: Structure of the processed GBIF occurrence dataset
 </ul></li>
 </ol>
 </section>
-<section id="processed-data-structure-5" class="level4" data-number="3.6.0.3">
-<h4 data-number="3.6.0.3" class="anchored" data-anchor-id="processed-data-structure-5"><span class="header-section-number">3.6.0.3</span> Processed Data Structure</h4>
+<section id="processed-data-structure-5" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="processed-data-structure-5"><span class="header-section-number">3.6.3</span> Processed Data Structure</h3>
 <p>The structure of the processed dataset (<code>watersheds.gpkg</code>) is as follows:</p>
 <div class="cell">
 <div id="tbl-watersheds" class="cell quarto-float anchored">
@@ -941,8 +942,171 @@ Table&nbsp;3.10: Structure of the processed watershed dataset
 </div>
 </section>
 </section>
-<section id="references" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="references"><span class="header-section-number">3.7</span> References</h2>
+<section id="sec-ontario_fishes" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-ontario_fishes"><span class="header-section-number">3.7</span> Ontario Freshwater Fishes Life History Database</h2>
+<p>The <a href="https://www.ontariofishes.ca/home.htm">Ontario Freshwater Fishes Life History Database</a> <span class="citation" data-cites="eakins2024">(<a href="#ref-eakins2024" role="doc-biblioref">Eakins, 2024</a>)</span> provides comprehensive life history information for 161 freshwater fish species in Ontario, Canada. The dataset includes 43 characteristics per species, covering taxonomic, ecological, reproductive, and habitat-related information. It also provides a bibliography of references used to compile this data.</p>
+<section id="source-and-accessibility" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="source-and-accessibility"><span class="header-section-number">3.7.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: Ontario Freshwater Fishes Life History Database</li>
+<li><strong>Accessibility</strong>: Open Government Licence - Canada</li>
+<li><strong>Data Type</strong>: HTML Scraped Dataset</li>
+<li><strong>Coverage</strong>: Freshwater systems in Ontario, Canada</li>
+<li><strong>Geographic Coverage</strong>: Ontario (Bounding Box: -95.1539, 41.6770, -74.3435, 56.8595)</li>
+<li><strong>Temporal Coverage</strong>: 2024</li>
+<li><strong>Processing Script</strong>: <code>dwn_ontario_freshwater_fishes_life_history.R</code></li>
+<li><strong>Output Files</strong>: <code>ontario_fishes_characteristics.csv</code>, <code>ontario_fishes_references.csv</code></li>
+</ul>
+</section>
+<section id="processing-steps-6" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="processing-steps-6"><span class="header-section-number">3.7.2</span> Processing Steps</h3>
+<p>Data was harvested from the website by scraping individual fish detail pages for 161 species. The harvesting script used the <code>rvest</code> package in R to extract structured data for each species, including:</p>
+<ol type="1">
+<li><strong>Characteristics Extraction</strong>: Scraped 43 life history attributes such as family, common name, habitat preference, spawning season, thermal regime, and abundance.</li>
+<li><strong>References Compilation</strong>: Extracted all bibliographic references associated with each species.</li>
+<li><strong>Data Cleaning</strong>: Cleaned and pivoted the raw data into a tidy format using <code>tidyr::pivot_wider()</code> and <code>janitor::clean_names()</code>.</li>
+<li><strong>Export</strong>: Saved the processed data into two CSV files:
+<ul>
+<li><code>ontario_fishes_characteristics.csv</code>: A structured table of life history characteristics.</li>
+<li><code>ontario_fishes_references.csv</code>: A table of species-referenced bibliographies.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-6" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="processed-data-structure-6"><span class="header-section-number">3.7.3</span> Processed Data Structure</h3>
+<p>The structure of the processed data includes the following key variables:</p>
+<section id="characteristics-table" class="level4" data-number="3.7.3.1">
+<h4 data-number="3.7.3.1" class="anchored" data-anchor-id="characteristics-table"><span class="header-section-number">3.7.3.1</span> Characteristics Table</h4>
+<div class="cell">
+<div id="tbl-ontario-fishes-structure" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ontario-fishes-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.11: Structure of the Ontario Fishes Characteristics Table
+</figcaption>
+<div aria-describedby="tbl-ontario-fishes-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">Taxonomic family, including common name.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Species name, including genus.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">taxonomic_authority</td>
+<td style="text-align: left;">Author of the taxonomic classification.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">common_name_s</td>
+<td style="text-align: left;">Common name in English.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">french_name</td>
+<td style="text-align: left;">Common name in French.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ontario_origin</td>
+<td style="text-align: left;">Origin status in Ontario (e.g., native, introduced).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">general_abundance</td>
+<td style="text-align: left;">General abundance in freshwater systems.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">thermal_regime</td>
+<td style="text-align: left;">Thermal regime preference (coldwater, coolwater, warmwater).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">habitat_preference</td>
+<td style="text-align: left;">Preferred habitats for the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spawning_season</td>
+<td style="text-align: left;">Season of spawning activity.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fecundity</td>
+<td style="text-align: left;">Number of eggs produced by the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">adult_length_cm</td>
+<td style="text-align: left;">Length of adult individuals in centimeters.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_length_cm</td>
+<td style="text-align: left;">Maximum recorded length of the species in centimeters.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lifespan_yrs</td>
+<td style="text-align: left;">Expected lifespan in years.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="references-table" class="level4" data-number="3.7.3.2">
+<h4 data-number="3.7.3.2" class="anchored" data-anchor-id="references-table"><span class="header-section-number">3.7.3.2</span> References Table</h4>
+<div class="cell">
+<div id="tbl-ontario-fishes-references" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ontario-fishes-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.12: Structure of the Ontario Fishes References Table
+</figcaption>
+<div aria-describedby="tbl-ontario-fishes-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">Scientific name of the species associated with the reference.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Reference citation for the data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="references" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="references"><span class="header-section-number">3.8</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
@@ -954,6 +1118,9 @@ Canada, N. R. (2022b). Atlas of canada national scale data 1:1,000,000 - waterbo
 </div>
 <div id="ref-nrcan2022" class="csl-entry" role="listitem">
 Canada, N. R. (2022c). National hydro network (NHN) - GeoBase series. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977</a>.
+</div>
+<div id="ref-eakins2024" class="csl-entry" role="listitem">
+Eakins, R. J. (2024). Ontario freshwater fishes life history database. <span>Ontario Freshwater Fishes</span> Available at: <a href="https://www.ontariofishes.ca/home.htm">https://www.ontariofishes.ca/home.htm</a>.
 </div>
 <div id="ref-fishbase2024" class="csl-entry" role="listitem">
 Froese, R. and Pauly, D. (2024). FishBase freshwater species checklist. <span>FishBase</span> Available at: <a href="https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh">https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh</a>.

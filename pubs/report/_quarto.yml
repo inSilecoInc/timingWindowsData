@@ -22,6 +22,7 @@ csl: frontiers.csl
 format:
   html:
     theme: cosmo
+    toc-depth: 2
 
 execute:
   echo: false

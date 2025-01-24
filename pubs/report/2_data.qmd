@@ -4,11 +4,11 @@ title: "Data Sources Overview"
 
 ## Canadian Outline {#sec-canada-outline}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Canada Outline**, was generated to create a simplified polygon of Canada's national boundaries. This dataset was produced using the [GADM](https://gadm.org) Level 1 administrative boundary data for Canada, with the geometry simplified for efficient large-scale spatial analysis [@gadm2023]. The resulting GeoPackage file represents Canada and its provinces/territories with reduced geometric complexity. The dataset is suitable for mapping and spatial analysis tasks requiring simplified boundaries.
 
-#### Processing Steps
+### Processing Steps
 
 The processed data was generated using the `prc_canada_outline` script. The following steps were undertaken:
 
@@ -20,7 +20,7 @@ The processed data was generated using the `prc_canada_outline` script. The foll
    - The simplified boundary dataset was saved as `can_1_simplified.gpkg` in GeoPackage format.
 
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the simplified dataset is as follows:
 
@@ -53,11 +53,11 @@ data.frame(
 
 ## Canadian Freshwater Fish Species {#sec-freshwater-fish}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **FishBase Freshwater Species Checklist**, was harvested from [FishBase](https://www.fishbase.se/) [@fishbase2024]. This dataset provides information on freshwater fish species found across Canada. It includes essential taxonomic and ecological details, such as species name, vernacular name, family, order, and occurrence status. Additional datasets retrieved from FishBase include species status (e.g., threat categories from the [IUCN Red List of Threatened Species](https://www.iucnredlist.org/)), and whether the species is classified as game or commercial. The source data consists of HTML tables retrieved through web scraping and transformed into a structured format for analysis.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested raw data was processed using the `prc_freshwater_fish_canada` script. The following steps were performed:
 
@@ -73,7 +73,7 @@ The harvested raw data was processed using the `prc_freshwater_fish_canada` scri
 5. **Data Export**:
    - The fully integrated and processed dataset was saved as `freshwater_fish_species_canada.csv`.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The processed dataset retains the following structure:
 
@@ -100,11 +100,11 @@ data.frame(
 
 ## Canadian Hydrological Features {#sec-canadian-hydrology}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Atlas of Canada National Scale Data 1:1,000,000 - Waterbodies & Rivers**, was harvested from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/e9931fc7-034c-52ad-91c5-6c64d4ba0065) [@nrcan2022a; @nrcan2022b]. This comprehensive GIS dataset includes spatial and tabular data representing Canada's hydrological features. It consists of waterbodies and river datasets compiled for large-scale mapping at a 1:1,000,000 scale. The processed dataset provides geospatial layers of lakes and rivers, including both their polygonal representations and sampled points for further spatial analyses.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` script. The following steps were performed:
 
@@ -127,7 +127,7 @@ The harvested raw data was processed using the `prc_atlas_of_canada_hydrology` s
    - Sampled points along each river segment at the mid-point of each rivers, cast the lines to points, and exported as `rivers_points.gpkg`.
 4. **Cleanup**: Temporary files created during processing were deleted.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed lake polygon dataset is as follows:
 
@@ -198,13 +198,13 @@ data.frame(
 
 ## Freshwater Fish Species Occurrences {#sec-freshwater-fish-occurrences}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **Global Freshwater Fish Species Occurrences Database**, was retrieved from [Figshare](https://figshare.com/collections/A_global_database_on_freshwater_fish_species_occurrences_in_drainage_basins/3739145) [@figshare2025]. This comprehensive dataset compiles freshwater fish species occurrences aggregated at the drainage basin level. The data is associated with the data paper by @tedesco2017 and is designed for analyzing global freshwater biodiversity patterns. 
 
 The dataset includes both spatial data (drainage basins) and tabular data (species occurrences). The drainage basin data covers 3,119 polygons worldwide, while the occurrence table provides over 110,000 records of species distributions across basins. The data has been validated using established taxonomic references such as FishBase.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested data was processed using the `prc_freshwater_fish_occurrences` script. The following steps were performed:
 
@@ -220,7 +220,7 @@ The harvested data was processed using the `prc_freshwater_fish_occurrences` scr
    - Species names in the `species_name_in_source` and `fishbase_valid_species_name` columns were updated to replace periods (`.`) with spaces.
    - The processed data was exported as `occurrences.csv`.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed drainage basin dataset (`bassins.gpkg`) is as follows:
 
@@ -268,13 +268,13 @@ data.frame(
 
 ## GBIF Species Occurrences {#sec-gbif-species-occurrences}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **GBIF Occurrence Data**, was retrieved from the [Global Biodiversity Information Facility (GBIF)](https://www.gbif.org/) [@gbif2025]. This dataset compiles species occurrence records for a specified taxonomic group and geographic region. The retrieved dataset includes spatial and tabular data for over 850,000 records of species occurrences across Canada, starting from 2000. 
 
 It should be noted that the processing steps described below show how the data is downloaded and processed programmatically. However, due to how GBIF manages their data request, we elected to store the downloaded data on our secure Google Cloud Storage and to retrieve them programmatically from there rather than directly on GBIF.
 
-#### Processing Steps
+### Processing Steps
 
 The harvested data was processed using the `dwn_gbif` and `prc_gbif` scripts. The following steps were performed:
 
@@ -289,7 +289,7 @@ The harvested data was processed using the `dwn_gbif` and `prc_gbif` scripts. Th
 4. **Export**:
    - The cleaned and spatially enabled dataset was exported as `species_occurrences_gbif.gpkg` in GeoPackage format.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed dataset (`species_occurrences_gbif.gpkg`) is as follows:
 
@@ -314,11 +314,11 @@ data.frame(
 
 ## National Hydro Network {#sec-national-hydro-network}
 
-#### Source and Description
+### Source and Description
 
 The dataset, titled **National Hydro Network (NHN) GeoBase Series**, was retrieved from [Natural Resources Canada](https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977) [@nrcan2022]. This dataset provides a comprehensive geometric description and a set of basic attributes describing Canada's inland surface waters. The data includes lakes, reservoirs, rivers, canals, drainage networks, and associated features. 
 
-#### Processing Steps
+### Processing Steps
 
 The NHN data was processed using the `prc_national_hydro_network` script. The following steps were performed:
 
@@ -333,7 +333,7 @@ The NHN data was processed using the `prc_national_hydro_network` script. The fo
 3. **Export**:
    - The processed watershed data was exported as `watersheds.gpkg` in GeoPackage format.
 
-#### Processed Data Structure
+### Processed Data Structure
 
 The structure of the processed dataset (`watersheds.gpkg`) is as follows:
 
@@ -345,6 +345,86 @@ data.frame(
   Description = c(
     "Unique identifier for each watershed feature.",
     "Polygon geometry of the watershed in geographic coordinates (CRS 4326)."
+  )
+) |>
+  knitr::kable()
+```
+
+
+
+## Ontario Freshwater Fishes Life History Database {#sec-ontario_fishes}
+
+The [Ontario Freshwater Fishes Life History Database](https://www.ontariofishes.ca/home.htm) [@eakins2024] provides comprehensive life history information for 161 freshwater fish species in Ontario, Canada. The dataset includes 43 characteristics per species, covering taxonomic, ecological, reproductive, and habitat-related information. It also provides a bibliography of references used to compile this data. 
+
+### Source and Accessibility
+
+- **Source**: Ontario Freshwater Fishes Life History Database
+- **Accessibility**: Open Government Licence - Canada
+- **Data Type**: HTML Scraped Dataset
+- **Coverage**: Freshwater systems in Ontario, Canada
+- **Geographic Coverage**: Ontario (Bounding Box: -95.1539, 41.6770, -74.3435, 56.8595)
+- **Temporal Coverage**: 2024
+- **Processing Script**: `dwn_ontario_freshwater_fishes_life_history.R`
+- **Output Files**: `ontario_fishes_characteristics.csv`, `ontario_fishes_references.csv`
+
+### Processing Steps
+
+Data was harvested from the website by scraping individual fish detail pages for 161 species. The harvesting script used the `rvest` package in R to extract structured data for each species, including:
+
+1. **Characteristics Extraction**: Scraped 43 life history attributes such as family, common name, habitat preference, spawning season, thermal regime, and abundance.
+2. **References Compilation**: Extracted all bibliographic references associated with each species.
+3. **Data Cleaning**: Cleaned and pivoted the raw data into a tidy format using `tidyr::pivot_wider()` and `janitor::clean_names()`.
+4. **Export**: Saved the processed data into two CSV files:
+   - `ontario_fishes_characteristics.csv`: A structured table of life history characteristics.
+   - `ontario_fishes_references.csv`: A table of species-referenced bibliographies.
+
+
+### Processed Data Structure
+The structure of the processed data includes the following key variables:
+
+#### Characteristics Table
+
+```{r}
+#| label: tbl-ontario-fishes-structure
+#| tbl-cap: "Structure of the Ontario Fishes Characteristics Table"
+data.frame(
+  Field = c(
+    "species_name", "family", "species", "taxonomic_authority",
+    "common_name_s", "french_name", "ontario_origin", "general_abundance",
+    "thermal_regime", "habitat_preference", "spawning_season",
+    "fecundity", "adult_length_cm", "maximum_length_cm", "lifespan_yrs"
+  ),
+  Description = c(
+    "Scientific name of the species.",
+    "Taxonomic family, including common name.",
+    "Species name, including genus.",
+    "Author of the taxonomic classification.",
+    "Common name in English.",
+    "Common name in French.",
+    "Origin status in Ontario (e.g., native, introduced).",
+    "General abundance in freshwater systems.",
+    "Thermal regime preference (coldwater, coolwater, warmwater).",
+    "Preferred habitats for the species.",
+    "Season of spawning activity.",
+    "Number of eggs produced by the species.",
+    "Length of adult individuals in centimeters.",
+    "Maximum recorded length of the species in centimeters.",
+    "Expected lifespan in years."
+  )
+) |>
+  knitr::kable()
+```
+
+#### References Table
+
+```{r}
+#| label: tbl-ontario-fishes-references
+#| tbl-cap: "Structure of the Ontario Fishes References Table"
+data.frame(
+  Field = c("species", "reference"),
+  Description = c(
+    "Scientific name of the species associated with the reference.",
+    "Reference citation for the data."
   )
 ) |>
   knitr::kable()

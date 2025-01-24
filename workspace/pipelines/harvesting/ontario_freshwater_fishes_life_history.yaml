@@ -1,0 +1,60 @@
+pipeline:
+  id: 1a084fb5-2dbd-4df9-9543-e020ec0ee77a
+  name: ontario_freshwater_fishes_life_history
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-24 12:22:13
+  last_modified: 2025-01-24 12:22:13
+  description: |
+    Harvesting data from the Ontario Freshwater Fishes Life History Database. 
+    The database provides life history characteristics and references for 161 freshwater fish species 
+    in Ontario, Canada. Data will be downloaded using a script to scrape the data from the website.
+
+  # Metadata section providing details about the data being harvested
+  metadata:
+    source_name: "Ontario Freshwater Fishes Life History Database"
+    data_type: "HTML Scrape"
+    file_size: "Unknown"
+    license: "Open Government Licence - Canada"
+    last_updated: "2024-01-01"
+    geographic_coverage:
+      region: "Ontario, Canada"
+      bounding_box:
+        - -95.15390015    # Longitude min
+        - 41.67700243     # Latitude min
+        - -74.34347534    # Longitude max
+        - 56.85947418     # Latitude max
+    temporal_coverage:
+      start_date: "2024-01-01"
+    variables:
+      - species
+      - life_history_characteristics
+      - references
+    data_quality:
+      - "Data retrieved from the official website and contains all 161 species."
+
+  # Bibliographic Information
+  bibliography:
+    - "@TechReport{eakins2024,
+        title = {Ontario Freshwater Fishes Life History Database},
+        author = {Eakins, R.J.},
+        year = {2024},
+        institution = {{Ontario Freshwater Fishes}},
+        url = {https://www.ontariofishes.ca/home.htm}
+      }"
+
+  # Harvest section: Define the sources to download and process
+  processing:
+    sources:
+      - name: Ontario Freshwater Fishes Life History Database
+        script: dwn_ontario_freshwater_fishes_life_history
+        input_files: []
+        output_files:
+          - ontario_fishes_characteristics.csv
+          - ontario_fishes_references.csv
+
+  # Output section: final output of the processed data
+  output:
+    output_dir: "workspace/data/harvested/"
+    log_dir: "workspace/logs/"
+    archive_raw: true
