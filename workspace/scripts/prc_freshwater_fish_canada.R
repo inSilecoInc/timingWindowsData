@@ -43,7 +43,9 @@ prc_freshwater_fish_canada <- function(input_files, output_path) {
   fish <- fish |>
     dplyr::left_join(status, by = "species") |>
     dplyr::left_join(game, by = "species") |>
+    dplyr::mutate(game = dplyr::if_else(is.na(game), 0, game)) |>
     dplyr::left_join(commercial, by = "species") |>
+    dplyr::mutate(commercial = dplyr::if_else(is.na(commercial), 0, commercial)) |>
     dplyr::mutate(species_id = sprintf("sp_%06d", seq_len(dplyr::n()))) |>
     dplyr::relocate(species_id)
 
