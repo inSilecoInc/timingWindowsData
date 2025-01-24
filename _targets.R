@@ -117,6 +117,22 @@ list(
                 input_files = list(tg_217d3c1a_8b05_499c_8d39_9ad96fe305d9_National_Hydro_Network_GeoBase_GPKG))
             "workspace/data/harvested/national_hydro_network-1.0.0/processed/watersheds.gpkg"
         }, format = "file")),
+    list(tar_target(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_Data, 
+    {
+        curl::curl_download("https://www.sciencebase.gov/catalog/file/get/619d2dbcd34eb622f6951e8a?name=NAFMFD_finalcopy.xlsx", 
+            "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_finalcopy.xlsx")
+        "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_finalcopy.xlsx"
+    }, format = "file"), tar_target(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_Metadata, 
+    {
+        curl::curl_download("https://www.sciencebase.gov/catalog/file/get/619d2dbcd34eb622f6951e8a?name=NAFMFD_metadata_12-20-2021.xml", 
+            "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_metadata_12-20-2021.xml")
+        "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/raw/NAFMFD_metadata_12-20-2021.xml"
+    }, format = "file"), tar_target(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_processed, 
+    {
+        prc_north_american_freshwater_migratory_fish_database(output_path = "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/processed", 
+            input_files = list(tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_Data))
+        "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/processed/north_american_freshwater_migratory_fish_database.csv"
+    }, format = "file")),
     list(tar_target(tg_1a084fb5_2dbd_4df9_9543_e020ec0ee77a_Ontario_Freshwater_Fishes_Life_History_Database, 
     {
         dwn_ontario_freshwater_fishes_life_history(output_path = "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed", 

@@ -35,6 +35,7 @@ Imports:
     mapview,
     quarto,
     raster,
+    readxl,
     rfishbase,
     rgbif,
     rlang,

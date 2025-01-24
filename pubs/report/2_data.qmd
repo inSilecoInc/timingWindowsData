@@ -382,8 +382,6 @@ Data was harvested from the website by scraping individual fish detail pages for
 ### Processed Data Structure
 The structure of the processed data includes the following key variables:
 
-#### Characteristics Table
-
 ```{r}
 #| label: tbl-ontario-fishes-structure
 #| tbl-cap: "Structure of the Ontario Fishes Characteristics Table"
@@ -415,7 +413,6 @@ data.frame(
   knitr::kable()
 ```
 
-#### References Table
 
 ```{r}
 #| label: tbl-ontario-fishes-references
@@ -463,8 +460,6 @@ The [FishPass Database](https://doi.org/10.5061/dryad.fqz612jwj) [@benoit2023] p
 
 The cleaned dataset is divided into four tables, each containing data for 220 species:
 
-#### Behaviour Data Table
-
 ```{r}
 #| label: tbl-fishpass-behaviour
 #| tbl-cap: "Structure of the FishPass Behaviour Data Table"
@@ -488,8 +483,6 @@ data.frame(
 ) |>
   knitr::kable()
 ```
-
-#### Morphology Data Table
 
 ```{r}
 #| label: tbl-fishpass-morphology
@@ -516,8 +509,6 @@ data.frame(
   knitr::kable()
 ```
 
-#### Phenology Data Table
-
 ```{r}
 #| label: tbl-fishpass-phenology
 #| tbl-cap: "Structure of the FishPass Phenology Data Table"
@@ -542,8 +533,6 @@ data.frame(
 ) |>
   knitr::kable()
 ```
-
-#### Physiology Data Table
 
 ```{r}
 #| label: tbl-fishpass-physiology
@@ -570,6 +559,63 @@ data.frame(
   knitr::kable()
 ```
 
+## North American Freshwater Migratory Fish Database (NAFMFD) {#sec-nafmfd}
+
+The [North American Freshwater Migratory Fish Database (NAFMFD)](https://doi.org/10.5066/P9WDLLP0) [@dean2021; @dean2022] synthesizes comprehensive data on the migratory behavior of freshwater fishes across Canada, the United States, and Mexico. It includes information for 1,241 species spanning 79 families and 322 genera, characterizing migratory status, patterns, and behaviors. 
+
+### Source and Accessibility
+
+- **Source**: U.S. Geological Survey ScienceBase-Catalog
+- **DOI**: [10.5066/P9WDLLP0](https://doi.org/10.5066/P9WDLLP0)
+- **Accessibility**: Public Domain
+- **Data Type**: Excel Spreadsheet and Metadata (XML)
+- **Coverage**: North America
+- **Processing Script**: `prc_north_american_freshwater_migratory_fish_database.R`
+- **Output Files**:
+  - `north_american_freshwater_migratory_fish_database.csv`
+
+### Processing Steps
+
+The data was harvested from the ScienceBase-Catalog using two files: an Excel spreadsheet containing species information and a metadata XML file. The processing involved the following steps:
+
+1. **Data Extraction**:
+   - The Excel file was read using the `readxl` package.
+   - Column names were standardized using `janitor::clean_names()` for consistency.
+2. **Data Cleaning**:
+   - Removed unnecessary whitespace and formatted data fields for analysis.
+3. **Export**:
+   - The processed data was saved as a CSV file for ease of use in further analyses.
+
+### Processed Data Structure
+
+The final processed dataset contains 28 fields and 2,198 rows. Key variables include species taxonomy, migratory behavior, and references for data sources.
+
+```{r}
+#| label: tbl-nafmfd-structure
+#| tbl-cap: "Structure of the NAFMFD Processed Data"
+data.frame(
+  Field = c(
+    "itis_family", "family_name", "scientific_name", "common_name",
+    "migratory", "anadromous", "catadromous", "potamodromous",
+    "diadromous", "suspected_migrant", "non_migratory", "reference"
+  ),
+  Description = c(
+    "Integrated Taxonomic Information System (ITIS) identifier for the family.",
+    "Taxonomic family name of the species.",
+    "Scientific name of the species.",
+    "Common name of the species.",
+    "Indicator of whether the species is migratory (1 = yes, 0 = no).",
+    "Indicator of anadromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of catadromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of potamodromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of diadromous migratory behavior (1 = yes, 0 = no).",
+    "Indicator of suspected migratory status (1 = yes, 0 = no).",
+    "Indicator of non-migratory status (1 = yes, 0 = no).",
+    "Reference for data source and assignment."
+  )
+) |>
+  knitr::kable()
+```
 
 
 ## References

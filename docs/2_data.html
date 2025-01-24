@@ -197,7 +197,8 @@ window.Quarto = {
   <li><a href="#sec-national-hydro-network" id="toc-sec-national-hydro-network" class="nav-link" data-scroll-target="#sec-national-hydro-network"><span class="header-section-number">3.6</span> National Hydro Network</a></li>
   <li><a href="#sec-ontario_fishes" id="toc-sec-ontario_fishes" class="nav-link" data-scroll-target="#sec-ontario_fishes"><span class="header-section-number">3.7</span> Ontario Freshwater Fishes Life History Database</a></li>
   <li><a href="#sec-fishpass" id="toc-sec-fishpass" class="nav-link" data-scroll-target="#sec-fishpass"><span class="header-section-number">3.8</span> FishPass Database</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.9</span> References</a></li>
+  <li><a href="#sec-nafmfd" id="toc-sec-nafmfd" class="nav-link" data-scroll-target="#sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.10</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -976,8 +977,6 @@ Table&nbsp;3.10: Structure of the processed watershed dataset
 <section id="processed-data-structure-6" class="level3" data-number="3.7.3">
 <h3 data-number="3.7.3" class="anchored" data-anchor-id="processed-data-structure-6"><span class="header-section-number">3.7.3</span> Processed Data Structure</h3>
 <p>The structure of the processed data includes the following key variables:</p>
-<section id="characteristics-table" class="level4" data-number="3.7.3.1">
-<h4 data-number="3.7.3.1" class="anchored" data-anchor-id="characteristics-table"><span class="header-section-number">3.7.3.1</span> Characteristics Table</h4>
 <div class="cell">
 <div id="tbl-ontario-fishes-structure" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1065,9 +1064,6 @@ Table&nbsp;3.11: Structure of the Ontario Fishes Characteristics Table
 </figure>
 </div>
 </div>
-</section>
-<section id="references-table" class="level4" data-number="3.7.3.2">
-<h4 data-number="3.7.3.2" class="anchored" data-anchor-id="references-table"><span class="header-section-number">3.7.3.2</span> References Table</h4>
 <div class="cell">
 <div id="tbl-ontario-fishes-references" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1103,7 +1099,6 @@ Table&nbsp;3.12: Structure of the Ontario Fishes References Table
 </figure>
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="sec-fishpass" class="level2" data-number="3.8">
@@ -1149,8 +1144,6 @@ Table&nbsp;3.12: Structure of the Ontario Fishes References Table
 <section id="processed-data-structure-7" class="level3" data-number="3.8.3">
 <h3 data-number="3.8.3" class="anchored" data-anchor-id="processed-data-structure-7"><span class="header-section-number">3.8.3</span> Processed Data Structure</h3>
 <p>The cleaned dataset is divided into four tables, each containing data for 220 species:</p>
-<section id="behaviour-data-table" class="level4" data-number="3.8.3.1">
-<h4 data-number="3.8.3.1" class="anchored" data-anchor-id="behaviour-data-table"><span class="header-section-number">3.8.3.1</span> Behaviour Data Table</h4>
 <div class="cell">
 <div id="tbl-fishpass-behaviour" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1214,9 +1207,6 @@ Table&nbsp;3.13: Structure of the FishPass Behaviour Data Table
 </figure>
 </div>
 </div>
-</section>
-<section id="morphology-data-table" class="level4" data-number="3.8.3.2">
-<h4 data-number="3.8.3.2" class="anchored" data-anchor-id="morphology-data-table"><span class="header-section-number">3.8.3.2</span> Morphology Data Table</h4>
 <div class="cell">
 <div id="tbl-fishpass-morphology" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1284,9 +1274,6 @@ Table&nbsp;3.14: Structure of the FishPass Morphology Data Table
 </figure>
 </div>
 </div>
-</section>
-<section id="phenology-data-table" class="level4" data-number="3.8.3.3">
-<h4 data-number="3.8.3.3" class="anchored" data-anchor-id="phenology-data-table"><span class="header-section-number">3.8.3.3</span> Phenology Data Table</h4>
 <div class="cell">
 <div id="tbl-fishpass-phenology" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1354,9 +1341,6 @@ Table&nbsp;3.15: Structure of the FishPass Phenology Data Table
 </figure>
 </div>
 </div>
-</section>
-<section id="physiology-data-table" class="level4" data-number="3.8.3.4">
-<h4 data-number="3.8.3.4" class="anchored" data-anchor-id="physiology-data-table"><span class="header-section-number">3.8.3.4</span> Physiology Data Table</h4>
 <div class="cell">
 <div id="tbl-fishpass-physiology" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1426,9 +1410,125 @@ Table&nbsp;3.16: Structure of the FishPass Physiology Data Table
 </div>
 </section>
 </section>
+<section id="sec-nafmfd" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</h2>
+<p>The <a href="https://doi.org/10.5066/P9WDLLP0">North American Freshwater Migratory Fish Database (NAFMFD)</a> <span class="citation" data-cites="dean2021 dean2022">(<a href="#ref-dean2021" role="doc-biblioref">Dean et al., 2021</a>, <a href="#ref-dean2022" role="doc-biblioref">2022</a>)</span> synthesizes comprehensive data on the migratory behavior of freshwater fishes across Canada, the United States, and Mexico. It includes information for 1,241 species spanning 79 families and 322 genera, characterizing migratory status, patterns, and behaviors.</p>
+<section id="source-and-accessibility-2" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="source-and-accessibility-2"><span class="header-section-number">3.9.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: U.S. Geological Survey ScienceBase-Catalog</li>
+<li><strong>DOI</strong>: <a href="https://doi.org/10.5066/P9WDLLP0">10.5066/P9WDLLP0</a></li>
+<li><strong>Accessibility</strong>: Public Domain</li>
+<li><strong>Data Type</strong>: Excel Spreadsheet and Metadata (XML)</li>
+<li><strong>Coverage</strong>: North America</li>
+<li><strong>Processing Script</strong>: <code>prc_north_american_freshwater_migratory_fish_database.R</code></li>
+<li><strong>Output Files</strong>:
+<ul>
+<li><code>north_american_freshwater_migratory_fish_database.csv</code></li>
+</ul></li>
+</ul>
 </section>
-<section id="references" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="references"><span class="header-section-number">3.9</span> References</h2>
+<section id="processing-steps-8" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="processing-steps-8"><span class="header-section-number">3.9.2</span> Processing Steps</h3>
+<p>The data was harvested from the ScienceBase-Catalog using two files: an Excel spreadsheet containing species information and a metadata XML file. The processing involved the following steps:</p>
+<ol type="1">
+<li><strong>Data Extraction</strong>:
+<ul>
+<li>The Excel file was read using the <code>readxl</code> package.</li>
+<li>Column names were standardized using <code>janitor::clean_names()</code> for consistency.</li>
+</ul></li>
+<li><strong>Data Cleaning</strong>:
+<ul>
+<li>Removed unnecessary whitespace and formatted data fields for analysis.</li>
+</ul></li>
+<li><strong>Export</strong>:
+<ul>
+<li>The processed data was saved as a CSV file for ease of use in further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-8" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="processed-data-structure-8"><span class="header-section-number">3.9.3</span> Processed Data Structure</h3>
+<p>The final processed dataset contains 28 fields and 2,198 rows. Key variables include species taxonomy, migratory behavior, and references for data sources.</p>
+<div class="cell">
+<div id="tbl-nafmfd-structure" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nafmfd-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.17: Structure of the NAFMFD Processed Data
+</figcaption>
+<div aria-describedby="tbl-nafmfd-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">itis_family</td>
+<td style="text-align: left;">Integrated Taxonomic Information System (ITIS) identifier for the family.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family_name</td>
+<td style="text-align: left;">Taxonomic family name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scientific_name</td>
+<td style="text-align: left;">Scientific name of the species.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">common_name</td>
+<td style="text-align: left;">Common name of the species.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">migratory</td>
+<td style="text-align: left;">Indicator of whether the species is migratory (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">anadromous</td>
+<td style="text-align: left;">Indicator of anadromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">catadromous</td>
+<td style="text-align: left;">Indicator of catadromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">potamodromous</td>
+<td style="text-align: left;">Indicator of potamodromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">diadromous</td>
+<td style="text-align: left;">Indicator of diadromous migratory behavior (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">suspected_migrant</td>
+<td style="text-align: left;">Indicator of suspected migratory status (1 = yes, 0 = no).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">non_migratory</td>
+<td style="text-align: left;">Indicator of non-migratory status (1 = yes, 0 = no).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;">Reference for data source and assignment.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="references"><span class="header-section-number">3.10</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
@@ -1443,6 +1543,12 @@ Canada, N. R. (2022b). Atlas of canada national scale data 1:1,000,000 - waterbo
 </div>
 <div id="ref-nrcan2022" class="csl-entry" role="listitem">
 Canada, N. R. (2022c). National hydro network (NHN) - GeoBase series. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977">https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977</a>.
+</div>
+<div id="ref-dean2021" class="csl-entry" role="listitem">
+Dean, E. M., Cooper, A. R., Wang, L., Daniel, W. M., David, S., Ernzen, C., et al. (2021). The north american freshwater migratory fish database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of canada, the united states, and mexico. U.S. Geological Survey Available at: <a href="https://doi.org/10.5066/P9WDLLP0">https://doi.org/10.5066/P9WDLLP0</a>.
+</div>
+<div id="ref-dean2022" class="csl-entry" role="listitem">
+Dean, E. M., Cooper, A. R., Wang, L., Daniel, W., David, S., Ernzen, C., et al. (2022). The north american freshwater migratory fish database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of canada, the united states and mexico. <em>Journal of Biogeography, Early View</em>. Available at: <a href="https://doi.org/10.1111/jbi.14367">https://doi.org/10.1111/jbi.14367</a>.
 </div>
 <div id="ref-eakins2024" class="csl-entry" role="listitem">
 Eakins, R. J. (2024). Ontario freshwater fishes life history database. <span>Ontario Freshwater Fishes</span> Available at: <a href="https://www.ontariofishes.ca/home.htm">https://www.ontariofishes.ca/home.htm</a>.

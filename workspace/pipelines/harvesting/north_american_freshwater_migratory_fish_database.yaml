@@ -1,0 +1,77 @@
+pipeline:
+  id: 0fedf29b-2fe3-49cc-b2b5-d1ebd3b8af2b
+  name: north_american_freshwater_migratory_fish_database
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-01-24 13:33:41
+  last_modified: 2025-01-24 13:33:41
+  description: |
+    Harvesting data from the North American Freshwater Migratory Fish Database (NAFMFD). 
+    The database synthesizes current knowledge of migratory status, pattern, and behavior 
+    for native and non-native freshwater fish species throughout North America, 
+    including 1,241 species representing 79 families and 322 genera.
+
+  # Metadata section providing details about the data being harvested
+  metadata:
+    source_name: "North American Freshwater Migratory Fish Database (NAFMFD)"
+    data_type: "Excel Spreadsheet"
+    file_size: "268.72 KB"
+    license: "Public Domain"
+    last_updated: "2021-12-21"
+    geographic_coverage:
+      region: "North America"
+    temporal_coverage:
+      start_date: "2021-08-01"
+    variables:
+      - species
+      - migratory_status
+      - migratory_pattern
+      - migratory_behavior
+    data_quality:
+      - "Data retrieved from the official USGS ScienceBase-Catalog and contains information on 1,241 species."
+
+  # Bibliographic Information
+  bibliography:
+    - "@TechReport{dean2021,
+        title = {The North American Freshwater Migratory Fish Database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of Canada, the United States, and Mexico},
+        author = {Dean, E.M. and Cooper, A.R. and Wang, L. and Daniel, W.M. and David, S. and Ernzen, C. and Gido, K.B. and Hale, E. and Haxton, T.J. and Kelso, W. and Leonard, N. and Lido, C. and Margraf, J. and Porter, M. and Pennock, C. and Propst, D. and Ross, J. and Staudinger, M.D. and Whelan, G. and Infante, D.M.},
+        year = {2021},
+        institution = {U.S. Geological Survey},
+        url = {https://doi.org/10.5066/P9WDLLP0}
+      }"
+    - "@Article{dean2022,
+        title = {The North American Freshwater Migratory Fish Database (NAFMFD): Characterizing the migratory life histories of freshwater fishes of Canada, the United States and Mexico},
+        author = {Dean, E.M. and Cooper, A.R. and Wang, L. and Daniel, W. and David, S. and Ernzen, C. and Gido, K.B. and Hale, E. and Haxton, T.J. and Kelso, W. and Leonard, N. and Lido, C. and Margraf, J. and Porter, M. and Pennock, C. and Propst, D. and Ross, J. and Staudinger, M.D. and Whelan, G. and Infante, D.M.},
+        year = {2022},
+        journal = {Journal of Biogeography, Early View},
+        url = {https://doi.org/10.1111/jbi.14367}
+      }"
+
+  # Harvest section: Define the sources to download and process
+  download:
+    sources:
+      - name: "NAFMFD Data"
+        source_type: "http_manual"
+        urls:
+          - "https://www.sciencebase.gov/catalog/file/get/619d2dbcd34eb622f6951e8a?name=NAFMFD_finalcopy.xlsx"
+        output: "NAFMFD_finalcopy.xlsx"
+      - name: "NAFMFD Metadata"
+        source_type: "http_manual"
+        urls:
+          - "https://www.sciencebase.gov/catalog/file/get/619d2dbcd34eb622f6951e8a?name=NAFMFD_metadata_12-20-2021.xml"
+        output: "NAFMFD_metadata_12-20-2021.xml"
+      
+  processing:
+    sources:
+      - name: NAFMFD processed
+        script: prc_north_american_freshwater_migratory_fish_database
+        input_files:
+          - NAFMFD Data
+        output_files:
+          - north_american_freshwater_migratory_fish_database.csv
+
+  # Output section: final output of the processed data
+  output:
+    output_dir: "workspace/data/harvested/nafmfd/"
+    log_dir: "workspace/logs/nafmfd/"
+    archive_raw: true
