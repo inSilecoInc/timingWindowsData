@@ -200,7 +200,8 @@ window.Quarto = {
   <li><a href="#sec-nafmfd" id="toc-sec-nafmfd" class="nav-link" data-scroll-target="#sec-nafmfd"><span class="header-section-number">3.9</span> North American Freshwater Migratory Fish Database (NAFMFD)</a></li>
   <li><a href="#sec-roberge" id="toc-sec-roberge" class="nav-link" data-scroll-target="#sec-roberge"><span class="header-section-number">3.10</span> Roberge et al.&nbsp;(2002)</a></li>
   <li><a href="#sec-dahlke" id="toc-sec-dahlke" class="nav-link" data-scroll-target="#sec-dahlke"><span class="header-section-number">3.11</span> Dahlke et al.&nbsp;(2020)</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.12</span> References</a></li>
+  <li><a href="#sec-fishbase" id="toc-sec-fishbase" class="nav-link" data-scroll-target="#sec-fishbase"><span class="header-section-number">3.12</span> FishBase</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.13</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -1883,13 +1884,1453 @@ Table&nbsp;3.22: Structure of Thermal Tolerance Data
 </div>
 </section>
 </section>
-<section id="references" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="references"><span class="header-section-number">3.12</span> References</h2>
+<section id="sec-fishbase" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="sec-fishbase"><span class="header-section-number">3.12</span> FishBase</h2>
+<p>The <a href="https://www.fishbase.org">FishBase dataset</a> <span class="citation" data-cites="froese2024">(<a href="#ref-froese2024" role="doc-biblioref">Froese and Pauly, 2024</a>)</span> provides a comprehensive database of global fish species, covering taxonomic, ecological, and biological attributes. Using the <code>rfishbase</code> R package <span class="citation" data-cites="boettiger2012">(<a href="#ref-boettiger2012" role="doc-biblioref">Boettiger et al., 2012</a>)</span>, this dataset was retrieved via API queries and includes species information, habitat details, growth patterns, diet, reproduction, and distribution data.</p>
+<section id="source-and-accessibility-5" class="level3" data-number="3.12.1">
+<h3 data-number="3.12.1" class="anchored" data-anchor-id="source-and-accessibility-5"><span class="header-section-number">3.12.1</span> Source and Accessibility</h3>
+<ul>
+<li><strong>Source</strong>: FishBase API via <code>rfishbase</code></li>
+<li><strong>DOI</strong>: <a href="https://www.fishbase.org">https://www.fishbase.org</a></li>
+<li><strong>Accessibility</strong>: FishBase Terms of Use</li>
+<li><strong>Data Type</strong>: API Queries</li>
+<li><strong>Coverage</strong>: Global</li>
+<li><strong>Processing Script</strong>: <code>download_fishbase.R</code></li>
+<li><strong>Output Files</strong>:
+<ul>
+<li><code>species.csv</code></li>
+<li><code>fecundity.csv</code></li>
+<li><code>reproduc.csv</code></li>
+<li><code>eggdev.csv</code></li>
+<li><code>larvdyn.csv</code></li>
+<li><code>fooditems.csv</code></li>
+<li><code>ecology.csv</code></li>
+<li><code>swimming.csv</code></li>
+<li><code>spawning_traits.csv</code></li>
+<li><code>spawning_phenology.csv</code></li>
+<li><code>larvae_traits.csv</code></li>
+<li><code>larvae_phenology.csv</code></li>
+<li><code>larvaepresence_phenology.csv</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="data-retrieval" class="level3" data-number="3.12.2">
+<h3 data-number="3.12.2" class="anchored" data-anchor-id="data-retrieval"><span class="header-section-number">3.12.2</span> Data retrieval</h3>
+<p>FishBase provides over 200 tables, all of which were summarily searched for relevance on the context of the current project. The final list of tables considered is available here in the following table:</p>
+<table class="table">
+<colgroup>
+<col style="width: 55%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ecology</code></td>
+<td>Includes ecological traits such as habitat preference, migratory behavior, and feeding mode.</td>
+</tr>
+<tr class="even">
+<td><code>eggdev</code></td>
+<td>Details on egg development stages and environmental influences.</td>
+</tr>
+<tr class="odd">
+<td><code>fecundity</code></td>
+<td>Contains information on fish fecundity, including egg production and reproductive output.</td>
+</tr>
+<tr class="even">
+<td><code>fooditems</code></td>
+<td>Provides detailed information on specific food items consumed by fish.</td>
+</tr>
+<tr class="odd">
+<td><code>larvae</code></td>
+<td>Contains larval traits and early life stage characteristics.</td>
+</tr>
+<tr class="even">
+<td><code>larvaepresence</code></td>
+<td>Information on the presence of larvae in different locations.</td>
+</tr>
+<tr class="odd">
+<td><code>larvdyn</code></td>
+<td>Provides data on larval dynamics, including movement and growth.</td>
+</tr>
+<tr class="even">
+<td><code>reproduc</code></td>
+<td>Provides reproductive characteristics, including spawning type and parental care.</td>
+</tr>
+<tr class="odd">
+<td><code>spawning</code></td>
+<td>Details spawning behavior, including seasonality, habitat, and locations.</td>
+</tr>
+<tr class="even">
+<td><code>species</code></td>
+<td>Main table containing taxonomic and biological information on fish species.</td>
+</tr>
+<tr class="odd">
+<td><code>swimming</code></td>
+<td>Provides information on fish swimming capabilities, including speed and behavior.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="processing-steps-11" class="level3" data-number="3.12.3">
+<h3 data-number="3.12.3" class="anchored" data-anchor-id="processing-steps-11"><span class="header-section-number">3.12.3</span> Processing Steps</h3>
+<p>The dataset was harvested using API queries to FishBase via <code>rfishbase</code>. The processing steps involved, but are not limited to:</p>
+<ol type="1">
+<li><strong>Fetching Data</strong>:
+<ul>
+<li>Extracted tables covering species, fecundity, reproduction, egg development, larval dynamics, food items, ecology, and swimming behavior.</li>
+<li>Queried FishBase for spawning, larval phenology, and larval presence phenology.</li>
+</ul></li>
+<li><strong>Data Cleaning &amp; Standardization</strong>:
+<ul>
+<li>Standardized column names with <code>janitor::clean_names()</code>.</li>
+<li>Filtered species based on the reference list of freshwater fish species in Canada.</li>
+<li>Removed redundant columns and transformed categorical variables for consistency.</li>
+</ul></li>
+<li><strong>Data Structuring</strong>:
+<ul>
+<li>Merged multiple sources of reproductive data to create a unified <code>reproduc.csv</code> file.</li>
+<li>Created long-format data for spawning and larval phenology to facilitate time-series analyses.</li>
+<li>Consolidated habitat data for ecological profiling.</li>
+</ul></li>
+<li><strong>Exporting Processed Data</strong>:
+<ul>
+<li>Saved all cleaned tables as CSV files for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="individual-tables" class="level3" data-number="3.12.4">
+<h3 data-number="3.12.4" class="anchored" data-anchor-id="individual-tables"><span class="header-section-number">3.12.4</span> Individual Tables</h3>
+<section id="ecology-ecology" class="level4" data-number="3.12.4.1">
+<h4 data-number="3.12.4.1" class="anchored" data-anchor-id="ecology-ecology"><span class="header-section-number">3.12.4.1</span> Ecology (<code>ecology</code>)</h4>
+<section id="explanation-of-data-content" class="level5" data-number="3.12.4.1.1">
+<h5 data-number="3.12.4.1.1" class="anchored" data-anchor-id="explanation-of-data-content"><span class="header-section-number">3.12.4.1.1</span> Explanation of Data Content</h5>
+<p>The <strong>Ecology Table</strong> in FishBase <a href="https://www.fishbase.se/manual/fishbasethe_ecology_table.htm">reference</a> provides information on species habitat preferences, depth range, trophic levels, and associations with different aquatic environments.</p>
+<ul>
+<li><strong>Trophic Levels (<code>diet_troph</code>, <code>food_troph</code>)</strong>:
+<ul>
+<li><code>diet_troph</code>: The trophic level of the species based on its diet.</li>
+<li><code>food_troph</code>: The trophic level of the species based on observed food intake.</li>
+</ul></li>
+<li><strong>Habitat Zones</strong>:
+<ul>
+<li><strong>Marine and Coastal Zones</strong>: Includes <code>neritic</code>, <code>supra_littoral_zone</code>, <code>saltmarshes</code>, <code>littoral_zone</code>, <code>tide_pools</code>, <code>intertidal</code>, <code>sub_littoral</code>, <code>oceanic</code>, <code>epipelagic</code>, <code>mesopelagic</code>, <code>bathypelagic</code>, <code>abyssopelagic</code>, and <code>hadopelagic</code>.</li>
+<li><strong>Freshwater and Transitional Habitats</strong>: Includes <code>estuaries</code>, <code>mangroves</code>, <code>marshes_swamps</code>, <code>stream</code>, <code>lakes</code>, and <code>caves</code>.</li>
+</ul></li>
+<li><strong>Substrate Preferences</strong>:
+<ul>
+<li>Different substrate types are recorded, such as <code>soft_bottom</code>, <code>sand</code>, <code>coarse</code>, <code>fine</code>, <code>level</code>, <code>sloping</code>, <code>silt</code>, <code>mud</code>, <code>ooze</code>, <code>detritus</code>, <code>organic</code>, <code>hard_bottom</code>, <code>rocky</code>, <code>rubble</code>, <code>gravel</code>, <code>vegetation</code>, and <code>driftwood</code>.</li>
+</ul></li>
+</ul>
+<p>These fields allow researchers to analyze species distributions across environments, their interactions within ecosystems, and their adaptability to changing conditions.</p>
+</section>
+<section id="processing" class="level5" data-number="3.12.4.1.2">
+<h5 data-number="3.12.4.1.2" class="anchored" data-anchor-id="processing"><span class="header-section-number">3.12.4.1.2</span> Processing</h5>
+<p>The <code>ecology.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Chose species-related ecological fields, including habitat zones, trophic levels, and substrate preferences.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Converted missing values (<code>NA</code>) to <code>0</code> where appropriate for habitat presence/absence.</li>
+<li>Replaced <code>-1</code> values with <code>1</code> to indicate presence in binary habitat fields.</li>
+<li>Applied <code>dplyr::mutate()</code> to ensure correct encoding of categorical variables.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Filtered rows where all habitat presence indicators were <code>0</code> to remove non-relevant entries.</li>
+<li>Used <code>dplyr::group_by(spec_code)</code> and <code>dplyr::summarise()</code> to compute mean trophic levels and aggregate habitat presence across multiple observations.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>ecology.csv</code> for downstream analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-11" class="level5" data-number="3.12.4.1.3">
+<h5 data-number="3.12.4.1.3" class="anchored" data-anchor-id="processed-data-structure-11"><span class="header-section-number">3.12.4.1.3</span> Processed Data Structure</h5>
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>diet_troph</td>
+<td>Trophic level based on diet</td>
+</tr>
+<tr class="odd">
+<td>food_troph</td>
+<td>Trophic level based on food intake</td>
+</tr>
+<tr class="even">
+<td>neritic</td>
+<td>Presence in neritic zones (binary)</td>
+</tr>
+<tr class="odd">
+<td>supra_littoral_zone</td>
+<td>Presence in supra-littoral zones (binary)</td>
+</tr>
+<tr class="even">
+<td>saltmarshes</td>
+<td>Presence in saltmarshes (binary)</td>
+</tr>
+<tr class="odd">
+<td>littoral_zone</td>
+<td>Presence in littoral zones (binary)</td>
+</tr>
+<tr class="even">
+<td>tide_pools</td>
+<td>Presence in tide pools (binary)</td>
+</tr>
+<tr class="odd">
+<td>intertidal</td>
+<td>Presence in intertidal zones (binary)</td>
+</tr>
+<tr class="even">
+<td>sub_littoral</td>
+<td>Presence in sub-littoral zones (binary)</td>
+</tr>
+<tr class="odd">
+<td>caves</td>
+<td>Presence in caves (binary)</td>
+</tr>
+<tr class="even">
+<td>oceanic</td>
+<td>Presence in oceanic zones (binary)</td>
+</tr>
+<tr class="odd">
+<td>epipelagic</td>
+<td>Presence in epipelagic zones (binary)</td>
+</tr>
+<tr class="even">
+<td>mesopelagic</td>
+<td>Presence in mesopelagic zones (binary)</td>
+</tr>
+<tr class="odd">
+<td>bathypelagic</td>
+<td>Presence in bathypelagic zones (binary)</td>
+</tr>
+<tr class="even">
+<td>abyssopelagic</td>
+<td>Presence in abyssopelagic zones (binary)</td>
+</tr>
+<tr class="odd">
+<td>hadopelagic</td>
+<td>Presence in hadopelagic zones (binary)</td>
+</tr>
+<tr class="even">
+<td>estuaries</td>
+<td>Presence in estuaries (binary)</td>
+</tr>
+<tr class="odd">
+<td>mangroves</td>
+<td>Presence in mangroves (binary)</td>
+</tr>
+<tr class="even">
+<td>marshes_swamps</td>
+<td>Presence in marshes and swamps (binary)</td>
+</tr>
+<tr class="odd">
+<td>cave_anchialine</td>
+<td>Presence in anchialine caves (binary)</td>
+</tr>
+<tr class="even">
+<td>stream</td>
+<td>Presence in streams (binary)</td>
+</tr>
+<tr class="odd">
+<td>lakes</td>
+<td>Presence in lakes (binary)</td>
+</tr>
+<tr class="even">
+<td>cave</td>
+<td>Presence in caves (binary)</td>
+</tr>
+<tr class="odd">
+<td>cave2</td>
+<td>Additional cave habitat information (binary)</td>
+</tr>
+<tr class="even">
+<td>soft_bottom</td>
+<td>Preference for soft bottom substrates (binary)</td>
+</tr>
+<tr class="odd">
+<td>sand</td>
+<td>Preference for sand substrates (binary)</td>
+</tr>
+<tr class="even">
+<td>coarse</td>
+<td>Preference for coarse substrates (binary)</td>
+</tr>
+<tr class="odd">
+<td>fine</td>
+<td>Preference for fine substrates (binary)</td>
+</tr>
+<tr class="even">
+<td>level</td>
+<td>Preference for level substrates (binary)</td>
+</tr>
+<tr class="odd">
+<td>sloping</td>
+<td>Preference for sloping substrates (binary)</td>
+</tr>
+<tr class="even">
+<td>silt</td>
+<td>Preference for silt substrates (binary)</td>
+</tr>
+<tr class="odd">
+<td>mud</td>
+<td>Preference for mud substrates (binary)</td>
+</tr>
+<tr class="even">
+<td>ooze</td>
+<td>Preference for ooze substrates (binary)</td>
+</tr>
+<tr class="odd">
+<td>detritus</td>
+<td>Presence of detritus (binary)</td>
+</tr>
+<tr class="even">
+<td>organic</td>
+<td>Presence of organic matter (binary)</td>
+</tr>
+<tr class="odd">
+<td>hard_bottom</td>
+<td>Preference for hard bottom substrates (binary)</td>
+</tr>
+<tr class="even">
+<td>rocky</td>
+<td>Preference for rocky habitats (binary)</td>
+</tr>
+<tr class="odd">
+<td>rubble</td>
+<td>Preference for rubble habitats (binary)</td>
+</tr>
+<tr class="even">
+<td>gravel</td>
+<td>Preference for gravel habitats (binary)</td>
+</tr>
+<tr class="odd">
+<td>vegetation</td>
+<td>Presence in vegetated habitats (binary)</td>
+</tr>
+<tr class="even">
+<td>driftwood</td>
+<td>Presence near driftwood (binary)</td>
+</tr>
+<tr class="odd">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="egg-development-eggdev" class="level4" data-number="3.12.4.2">
+<h4 data-number="3.12.4.2" class="anchored" data-anchor-id="egg-development-eggdev"><span class="header-section-number">3.12.4.2</span> Egg Development (<code>eggdev</code>)</h4>
+<section id="explanation-of-data-content-1" class="level5" data-number="3.12.4.2.1">
+<h5 data-number="3.12.4.2.1" class="anchored" data-anchor-id="explanation-of-data-content-1"><span class="header-section-number">3.12.4.2.1</span> Explanation of Data Content</h5>
+<p>The <strong>Egg Development Table</strong> in FishBase <a href="https://fishbase.se/manual/english/FishBaseThe_eggdev_Table.htm">reference</a> provides details on the environmental conditions required for fish eggs to develop.</p>
+<ul>
+<li><strong>Temperature Requirements (<code>temperature</code>)</strong>:
+<ul>
+<li>Represents the mean recorded temperature at which eggs develop.</li>
+<li>Understanding thermal tolerance at the egg stage is essential for studying species adaptations to different climatic conditions.</li>
+</ul></li>
+<li><strong>Salinity Preferences (<code>freshwater</code>, <code>brackish</code>)</strong>:
+<ul>
+<li><strong>Freshwater (<code>freshwater</code>)</strong>: Indicates whether a species’ eggs develop in freshwater conditions.</li>
+<li><strong>Brackish (<code>brackish</code>)</strong>: Indicates whether eggs can develop in brackish environments.</li>
+<li>These values help identify species that can tolerate a range of salinities, which is useful for habitat conservation and management.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-1" class="level5" data-number="3.12.4.2.2">
+<h5 data-number="3.12.4.2.2" class="anchored" data-anchor-id="processing-1"><span class="header-section-number">3.12.4.2.2</span> Processing</h5>
+<p>The <code>eggdev.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted species-related egg development fields, including temperature and salinity preferences.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Computed the mean temperature per species using <code>dplyr::group_by()</code> and <code>summarize()</code>.</li>
+<li>Converted missing values (<code>NA</code>) to <code>0</code> where appropriate for salinity preferences.</li>
+<li>Restructured the salinity data using <code>tidyr::pivot_wider()</code> to create binary presence/absence indicators for freshwater and brackish environments.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species with no recorded temperature or salinity values.</li>
+<li>Aggregated multiple records per species to avoid redundancy.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>eggdev.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-12" class="level5" data-number="3.12.4.2.3">
+<h5 data-number="3.12.4.2.3" class="anchored" data-anchor-id="processed-data-structure-12"><span class="header-section-number">3.12.4.2.3</span> Processed Data Structure</h5>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>temperature</td>
+<td>Mean recorded temperature during egg development</td>
+</tr>
+<tr class="odd">
+<td>freshwater</td>
+<td>Presence in freshwater environments (binary)</td>
+</tr>
+<tr class="even">
+<td>brackish</td>
+<td>Presence in brackish environments (binary)</td>
+</tr>
+<tr class="odd">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="fecundity-fecundity" class="level4" data-number="3.12.4.3">
+<h4 data-number="3.12.4.3" class="anchored" data-anchor-id="fecundity-fecundity"><span class="header-section-number">3.12.4.3</span> Fecundity (<code>fecundity</code>)</h4>
+<section id="explanation-of-data-content-2" class="level5" data-number="3.12.4.3.1">
+<h5 data-number="3.12.4.3.1" class="anchored" data-anchor-id="explanation-of-data-content-2"><span class="header-section-number">3.12.4.3.1</span> Explanation of Data Content</h5>
+<p>The <strong>Fecundity Table</strong> in FishBase provides information on the reproductive capacity of fish species, specifically focusing on the number of eggs produced per spawning event.</p>
+<ul>
+<li><strong>Fecundity Estimates (<code>fecundity_min</code>, <code>fecundity_max</code>)</strong>:
+<ul>
+<li>Represents the estimated range of eggs produced per spawning event.</li>
+<li><code>fecundity_min</code>: The lowest recorded number of eggs produced.</li>
+<li><code>fecundity_max</code>: The highest recorded number of eggs produced.</li>
+<li>These values help assess species reproductive potential and variability in spawning output.</li>
+</ul></li>
+<li><strong>Fecundity Factors</strong>:
+<ul>
+<li>While not included in this dataset, fecundity in FishBase is often linked to factors like <strong>body size, reproductive strategy, and environmental conditions</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-2" class="level5" data-number="3.12.4.3.2">
+<h5 data-number="3.12.4.3.2" class="anchored" data-anchor-id="processing-2"><span class="header-section-number">3.12.4.3.2</span> Processing</h5>
+<p>The <code>fecundity.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted species-related fecundity fields, including minimum and maximum fecundity estimates.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Computed the mean fecundity values for species with multiple records using <code>dplyr::group_by()</code> and <code>summarize()</code>.</li>
+<li>Ensured missing values (<code>NA</code>) were excluded from the mean calculations.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species with no available fecundity data to retain only informative records.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>fecundity.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-13" class="level5" data-number="3.12.4.3.3">
+<h5 data-number="3.12.4.3.3" class="anchored" data-anchor-id="processed-data-structure-13"><span class="header-section-number">3.12.4.3.3</span> Processed Data Structure</h5>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>fecundity_min</td>
+<td>Mean minimum recorded fecundity</td>
+</tr>
+<tr class="odd">
+<td>fecundity_max</td>
+<td>Mean maximum recorded fecundity</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="food-items-fooditems" class="level4" data-number="3.12.4.4">
+<h4 data-number="3.12.4.4" class="anchored" data-anchor-id="food-items-fooditems"><span class="header-section-number">3.12.4.4</span> Food Items (<code>fooditems</code>)</h4>
+<section id="explanation-of-data-content-3" class="level5" data-number="3.12.4.4.1">
+<h5 data-number="3.12.4.4.1" class="anchored" data-anchor-id="explanation-of-data-content-3"><span class="header-section-number">3.12.4.4.1</span> Explanation of Data Content</h5>
+<p>The <strong>Food Items Table</strong> in FishBase <a href="https://fishbase.se/manual/english/FishBaseThe_FOOD_ITEMS_table.htm">reference</a> provides insights into the dietary composition of fish species, documenting the type of prey consumed and the life stages at which they are eaten. This dataset helps in understanding feeding ecology, trophic interactions, and the role of fish species in food webs.</p>
+<ul>
+<li><strong>Primary, Secondary, and Tertiary Food Items (<code>food_i</code>, <code>food_ii</code>, <code>food_iii</code>)</strong>:
+<ul>
+<li><code>food_i</code>: Broad food category such as detritus, nekton, or plankton.</li>
+<li><code>food_ii</code>: More specific classification within <code>food_i</code> (e.g., finfish under nekton, cephalopods under mollusks).</li>
+<li><code>food_iii</code>: The most specific food category, detailing exact prey type (e.g., squids/cuttlefish, bony fish, carcasses).</li>
+</ul></li>
+<li><strong>Prey and Predator Life Stages (<code>prey_stage</code>, <code>predator_stage</code>)</strong>:
+<ul>
+<li>Specifies the developmental stages of both prey and predator (e.g., larval, juvenile, adult).</li>
+<li>Indicates at what stage of life a fish species consumes specific types of prey.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-3" class="level5" data-number="3.12.4.4.2">
+<h5 data-number="3.12.4.4.2" class="anchored" data-anchor-id="processing-3"><span class="header-section-number">3.12.4.4.2</span> Processing</h5>
+<p>The <code>fooditems.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted dietary data related to fish feeding habits, including primary (<code>food_i</code>), secondary (<code>food_ii</code>), and tertiary (<code>food_iii</code>) food items.</li>
+<li>Included details on prey and predator life stages (<code>prey_stage</code>, <code>predator_stage</code>).</li>
+<li>Retained geospatial fields (<code>country</code>, <code>longitude</code>, <code>latitude</code>) where available.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Standardized food category names for consistency.</li>
+<li>Ensured missing values (<code>NA</code>) were preserved where information was unavailable.</li>
+</ul></li>
+<li><strong>Geospatial Information Handling</strong>:
+<ul>
+<li>Included location-based data where available to associate feeding habits with geographic distribution.</li>
+<li>Maintained missing values for species with unreported feeding locations.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>fooditems.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-14" class="level5" data-number="3.12.4.4.3">
+<h5 data-number="3.12.4.4.3" class="anchored" data-anchor-id="processed-data-structure-14"><span class="header-section-number">3.12.4.4.3</span> Processed Data Structure</h5>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>country</td>
+<td>Country where the food record was observed</td>
+</tr>
+<tr class="odd">
+<td>longitude</td>
+<td>Longitude of the food observation</td>
+</tr>
+<tr class="even">
+<td>latitude</td>
+<td>Latitude of the food observation</td>
+</tr>
+<tr class="odd">
+<td>food_i</td>
+<td>Primary food category (e.g., detritus, nekton, plankton)</td>
+</tr>
+<tr class="even">
+<td>food_ii</td>
+<td>Secondary food category (e.g., cephalopods, finfish)</td>
+</tr>
+<tr class="odd">
+<td>food_iii</td>
+<td>Tertiary food category (e.g., squids/cuttlefish, bony fish)</td>
+</tr>
+<tr class="even">
+<td>prey_stage</td>
+<td>Life stage of the prey (e.g., larvae, juvenile, adult)</td>
+</tr>
+<tr class="odd">
+<td>predator_stage</td>
+<td>Life stage of the predator (e.g., larvae, juvenile, adult)</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="larvae-larvae" class="level4" data-number="3.12.4.5">
+<h4 data-number="3.12.4.5" class="anchored" data-anchor-id="larvae-larvae"><span class="header-section-number">3.12.4.5</span> Larvae (<code>larvae</code>)</h4>
+<section id="explanation-of-data-content-4" class="level5" data-number="3.12.4.5.1">
+<h5 data-number="3.12.4.5.1" class="anchored" data-anchor-id="explanation-of-data-content-4"><span class="header-section-number">3.12.4.5.1</span> Explanation of Data Content</h5>
+<p>The <strong>Larvae Table</strong> in FishBase <a href="https://www.fishbase.se/manual/fishbasethe_larvae_table.htm">reference</a> contains detailed information about the early life stages of fish species, including their developmental traits and seasonal presence.</p>
+<ul>
+<li><strong>Larval Traits (<code>larvae_traits</code>)</strong>:
+<ul>
+<li><strong>Place of Development (<code>placeof_development</code>)</strong>: Describes where larvae develop (e.g., planktonic, in a closed nest, on the substrate).</li>
+<li><strong>Larval Duration (<code>larval_duration_min</code>, <code>larval_duration_max</code>, <code>larval_duration_mod</code>)</strong>: Duration of the larval stage in days, with minimum, maximum, and modal estimates.</li>
+<li><strong>Shape of Yolk Sac (<code>shapeofyolksac</code>)</strong>: Describes the yolk sac morphology, which can influence larval survival.</li>
+<li><strong>Body Form (<code>body_form</code>)</strong>: Indicates whether larvae are fusiform, elongated, or have another body shape.</li>
+</ul></li>
+<li><strong>Larval Phenology (<code>larvae_phenology</code>)</strong>:
+<ul>
+<li><strong>Locality (<code>locality</code>)</strong>: Provides the geographic region where larval presence was recorded.</li>
+<li><strong>Monthly Presence (<code>jan</code>–<code>dec</code>)</strong>: Indicates the months in which larvae were observed (1 = present, 0 = absent).</li>
+<li>This data is essential for tracking seasonal spawning patterns and larval dispersal dynamics.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-4" class="level5" data-number="3.12.4.5.2">
+<h5 data-number="3.12.4.5.2" class="anchored" data-anchor-id="processing-4"><span class="header-section-number">3.12.4.5.2</span> Processing</h5>
+<p>The <code>larvae_traits.csv</code> and <code>larvae_phenology.csv</code> files were generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>For <code>larvae_traits.csv</code>: Selected species-related developmental traits, including duration, yolk sac shape, and body form.</li>
+<li>For <code>larvae_phenology.csv</code>: Selected locality and monthly larval presence indicators.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Standardized categorical variables such as <code>body_form</code> to ensure consistency (e.g., converting “eel-like” to “elongated”).</li>
+<li>Converted missing values (<code>NA</code>) to <code>0</code> for monthly larval presence data.</li>
+<li>Used <code>dplyr::mutate()</code> to standardize habitat descriptors.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed entries where no larval traits were recorded.</li>
+<li>Ensured only species with confirmed larval presence were retained in <code>larvae_phenology.csv</code>.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final datasets were written to <code>larvae_traits.csv</code> and <code>larvae_phenology.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-15" class="level5" data-number="3.12.4.5.3">
+<h5 data-number="3.12.4.5.3" class="anchored" data-anchor-id="processed-data-structure-15"><span class="header-section-number">3.12.4.5.3</span> Processed Data Structure</h5>
+<section id="larval-traits-larvae_traits.csv" class="level6" data-number="3.12.4.5.3.1">
+<h6 data-number="3.12.4.5.3.1" class="anchored" data-anchor-id="larval-traits-larvae_traits.csv"><span class="header-section-number">3.12.4.5.3.1</span> Larval Traits (<code>larvae_traits.csv</code>)</h6>
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>placeof_development</td>
+<td>Location of larval development (e.g., planktonic)</td>
+</tr>
+<tr class="odd">
+<td>larval_duration_min</td>
+<td>Minimum larval duration (days)</td>
+</tr>
+<tr class="even">
+<td>larval_duration_max</td>
+<td>Maximum larval duration (days)</td>
+</tr>
+<tr class="odd">
+<td>larval_duration_mod</td>
+<td>Modal larval duration (days)</td>
+</tr>
+<tr class="even">
+<td>shapeofyolksac</td>
+<td>Shape of yolk sac</td>
+</tr>
+<tr class="odd">
+<td>body_form</td>
+<td>Larval body form (e.g., fusiform, elongated)</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="larval-phenology-larvae_phenology.csv" class="level6" data-number="3.12.4.5.3.2">
+<h6 data-number="3.12.4.5.3.2" class="anchored" data-anchor-id="larval-phenology-larvae_phenology.csv"><span class="header-section-number">3.12.4.5.3.2</span> Larval Phenology (<code>larvae_phenology.csv</code>)</h6>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>locality</td>
+<td>Geographic location of larval observations</td>
+</tr>
+<tr class="odd">
+<td>jan-dec</td>
+<td>Monthly indicators of larval presence (1 = present, 0 = absent)</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="larval-presence-larvaepresence" class="level4" data-number="3.12.4.6">
+<h4 data-number="3.12.4.6" class="anchored" data-anchor-id="larval-presence-larvaepresence"><span class="header-section-number">3.12.4.6</span> Larval Presence (<code>larvaepresence</code>)</h4>
+<section id="explanation-of-data-content-5" class="level5" data-number="3.12.4.6.1">
+<h5 data-number="3.12.4.6.1" class="anchored" data-anchor-id="explanation-of-data-content-5"><span class="header-section-number">3.12.4.6.1</span> Explanation of Data Content</h5>
+<p>The <strong>Larval Presence Table</strong> in FishBase provides information on the geographic and seasonal occurrence of fish larvae.</p>
+<ul>
+<li><strong>Monthly Presence (<code>jan</code>–<code>dec</code>)</strong>:
+<ul>
+<li>Indicates the months in which larvae were observed at a given location.</li>
+<li>Values are <strong>binary</strong> (<code>1</code> = present, <code>0</code> = absent), providing insight into seasonal larval distributions.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-5" class="level5" data-number="3.12.4.6.2">
+<h5 data-number="3.12.4.6.2" class="anchored" data-anchor-id="processing-5"><span class="header-section-number">3.12.4.6.2</span> Processing</h5>
+<p>The <code>larvaepresence_phenology.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Retained species identification, geographic location, and monthly larval presence indicators.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Converted <strong>missing values (<code>NA</code>)</strong> to <code>0</code>, indicating no recorded presence.</li>
+<li>Replaced occurrences of <code>111</code> with <code>1</code>, ensuring correct binary encoding.</li>
+<li>Used <code>dplyr::mutate()</code> to standardize monthly presence values.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species without any recorded larval presence.</li>
+<li>Ensured that at least one month contained larval presence data before inclusion in the final dataset.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>larvaepresence_phenology.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-16" class="level5" data-number="3.12.4.6.3">
+<h5 data-number="3.12.4.6.3" class="anchored" data-anchor-id="processed-data-structure-16"><span class="header-section-number">3.12.4.6.3</span> Processed Data Structure</h5>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>country</td>
+<td>Country where the larval presence was observed</td>
+</tr>
+<tr class="odd">
+<td>longitude</td>
+<td>Longitude of the observation site</td>
+</tr>
+<tr class="even">
+<td>latitude</td>
+<td>Latitude of the observation site</td>
+</tr>
+<tr class="odd">
+<td>jan-dec</td>
+<td>Monthly indicators of larval presence (<code>1</code> = present, <code>0</code> = absent)</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="larval-dynamics-larvdyn" class="level4" data-number="3.12.4.7">
+<h4 data-number="3.12.4.7" class="anchored" data-anchor-id="larval-dynamics-larvdyn"><span class="header-section-number">3.12.4.7</span> Larval Dynamics (<code>larvdyn</code>)</h4>
+<section id="explanation-of-data-content-6" class="level5" data-number="3.12.4.7.1">
+<h5 data-number="3.12.4.7.1" class="anchored" data-anchor-id="explanation-of-data-content-6"><span class="header-section-number">3.12.4.7.1</span> Explanation of Data Content</h5>
+<p>The <strong>Larval Dynamics Table</strong> in FishBase <a href="https://fishbase.se/manual/english/FishBaseHoude_and_Zastrows_LARVDYN_Table.htm">reference</a> provides data on the environmental conditions affecting fish larvae, including ecosystem type, water temperature, and larval duration.</p>
+<ul>
+<li><strong>Ecosystem (<code>ecosystem</code>)</strong>:
+<ul>
+<li>Describes the habitat type where larval development occurs (e.g., <strong>Shelf</strong>, <strong>Freshwater</strong>, <strong>Marine</strong>).</li>
+<li>Helps in assessing species adaptation to different environmental conditions.</li>
+</ul></li>
+<li><strong>Temperature (<code>temperature</code>)</strong>:
+<ul>
+<li>Represents the recorded water temperature (°C) where larvae develop.</li>
+<li>Critical for studying species-specific thermal tolerances and climate change impacts.</li>
+</ul></li>
+<li><strong>Larval Duration (<code>duration</code>)</strong>:
+<ul>
+<li>Indicates the estimated number of days larvae remain in the larval stage.</li>
+<li>Longer durations suggest extended planktonic phases, which can affect dispersal and survival.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-6" class="level5" data-number="3.12.4.7.2">
+<h5 data-number="3.12.4.7.2" class="anchored" data-anchor-id="processing-6"><span class="header-section-number">3.12.4.7.2</span> Processing</h5>
+<p>The <code>larvdyn.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted ecosystem type, water temperature, and larval duration for each species.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Ensured categorical values for <code>ecosystem</code> were standardized.</li>
+<li>Retained missing values (<code>NA</code>) where temperature or duration was unreported.</li>
+<li>Applied <code>dplyr::mutate()</code> to tag records with the FishBase table name.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species without any recorded larval dynamics data.</li>
+<li>Retained unique records per species to prevent duplication.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>larvdyn.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-17" class="level5" data-number="3.12.4.7.3">
+<h5 data-number="3.12.4.7.3" class="anchored" data-anchor-id="processed-data-structure-17"><span class="header-section-number">3.12.4.7.3</span> Processed Data Structure</h5>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>ecosystem</td>
+<td>Ecosystem where larval development occurs</td>
+</tr>
+<tr class="odd">
+<td>temperature</td>
+<td>Water temperature (°C) at larval development</td>
+</tr>
+<tr class="even">
+<td>duration</td>
+<td>Duration of the larval stage (days)</td>
+</tr>
+<tr class="odd">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="reproduction-reproduc" class="level4" data-number="3.12.4.8">
+<h4 data-number="3.12.4.8" class="anchored" data-anchor-id="reproduction-reproduc"><span class="header-section-number">3.12.4.8</span> Reproduction (<code>reproduc</code>)</h4>
+<section id="explanation-of-data-content-7" class="level5" data-number="3.12.4.8.1">
+<h5 data-number="3.12.4.8.1" class="anchored" data-anchor-id="explanation-of-data-content-7"><span class="header-section-number">3.12.4.8.1</span> Explanation of Data Content</h5>
+<p>The <strong>Reproduction Table</strong> in FishBase <a href="https://fishbase.mnhn.fr/manual/English/fishbasethe_reproduction_table.htm">reference</a> provides information on the reproductive strategies of fish species, including their fertilization method, spawning patterns, and parental care.</p>
+<ul>
+<li><strong>Reproductive Mode (<code>repro_mode</code>)</strong>:
+<ul>
+<li>Describes how sexes are structured in a species.<br>
+</li>
+<li>Common values include <strong>dioecism</strong> (separate sexes), <strong>hermaphroditism</strong>, and <strong>unisex populations</strong>.</li>
+</ul></li>
+<li><strong>Fertilization Type (<code>fertilization</code>)</strong>:
+<ul>
+<li>Indicates whether fertilization occurs <strong>externally</strong> (in water) or <strong>internally</strong> (within the body).</li>
+</ul></li>
+<li><strong>Mating System (<code>mating_system</code>)</strong>:
+<ul>
+<li>Provides details on the mating strategy, though this field is often unreported.</li>
+</ul></li>
+<li><strong>Spawning Pattern (<code>spawning</code>)</strong>:
+<ul>
+<li>Describes the seasonal and geographic variation in spawning behavior.<br>
+</li>
+<li>Some species spawn throughout the year, while others have <strong>distinct reproductive seasons</strong>.</li>
+</ul></li>
+<li><strong>Batch Spawning (<code>batch_spawner</code>)</strong>:
+<ul>
+<li><strong>0</strong> = Does not spawn in batches.<br>
+</li>
+<li><strong>1</strong> = Produces eggs in multiple spawning events.</li>
+</ul></li>
+<li><strong>Reproductive Guild (<code>rep_guild1</code>, <code>rep_guild2</code>)</strong>:
+<ul>
+<li>Classifies species based on their spawning and parental care behaviors.<br>
+</li>
+<li><strong>Primary guild (<code>rep_guild1</code>)</strong>: Nonguarders, guarders, bearers.<br>
+</li>
+<li><strong>Secondary guild (<code>rep_guild2</code>)</strong>: More specific categorization, such as <strong>substratum egg scatterers</strong> or <strong>brood hiders</strong>.</li>
+</ul></li>
+<li><strong>Parental Care (<code>parental_care</code>)</strong>:
+<ul>
+<li>Indicates if a species provides care for its eggs or offspring.<br>
+</li>
+<li>Values include <strong>none</strong>, <strong>guarding</strong>, <strong>mouthbrooding</strong>, or <strong>live-bearing</strong> behaviors.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-7" class="level5" data-number="3.12.4.8.2">
+<h5 data-number="3.12.4.8.2" class="anchored" data-anchor-id="processing-7"><span class="header-section-number">3.12.4.8.2</span> Processing</h5>
+<p>The <code>reproduc.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted key reproductive attributes such as reproductive mode, fertilization type, and parental care.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Standardized categorical variables (<code>repro_mode</code>, <code>fertilization</code>, <code>rep_guild1</code>, <code>rep_guild2</code>, <code>parental_care</code>) to ensure consistency.<br>
+</li>
+<li>Ensured missing values (<code>NA</code>) remained where information was unreported.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species without any recorded reproductive data.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>reproduc.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-18" class="level5" data-number="3.12.4.8.3">
+<h5 data-number="3.12.4.8.3" class="anchored" data-anchor-id="processed-data-structure-18"><span class="header-section-number">3.12.4.8.3</span> Processed Data Structure</h5>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>repro_mode</td>
+<td>Reproductive mode (e.g., dioecism, hermaphroditism)</td>
+</tr>
+<tr class="odd">
+<td>fertilization</td>
+<td>Fertilization type (external or internal)</td>
+</tr>
+<tr class="even">
+<td>mating_system</td>
+<td>Mating strategy</td>
+</tr>
+<tr class="odd">
+<td>spawning</td>
+<td>Spawning pattern (e.g., seasonal, year-round)</td>
+</tr>
+<tr class="even">
+<td>batch_spawner</td>
+<td>Indicator of batch spawning (1 = Yes, 0 = No)</td>
+</tr>
+<tr class="odd">
+<td>rep_guild1</td>
+<td>Primary reproductive guild classification</td>
+</tr>
+<tr class="even">
+<td>rep_guild2</td>
+<td>Secondary reproductive guild classification</td>
+</tr>
+<tr class="odd">
+<td>parental_care</td>
+<td>Type of parental care (e.g., none, mouthbrooding)</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="spawning-spawning" class="level4" data-number="3.12.4.9">
+<h4 data-number="3.12.4.9" class="anchored" data-anchor-id="spawning-spawning"><span class="header-section-number">3.12.4.9</span> Spawning (<code>spawning</code>)</h4>
+<section id="explanation-of-data-content-8" class="level5" data-number="3.12.4.9.1">
+<h5 data-number="3.12.4.9.1" class="anchored" data-anchor-id="explanation-of-data-content-8"><span class="header-section-number">3.12.4.9.1</span> Explanation of Data Content</h5>
+<p>The <strong>Spawning Table</strong> in FishBase <a href="https://www.fishbase.se/manual/fishbasethe_spawning_table.htm">reference</a> provides detailed information on the reproductive seasonality and environmental requirements of fish species.</p>
+<ul>
+<li><strong>Spawning Traits (<code>spawning_traits</code>)</strong>:
+<ul>
+<li><strong>Temperature Requirements (<code>temp_low</code>, <code>temp_high</code>)</strong>: Indicates the range of temperatures (°C) at which spawning occurs.<br>
+</li>
+<li><strong>Fecundity Estimates (<code>fecundity_min</code>, <code>fecundity_max</code>)</strong>: Represents the estimated range of eggs produced per spawning event.<br>
+</li>
+<li><strong>Spawning Cycles (<code>spawning_cycles</code>)</strong>: Number of spawning events per year.<br>
+</li>
+<li><strong>Spawning Habitats (<code>coastal</code>, <code>lacustrine</code>, <code>riverine</code>, <code>estuarine</code>)</strong>: Indicates the type of environment where spawning takes place.</li>
+</ul></li>
+<li><strong>Spawning Phenology (<code>spawning_phenology</code>)</strong>:
+<ul>
+<li><strong>Geographic Information (<code>country</code>, <code>longitude</code>, <code>latitude</code>)</strong>: Location details of where spawning was observed.<br>
+</li>
+<li><strong>Monthly Spawning Presence (<code>jan</code>–<code>dec</code>)</strong>: Binary indicators (<code>1</code> = active spawning, <code>0</code> = no activity) showing seasonal trends in spawning behavior.</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-8" class="level5" data-number="3.12.4.9.2">
+<h5 data-number="3.12.4.9.2" class="anchored" data-anchor-id="processing-8"><span class="header-section-number">3.12.4.9.2</span> Processing</h5>
+<p>The <code>spawning_traits.csv</code> and <code>spawning_phenology.csv</code> files were generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted environmental and reproductive attributes for <code>spawning_traits.csv</code>.<br>
+</li>
+<li>Retained geographic and temporal indicators for <code>spawning_phenology.csv</code>.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Computed mean temperature and fecundity values per species using <code>dplyr::group_by()</code> and <code>summarize()</code>.<br>
+</li>
+<li>Converted missing values (<code>NA</code>) to <code>0</code> for monthly spawning indicators.<br>
+</li>
+<li>Standardized habitat types using <code>tidyr::pivot_wider()</code> to create binary presence/absence indicators.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Retained only species with at least one recorded spawning event.<br>
+</li>
+<li>Removed records where all monthly spawning indicators were <code>0</code>.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final datasets were written to <code>spawning_traits.csv</code> and <code>spawning_phenology.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-19" class="level5" data-number="3.12.4.9.3">
+<h5 data-number="3.12.4.9.3" class="anchored" data-anchor-id="processed-data-structure-19"><span class="header-section-number">3.12.4.9.3</span> Processed Data Structure</h5>
+<section id="spawning-traits-spawning_traits.csv" class="level6" data-number="3.12.4.9.3.1">
+<h6 data-number="3.12.4.9.3.1" class="anchored" data-anchor-id="spawning-traits-spawning_traits.csv"><span class="header-section-number">3.12.4.9.3.1</span> Spawning Traits (<code>spawning_traits.csv</code>)</h6>
+<table class="table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>temp_low</td>
+<td>Minimum temperature (°C) at which spawning occurs</td>
+</tr>
+<tr class="odd">
+<td>temp_high</td>
+<td>Maximum temperature (°C) at which spawning occurs</td>
+</tr>
+<tr class="even">
+<td>fecundity_min</td>
+<td>Minimum estimated fecundity</td>
+</tr>
+<tr class="odd">
+<td>fecundity_max</td>
+<td>Maximum estimated fecundity</td>
+</tr>
+<tr class="even">
+<td>spawning_cycles</td>
+<td>Number of spawning events per year</td>
+</tr>
+<tr class="odd">
+<td>coastal</td>
+<td>Presence in coastal spawning habitats (binary)</td>
+</tr>
+<tr class="even">
+<td>lacustrine</td>
+<td>Presence in lake spawning habitats (binary)</td>
+</tr>
+<tr class="odd">
+<td>riverine</td>
+<td>Presence in river spawning habitats (binary)</td>
+</tr>
+<tr class="even">
+<td>estuarine</td>
+<td>Presence in estuarine spawning habitats (binary)</td>
+</tr>
+<tr class="odd">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spawning-phenology-spawning_phenology.csv" class="level6" data-number="3.12.4.9.3.2">
+<h6 data-number="3.12.4.9.3.2" class="anchored" data-anchor-id="spawning-phenology-spawning_phenology.csv"><span class="header-section-number">3.12.4.9.3.2</span> Spawning Phenology (<code>spawning_phenology.csv</code>)</h6>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>country</td>
+<td>Country where spawning presence was observed</td>
+</tr>
+<tr class="odd">
+<td>longitude</td>
+<td>Longitude of the observation site</td>
+</tr>
+<tr class="even">
+<td>latitude</td>
+<td>Latitude of the observation site</td>
+</tr>
+<tr class="odd">
+<td>jan-dec</td>
+<td>Monthly indicators of spawning presence (1 = present, 0 = absent)</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="species-species" class="level4" data-number="3.12.4.10">
+<h4 data-number="3.12.4.10" class="anchored" data-anchor-id="species-species"><span class="header-section-number">3.12.4.10</span> Species (<code>species</code>)</h4>
+<section id="explanation-of-data-content-9" class="level5" data-number="3.12.4.10.1">
+<h5 data-number="3.12.4.10.1" class="anchored" data-anchor-id="explanation-of-data-content-9"><span class="header-section-number">3.12.4.10.1</span> Explanation of Data Content</h5>
+<p>The <strong>Species Table</strong> in FishBase <a href="https://www.fishbase.se/manual/fishbasethe_species_table.htm">reference</a> provides fundamental taxonomic and biological information for fish species.</p>
+<ul>
+<li><strong>Taxonomic Information</strong>:
+<ul>
+<li><strong>Scientific Name (<code>scientific</code>)</strong>: The genus and species combination used for taxonomic classification.<br>
+</li>
+<li><strong>Preferred Image (<code>pic_preferred_name</code>)</strong>: The filename of the representative species image.</li>
+</ul></li>
+<li><strong>Habitat and Distribution</strong>:
+<ul>
+<li><strong>Freshwater (<code>fresh</code>)</strong>, <strong>Brackish (<code>brack</code>)</strong>, <strong>Saltwater (<code>saltwater</code>)</strong>: Binary indicators (<code>1</code> = present, <code>0</code> = absent) representing habitat preferences.<br>
+</li>
+<li><strong>Pelagic or Demersal (<code>demers_pelag</code>)</strong>: Classification indicating if the species is bottom-dwelling (demersal) or lives in the water column (pelagic).<br>
+</li>
+<li><strong>Air Breathing (<code>air_breathing</code>)</strong>: Indicates if the species is capable of air breathing.<br>
+</li>
+<li><strong>Anadromy and Catadromy (<code>ana_cat</code>)</strong>: Classifies migratory species that move between freshwater and marine environments.</li>
+</ul></li>
+<li><strong>Life History Traits</strong>:
+<ul>
+<li><strong>Longevity in the Wild (<code>longevity_wild</code>)</strong>: Maximum recorded lifespan (years).<br>
+</li>
+<li><strong>Maximum Length (<code>length</code>)</strong>: Maximum total length (cm) recorded for the species.<br>
+</li>
+<li><strong>Common Length (<code>common_length</code>)</strong>: The most frequently observed length (cm) for the species.<br>
+</li>
+<li><strong>Maximum Weight (<code>weight</code>)</strong>: Maximum recorded weight (grams) for the species.</li>
+</ul></li>
+<li><strong>Economic Importance</strong>:
+<ul>
+<li><strong>Importance (<code>importance</code>)</strong>: Classifies species as <strong>commercial, minor commercial, subsistence, or game fish</strong>.<br>
+</li>
+<li><strong>Game Fish (<code>game_fish</code>)</strong>: Binary indicator (<code>1</code> = game fish, <code>0</code> = not targeted for sport fishing).</li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-9" class="level5" data-number="3.12.4.10.2">
+<h5 data-number="3.12.4.10.2" class="anchored" data-anchor-id="processing-9"><span class="header-section-number">3.12.4.10.2</span> Processing</h5>
+<p>The <code>species.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Retained taxonomic, habitat, and biological attributes essential for ecological and fisheries research.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Standardized categorical variables (<code>body_shape_i</code>, <code>demers_pelag</code>, <code>ana_cat</code>, <code>importance</code>) for consistency.<br>
+</li>
+<li>Converted <strong>missing values (<code>NA</code>)</strong> to <code>0</code> for binary habitat fields (<code>fresh</code>, <code>brack</code>, <code>saltwater</code>).</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species lacking taxonomic or ecological data to maintain dataset integrity.<br>
+</li>
+<li>Mapped species to FishBase images where available.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>species.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-20" class="level5" data-number="3.12.4.10.3">
+<h5 data-number="3.12.4.10.3" class="anchored" data-anchor-id="processed-data-structure-20"><span class="header-section-number">3.12.4.10.3</span> Processed Data Structure</h5>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>scientific</td>
+<td>Genus and species combination</td>
+</tr>
+<tr class="odd">
+<td>pic_preferred_name</td>
+<td>Filename of the representative species image</td>
+</tr>
+<tr class="even">
+<td>body_shape_i</td>
+<td>Body shape classification (e.g., fusiform)</td>
+</tr>
+<tr class="odd">
+<td>fresh</td>
+<td>Presence in freshwater habitats (binary)</td>
+</tr>
+<tr class="even">
+<td>brack</td>
+<td>Presence in brackish water habitats (binary)</td>
+</tr>
+<tr class="odd">
+<td>saltwater</td>
+<td>Presence in saltwater habitats (binary)</td>
+</tr>
+<tr class="even">
+<td>demers_pelag</td>
+<td>Classification as demersal or pelagic</td>
+</tr>
+<tr class="odd">
+<td>air_breathing</td>
+<td>Indicator of air-breathing ability (binary)</td>
+</tr>
+<tr class="even">
+<td>ana_cat</td>
+<td>Migration category (e.g., anadromous, catadromous)</td>
+</tr>
+<tr class="odd">
+<td>longevity_wild</td>
+<td>Maximum recorded lifespan (years)</td>
+</tr>
+<tr class="even">
+<td>length</td>
+<td>Maximum recorded length (cm)</td>
+</tr>
+<tr class="odd">
+<td>common_length</td>
+<td>Most frequently observed length (cm)</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>Maximum recorded weight (grams)</td>
+</tr>
+<tr class="odd">
+<td>importance</td>
+<td>Economic importance (e.g., commercial, game fish)</td>
+</tr>
+<tr class="even">
+<td>game_fish</td>
+<td>Indicator of game fish status (binary)</td>
+</tr>
+<tr class="odd">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="swimming-swimming" class="level4" data-number="3.12.4.11">
+<h4 data-number="3.12.4.11" class="anchored" data-anchor-id="swimming-swimming"><span class="header-section-number">3.12.4.11</span> Swimming (<code>swimming</code>)</h4>
+<section id="explanation-of-data-content-10" class="level5" data-number="3.12.4.11.1">
+<h5 data-number="3.12.4.11.1" class="anchored" data-anchor-id="explanation-of-data-content-10"><span class="header-section-number">3.12.4.11.1</span> Explanation of Data Content</h5>
+<p>The <strong>Swimming Table</strong> in FishBase <a href="https://www.fishbase.se/manual/fishbasethe_swimming_and_speed_tables.htm">reference</a> provides information on the swimming strategies of fish species.</p>
+<ul>
+<li><strong>Swimming Type (<code>adult_type</code>)</strong>:
+<ul>
+<li>Describes the primary movement mechanism used by adult fish.<br>
+</li>
+<li>Common values include:
+<ul>
+<li><strong>Movements of body and/or caudal fin</strong> (e.g., undulatory propulsion).<br>
+</li>
+<li><strong>Movements of median and/or paired fins</strong> (e.g., fin propulsion without significant body movement).</li>
+</ul></li>
+</ul></li>
+<li><strong>Swimming Mode (<code>adult_mode</code>)</strong>:
+<ul>
+<li>Classifies species based on their swimming kinematics.<br>
+</li>
+<li>Common categories:
+<ul>
+<li><strong>Anguilliform</strong> (e.g., eels—body waves propagate the entire length).<br>
+</li>
+<li><strong>Carangiform</strong> (e.g., jacks—flexion in the posterior half of the body).<br>
+</li>
+<li><strong>Subcarangiform</strong> (e.g., salmon—less body flexion than carangiform).<br>
+</li>
+<li><strong>Thunniform</strong> (e.g., tuna—efficient, high-speed swimming with minimal body movement).<br>
+</li>
+<li><strong>Labriform</strong> (e.g., wrasses—use of pectoral fins for propulsion).</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="processing-10" class="level5" data-number="3.12.4.11.2">
+<h5 data-number="3.12.4.11.2" class="anchored" data-anchor-id="processing-10"><span class="header-section-number">3.12.4.11.2</span> Processing</h5>
+<p>The <code>swimming.csv</code> file was generated using the following processing steps:</p>
+<ol type="1">
+<li><strong>Selection of Relevant Fields</strong>:
+<ul>
+<li>Extracted adult swimming type and mode to retain core locomotive attributes.</li>
+</ul></li>
+<li><strong>Data Transformation</strong>:
+<ul>
+<li>Standardized categorical variables (<code>adult_type</code>, <code>adult_mode</code>) for consistency.<br>
+</li>
+<li>Ensured missing values (<code>NA</code>) remained where data was unreported.</li>
+</ul></li>
+<li><strong>Filtering &amp; Summarization</strong>:
+<ul>
+<li>Removed species without recorded swimming data.</li>
+</ul></li>
+<li><strong>Exporting Cleaned Data</strong>:
+<ul>
+<li>The final dataset was written to <code>swimming.csv</code> for further analyses.</li>
+</ul></li>
+</ol>
+</section>
+<section id="processed-data-structure-21" class="level5" data-number="3.12.4.11.3">
+<h5 data-number="3.12.4.11.3" class="anchored" data-anchor-id="processed-data-structure-21"><span class="header-section-number">3.12.4.11.3</span> Processed Data Structure</h5>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>species_id</td>
+<td>Unique species identifier</td>
+</tr>
+<tr class="even">
+<td>adult_type</td>
+<td>Primary movement mechanism</td>
+</tr>
+<tr class="odd">
+<td>adult_mode</td>
+<td>Swimming kinematics classification</td>
+</tr>
+<tr class="even">
+<td>fb_table</td>
+<td>FishBase source table indicator</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+<section id="references" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="references"><span class="header-section-number">3.13</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="5" role="list">
 <div id="ref-benoit2023" class="csl-entry" role="listitem">
 Benoit, D., Zielinski, D., and Swanson, R. et al. (2023). FishPass sortable attribute database: Phenological, morphological, physiological, and behavioural characteristics related to passage and movement of great lakes fishes [dataset]. Available at: <a href="https://doi.org/10.5061/dryad.fqz612jwj">https://doi.org/10.5061/dryad.fqz612jwj</a>.
+</div>
+<div id="ref-boettiger2012" class="csl-entry" role="listitem">
+Boettiger, C., Temple Lang, D., and Wainwright, P. (2012). Rfishbase: Exploring, manipulating and visualizing <span>FishBase</span> data from r. <em>Journal of Fish Biology</em>. Available at: <a href="https://doi.org/10.1111/j.1095-8649.2012.03464.x">https://doi.org/10.1111/j.1095-8649.2012.03464.x</a>.
 </div>
 <div id="ref-nrcan2022b" class="csl-entry" role="listitem">
 Canada, N. R. (2022a). Atlas of canada national scale data 1:1,000,000 - rivers. Natural Resources Canada Available at: <a href="https://open.canada.ca/data/en/dataset/87bb794c-eabf-5eea-bdb3-61d0338d9594">https://open.canada.ca/data/en/dataset/87bb794c-eabf-5eea-bdb3-61d0338d9594</a>.
@@ -1917,6 +3358,9 @@ Eakins, R. J. (2024). Ontario freshwater fishes life history database. <span>Ont
 </div>
 <div id="ref-fishbase2024" class="csl-entry" role="listitem">
 Froese, R. and Pauly, D. (2024). FishBase freshwater species checklist. <span>FishBase</span> Available at: <a href="https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh">https://www.fishbase.se/country/CountryChecklist.php?what=list&amp;trpp=50&amp;c_code=124&amp;csub_code=&amp;cpresence=present&amp;sortby=alpha2&amp;vhabitat=fresh</a>.
+</div>
+<div id="ref-froese2024" class="csl-entry" role="listitem">
+Froese, R., and Pauly, D. (Editors). (2024). FishBase. Available at: <a href="https://www.fishbase.org">https://www.fishbase.org</a>.
 </div>
 <div id="ref-gadm2023" class="csl-entry" role="listitem">
 Global Administrative Areas, G. (Database of (2023). GADM database of global administrative areas, version 4.1. GADM Available at: <a href="https://gadm.org">https://gadm.org</a>.

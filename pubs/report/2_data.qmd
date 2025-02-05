@@ -784,4 +784,703 @@ data.frame(
 ```
 
 
+## FishBase {#sec-fishbase}
+
+The [FishBase dataset](https://www.fishbase.org) [@froese2024] provides a comprehensive database of global fish species, covering taxonomic, ecological, and biological attributes. Using the `rfishbase` R package [@boettiger2012], this dataset was retrieved via API queries and includes species information, habitat details, growth patterns, diet, reproduction, and distribution data. 
+
+
+### Source and Accessibility
+
+- **Source**: FishBase API via `rfishbase`
+- **DOI**: [https://www.fishbase.org](https://www.fishbase.org)
+- **Accessibility**: FishBase Terms of Use
+- **Data Type**: API Queries
+- **Coverage**: Global
+- **Processing Script**: `download_fishbase.R`
+- **Output Files**:
+  - `species.csv`
+  - `fecundity.csv`
+  - `reproduc.csv`
+  - `eggdev.csv`
+  - `larvdyn.csv`
+  - `fooditems.csv`
+  - `ecology.csv`
+  - `swimming.csv`
+  - `spawning_traits.csv`
+  - `spawning_phenology.csv`
+  - `larvae_traits.csv`
+  - `larvae_phenology.csv`
+  - `larvaepresence_phenology.csv`
+
+### Data retrieval
+
+FishBase provides over 200 tables, all of which were summarily searched for relevance on the context of the current project. The final list of tables considered is available here in the following table: 
+
+| Table Name      | Description |
+|----------------|-------------|
+| `ecology`      | Includes ecological traits such as habitat preference, migratory behavior, and feeding mode. |
+| `eggdev`       | Details on egg development stages and environmental influences. |
+| `fecundity`    | Contains information on fish fecundity, including egg production and reproductive output. |
+| `fooditems`    | Provides detailed information on specific food items consumed by fish. |
+| `larvae`       | Contains larval traits and early life stage characteristics. |
+| `larvaepresence` | Information on the presence of larvae in different locations. |
+| `larvdyn`      | Provides data on larval dynamics, including movement and growth. |
+| `reproduc`     | Provides reproductive characteristics, including spawning type and parental care. |
+| `spawning`     | Details spawning behavior, including seasonality, habitat, and locations. |
+| `species`      | Main table containing taxonomic and biological information on fish species. |
+| `swimming`     | Provides information on fish swimming capabilities, including speed and behavior. |
+
+
+### Processing Steps
+
+The dataset was harvested using API queries to FishBase via `rfishbase`. The processing steps involved, but are not limited to:
+
+1. **Fetching Data**:
+   - Extracted tables covering species, fecundity, reproduction, egg development, larval dynamics, food items, ecology, and swimming behavior.
+   - Queried FishBase for spawning, larval phenology, and larval presence phenology.
+
+2. **Data Cleaning & Standardization**:
+   - Standardized column names with `janitor::clean_names()`.
+   - Filtered species based on the reference list of freshwater fish species in Canada.
+   - Removed redundant columns and transformed categorical variables for consistency.
+
+3. **Data Structuring**:
+   - Merged multiple sources of reproductive data to create a unified `reproduc.csv` file.
+   - Created long-format data for spawning and larval phenology to facilitate time-series analyses.
+   - Consolidated habitat data for ecological profiling.
+
+4. **Exporting Processed Data**:
+   - Saved all cleaned tables as CSV files for further analyses.
+
+
+### Individual Tables
+
+#### Ecology (`ecology`)
+
+##### Explanation of Data Content
+
+The **Ecology Table** in FishBase [reference](https://www.fishbase.se/manual/fishbasethe_ecology_table.htm) provides information on species habitat preferences, depth range, trophic levels, and associations with different aquatic environments. 
+
+- **Trophic Levels (`diet_troph`, `food_troph`)**:
+  - `diet_troph`: The trophic level of the species based on its diet.
+  - `food_troph`: The trophic level of the species based on observed food intake.
+
+- **Habitat Zones**:
+  - **Marine and Coastal Zones**: Includes `neritic`, `supra_littoral_zone`, `saltmarshes`, `littoral_zone`, `tide_pools`, `intertidal`, `sub_littoral`, `oceanic`, `epipelagic`, `mesopelagic`, `bathypelagic`, `abyssopelagic`, and `hadopelagic`.
+  - **Freshwater and Transitional Habitats**: Includes `estuaries`, `mangroves`, `marshes_swamps`, `stream`, `lakes`, and `caves`.
+
+- **Substrate Preferences**:
+  - Different substrate types are recorded, such as `soft_bottom`, `sand`, `coarse`, `fine`, `level`, `sloping`, `silt`, `mud`, `ooze`, `detritus`, `organic`, `hard_bottom`, `rocky`, `rubble`, `gravel`, `vegetation`, and `driftwood`.
+
+These fields allow researchers to analyze species distributions across environments, their interactions within ecosystems, and their adaptability to changing conditions.
+
+##### Processing
+
+The `ecology.csv` file was generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - Chose species-related ecological fields, including habitat zones, trophic levels, and substrate preferences.
+
+2. **Data Transformation**:
+   - Converted missing values (`NA`) to `0` where appropriate for habitat presence/absence.
+   - Replaced `-1` values with `1` to indicate presence in binary habitat fields.
+   - Applied `dplyr::mutate()` to ensure correct encoding of categorical variables.
+
+3. **Filtering & Summarization**:
+   - Filtered rows where all habitat presence indicators were `0` to remove non-relevant entries.
+   - Used `dplyr::group_by(spec_code)` and `dplyr::summarise()` to compute mean trophic levels and aggregate habitat presence across multiple observations.
+
+4. **Exporting Cleaned Data**:
+   - The final dataset was written to `ecology.csv` for downstream analyses.
+
+##### Processed Data Structure
+
+| Field                  | Description                                             |
+|------------------------|---------------------------------------------------------|
+| species_id            | Unique species identifier                              |
+| diet_troph           | Trophic level based on diet                            |
+| food_troph           | Trophic level based on food intake                     |
+| neritic              | Presence in neritic zones (binary)                     |
+| supra_littoral_zone  | Presence in supra-littoral zones (binary)              |
+| saltmarshes          | Presence in saltmarshes (binary)                       |
+| littoral_zone        | Presence in littoral zones (binary)                    |
+| tide_pools           | Presence in tide pools (binary)                        |
+| intertidal           | Presence in intertidal zones (binary)                  |
+| sub_littoral        | Presence in sub-littoral zones (binary)                 |
+| caves               | Presence in caves (binary)                              |
+| oceanic             | Presence in oceanic zones (binary)                      |
+| epipelagic          | Presence in epipelagic zones (binary)                   |
+| mesopelagic         | Presence in mesopelagic zones (binary)                  |
+| bathypelagic        | Presence in bathypelagic zones (binary)                 |
+| abyssopelagic       | Presence in abyssopelagic zones (binary)                |
+| hadopelagic         | Presence in hadopelagic zones (binary)                  |
+| estuaries          | Presence in estuaries (binary)                           |
+| mangroves          | Presence in mangroves (binary)                           |
+| marshes_swamps     | Presence in marshes and swamps (binary)                  |
+| cave_anchialine    | Presence in anchialine caves (binary)                    |
+| stream             | Presence in streams (binary)                             |
+| lakes              | Presence in lakes (binary)                               |
+| cave               | Presence in caves (binary)                               |
+| cave2              | Additional cave habitat information (binary)             |
+| soft_bottom        | Preference for soft bottom substrates (binary)           |
+| sand               | Preference for sand substrates (binary)                  |
+| coarse             | Preference for coarse substrates (binary)                |
+| fine               | Preference for fine substrates (binary)                  |
+| level              | Preference for level substrates (binary)                 |
+| sloping            | Preference for sloping substrates (binary)               |
+| silt               | Preference for silt substrates (binary)                  |
+| mud                | Preference for mud substrates (binary)                   |
+| ooze               | Preference for ooze substrates (binary)                  |
+| detritus           | Presence of detritus (binary)                            |
+| organic            | Presence of organic matter (binary)                      |
+| hard_bottom        | Preference for hard bottom substrates (binary)           |
+| rocky              | Preference for rocky habitats (binary)                   |
+| rubble             | Preference for rubble habitats (binary)                  |
+| gravel             | Preference for gravel habitats (binary)                  |
+| vegetation         | Presence in vegetated habitats (binary)                  |
+| driftwood          | Presence near driftwood (binary)                         |
+| fb_table           | FishBase source table indicator                          |
+
+
+
+#### Egg Development (`eggdev`)
+
+##### Explanation of Data Content
+
+The **Egg Development Table** in FishBase [reference](https://fishbase.se/manual/english/FishBaseThe_eggdev_Table.htm) provides details on the environmental conditions required for fish eggs to develop. 
+
+- **Temperature Requirements (`temperature`)**:
+  - Represents the mean recorded temperature at which eggs develop.
+  - Understanding thermal tolerance at the egg stage is essential for studying species adaptations to different climatic conditions.
+
+- **Salinity Preferences (`freshwater`, `brackish`)**:
+  - **Freshwater (`freshwater`)**: Indicates whether a species' eggs develop in freshwater conditions.
+  - **Brackish (`brackish`)**: Indicates whether eggs can develop in brackish environments.
+  - These values help identify species that can tolerate a range of salinities, which is useful for habitat conservation and management.
+
+##### Processing
+
+The `eggdev.csv` file was generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - Extracted species-related egg development fields, including temperature and salinity preferences.
+
+2. **Data Transformation**:
+   - Computed the mean temperature per species using `dplyr::group_by()` and `summarize()`.
+   - Converted missing values (`NA`) to `0` where appropriate for salinity preferences.
+   - Restructured the salinity data using `tidyr::pivot_wider()` to create binary presence/absence indicators for freshwater and brackish environments.
+
+3. **Filtering & Summarization**:
+   - Removed species with no recorded temperature or salinity values.
+   - Aggregated multiple records per species to avoid redundancy.
+
+4. **Exporting Cleaned Data**:
+   - The final dataset was written to `eggdev.csv` for further analyses.
+
+##### Processed Data Structure
+
+| Field        | Description                                        |
+|-------------|----------------------------------------------------|
+| species_id  | Unique species identifier                         |
+| temperature | Mean recorded temperature during egg development  |
+| freshwater  | Presence in freshwater environments (binary)      |
+| brackish    | Presence in brackish environments (binary)        |
+| fb_table    | FishBase source table indicator                   |
+
+
+
+#### Fecundity (`fecundity`)
+
+##### Explanation of Data Content
+
+The **Fecundity Table** in FishBase provides information on the reproductive capacity of fish species, specifically focusing on the number of eggs produced per spawning event.
+
+- **Fecundity Estimates (`fecundity_min`, `fecundity_max`)**:
+  - Represents the estimated range of eggs produced per spawning event.
+  - `fecundity_min`: The lowest recorded number of eggs produced.
+  - `fecundity_max`: The highest recorded number of eggs produced.
+  - These values help assess species reproductive potential and variability in spawning output.
+
+- **Fecundity Factors**:
+  - While not included in this dataset, fecundity in FishBase is often linked to factors like **body size, reproductive strategy, and environmental conditions**.
+
+##### Processing
+
+The `fecundity.csv` file was generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - Extracted species-related fecundity fields, including minimum and maximum fecundity estimates.
+
+2. **Data Transformation**:
+   - Computed the mean fecundity values for species with multiple records using `dplyr::group_by()` and `summarize()`.
+   - Ensured missing values (`NA`) were excluded from the mean calculations.
+
+3. **Filtering & Summarization**:
+   - Removed species with no available fecundity data to retain only informative records.
+
+4. **Exporting Cleaned Data**:
+   - The final dataset was written to `fecundity.csv` for further analyses.
+
+##### Processed Data Structure
+
+| Field         | Description                                        |
+|--------------|----------------------------------------------------|
+| species_id   | Unique species identifier                         |
+| fecundity_min| Mean minimum recorded fecundity                   |
+| fecundity_max| Mean maximum recorded fecundity                   |
+| fb_table     | FishBase source table indicator                   |
+
+
+#### Food Items (`fooditems`)
+
+##### Explanation of Data Content
+
+The **Food Items Table** in FishBase [reference](https://fishbase.se/manual/english/FishBaseThe_FOOD_ITEMS_table.htm) provides insights into the dietary composition of fish species, documenting the type of prey consumed and the life stages at which they are eaten. This dataset helps in understanding feeding ecology, trophic interactions, and the role of fish species in food webs.
+
+- **Primary, Secondary, and Tertiary Food Items (`food_i`, `food_ii`, `food_iii`)**:
+  - `food_i`: Broad food category such as detritus, nekton, or plankton.
+  - `food_ii`: More specific classification within `food_i` (e.g., finfish under nekton, cephalopods under mollusks).
+  - `food_iii`: The most specific food category, detailing exact prey type (e.g., squids/cuttlefish, bony fish, carcasses).
+
+- **Prey and Predator Life Stages (`prey_stage`, `predator_stage`)**:
+  - Specifies the developmental stages of both prey and predator (e.g., larval, juvenile, adult).
+  - Indicates at what stage of life a fish species consumes specific types of prey.
+
+##### Processing
+
+The `fooditems.csv` file was generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - Extracted dietary data related to fish feeding habits, including primary (`food_i`), secondary (`food_ii`), and tertiary (`food_iii`) food items.
+   - Included details on prey and predator life stages (`prey_stage`, `predator_stage`).
+   - Retained geospatial fields (`country`, `longitude`, `latitude`) where available.
+
+2. **Data Transformation**:
+   - Standardized food category names for consistency.
+   - Ensured missing values (`NA`) were preserved where information was unavailable.
+
+3. **Geospatial Information Handling**:
+   - Included location-based data where available to associate feeding habits with geographic distribution.
+   - Maintained missing values for species with unreported feeding locations.
+
+4. **Exporting Cleaned Data**:
+   - The final dataset was written to `fooditems.csv` for further analyses.
+
+
+##### Processed Data Structure
+
+| Field           | Description                                                   |
+|---------------|---------------------------------------------------------------|
+| species_id    | Unique species identifier                                    |
+| country       | Country where the food record was observed                   |
+| longitude     | Longitude of the food observation                            |
+| latitude      | Latitude of the food observation                             |
+| food_i        | Primary food category (e.g., detritus, nekton, plankton)     |
+| food_ii       | Secondary food category (e.g., cephalopods, finfish)         |
+| food_iii      | Tertiary food category (e.g., squids/cuttlefish, bony fish)  |
+| prey_stage    | Life stage of the prey (e.g., larvae, juvenile, adult)       |
+| predator_stage| Life stage of the predator (e.g., larvae, juvenile, adult)   |
+| fb_table      | FishBase source table indicator                              |
+
+
+#### Larvae (`larvae`)
+
+##### Explanation of Data Content
+
+The **Larvae Table** in FishBase [reference](https://www.fishbase.se/manual/fishbasethe_larvae_table.htm) contains detailed information about the early life stages of fish species, including their developmental traits and seasonal presence. 
+
+- **Larval Traits (`larvae_traits`)**:
+  - **Place of Development (`placeof_development`)**: Describes where larvae develop (e.g., planktonic, in a closed nest, on the substrate).
+  - **Larval Duration (`larval_duration_min`, `larval_duration_max`, `larval_duration_mod`)**: Duration of the larval stage in days, with minimum, maximum, and modal estimates.
+  - **Shape of Yolk Sac (`shapeofyolksac`)**: Describes the yolk sac morphology, which can influence larval survival.
+  - **Body Form (`body_form`)**: Indicates whether larvae are fusiform, elongated, or have another body shape.
+
+- **Larval Phenology (`larvae_phenology`)**:
+  - **Locality (`locality`)**: Provides the geographic region where larval presence was recorded.
+  - **Monthly Presence (`jan`–`dec`)**: Indicates the months in which larvae were observed (1 = present, 0 = absent).
+  - This data is essential for tracking seasonal spawning patterns and larval dispersal dynamics.
+
+##### Processing
+
+The `larvae_traits.csv` and `larvae_phenology.csv` files were generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - For `larvae_traits.csv`: Selected species-related developmental traits, including duration, yolk sac shape, and body form.
+   - For `larvae_phenology.csv`: Selected locality and monthly larval presence indicators.
+
+2. **Data Transformation**:
+   - Standardized categorical variables such as `body_form` to ensure consistency (e.g., converting "eel-like" to "elongated").
+   - Converted missing values (`NA`) to `0` for monthly larval presence data.
+   - Used `dplyr::mutate()` to standardize habitat descriptors.
+
+3. **Filtering & Summarization**:
+   - Removed entries where no larval traits were recorded.
+   - Ensured only species with confirmed larval presence were retained in `larvae_phenology.csv`.
+
+4. **Exporting Cleaned Data**:
+   - The final datasets were written to `larvae_traits.csv` and `larvae_phenology.csv` for further analyses.
+
+##### Processed Data Structure
+
+###### Larval Traits (`larvae_traits.csv`)
+
+| Field                 | Description                                            |
+|-----------------------|--------------------------------------------------------|
+| species_id           | Unique species identifier                            |
+| placeof_development  | Location of larval development (e.g., planktonic)    |
+| larval_duration_min  | Minimum larval duration (days)                       |
+| larval_duration_max  | Maximum larval duration (days)                       |
+| larval_duration_mod  | Modal larval duration (days)                         |
+| shapeofyolksac       | Shape of yolk sac                                    |
+| body_form            | Larval body form (e.g., fusiform, elongated)         |
+| fb_table             | FishBase source table indicator                      |
+
+###### Larval Phenology (`larvae_phenology.csv`)
+
+| Field      | Description                                             |
+|-----------|---------------------------------------------------------|
+| species_id| Unique species identifier                              |
+| locality  | Geographic location of larval observations             |
+| jan-dec   | Monthly indicators of larval presence (1 = present, 0 = absent) |
+| fb_table  | FishBase source table indicator                        |
+
+
+
+#### Larval Presence (`larvaepresence`)
+
+##### Explanation of Data Content
+
+The **Larval Presence Table** in FishBase provides information on the geographic and seasonal occurrence of fish larvae. 
+
+- **Monthly Presence (`jan`–`dec`)**:
+  - Indicates the months in which larvae were observed at a given location.
+  - Values are **binary** (`1` = present, `0` = absent), providing insight into seasonal larval distributions.
+
+##### Processing
+
+The `larvaepresence_phenology.csv` file was generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - Retained species identification, geographic location, and monthly larval presence indicators.
+
+2. **Data Transformation**:
+   - Converted **missing values (`NA`)** to `0`, indicating no recorded presence.
+   - Replaced occurrences of `111` with `1`, ensuring correct binary encoding.
+   - Used `dplyr::mutate()` to standardize monthly presence values.
+
+3. **Filtering & Summarization**:
+   - Removed species without any recorded larval presence.
+   - Ensured that at least one month contained larval presence data before inclusion in the final dataset.
+
+4. **Exporting Cleaned Data**:
+   - The final dataset was written to `larvaepresence_phenology.csv` for further analyses.
+
+##### Processed Data Structure
+
+| Field      | Description                                              |
+|-----------|----------------------------------------------------------|
+| species_id| Unique species identifier                               |
+| country   | Country where the larval presence was observed          |
+| longitude | Longitude of the observation site                       |
+| latitude  | Latitude of the observation site                        |
+| jan-dec   | Monthly indicators of larval presence (`1` = present, `0` = absent) |
+| fb_table  | FishBase source table indicator                         |
+
+
+#### Larval Dynamics (`larvdyn`)
+
+##### Explanation of Data Content
+
+The **Larval Dynamics Table** in FishBase [reference](https://fishbase.se/manual/english/FishBaseHoude_and_Zastrows_LARVDYN_Table.htm) provides data on the environmental conditions affecting fish larvae, including ecosystem type, water temperature, and larval duration. 
+
+- **Ecosystem (`ecosystem`)**:
+  - Describes the habitat type where larval development occurs (e.g., **Shelf**, **Freshwater**, **Marine**).
+  - Helps in assessing species adaptation to different environmental conditions.
+
+- **Temperature (`temperature`)**:
+  - Represents the recorded water temperature (°C) where larvae develop.
+  - Critical for studying species-specific thermal tolerances and climate change impacts.
+
+- **Larval Duration (`duration`)**:
+  - Indicates the estimated number of days larvae remain in the larval stage.
+  - Longer durations suggest extended planktonic phases, which can affect dispersal and survival.
+
+##### Processing
+
+The `larvdyn.csv` file was generated using the following processing steps:
+
+1. **Selection of Relevant Fields**:
+   - Extracted ecosystem type, water temperature, and larval duration for each species.
+
+2. **Data Transformation**:
+   - Ensured categorical values for `ecosystem` were standardized.
+   - Retained missing values (`NA`) where temperature or duration was unreported.
+   - Applied `dplyr::mutate()` to tag records with the FishBase table name.
+
+3. **Filtering & Summarization**:
+   - Removed species without any recorded larval dynamics data.
+   - Retained unique records per species to prevent duplication.
+
+4. **Exporting Cleaned Data**:
+   - The final dataset was written to `larvdyn.csv` for further analyses.
+
+##### Processed Data Structure
+
+| Field        | Description                                      |
+|-------------|--------------------------------------------------|
+| species_id  | Unique species identifier                       |
+| ecosystem   | Ecosystem where larval development occurs       |
+| temperature | Water temperature (°C) at larval development    |
+| duration    | Duration of the larval stage (days)             |
+| fb_table    | FishBase source table indicator                 |
+
+
+#### Reproduction (`reproduc`)  
+
+##### Explanation of Data Content  
+
+The **Reproduction Table** in FishBase [reference](https://fishbase.mnhn.fr/manual/English/fishbasethe_reproduction_table.htm) provides information on the reproductive strategies of fish species, including their fertilization method, spawning patterns, and parental care. 
+
+- **Reproductive Mode (`repro_mode`)**:  
+  - Describes how sexes are structured in a species.  
+  - Common values include **dioecism** (separate sexes), **hermaphroditism**, and **unisex populations**.  
+
+- **Fertilization Type (`fertilization`)**:  
+  - Indicates whether fertilization occurs **externally** (in water) or **internally** (within the body).  
+
+- **Mating System (`mating_system`)**:  
+  - Provides details on the mating strategy, though this field is often unreported.  
+
+- **Spawning Pattern (`spawning`)**:  
+  - Describes the seasonal and geographic variation in spawning behavior.  
+  - Some species spawn throughout the year, while others have **distinct reproductive seasons**.  
+
+- **Batch Spawning (`batch_spawner`)**:  
+  - **0** = Does not spawn in batches.  
+  - **1** = Produces eggs in multiple spawning events.  
+
+- **Reproductive Guild (`rep_guild1`, `rep_guild2`)**:  
+  - Classifies species based on their spawning and parental care behaviors.  
+  - **Primary guild (`rep_guild1`)**: Nonguarders, guarders, bearers.  
+  - **Secondary guild (`rep_guild2`)**: More specific categorization, such as **substratum egg scatterers** or **brood hiders**.  
+
+- **Parental Care (`parental_care`)**:  
+  - Indicates if a species provides care for its eggs or offspring.  
+  - Values include **none**, **guarding**, **mouthbrooding**, or **live-bearing** behaviors.  
+
+##### Processing  
+
+The `reproduc.csv` file was generated using the following processing steps:  
+
+1. **Selection of Relevant Fields**:  
+   - Extracted key reproductive attributes such as reproductive mode, fertilization type, and parental care.  
+
+2. **Data Transformation**:  
+   - Standardized categorical variables (`repro_mode`, `fertilization`, `rep_guild1`, `rep_guild2`, `parental_care`) to ensure consistency.  
+   - Ensured missing values (`NA`) remained where information was unreported.  
+
+3. **Filtering & Summarization**:  
+   - Removed species without any recorded reproductive data.  
+
+4. **Exporting Cleaned Data**:  
+   - The final dataset was written to `reproduc.csv` for further analyses.  
+
+##### Processed Data Structure  
+
+| Field          | Description                                        |
+|---------------|----------------------------------------------------|
+| species_id    | Unique species identifier                         |
+| repro_mode    | Reproductive mode (e.g., dioecism, hermaphroditism) |
+| fertilization | Fertilization type (external or internal)         |
+| mating_system | Mating strategy                                   |
+| spawning      | Spawning pattern (e.g., seasonal, year-round)     |
+| batch_spawner | Indicator of batch spawning (1 = Yes, 0 = No)    |
+| rep_guild1    | Primary reproductive guild classification         |
+| rep_guild2    | Secondary reproductive guild classification       |
+| parental_care | Type of parental care (e.g., none, mouthbrooding) |
+| fb_table      | FishBase source table indicator                   |
+
+
+#### Spawning (`spawning`)  
+
+##### Explanation of Data Content  
+
+The **Spawning Table** in FishBase [reference](https://www.fishbase.se/manual/fishbasethe_spawning_table.htm) provides detailed information on the reproductive seasonality and environmental requirements of fish species.
+
+- **Spawning Traits (`spawning_traits`)**:  
+  - **Temperature Requirements (`temp_low`, `temp_high`)**: Indicates the range of temperatures (°C) at which spawning occurs.  
+  - **Fecundity Estimates (`fecundity_min`, `fecundity_max`)**: Represents the estimated range of eggs produced per spawning event.  
+  - **Spawning Cycles (`spawning_cycles`)**: Number of spawning events per year.  
+  - **Spawning Habitats (`coastal`, `lacustrine`, `riverine`, `estuarine`)**: Indicates the type of environment where spawning takes place.  
+
+- **Spawning Phenology (`spawning_phenology`)**:  
+  - **Geographic Information (`country`, `longitude`, `latitude`)**: Location details of where spawning was observed.  
+  - **Monthly Spawning Presence (`jan`–`dec`)**: Binary indicators (`1` = active spawning, `0` = no activity) showing seasonal trends in spawning behavior.  
+
+##### Processing  
+
+The `spawning_traits.csv` and `spawning_phenology.csv` files were generated using the following processing steps:  
+
+1. **Selection of Relevant Fields**:  
+   - Extracted environmental and reproductive attributes for `spawning_traits.csv`.  
+   - Retained geographic and temporal indicators for `spawning_phenology.csv`.  
+
+2. **Data Transformation**:  
+   - Computed mean temperature and fecundity values per species using `dplyr::group_by()` and `summarize()`.  
+   - Converted missing values (`NA`) to `0` for monthly spawning indicators.  
+   - Standardized habitat types using `tidyr::pivot_wider()` to create binary presence/absence indicators.  
+
+3. **Filtering & Summarization**:  
+   - Retained only species with at least one recorded spawning event.  
+   - Removed records where all monthly spawning indicators were `0`.  
+
+4. **Exporting Cleaned Data**:  
+   - The final datasets were written to `spawning_traits.csv` and `spawning_phenology.csv` for further analyses.  
+
+##### Processed Data Structure  
+
+###### Spawning Traits (`spawning_traits.csv`)  
+
+| Field            | Description                                          |
+|-----------------|------------------------------------------------------|
+| species_id      | Unique species identifier                           |
+| temp_low        | Minimum temperature (°C) at which spawning occurs   |
+| temp_high       | Maximum temperature (°C) at which spawning occurs   |
+| fecundity_min   | Minimum estimated fecundity                         |
+| fecundity_max   | Maximum estimated fecundity                         |
+| spawning_cycles | Number of spawning events per year                  |
+| coastal         | Presence in coastal spawning habitats (binary)      |
+| lacustrine      | Presence in lake spawning habitats (binary)         |
+| riverine        | Presence in river spawning habitats (binary)        |
+| estuarine       | Presence in estuarine spawning habitats (binary)    |
+| fb_table        | FishBase source table indicator                     |
+
+###### Spawning Phenology (`spawning_phenology.csv`)  
+
+| Field      | Description                                              |
+|-----------|----------------------------------------------------------|
+| species_id| Unique species identifier                               |
+| country   | Country where spawning presence was observed            |
+| longitude | Longitude of the observation site                       |
+| latitude  | Latitude of the observation site                        |
+| jan-dec   | Monthly indicators of spawning presence (1 = present, 0 = absent) |
+| fb_table  | FishBase source table indicator                         |
+
+
+#### Species (`species`)  
+
+##### Explanation of Data Content  
+
+The **Species Table** in FishBase [reference](https://www.fishbase.se/manual/fishbasethe_species_table.htm) provides fundamental taxonomic and biological information for fish species.
+
+- **Taxonomic Information**:  
+  - **Scientific Name (`scientific`)**: The genus and species combination used for taxonomic classification.  
+  - **Preferred Image (`pic_preferred_name`)**: The filename of the representative species image.  
+
+- **Habitat and Distribution**:  
+  - **Freshwater (`fresh`)**, **Brackish (`brack`)**, **Saltwater (`saltwater`)**: Binary indicators (`1` = present, `0` = absent) representing habitat preferences.  
+  - **Pelagic or Demersal (`demers_pelag`)**: Classification indicating if the species is bottom-dwelling (demersal) or lives in the water column (pelagic).  
+  - **Air Breathing (`air_breathing`)**: Indicates if the species is capable of air breathing.  
+  - **Anadromy and Catadromy (`ana_cat`)**: Classifies migratory species that move between freshwater and marine environments.  
+
+- **Life History Traits**:  
+  - **Longevity in the Wild (`longevity_wild`)**: Maximum recorded lifespan (years).  
+  - **Maximum Length (`length`)**: Maximum total length (cm) recorded for the species.  
+  - **Common Length (`common_length`)**: The most frequently observed length (cm) for the species.  
+  - **Maximum Weight (`weight`)**: Maximum recorded weight (grams) for the species.  
+
+- **Economic Importance**:  
+  - **Importance (`importance`)**: Classifies species as **commercial, minor commercial, subsistence, or game fish**.  
+  - **Game Fish (`game_fish`)**: Binary indicator (`1` = game fish, `0` = not targeted for sport fishing).  
+
+##### Processing  
+
+The `species.csv` file was generated using the following processing steps:  
+
+1. **Selection of Relevant Fields**:  
+   - Retained taxonomic, habitat, and biological attributes essential for ecological and fisheries research.  
+
+2. **Data Transformation**:  
+   - Standardized categorical variables (`body_shape_i`, `demers_pelag`, `ana_cat`, `importance`) for consistency.  
+   - Converted **missing values (`NA`)** to `0` for binary habitat fields (`fresh`, `brack`, `saltwater`).  
+
+3. **Filtering & Summarization**:  
+   - Removed species lacking taxonomic or ecological data to maintain dataset integrity.  
+   - Mapped species to FishBase images where available.  
+
+4. **Exporting Cleaned Data**:  
+   - The final dataset was written to `species.csv` for further analyses.  
+
+##### Processed Data Structure  
+
+| Field                | Description                                      |
+|----------------------|--------------------------------------------------|
+| species_id          | Unique species identifier                       |
+| scientific          | Genus and species combination                   |
+| pic_preferred_name  | Filename of the representative species image    |
+| body_shape_i        | Body shape classification (e.g., fusiform)      |
+| fresh              | Presence in freshwater habitats (binary)        |
+| brack              | Presence in brackish water habitats (binary)    |
+| saltwater          | Presence in saltwater habitats (binary)         |
+| demers_pelag       | Classification as demersal or pelagic           |
+| air_breathing      | Indicator of air-breathing ability (binary)     |
+| ana_cat            | Migration category (e.g., anadromous, catadromous) |
+| longevity_wild     | Maximum recorded lifespan (years)               |
+| length             | Maximum recorded length (cm)                    |
+| common_length      | Most frequently observed length (cm)            |
+| weight             | Maximum recorded weight (grams)                 |
+| importance         | Economic importance (e.g., commercial, game fish) |
+| game_fish         | Indicator of game fish status (binary)           |
+| fb_table           | FishBase source table indicator                  |
+
+
+#### Swimming (`swimming`)  
+
+##### Explanation of Data Content  
+
+The **Swimming Table** in FishBase [reference](https://www.fishbase.se/manual/fishbasethe_swimming_and_speed_tables.htm) provides information on the swimming strategies of fish species. 
+
+- **Swimming Type (`adult_type`)**:  
+  - Describes the primary movement mechanism used by adult fish.  
+  - Common values include:  
+    - **Movements of body and/or caudal fin** (e.g., undulatory propulsion).  
+    - **Movements of median and/or paired fins** (e.g., fin propulsion without significant body movement).  
+
+- **Swimming Mode (`adult_mode`)**:  
+  - Classifies species based on their swimming kinematics.  
+  - Common categories:  
+    - **Anguilliform** (e.g., eels—body waves propagate the entire length).  
+    - **Carangiform** (e.g., jacks—flexion in the posterior half of the body).  
+    - **Subcarangiform** (e.g., salmon—less body flexion than carangiform).  
+    - **Thunniform** (e.g., tuna—efficient, high-speed swimming with minimal body movement).  
+    - **Labriform** (e.g., wrasses—use of pectoral fins for propulsion).  
+
+##### Processing  
+
+The `swimming.csv` file was generated using the following processing steps:  
+
+1. **Selection of Relevant Fields**:  
+   - Extracted adult swimming type and mode to retain core locomotive attributes.  
+
+2. **Data Transformation**:  
+   - Standardized categorical variables (`adult_type`, `adult_mode`) for consistency.  
+   - Ensured missing values (`NA`) remained where data was unreported.  
+
+3. **Filtering & Summarization**:  
+   - Removed species without recorded swimming data.  
+
+4. **Exporting Cleaned Data**:  
+   - The final dataset was written to `swimming.csv` for further analyses.  
+
+##### Processed Data Structure  
+
+| Field        | Description                                        |
+|-------------|----------------------------------------------------|
+| species_id  | Unique species identifier                         |
+| adult_type  | Primary movement mechanism                        |
+| adult_mode  | Swimming kinematics classification                |
+| fb_table    | FishBase source table indicator                   |
+
+
+
 ## References

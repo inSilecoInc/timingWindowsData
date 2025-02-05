@@ -188,6 +188,25 @@ list(
             input_files = list(tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_Roberge_Dataset))
         "workspace/data/harvested/roberge_2002-1.0.0/processed/roberge.csv"
     }, format = "file")),
+    list(tar_target(tg_bf63ff45_6283_4bdc_b360_746549ee32ed_download_fishbase, 
+    {
+        download_fishbase(output_path = "workspace/data/analyzed/fishbase-1.0.0", 
+            input_files = list(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_freshwater_fish_species_canada))
+        c("workspace/data/analyzed/fishbase-1.0.0/ecology.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/eggdev.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/fecundity.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/fooditems.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/larvae_phenology.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/larvae_traits.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/larvaepresence_phenology.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/larvdyn.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/reproduc.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/spawning_phenology.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/spawning_traits.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/species.csv", 
+        "workspace/data/analyzed/fishbase-1.0.0/swimming.csv"
+        )
+    }, format = "file")),
     list(tar_target(tg_47a31643_e5a1_4126_9070_909f742c85cd_national_timing_windows_database, 
     {
         int_national_timing_windows_dataset(output_path = "workspace/data/analyzed/national_timing_windows_dataset-1.0.0", 

@@ -1,0 +1,84 @@
+pipeline:
+  id: bf63ff45-6283-4bdc-b360-746549ee32ed
+  name: fishbase
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-02-04 14:06:30
+  last_modified: 2025-02-04 14:06:30
+  description: |
+    This pipeline retrieves species-related data from FishBase using the `rfishbase` R package. 
+    The dataset includes taxonomic, ecological, and biological attributes for fish species, 
+    supporting various ecological and conservation research applications.
+
+  # Metadata section providing details about the data being harvested
+  metadata:
+    source_name: "FishBase API via rfishbase"
+    data_type: "API Queries"
+    file_size: "Unknown"
+    license: "FishBase Terms of Use"
+    last_updated: "2024-01-01"
+    geographic_coverage:
+      region: "Global"
+    temporal_coverage:
+      start_date: "2024-01-01"
+    variables:
+      - species
+      - taxonomy
+      - habitat
+      - growth
+      - diet
+      - reproduction
+      - distribution
+    data_quality:
+      - "Data retrieved from the official FishBase API via rfishbase."
+
+  # Bibliographic Information
+  bibliography:
+    - "@Article{boettiger2012,
+        title = {rfishbase: exploring, manipulating and visualizing {FishBase} data from R},
+        author = {Carl Boettiger and Duncan {Temple Lang} and Peter Wainwright},
+        month = {nov},
+        year = {2012},
+        publisher = {Wiley-Blackwell},
+        journal = {Journal of Fish Biology},
+        url = {https://doi.org/10.1111/j.1095-8649.2012.03464.x}
+      }"
+    - "@Misc{froese2024,
+        title = {FishBase},
+        author = {Froese, R. and Pauly, D. (Editors)},
+        year = {2024},
+        publisher = {FishBase - World Wide Web electronic publication},
+        url = {https://www.fishbase.org},
+        note = {(10/2024)}
+      }"
+
+  analysis:
+    sources:
+    - name: download fishbase
+      description: Fetch and process data from the kernal, based on project species list
+      script: download_fishbase
+      input_files:
+      - id: e36167b9-1aa9-499b-a242-e9e85b7479cb
+        name: freshwater fish species canada
+      output_files:  
+      - ecology.csv
+      - eggdev.csv
+      - fecundity.csv
+      - fooditems.csv
+      - larvae_phenology.csv
+      - larvae_traits.csv
+      - larvaepresence_phenology.csv
+      - larvdyn.csv
+      - reproduc.csv
+      - spawning_phenology.csv
+      - spawning_traits.csv
+      - species.csv
+      - swimming.csv
+
+
+
+  # Output section: final output of the processed data
+  output:
+    output_dir: "workspace/data/harvested/fishbase/"
+    log_dir: "workspace/logs/fishbase/"
+    archive_raw: true
