@@ -219,6 +219,35 @@ list(
         "workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg"
         )
     }, format = "file")),
+    list(tar_target(tg_e53aa36a_6191_497b_ad1b_4e55159d0774_integrate_species_traits, 
+    {
+        ana_species_traits(output_path = "workspace/data/analyzed/species_traits-1.0.0", 
+            input_files = list(tg_e36167b9_1aa9_499b_a242_e9e85b7479cb_freshwater_fish_species_canada, 
+                tg_c54f4d0a_9b58_444d_9afe_90ea795cb212_dahlke_processed, 
+                tg_bf63ff45_6283_4bdc_b360_746549ee32ed_download_fishbase, 
+                tg_44238b88_cc41_4468_b1fc_7b770c4a4be4_FishPass_processed, 
+                tg_0fedf29b_2fe3_49cc_b2b5_d1ebd3b8af2b_NAFMFD_processed, 
+                tg_1a084fb5_2dbd_4df9_9543_e020ec0ee77a_Ontario_Freshwater_Fishes_Life_History_Database, 
+                tg_d56fc2b3_318b_489a_8000_54501f7ae5e7_roberge_processed))
+        c("workspace/data/analyzed/species_traits-1.0.0/habitat_adult.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/habitat_juvenile.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/habitat_spawning.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/habitat_yoy.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/food_items.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/spawning.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/eggs.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/larvae.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/migration.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/morphology.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/tolerance_adult.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/tolerance_embryo.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/tolerance_larvae.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/tolerance_spawner.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/taxonomy.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/picture.csv", 
+        "workspace/data/analyzed/species_traits-1.0.0/swimming.csv"
+        )
+    }, format = "file")),
     list(tar_target(tg_4e7387b0_19f5_4951_8dac_6215e3224144_waterbodies_and_species_intersect, 
     {
         ana_waterbodies_species(output_path = "workspace/data/analyzed/waterbodies_species-1.0.0", 

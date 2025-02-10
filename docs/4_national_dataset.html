@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>National Timing Windows Dataset - 2&nbsp; Research compendium</title>
+<title>National Timing Windows Dataset - 5&nbsp; National Timing Windows Dataset</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2_data.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./3_integration.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1_research_compendium.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research compendium</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4_national_dataset.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">National Timing Windows Dataset</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -114,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_research_compendium.html" class="sidebar-item-text sidebar-link active">
+  <a href="./1_research_compendium.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research compendium</span></span></a>
   </div>
 </li>
@@ -132,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_national_dataset.html" class="sidebar-item-text sidebar-link">
+  <a href="./4_national_dataset.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">National Timing Windows Dataset</span></span></a>
   </div>
 </li>
@@ -146,8 +145,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#structure-and-content" id="toc-structure-and-content" class="nav-link active" data-scroll-target="#structure-and-content"><span class="header-section-number">2.1</span> Structure and Content</a></li>
-  <li><a href="#navigating-and-using-the-compendium" id="toc-navigating-and-using-the-compendium" class="nav-link" data-scroll-target="#navigating-and-using-the-compendium"><span class="header-section-number">2.2</span> Navigating and Using the Compendium</a></li>
+  <li><a href="#initial-data-preparation" id="toc-initial-data-preparation" class="nav-link active" data-scroll-target="#initial-data-preparation"><span class="header-section-number">5.1</span> Initial Data Preparation</a></li>
+  <li><a href="#integration-workflow" id="toc-integration-workflow" class="nav-link" data-scroll-target="#integration-workflow"><span class="header-section-number">5.2</span> Integration Workflow</a></li>
+  <li><a href="#database-structure-and-schema" id="toc-database-structure-and-schema" class="nav-link" data-scroll-target="#database-structure-and-schema"><span class="header-section-number">5.3</span> Database Structure and Schema</a></li>
+  <li><a href="#processed-data-overview" id="toc-processed-data-overview" class="nav-link" data-scroll-target="#processed-data-overview"><span class="header-section-number">5.4</span> Processed Data Overview</a></li>
   </ul>
 </nav>
     </div>
@@ -156,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research compendium</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">National Timing Windows Dataset</span></h1>
 </div>
 
 
@@ -173,146 +174,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We created a publicly available <em>research compendium</em> called <a href="https://github.com/inSilecoInc/timingWindowsData"><code>twdata</code></a>. This research compendium is designed to facilitate reproducible research by organizing data, scripts, and outputs within a structured framework. By emulating the structure of an R package, the compendium combines the rigour of package development with the flexibility required for complex analytical workflows. This structure ensures transparency, reproducibility, and ease of navigation for researchers and collaborators. The compendium not only supports the organization and documentation of workflows but also allows the seamless integration of R tools and functions. Adopting an R package-like structure provides several advantages:</p>
+<p>The <strong>National Timing Windows Database</strong> serves as a comprehensive repository for managing and analyzing ecological data related to the assessment of optimal timing windows for human interventions in Canadian waterbodies. This chapter details the step-by-step methodology for integrating diverse datasets into the relational database. The process ensures the data is harmonized, relationships are preserved, and schema integrity is maintained.</p>
+<p>The integration relies on datasets from the following sources:</p>
 <ul>
-<li><strong>Reproducibility</strong>: The standardized structure ensures that all components (data, code, outputs) are easily accessible and linked, reducing the likelihood of errors in replication.</li>
-<li><strong>Portability</strong>: The compendium can be shared and installed like an R package, enabling collaborators to reproduce the work on their systems.</li>
-<li><strong>Documentation</strong>: Built-in support for documentation (e.g., <code>man/</code>, <code>README.md</code>) enhances understanding and usability for current and future users.</li>
+<li><strong>FishBase Freshwater Species Checklist</strong>: Provides information on species distribution and ecological traits for freshwater fish across Canada.</li>
+<li><strong>Atlas of Canada Hydrology</strong>: Offers geospatial data on lakes, rivers, and watersheds.</li>
+<li><strong>National Hydro Network (NHN)</strong>: Supplies detailed geospatial data on watersheds.</li>
+<li><strong>GBIF Species Occurrences</strong>: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.</li>
 </ul>
-<p>While not including the data directly, the <em>research compendium</em> contains all the resources making it possible to access and transform the raw data and prepare the threat layers for this project. It also contains the code creating figures, tables and this report. Only sensitive data for which confidentiality agreements have been signed remain inaccessible; still, these are stored on Google Cloud Storage in a secure bucket that can be accessed programmatically with an access key. This ensures that the whole project remains fully reproducible even if access to some data is limited.</p>
-<section id="structure-and-content" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="structure-and-content"><span class="header-section-number">2.1</span> Structure and Content</h2>
-<p>The research compendium is organized into the following components:</p>
-<pre><code>myResearchCompendium/
-│
-├── _targets/
-│
-├── data/
-│
-├── docs/
-│
-├── figures/
-│
-├── man/
-│
-├── pubs/
-│
-├── R/
-│
-├── workspace/
-│   ├── bibliographies/
-│   ├── config/
-│   ├── credentials/
-│   ├── data/
-│   │   ├── harvested/
-│   │   └── analyzed/
-│   ├── pipelines/
-│   │   ├── harvesting/
-│   │   └── analytical/
-│   └── script/
-│
-├── _targets.R
-├── DESCRIPTION
-├── LICENSE.md
-├── NAMESPACE
-├── README.md
-└── README.Rmd</code></pre>
-<p>Below is a description of each component of the research compendium.</p>
-<section id="root-level-files" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="root-level-files"><span class="header-section-number">2.1.1</span> Root-Level Files</h3>
-<ul>
-<li><strong><code>_targets.R</code></strong>: The central configuration file for the <a href="https://CRAN.R-project.org/package=targets"><code>targets</code></a> R package, which manages and tracks the execution of analytical workflows. This file defines the targets (steps) in the analysis and their dependencies.</li>
-<li><strong><code>DESCRIPTION</code></strong>: Provides metadata about the compendium, including its title, version, author information, and dependencies. This file mirrors the <code>DESCRIPTION</code> file in R packages, enabling compatibility with R’s package ecosystem.</li>
-<li><strong><code>LICENSE.md</code></strong>: Contains the licensing terms under which the compendium is distributed, ensuring clarity regarding usage and redistribution rights.</li>
-<li><strong><code>NAMESPACE</code></strong>: Specifies the exported functions and imports from other packages, similar to an R package, to manage the scope and dependencies of functions within the compendium.</li>
-<li><strong><code>README.md</code></strong> and <strong><code>README.Rmd</code></strong>: Provide an overview of the project, its goals, and instructions for setup and use. The R Markdown file (<code>README.Rmd</code>) can be rendered to create the Markdown file (<code>README.md</code>).</li>
-</ul>
+<section id="initial-data-preparation" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="initial-data-preparation"><span class="header-section-number">5.1</span> Initial Data Preparation</h2>
+<p>The integration process begins with the preparation of core datasets: 1. <strong>Watersheds</strong>: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers. 2. <strong>Waterbodies</strong>: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies. 3. <strong>Species Data</strong>: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species. 4. <strong>Spatial Intersections</strong>: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.</p>
 </section>
-<section id="directories" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="directories"><span class="header-section-number">2.1.2</span> Directories</h3>
-<section id="targets" class="level4" data-number="2.1.2.1">
-<h4 data-number="2.1.2.1" class="anchored" data-anchor-id="targets"><span class="header-section-number">2.1.2.1</span> <strong><code>_targets/</code></strong></h4>
-<p>This directory contains internal files used by the <code>targets</code> package to manage workflow execution. It tracks dependencies, outputs, and progress, ensuring reproducibility and enabling efficient re-execution of only the steps affected by changes. This folder is present once the <code>_targets.R</code> file has been run once.</p>
-</section>
-<section id="data" class="level4" data-number="2.1.2.2">
-<h4 data-number="2.1.2.2" class="anchored" data-anchor-id="data"><span class="header-section-number">2.1.2.2</span> <strong><code>data/</code></strong></h4>
-<p>This directory stores raw and cleaned data files that are essential to the analyses but not directly produced by the workflows. This allows the compendium to maintain a clear separation between input data and processed outputs.</p>
-</section>
-<section id="docs" class="level4" data-number="2.1.2.3">
-<h4 data-number="2.1.2.3" class="anchored" data-anchor-id="docs"><span class="header-section-number">2.1.2.3</span> <strong><code>docs/</code></strong></h4>
-<p>Documentation files for the project, such as user guides, vignettes, and any additional explanatory materials that provide context for the workflows and outputs.</p>
-</section>
-<section id="figures" class="level4" data-number="2.1.2.4">
-<h4 data-number="2.1.2.4" class="anchored" data-anchor-id="figures"><span class="header-section-number">2.1.2.4</span> <strong><code>figures/</code></strong></h4>
-<p>A repository for plots, charts, and visualizations generated by the analytical workflows. This directory helps centralize all visual outputs for reporting and publication.</p>
-</section>
-<section id="man" class="level4" data-number="2.1.2.5">
-<h4 data-number="2.1.2.5" class="anchored" data-anchor-id="man"><span class="header-section-number">2.1.2.5</span> <strong><code>man/</code></strong></h4>
-<p>Documentation for functions included in the compendium. This directory mirrors the <code>man/</code> folder in R packages and contains <code>.Rd</code> files that describe each function’s purpose, usage, and arguments.</p>
-</section>
-<section id="pubs" class="level4" data-number="2.1.2.6">
-<h4 data-number="2.1.2.6" class="anchored" data-anchor-id="pubs"><span class="header-section-number">2.1.2.6</span> <strong><code>pubs/</code></strong></h4>
-<p>A location for storing draft manuscripts, reports, and other publications derived from the project. This ensures that research outputs are connected to their analytical source.</p>
-</section>
-<section id="r" class="level4" data-number="2.1.2.7">
-<h4 data-number="2.1.2.7" class="anchored" data-anchor-id="r"><span class="header-section-number">2.1.2.7</span> <strong><code>R/</code></strong></h4>
-<p>Contains R scripts defining functions and utilities used across the workflows. This is the primary location for reusable, well-documented R functions that are central to the analyses.</p>
-</section>
-<section id="workspace" class="level4" data-number="2.1.2.8">
-<h4 data-number="2.1.2.8" class="anchored" data-anchor-id="workspace"><span class="header-section-number">2.1.2.8</span> <strong><code>workspace/</code></strong></h4>
-<p>A comprehensive directory for project-specific resources and configurations. It is further divided into:</p>
-<ul>
-<li><strong><code>bibliographies/</code></strong>: Bibliographic files, such as <code>.bib</code> files, used for citations in reports and publications.</li>
-<li><strong><code>config/</code></strong>: Configuration files (e.g., YAML or JSON) that specify pipeline parameters and global settings for the analyses.</li>
-<li><strong><code>credentials/</code></strong>: Secure storage for authentication keys and other sensitive information required for accessing data sources.</li>
-<li><strong><code>data/</code></strong>: Organized into two subdirectories:
-<ul>
-<li><strong><code>harvested/</code></strong>: Raw data files downloaded or collected through the harvesting pipelines.</li>
-<li><strong><code>analyzed/</code></strong>: Processed data files generated by the analytical pipelines.</li>
-</ul></li>
-<li><strong><code>pipelines/</code></strong>: Divided into:
-<ul>
-<li><strong><code>harvesting/</code></strong>: YAML configurations and scripts for harvesting data from external sources.</li>
-<li><strong><code>analytical/</code></strong>: YAML configurations and scripts for performing analyses on harvested data.</li>
-</ul></li>
-<li><strong><code>script/</code></strong>: Scripts and functions used by the targets master workflow.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="navigating-and-using-the-compendium" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="navigating-and-using-the-compendium"><span class="header-section-number">2.2</span> Navigating and Using the Compendium</h2>
+<section id="integration-workflow" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="integration-workflow"><span class="header-section-number">5.2</span> Integration Workflow</h2>
+<p>The integration is performed using the script <code>int_national_timing_windows_dataset</code>, which processes datasets and populates the SQLite relational database:</p>
 <ol type="1">
-<li><strong>Setting Up the Workspace</strong>:
+<li><strong>Database Initialization</strong>:
 <ul>
-<li>The <code>README.md</code> provides instructions for setting up the compendium, including installing dependencies, configuring paths, and loading required libraries.</li>
+<li>A SQLite database is created with an initial schema for tables such as <code>watersheds</code>, <code>waterbodies</code>, <code>species</code>, <code>waterbodies_species</code>, and <code>watersheds_species</code>.</li>
 </ul></li>
-<li><strong>Credentials</strong>:
+<li><strong>Watershed Data</strong>:
 <ul>
-<li>This project requires credentials to access data from two different sources:
-<ul>
-<li>Secure google cloud storage managed by inSileco (<code>pof-stac-insileco.json</code>)</li>
-<li>Credentials to access data from the <a href="https://eogdata.mines.edu/products/register/">earth observation group</a> (<code>earth_observation_group.json</code>). The structure of the <code>.json</code> file should be:</li>
-</ul>
-<pre><code>{
-  "client_id": "eogdata_oidc",
-  "client_secret": "unique_id",
-  "username": "username",
-  "password": "password",
-  "grant_type": "password"
-}</code></pre></li>
-<li>These credentials have to be stored in <code>workspace/credentials/</code></li>
+<li>Watershed geometries are read from GeoPackage files and stripped of geometry for relational storage.</li>
+<li>The <code>watersheds</code> table is populated with watershed attributes such as <code>watershed_id</code>.</li>
 </ul></li>
-<li><strong>Running the Pipelines</strong>:
+<li><strong>Waterbody Data</strong>:
 <ul>
-<li>Running the master pipeline contained in <code>_targets.R</code> is achieved by executing the <code>targets::tar_make()</code> command in <code>R</code> from the root of the research compendium. Depending on your computer and internet connection, the first run will likely take a full day to complete.</li>
+<li>Lakes and rivers are processed into separate datasets and concatenated into a single <code>waterbodies</code> table.</li>
+<li>Attributes include <code>waterbody_id</code> and other relevant identifiers.</li>
 </ul></li>
-<li><strong>Exploring Outputs</strong>:
+<li><strong>Species Data</strong>:
 <ul>
-<li>Processed data is stored in <code>workspace/data/analyzed/</code>.</li>
-<li>Visualizations and figures are available in <code>figures/</code>, while reports and publications can be found in <code>pubs/</code>.</li>
+<li>Fish species data is enriched with status and trait information.</li>
+<li>The <code>species</code> table is populated with <code>species_id</code>, <code>species</code>, and additional attributes such as threat categories.</li>
+</ul></li>
+<li><strong>Spatial Intersections</strong>:
+<ul>
+<li>Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in <code>ana_waterbodies_species</code>.</li>
+<li>Similarly, relationships between species and watersheds are identified using the script <code>ana_watersheds_species</code>.</li>
+<li>Results are stored in <code>waterbodies_species</code> and <code>watersheds_species</code> tables.</li>
 </ul></li>
 </ol>
+</section>
+<section id="database-structure-and-schema" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="database-structure-and-schema"><span class="header-section-number">5.3</span> Database Structure and Schema</h2>
+<p>The resulting relational database schema is visualized as part of the integration process. Using the <code>dm</code> package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include: - <code>watersheds_species</code>: Links species to watersheds through <code>watershed_id</code> and <code>species_id</code>. - <code>waterbodies_species</code>: Links species to waterbodies (lakes or rivers) through <code>waterbody_id</code> and <code>species_id</code>. - <code>species</code>: Serves as the central table connecting species to waterbodies, watersheds, and traits.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-data-schema" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Relational schema of the National Timing Windows Database.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="processed-data-overview" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="processed-data-overview"><span class="header-section-number">5.4</span> Processed Data Overview</h2>
+<p>Key tables in the relational database:</p>
+<ul>
+<li><strong>Watersheds</strong>: Contains metadata on watersheds across Canada, such as <code>watershed_id</code>.</li>
+<li><strong>Waterbodies</strong>: Includes lakes and rivers with attributes such as <code>waterbody_id</code>.</li>
+<li><strong>Species</strong>: Comprehensive list of fish species with ecological attributes and status.</li>
+<li><strong>Waterbodies-Species Relationship</strong>: Spatial relationships between species and waterbodies.</li>
+<li><strong>Watersheds-Species Relationship</strong>: Spatial relationships between species and watersheds.</li>
+</ul>
 
 
 </section>
@@ -729,14 +661,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="./3_integration.html" class="pagination-link" aria-label="Data integration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data integration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2_data.html" class="pagination-link" aria-label="Data Sources Overview">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Sources Overview</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1,0 +1,124 @@
+---
+title: "Data integration"
+---
+
+## Species characteristics
+
+To develop a comprehensive national timing windows dataset, we integrate multiple datasets covering various aspects of fish traits and phenology. This integration ensures that life history characteristics, ecological interactions, and temporal patterns relevant to timing windows assessments are well-represented. By harmonizing data across sources, we establish a structured foundation for evaluating the seasonal and ecological constraints of freshwater fish in Canada.
+
+### Data Sources
+
+The datasets used in this integration provide a diverse range of attributes, from taxonomic classifications to physiological tolerances and habitat preferences. Below is an overview of the key data sources:
+
+| **Dataset**                                                | **Description**                                                                                                                            | **Reference**                                    |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| Ontario Freshwater Fishes Life History Database            | Covers 161 species in Ontario, including 43 life history traits such as habitat, spawning season, thermal regime, fecundity, and lifespan. | [Ontario Freshwater Fishes](#sec-ontario_fishes) |
+| FishPass Database                                          | Focuses on biological attributes influencing fish passage, including morphology, physiology, phenology, and behavior for 220 species.      | [FishPass](#sec-fishpass)                        |
+| North American Freshwater Migratory Fish Database (NAFMFD) | Provides migration data for 1,241 species, detailing migratory behaviors across North America.                                             | [NAFMFD](#sec-nafmfd)                            |
+| Roberge et al. (2002)                                      | Documents stream habitat requirements for 86 fish species across different life stages in British Columbia and Yukon.                      | [Roberge et al. (2002)](#sec-roberge)            |
+| Dahlke et al. (2020)                                       | Compiles experimental and imputed thermal tolerance data, thermal safety margins, and responsiveness for multiple species and life stages. | [Dahlke et al. (2020)](#sec-dahlke)              |
+| FishBase                                                   | Global database providing extensive taxonomic, ecological, and biological data, including growth, diet, reproduction, and distribution.    | [FishBase](#sec-fishbase)                        |
+
+
+## Fish Traits Integration
+
+### Rationale
+
+Understanding fish traits is fundamental for evaluating species-specific responses to environmental changes, including their vulnerability to anthropogenic stressors and climate variability. By structuring data into thematic tables, we facilitate the identification of key ecological attributes that influence timing windows. These traits encompass habitat preferences, reproductive strategies, morphological adaptations, and physiological tolerances, among others. The integration of these datasets into a national framework ensures consistency and accessibility for environmental assessments and conservation planning.
+
+### Thematic Trait Tables
+
+The following tables outline the thematic structuring of fish traits, incorporating data from multiple sources:
+
+
+| **Category**              | **Table Name**        | **Output File**             | **Source(s)**                                                 |
+|---------------------------|----------------------|-----------------------------|-------------------------------------------------------------|
+| Habitat (Adult)           | habitat_adult        | `habitat_adult.csv`         | FishBase, FishPass, Ontario Freshwater Fishes, Roberge (2002) |
+| Habitat (Juvenile)        | habitat_juvenile     | `habitat_juvenile.csv`      | FishBase, FishPass, Ontario Freshwater Fishes, Roberge (2002) |
+| Habitat (Spawning)        | habitat_spawning     | `habitat_spawning.csv`      | FishBase, FishPass, Ontario Freshwater Fishes, Roberge (2002) |
+| Habitat (YOY)             | habitat_yoy          | `habitat_yoy.csv`           | FishBase, FishPass, Ontario Freshwater Fishes, Roberge (2002) |
+| Food Items                | food_items           | `food_items.csv`            | FishBase                                                      |
+| Spawning                  | spawning             | `spawning.csv`              | FishBase, FishPass, Ontario Freshwater Fishes                 |
+| Eggs                      | eggs                 | `eggs.csv`                  | FishBase                                                      |
+| Larvae                    | larvae               | `larvae.csv`                | FishBase                                                      |
+| Migration                 | migration            | `migration.csv`             | FishBase, FishPass, NAFMFD                                    |
+| Morphology                | morphology           | `morphology.csv`            | FishPass, FishBase, Ontario Freshwater Fishes                 |
+| Tolerance (Adult)         | tolerance_adult      | `tolerance_adult.csv`       | Dahlke (2020)                                                 |
+| Tolerance (Embryo)        | tolerance_embryo     | `tolerance_embryo.csv`      | Dahlke (2020)                                                 |
+| Tolerance (Larvae)        | tolerance_larvae     | `tolerance_larvae.csv`      | Dahlke (2020)                                                 |
+| Tolerance (Spawner)       | tolerance_spawner    | `tolerance_spawner.csv`     | Dahlke (2020)                                                 |
+| Taxonomy                  | taxonomy             | `taxonomy.csv`              | FishBase                                                      |
+| Picture                   | picture              | `picture.csv`               | FishBase                                                      |
+| Swimming Behavior         | swimming             | `swimming.csv`              | FishBase                                                      |
+
+
+
+### Data Processing and Standardization**
+
+Once loaded, the data undergoes multiple transformations to harmonize species identifiers, format variables consistently, and extract relevant information for each category.
+
+#### **a. Species Identification**
+Some datasets lack a `species_id` field. These are standardized by:
+- Extracting species names and joining with a reference list of species (`spList`).
+- Ensuring consistent taxonomic names across sources.
+
+#### **b. Data Extraction and Formatting**
+- **Habitat**:
+  - Extracted from multiple sources (`FishBase`, `FishPass`, `Roberge`, and `Ontario Freshwater Fishes`).
+  - Life-stage-specific habitat information is categorized (`adult`, `juvenile`, `spawning`, `YOY`).
+
+- **Food Items**:
+  - Taken from `FishBase` and standardized.
+
+- **Spawning**:
+  - Data on fecundity, spawning cycles, and seasonal cues are extracted and formatted.
+  - Spawning months are converted into binary monthly indicators.
+
+- **Eggs & Larvae**:
+  - Egg development parameters (`FishBase`) are directly used.
+  - Larval duration and environmental requirements are processed from `FishBase`.
+
+- **Migration**:
+  - Different migration types (`anadromous`, `potamodromous`, `diadromous`) are extracted from `FishBase`, `FishPass`, and `NAFMFD`.
+
+- **Morphology**:
+  - Merged from `FishBase`, `FishPass`, and `Ontario Freshwater Fishes`.
+  - Body shape, length, and physiological characteristics are included.
+
+- **Tolerance**:
+  - Data from `Dahlke (2020)` is split by life stage (`adult`, `embryo`, `larvae`, `spawner`).
+
+- **Taxonomy**:
+  - Extracted from `Freshwater Fish Canada` dataset and separated into genus, species, family, and order.
+
+- **Pictures**:
+  - Image URLs are retrieved from `FishBase`.
+
+- **Swimming Behavior**:
+  - Extracted from `FishBase` to categorize locomotion patterns.
+
+
+
+
+
+
+## Fish Phenology Integration
+
+### Rationale
+
+Phenology, or the timing of biological events, is a critical factor in determining species-specific timing windows for migration, spawning, and early life stages. By integrating data from multiple sources, we systematically capture the seasonal variations in key life processes. This allows for the identification of **species-specific windows** when fish are most vulnerable to environmental stressors or anthropogenic impacts.
+
+### Thematic Phenology Tables
+
+The following tables capture species phenology, incorporating data from multiple sources:
+
+| **Category**         | **Table Name**        | **Temporal Dimension** | **Source(s)** |
+|---------------------|---------------------|----------------------|--------------|
+| **Migration**     | `migration_timing`  | Seasonal movement periods (e.g., spring vs. fall migration) | FishBase, FishPass, NAFMFD, Roberge (2002) |
+| **Spawning**      | `spawning_timing`   | Monthly spawning presence, peak spawning months | FishBase, FishPass, Ontario Freshwater Fishes, Roberge (2002) |
+| **Egg**           | `egg_timing`        | Egg incubation period, seasonality | FishBase |
+| **Larvae**        | `larvae_timing`     | Seasonal larval presence (e.g., observed monthly presence) | FishBase, Roberge (2002) |
+| **New → Thermal Phenology** | `thermal_timing`  | Temperature cues for migration/spawning | Dahlke et al. (2020) |
+
+These tables provide a structured approach to analyzing seasonal life cycle events and their ecological implications for freshwater fish in Canada.
+

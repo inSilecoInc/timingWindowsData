@@ -327,7 +327,7 @@ download_fishbase <- function(input_files, output_path) {
             rfishbase::fb_tbl("countref")[, c("C_Code", "PAESE", "CenterLat", "CenterLong")],
             by = c("c_code" = "C_Code")
           ) |>
-          dplyr::relocate(species_id, country = PAESE, longitude = CenterLat, latitude = CenterLong) |>
+          dplyr::relocate(species_id, country = PAESE, longitude = CenterLong, latitude = CenterLat) |>
           dplyr::select(-c_code)
       } else {
         x
