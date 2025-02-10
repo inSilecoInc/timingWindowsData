@@ -446,15 +446,27 @@ ana_species_traits <- function(input_files, output_path) {
       dplyr::select(-fb_table) |>
       dplyr::mutate(
         batch_spawner = abs(batch_spawner),
-        dplyr::across(dplyr::everything(), as.character)
+        rep_guild1 = tolower(rep_guild1),
+        rep_guild2 = tolower(rep_guild2),
+        rep_guild2 = stringr::str_replace_all(
+          rep_guild2,
+          "open water/substratum egg scatterers",
+          "open substratum spawners"
+        ),
+        rep_guild2 = stringr::str_replace_all(rep_guild2, " ", "_")
       ) |>
+      dplyr::mutate(value = 1) |>
+      tidyr::pivot_wider(names_from = rep_guild1, values_from = value, values_fill = list(value = 0)) |>
+      dplyr::select(-`NA`) |>
+      dplyr::mutate(value = 1) |>
+      tidyr::pivot_wider(names_from = rep_guild2, values_from = value, values_fill = list(value = 0)) |>
+      dplyr::select(-`NA`) |>
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
       tidyr::pivot_longer(cols = -c("species_id"), names_to = "spawning", values_to = "value") |>
+      dplyr::filter(value > 0) |>
       na.omit(),
     dat$fishbase$spawning_traits |>
-      dplyr::select(
-        species_id, fecundity_min, fecundity_max, spawning_cycles,
-        coastal, lacustrine, riverine, estuarine
-      ) |>
+      dplyr::select(species_id, fecundity_min, fecundity_max, spawning_cycles) |>
       dplyr::mutate(
         dplyr::across(dplyr::everything(), as.character)
       ) |>
@@ -472,26 +484,32 @@ ana_species_traits <- function(input_files, output_path) {
       tidyr::pivot_longer(cols = -c("species_id"), names_to = "spawning", values_to = "value") |>
       na.omit(),
     dat$ontario_freshwater_fishes_life_history$ontario_fishes_characteristics |>
-      dplyr::select(
-        species_id, reproductive_guild, spawning_habitat_s,
-        spawning_temperature_c, fecundity
-      ) |>
-      dplyr::rename(
-        habitat = spawning_habitat_s,
-        temperature = spawning_temperature_c
-      ) |>
+      dplyr::select(species_id, reproductive_guild, spawning_temperature_c, fecundity) |>
+      dplyr::rename(temperature = spawning_temperature_c) |>
       dplyr::mutate(
         temperature = dplyr::if_else(temperature == "no data", NA, temperature),
         temperature = stringr::str_replace_all(temperature, "\\+", ""),
-        fecundity = stringr::str_replace_all(fecundity, ",", "")
+        fecundity = stringr::str_replace_all(fecundity, ",", ""),
+        reproductive_guild = tolower(reproductive_guild)
       ) |>
       split_range_column("temperature") |>
       split_range_column("fecundity") |>
+      tidyr::separate_rows(reproductive_guild, sep = ": ") |>
+      dplyr::mutate(
+        reproductive_guild = stringr::str_replace_all(reproductive_guild, " ", "_"),
+        value = 1
+      ) |>
+      tidyr::pivot_wider(names_from = reproductive_guild, values_from = value, values_fill = list(value = 0)) |>
+      dplyr::mutate(
+        dplyr::across(dplyr::everything(), as.character)
+      ) |>
       tidyr::pivot_longer(cols = -c("species_id"), names_to = "spawning", values_to = "value") |>
-      tidyr::separate_rows(value, sep = ": ") |>
       dplyr::distinct() |>
+      dplyr::filter(value > 0) |>
       na.omit()
   ) |>
+    dplyr::filter(value != "no data") |>
+    dplyr::mutate(spawning = stringr::str_replace(spawning, "nest_spawners", "nesters")) |>
     dplyr::distinct()
 
   # -------------------------------------------------------
@@ -562,7 +580,8 @@ ana_species_traits <- function(input_files, output_path) {
       na.omit() |>
       dplyr::filter(value == 1)
   ) |>
-    dplyr::distinct()
+    dplyr::distinct() |>
+    dplyr::mutate(migration = stringr::str_replace(migration, "non-migratory", "non_migratory"))
 
   # -------------------------------------------------------
   # morphology table
@@ -574,11 +593,13 @@ ana_species_traits <- function(input_files, output_path) {
         common_length_cm = common_length, maximum_weight_kg = weight
       ) |>
       dplyr::mutate(
+        maximum_weight_kg = maximum_weight_kg / 1000,
         dplyr::across(dplyr::everything(), as.character)
       ) |>
       tidyr::pivot_longer(cols = -c("species_id"), names_to = "morphology", values_to = "value") |>
       na.omit(),
     dat$fishpass$fishpass_morphology |>
+      dplyr::select(-body_shape) |>
       dplyr::mutate(
         dplyr::across(dplyr::everything(), as.character)
       ) |>
@@ -593,8 +614,9 @@ ana_species_traits <- function(input_files, output_path) {
       na.omit(),
     dat$ontario_freshwater_fishes_life_history$ontario_fishes_characteristics |>
       dplyr::select(
-        species_id, adult_length_cm, adult_weight_kg, maximum_length_cm,
-        maximum_weight_kg, record_length_cm, record_weight_kg
+        species_id, adult_length_cm, adult_weight_kg,
+        adult_maximum_length_cm = maximum_length_cm,
+        adult_maximum_weight_kg = maximum_weight_kg, record_length_cm, record_weight_kg
       ) |>
       dplyr::mutate(
         dplyr::across(dplyr::everything(), as.character)
@@ -602,8 +624,15 @@ ana_species_traits <- function(input_files, output_path) {
       tidyr::pivot_longer(cols = -c("species_id"), names_to = "morphology", values_to = "value") |>
       na.omit()
   ) |>
+    dplyr::mutate(
+      morphology = stringr::str_replace_all(
+        morphology,
+        c(
+          "maximum_total_length_cm" = "maximum_length_cm"
+        )
+      )
+    ) |>
     dplyr::distinct()
-
 
   # -------------------------------------------------------
   # tolerance table

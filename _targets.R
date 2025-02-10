@@ -214,7 +214,9 @@ list(
                 tg_e950ce9d_5743_4901_91bd_a6d7e4a1fd55_hydrology, 
                 tg_217d3c1a_8b05_499c_8d39_9ad96fe305d9_watersheds, 
                 tg_4e7387b0_19f5_4951_8dac_6215e3224144_waterbodies_and_species_intersect, 
-                tg_867509cc_57d1_4be5_9750_ab397153a7ee_watersheds_and_species_intersect))
+                tg_867509cc_57d1_4be5_9750_ab397153a7ee_watersheds_and_species_intersect, 
+                tg_e53aa36a_6191_497b_ad1b_4e55159d0774_integrate_species_traits, 
+                tg_b4f3f034_0ff5_4cf8_aa92_aa897a86a723_integrate_species_phenology))
         c("workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.sqlite", 
         "workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg"
         )

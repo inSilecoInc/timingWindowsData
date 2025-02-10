@@ -63,6 +63,10 @@ pipeline:
           name: waterbodies and species intersect
         - id: 867509cc-57d1-4be5-9750-ab397153a7ee
           name: watersheds and species intersect
+        - id: e53aa36a-6191-497b-ad1b-4e55159d0774
+          name: integrate species traits
+        - id: b4f3f034-0ff5-4cf8-aa92-aa897a86a723
+          name: integrate species phenology
         output_files:
           - national_timing_windows_database.sqlite
           - national_timing_windows_database.svg

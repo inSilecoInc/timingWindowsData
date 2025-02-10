@@ -181,10 +181,11 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Atlas of Canada Hydrology</strong>: Offers geospatial data on lakes, rivers, and watersheds.</li>
 <li><strong>National Hydro Network (NHN)</strong>: Supplies detailed geospatial data on watersheds.</li>
 <li><strong>GBIF Species Occurrences</strong>: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.</li>
+<li><strong>Species Traits &amp; Phenology Data</strong>: Derived from various sources, including FishBase, FishPass, and national ecological datasets, covering species’ habitat, morphology, reproduction, and movement patterns.</li>
 </ul>
 <section id="initial-data-preparation" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="initial-data-preparation"><span class="header-section-number">5.1</span> Initial Data Preparation</h2>
-<p>The integration process begins with the preparation of core datasets: 1. <strong>Watersheds</strong>: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers. 2. <strong>Waterbodies</strong>: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies. 3. <strong>Species Data</strong>: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species. 4. <strong>Spatial Intersections</strong>: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.</p>
+<p>The integration process begins with the preparation of core datasets: 1. <strong>Watersheds</strong>: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers. 2. <strong>Waterbodies</strong>: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies. 3. <strong>Species Data</strong>: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species. 4. <strong>Species Traits &amp; Phenology</strong>: Traits related to morphology, spawning, habitat preferences, and migration patterns are processed for integration. 5. <strong>Spatial Intersections</strong>: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.</p>
 </section>
 <section id="integration-workflow" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="integration-workflow"><span class="header-section-number">5.2</span> Integration Workflow</h2>
@@ -192,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><strong>Database Initialization</strong>:
 <ul>
-<li>A SQLite database is created with an initial schema for tables such as <code>watersheds</code>, <code>waterbodies</code>, <code>species</code>, <code>waterbodies_species</code>, and <code>watersheds_species</code>.</li>
+<li>A SQLite database is created with an initial schema for tables such as <code>watersheds</code>, <code>waterbodies</code>, <code>species</code>, <code>waterbodies_species</code>, <code>watersheds_species</code>, and additional life history attributes.</li>
 </ul></li>
 <li><strong>Watershed Data</strong>:
 <ul>
@@ -209,6 +210,11 @@ ul.task-list li input[type="checkbox"] {
 <li>Fish species data is enriched with status and trait information.</li>
 <li>The <code>species</code> table is populated with <code>species_id</code>, <code>species</code>, and additional attributes such as threat categories.</li>
 </ul></li>
+<li><strong>Species Traits &amp; Phenology</strong>:
+<ul>
+<li>Traits such as <strong>habitat preferences, reproductive strategies, morphology, and tolerance levels</strong> are integrated into separate tables.</li>
+<li>Phenology-related data, including <strong>migration timing, spawning periods, and larval presence</strong>, are structured into dedicated tables.</li>
+</ul></li>
 <li><strong>Spatial Intersections</strong>:
 <ul>
 <li>Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in <code>ana_waterbodies_species</code>.</li>
@@ -219,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="database-structure-and-schema" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="database-structure-and-schema"><span class="header-section-number">5.3</span> Database Structure and Schema</h2>
-<p>The resulting relational database schema is visualized as part of the integration process. Using the <code>dm</code> package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include: - <code>watersheds_species</code>: Links species to watersheds through <code>watershed_id</code> and <code>species_id</code>. - <code>waterbodies_species</code>: Links species to waterbodies (lakes or rivers) through <code>waterbody_id</code> and <code>species_id</code>. - <code>species</code>: Serves as the central table connecting species to waterbodies, watersheds, and traits.</p>
+<p>The resulting relational database schema is visualized as part of the integration process. Using the <code>dm</code> package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include: - <code>watersheds_species</code>: Links species to watersheds through <code>watershed_id</code> and <code>species_id</code>. - <code>waterbodies_species</code>: Links species to waterbodies (lakes or rivers) through <code>waterbody_id</code> and <code>species_id</code>. - <code>species</code>: Serves as the central table connecting species to waterbodies, watersheds, traits, and phenology. - <code>species_traits</code>: Stores trait-related information such as morphology, habitat use, and reproductive characteristics. - <code>species_phenology</code>: Captures seasonal movement and life cycle events such as migration, spawning, and larvae presence.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-data-schema" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -244,7 +250,10 @@ Figure&nbsp;5.1: Relational schema of the National Timing Windows Database.
 <li><strong>Species</strong>: Comprehensive list of fish species with ecological attributes and status.</li>
 <li><strong>Waterbodies-Species Relationship</strong>: Spatial relationships between species and waterbodies.</li>
 <li><strong>Watersheds-Species Relationship</strong>: Spatial relationships between species and watersheds.</li>
+<li><strong>Species Traits</strong>: Contains species-specific habitat, morphology, reproduction, and physiological attributes.</li>
+<li><strong>Species Phenology</strong>: Includes timing data on migration, spawning, and larvae presence.</li>
 </ul>
+<p>This structured integration allows for an evidence-based approach to identifying <strong>optimal timing windows for conservation and management actions</strong> in Canadian waterbodies.</p>
 
 
 </section>

@@ -2,7 +2,6 @@
 title: "National Timing Windows Dataset"
 ---
 
-
 The **National Timing Windows Database** serves as a comprehensive repository for managing and analyzing ecological data related to the assessment of optimal timing windows for human interventions in Canadian waterbodies. This chapter details the step-by-step methodology for integrating diverse datasets into the relational database. The process ensures the data is harmonized, relationships are preserved, and schema integrity is maintained. 
 
 The integration relies on datasets from the following sources:
@@ -11,6 +10,7 @@ The integration relies on datasets from the following sources:
 - **Atlas of Canada Hydrology**: Offers geospatial data on lakes, rivers, and watersheds.
 - **National Hydro Network (NHN)**: Supplies detailed geospatial data on watersheds.
 - **GBIF Species Occurrences**: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.
+- **Species Traits & Phenology Data**: Derived from various sources, including FishBase, FishPass, and national ecological datasets, covering species' habitat, morphology, reproduction, and movement patterns.
 
 ## Initial Data Preparation
 
@@ -18,14 +18,15 @@ The integration process begins with the preparation of core datasets:
 1. **Watersheds**: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers.
 2. **Waterbodies**: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies.
 3. **Species Data**: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species.
-4. **Spatial Intersections**: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.
+4. **Species Traits & Phenology**: Traits related to morphology, spawning, habitat preferences, and migration patterns are processed for integration.
+5. **Spatial Intersections**: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.
 
 ## Integration Workflow
 
 The integration is performed using the script `int_national_timing_windows_dataset`, which processes datasets and populates the SQLite relational database:
 
 1. **Database Initialization**:
-   - A SQLite database is created with an initial schema for tables such as `watersheds`, `waterbodies`, `species`, `waterbodies_species`, and `watersheds_species`.
+   - A SQLite database is created with an initial schema for tables such as `watersheds`, `waterbodies`, `species`, `waterbodies_species`, `watersheds_species`, and additional life history attributes.
 
 2. **Watershed Data**:
    - Watershed geometries are read from GeoPackage files and stripped of geometry for relational storage.
@@ -39,7 +40,11 @@ The integration is performed using the script `int_national_timing_windows_datas
    - Fish species data is enriched with status and trait information.
    - The `species` table is populated with `species_id`, `species`, and additional attributes such as threat categories.
 
-5. **Spatial Intersections**:
+5. **Species Traits & Phenology**:
+   - Traits such as **habitat preferences, reproductive strategies, morphology, and tolerance levels** are integrated into separate tables.
+   - Phenology-related data, including **migration timing, spawning periods, and larval presence**, are structured into dedicated tables.
+
+6. **Spatial Intersections**:
    - Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in `ana_waterbodies_species`.
    - Similarly, relationships between species and watersheds are identified using the script `ana_watersheds_species`.
    - Results are stored in `waterbodies_species` and `watersheds_species` tables.
@@ -49,7 +54,9 @@ The integration is performed using the script `int_national_timing_windows_datas
 The resulting relational database schema is visualized as part of the integration process. Using the `dm` package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include:
 - `watersheds_species`: Links species to watersheds through `watershed_id` and `species_id`.
 - `waterbodies_species`: Links species to waterbodies (lakes or rivers) through `waterbody_id` and `species_id`.
-- `species`: Serves as the central table connecting species to waterbodies, watersheds, and traits.
+- `species`: Serves as the central table connecting species to waterbodies, watersheds, traits, and phenology.
+- `species_traits`: Stores trait-related information such as morphology, habitat use, and reproductive characteristics.
+- `species_phenology`: Captures seasonal movement and life cycle events such as migration, spawning, and larvae presence.
 
 ```{r}
 #| label: fig-data-schema
@@ -66,3 +73,7 @@ Key tables in the relational database:
 - **Species**: Comprehensive list of fish species with ecological attributes and status.
 - **Waterbodies-Species Relationship**: Spatial relationships between species and waterbodies.
 - **Watersheds-Species Relationship**: Spatial relationships between species and watersheds.
+- **Species Traits**: Contains species-specific habitat, morphology, reproduction, and physiological attributes.
+- **Species Phenology**: Includes timing data on migration, spawning, and larvae presence.
+
+This structured integration allows for an evidence-based approach to identifying **optimal timing windows for conservation and management actions** in Canadian waterbodies.
