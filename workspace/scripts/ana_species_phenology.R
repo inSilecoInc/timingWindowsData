@@ -288,6 +288,7 @@ ana_species_phenology <- function(input_files, output_path) {
   # spawning table
   spawning <- dplyr::bind_rows(
     dat$fishbase$spawning_phenology |>
+      dplyr::filter(!dplyr::if_any(jan:dec, ~ .x > 1)) |>
       dplyr::mutate(db = "fishbase"),
     dat$dahlke_2020$thermal_tolerance |>
       dplyr::select(-realm, -depth_spawners, -depths_embryos) |>
@@ -365,7 +366,10 @@ ana_species_phenology <- function(input_files, output_path) {
   }
 
   # Apply migration timing definition
-  migration <- spawning_migratory |> define_migration_period()
+  migration <- spawning_migratory |>
+    define_migration_period() |>
+    dplyr::mutate(dplyr::across(jan:dec, ~ as.integer(.x > 0)))
+
 
   # Convert to final format by summing pre and post-migration periods
   # migration_table_final <- migration_table |>
