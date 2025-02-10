@@ -1,0 +1,34 @@
+pipeline:
+  id: b4f3f034-0ff5-4cf8-aa92-aa897a86a723
+  name: species_phenology
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-02-09 20:53:54
+  last_modified: 2025-02-09 20:53:54
+  description: 'Pipeline for analytical data: species_phenology'
+  analysis:
+    sources:
+    - name: integrate species phenology
+      description: species phynology data from various sources
+      script: ana_species_phenology
+      input_files:
+      - id: e36167b9-1aa9-499b-a242-e9e85b7479cb
+        name: freshwater fish species canada
+      - id: c54f4d0a-9b58-444d-9afe-90ea795cb212
+        name: dahlke processed
+      - id: bf63ff45-6283-4bdc-b360-746549ee32ed
+        name: download fishbase
+      - id: 44238b88-cc41-4468-b1fc-7b770c4a4be4
+        name: FishPass processed
+      - id: 0fedf29b-2fe3-49cc-b2b5-d1ebd3b8af2b
+        name: NAFMFD processed
+      - id: 1a084fb5-2dbd-4df9-9543-e020ec0ee77a
+        name: Ontario Freshwater Fishes Life History Database
+      - id: d56fc2b3-318b-489a-8000-54501f7ae5e7
+        name: roberge processed
+      - id: e53aa36a-6191-497b-ad1b-4e55159d0774
+        name: integrate species traits
+      output_files:  
+      - spawning.csv
+      - migration.csv
+      - larvae.csv

@@ -27,7 +27,8 @@ ana_species_phenology <- function(input_files, output_path) {
   #   "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_characteristics.csv",
   #   "workspace/data/harvested/ontario_freshwater_fishes_life_history-1.0.0/processed/ontario_fishes_references.csv",
   #   "workspace/data/harvested/roberge_2002-1.0.0/processed/roberge.csv",
-  #   "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/processed/north_american_freshwater_migratory_fish_database.csv"
+  #   "workspace/data/harvested/north_american_freshwater_migratory_fish_database-1.0.0/processed/north_american_freshwater_migratory_fish_database.csv",
+  #   "workspace/data/analyzed/species_traits-1.0.0/migration.csv"
   # )
   input_files <- unlist(input_files)
 
@@ -306,15 +307,130 @@ ana_species_phenology <- function(input_files, output_path) {
     dplyr::distinct()
 
   # -------------------------------------------------------
-  # larvae table
-  larvae <- dplyr::bind_rows(
-    dat$fishbase$larvae_phenology,
-    dat$fishbase$larvaepresence_phenology |>
-      dplyr::rename(locality = country)
+  # Define migratory species (excluding non-migratory)
+  migratory_terms <- c(
+    "anadromous", "potamodromous", "amphidromous",
+    "catadromous", "oceanodromous", "migratory", "diadromous",
+    "diadromous_and_potamodromous", "semi_anadromous",
+    "suspected_migrant", "multiple_diadromous",
+    "anadromous_semianadromous", "migratory_and_non_migratory"
   )
+
+  # Filter only migratory species
+  migratory_species <- dat$species_traits$migration |>
+    dplyr::filter(migration %in% migratory_terms) |>
+    dplyr::select(species_id) |>
+    dplyr::distinct()
+
+  # Merge with spawning table to get only migratory species' spawning timing
+  spawning_migratory <- spawning |>
+    dplyr::filter(species_id %in% migratory_species$species_id)
+
+
+  # Function to create migration timing
+  define_migration_period <- function(df) {
+    df |>
+      dplyr::group_by(species_id) |>
+      dplyr::mutate(
+        # Pre-spawning migration: Shift months earlier
+        jan = dplyr::lead(jan, default = feb),
+        feb = dplyr::lead(feb, default = mar),
+        mar = dplyr::lead(mar, default = apr),
+        apr = dplyr::lead(apr, default = may),
+        may = dplyr::lead(may, default = jun),
+        jun = dplyr::lead(jun, default = jul),
+        jul = dplyr::lead(jul, default = aug),
+        aug = dplyr::lead(aug, default = sep),
+        sep = dplyr::lead(sep, default = oct),
+        oct = dplyr::lead(oct, default = nov),
+        nov = dplyr::lead(nov, default = dec),
+        dec = dplyr::lead(dec, default = jan) # ,
+
+        # # Post-spawning migration: Shift months later
+        # jan_post = dplyr::lag(jan, default = dec),
+        # feb_post = dplyr::lag(feb, default = jan),
+        # mar_post = dplyr::lag(mar, default = feb),
+        # apr_post = dplyr::lag(apr, default = mar),
+        # may_post = dplyr::lag(may, default = apr),
+        # jun_post = dplyr::lag(jun, default = may),
+        # jul_post = dplyr::lag(jul, default = jun),
+        # aug_post = dplyr::lag(aug, default = jul),
+        # sep_post = dplyr::lag(sep, default = aug),
+        # oct_post = dplyr::lag(oct, default = sep),
+        # nov_post = dplyr::lag(nov, default = oct),
+        # dec_post = dplyr::lag(dec, default = nov),
+      ) |>
+      dplyr::ungroup() #|>
+    # dplyr::select(species_id, jan_pre:dec_pre) # , jan_post:dec_post) # Keep migration timing
+  }
+
+  # Apply migration timing definition
+  migration <- spawning_migratory |> define_migration_period()
+
+  # Convert to final format by summing pre and post-migration periods
+  # migration_table_final <- migration_table |>
+  #   dplyr::mutate(
+  #     jan = pmax(jan_pre, jan_post),
+  #     feb = pmax(feb_pre, feb_post),
+  #     mar = pmax(mar_pre, mar_post),
+  #     apr = pmax(apr_pre, apr_post),
+  #     may = pmax(may_pre, may_post),
+  #     jun = pmax(jun_pre, jun_post),
+  #     jul = pmax(jul_pre, jul_post),
+  #     aug = pmax(aug_pre, aug_post),
+  #     sep = pmax(sep_pre, sep_post),
+  #     oct = pmax(oct_pre, oct_post),
+  #     nov = pmax(nov_pre, nov_post),
+  #     dec = pmax(dec_pre, dec_post)
+  #   ) |>
+  #   dplyr::select(species_id, jan:dec) # Keep only final migration columns
+
+
+
+  # -------------------------------------------------------
+  # larvae table
+  # larvae <- dplyr::bind_rows(
+  #   dat$fishbase$larvae_phenology,
+  #   dat$fishbase$larvaepresence_phenology |>
+  #     dplyr::rename(locality = country)
+  # )
+
+  # Function to create larvae timing based on spawning data
+  define_larvae_period <- function(df) {
+    df |>
+      dplyr::mutate(
+        # Identify last spawning month (column with the highest nonzero value)
+        last_spawning_month = apply(df[, 2:13], 1, function(x) max(which(x > 0), na.rm = TRUE)),
+
+        # Compute next month index (wrapping around December to January)
+        next_larvae_month = ifelse(last_spawning_month == 12, 1, last_spawning_month + 1)
+      ) |>
+      dplyr::rowwise() |> # Row-wise mutation to assign binary values
+      dplyr::mutate(
+        # Create a larvae timing table, marking last spawning and next month
+        jan = as.integer(last_spawning_month == 1 | next_larvae_month == 1),
+        feb = as.integer(last_spawning_month == 2 | next_larvae_month == 2),
+        mar = as.integer(last_spawning_month == 3 | next_larvae_month == 3),
+        apr = as.integer(last_spawning_month == 4 | next_larvae_month == 4),
+        may = as.integer(last_spawning_month == 5 | next_larvae_month == 5),
+        jun = as.integer(last_spawning_month == 6 | next_larvae_month == 6),
+        jul = as.integer(last_spawning_month == 7 | next_larvae_month == 7),
+        aug = as.integer(last_spawning_month == 8 | next_larvae_month == 8),
+        sep = as.integer(last_spawning_month == 9 | next_larvae_month == 9),
+        oct = as.integer(last_spawning_month == 10 | next_larvae_month == 10),
+        nov = as.integer(last_spawning_month == 11 | next_larvae_month == 11),
+        dec = as.integer(last_spawning_month == 12 | next_larvae_month == 12)
+      ) |>
+      dplyr::select(species_id, jan:dec) # Keep only final larvae columns
+  }
+
+  # Apply the function to generate larvae season table
+  larvae <- spawning |> define_larvae_period()
+
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Export
   vroom::vroom_write(spawning, file.path(output_path, "spawning.csv"), delim = ",")
+  vroom::vroom_write(migration, file.path(output_path, "migration.csv"), delim = ",")
   vroom::vroom_write(larvae, file.path(output_path, "larvae.csv"), delim = ",")
 }

@@ -449,26 +449,45 @@ ul.task-list li input[type="checkbox"] {
 <td>FishBase, FishPass, Ontario Freshwater Fishes, Roberge (2002)</td>
 </tr>
 <tr class="odd">
-<td><strong>Egg</strong></td>
-<td><code>egg_timing</code></td>
-<td>Egg incubation period, seasonality</td>
-<td>FishBase</td>
-</tr>
-<tr class="even">
 <td><strong>Larvae</strong></td>
 <td><code>larvae_timing</code></td>
-<td>Seasonal larval presence (e.g., observed monthly presence)</td>
+<td>Seasonal larval presence (last spawning month + next month)</td>
 <td>FishBase, Roberge (2002)</td>
-</tr>
-<tr class="odd">
-<td><strong>New → Thermal Phenology</strong></td>
-<td><code>thermal_timing</code></td>
-<td>Temperature cues for migration/spawning</td>
-<td>Dahlke et al.&nbsp;(2020)</td>
 </tr>
 </tbody>
 </table>
 <p>These tables provide a structured approach to analyzing seasonal life cycle events and their ecological implications for freshwater fish in Canada.</p>
+</section>
+<section id="integration-process" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="integration-process"><span class="header-section-number">4.3.3</span> Integration Process</h3>
+<p>The integration of fish phenology data follows a structured workflow:</p>
+<ol type="1">
+<li><strong>Data Collection &amp; Preprocessing</strong>
+<ul>
+<li>Input data is gathered from multiple sources (<code>FishBase</code>, <code>FishPass</code>, <code>NAFMFD</code>, <code>Ontario Freshwater Fishes</code>, <code>Roberge 2002</code>).</li>
+<li>Species IDs are standardized, and datasets lacking direct species identifiers are joined to a reference species list.</li>
+</ul></li>
+<li><strong>Spawning Timing Calculation</strong>
+<ul>
+<li>The <strong>spawning table</strong> compiles monthly spawning presence using available data.</li>
+<li>If multiple records exist, North American sources are prioritized; otherwise, values are aggregated.</li>
+</ul></li>
+<li><strong>Migration Timing Inference</strong>
+<ul>
+<li>Migration timing is inferred based on <strong>spawning months</strong> and <strong>species migration category</strong>.</li>
+<li>If a species is migratory (<code>anadromous</code>, <code>potamodromous</code>, etc.), migration occurs <strong>one or more months before spawning</strong>.</li>
+</ul></li>
+<li><strong>Larvae Timing Determination</strong>
+<ul>
+<li>The <strong>last observed spawning month</strong> is identified per species.</li>
+<li>Larvae presence is assigned to the <strong>last spawning month and the following month</strong>.</li>
+</ul></li>
+<li><strong>Final Data Export</strong>
+<ul>
+<li>Processed data is structured into three output files: <code>spawning.csv</code>, <code>migration.csv</code>, <code>larvae.csv</code>.</li>
+</ul></li>
+</ol>
+<p>This workflow ensures that the timing windows for key life processes are systematically captured and formatted for ecological analysis.</p>
 
 
 </section>
