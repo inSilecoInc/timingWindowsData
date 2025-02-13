@@ -10,6 +10,7 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
   #   "workspace/data/harvested/national_hydro_network-1.0.0/processed/watersheds.gpkg",
   #   "workspace/data/analyzed/waterbodies_species-1.0.0/waterbodies_species.csv",
   #   "workspace/data/analyzed/watersheds_species-1.0.0/watersheds_species.csv",
+  #   "workspace/data/analyzed/watersheds_waterbodies-1.0.0/watersheds_waterbodies.csv",
   #   "workspace/data/analyzed/species_traits-1.0.0/habitat_adult.csv",
   #   "workspace/data/analyzed/species_traits-1.0.0/habitat_juvenile.csv",
   #   "workspace/data/analyzed/species_traits-1.0.0/habitat_spawning.csv",
@@ -255,6 +256,11 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
 
   # -----------------------------------------------------------------
   # Watersheds - species
+  watersheds_waterbodies <- input_files[grepl("watersheds_waterbodies.csv", input_files)] |>
+    vroom::vroom(progress = FALSE, show_col_types = FALSE)
+
+  # -----------------------------------------------------------------
+  # Watersheds - species
   watersheds_species <- input_files[grepl("watersheds_species.csv", input_files)] |>
     vroom::vroom(progress = FALSE, show_col_types = FALSE)
 
@@ -332,6 +338,7 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
   DBI::dbWriteTable(con, "swimming", swimming, overwrite = TRUE)
   # DBI::dbWriteTable(con, "wua", wua, overwrite = TRUE)
   # DBI::dbWriteTable(con, "stressors", stressors, overwrite = TRUE)
+  DBI::dbWriteTable(con, "watersheds_waterbodies", watersheds_waterbodies, overwrite = TRUE)
   DBI::dbWriteTable(con, "waterbodies_species", waterbodies_species, overwrite = TRUE)
   DBI::dbWriteTable(con, "watersheds_species", watersheds_species, overwrite = TRUE)
   # DBI::dbWriteTable(con, "waterbodies_species_life_processes", waterbodies_species_life_processes, overwrite = TRUE)
@@ -388,6 +395,8 @@ int_national_timing_windows_dataset <- function(input_files, output_path) {
     dm::dm_add_fk(table = "taxonomy", "species_id", "species") |>
     dm::dm_add_fk(table = "picture", "species_id", "species") |>
     dm::dm_add_fk(table = "swimming", "species_id", "species") |>
+    dm::dm_add_fk(table = "watersheds_waterbodies", "watershed_id", "watersheds") |>
+    dm::dm_add_fk(table = "watersheds_waterbodies", "waterbody_id", "waterbodies") |>
     dm::dm_add_fk(table = "waterbodies_species", "waterbody_id", "waterbodies") |>
     dm::dm_add_fk(table = "waterbodies_species", "species_id", "species") |>
     dm::dm_add_fk(table = "watersheds_species", "watershed_id", "watersheds") |>

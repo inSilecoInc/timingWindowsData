@@ -1,0 +1,25 @@
+pipeline:
+  id: a26958f4-6efe-4a34-8c01-aac740c693d8
+  name: watersheds_waterbodies
+  version: 1.0.0
+  package_version: 0.0.0.9001
+  created_at: 2025-02-13 11:24:28
+  last_modified: 2025-02-13 11:24:28
+  description: 'Pipeline for analytical data: watersheds_waterbodies'
+  analysis:
+    sources:
+      - name: watersheds and waterbodies intersect
+        description: spatial intersections between watersheds and waterbodies
+        script: ana_watersheds_waterbodies
+        input_files:
+        - id: 217d3c1a-8b05-499c-8d39-9ad96fe305d9
+          name: watersheds
+        - id: e950ce9d-5743-4901-91bd-a6d7e4a1fd55
+          name: hydrology
+        output_files:
+          - watersheds_waterbodies.csv
+
+  output:
+    output_dir: "workspace/data/analyzed/watersheds_waterbodies/"
+    log_dir: "workspace/logs/"
+    archive_raw: false

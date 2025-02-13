@@ -63,6 +63,8 @@ pipeline:
           name: waterbodies and species intersect
         - id: 867509cc-57d1-4be5-9750-ab397153a7ee
           name: watersheds and species intersect
+        - id: a26958f4-6efe-4a34-8c01-aac740c693d8
+          name: watersheds and waterbodies intersect
         - id: e53aa36a-6191-497b-ad1b-4e55159d0774
           name: integrate species traits
         - id: b4f3f034-0ff5-4cf8-aa92-aa897a86a723
