@@ -1,33 +1,65 @@
 ---
-title: "Introduction"
+title: "Project overview"
 ---
 
+# Introduction 
 
-# Introduction
+The National Timing Windows Dataset (NTWD) was developed to provide a comprehensive, structured repository of freshwater fish life history, ecological, and phenological data to support the assessment and management of timing windows in Canadian water bodies. Timing windows —- periods during which human activities should be restricted to minimize ecological disruptions -— are critical for protecting key life processes such as spawning, migration, and juvenile development.  
 
-## Background 
+This technical report provides an overview of the datasets integrated into the NTWD, details the data harmonization and integration process, and describes the relational database structure designed to facilitate efficient querying and analysis. The NTWD was developed as an SQLite relational database, consolidating information from multiple sources, including fish life history traits, habitat preferences, migration patterns, and physiological tolerances. The integration process involved standardizing taxonomic classifications, resolving discrepancies between data sources, and structuring the database into 26 interlinked tables.  
+
+By centralizing these datasets within a cohesive, queryable framework, the NTWD ensures that researchers, environmental managers, and policymakers have access to high-quality, species-specific timing windows that can be used to refine conservation strategies, inform risk assessments, and support regulatory decision-making.
+
+# Timing Windows Project
+ 
+The NTWD is part of a larger initative called the The Timing Windows Project, which was initiated to provide a data-driven approach to assessing and optimizing the temporal protection of fish populations in Canadian freshwater systems. Many fish species exhibit life cycle events—such as spawning, migration, and juvenile rearing—that are closely tied to seasonal and environmental cues. These life processes are particularly vulnerable to anthropogenic disturbances such as dredging, dam operations, and other industrial activities. Timing windows have long been used as a management tool to mitigate these impacts; however, their effectiveness has been constrained by regional variability, limited data availability, and a lack of integration between scientific knowledge and regulatory applications.  
+
+This project addresses these limitations by developing a National Timing Windows Database (NTWD) and an interactive Timing Windows Calculator as a Shiny web application. These tools are designed to enhance the precision of timing window recommendations, improve risk assessments for fish life processes, and empower decision-makers with a flexible and science-based framework for environmental planning.  
+
+## Objectives and Key Deliverables  
+
+The project was structured around three core objectives:  
+
+1. Developing a National Timing Windows Database (NTWD)  
+   - A relational SQLite database was created to integrate comprehensive life history, ecological, and phenological data for freshwater fish across Canada.  
+   - It synthesizes species-specific timing windows for spawning, migration, and early development stages, ensuring that seasonal and ecological constraints of freshwater fish are well-represented.  
+   - The database harmonizes multiple datasets, providing a structured and consistent framework for evaluating species-specific responses to environmental changes.  
+
+2. Implementing a Risk Assessment Framework  
+   - The Timing Windows Calculator guides users through a structured risk assessment framework, ensuring that recommendations are rooted in best available data and scientific methodologies.  
+   - The tool allows users to assess and refine timing windows based on both national datasets and local ecological expertise, ensuring applicability across diverse water bodies.  
+
+3. Building an Interactive Shiny Application  
+   - A Shiny web application was developed to provide users with an interactive tool for exploring species-specific life stage timing, regional risk assessments, and optimal timing windows.  
+   - The application enables users to modify existing knowledge, incorporate local data, and even conduct risk assessments for waterbodies with no prior knowledge.  
+
+## National Timing Windows Database (NTWD)  
+
+The NTWD was built to consolidate and structure a wide range of datasets, ensuring that species-specific timing windows are represented with high accuracy. Key integration components included:  
+
+- Species Traits Integration: Incorporating habitat preferences, reproductive strategies, migration behavior, morphological adaptations, and physiological tolerances to assess how species respond to seasonal variations and anthropogenic stressors.  
+- Phenology Integration: Capturing the timing of biological events such as migration, spawning, and larval development to define species-specific timing windows and their ecological implications.  
+
+The NTWD is accompanied by a [Research Compendium](https://github.com/inSilecoInc/timingWindowsData) ensuring reproducibility and a [technical report](https://insileco.io/timingWindowsData) detailing data sources and integration process.  
 
 
+## Timing Windows Calculator
 
-## Objective & scope
+A Timing Windows Calculator was developed to allow users to: 
 
+- Explore species-specific life stage timing and optimal timing windows.  
+- Conduct risk assessments for different regions based on WUA pressures (Water Use Activities).  
+- Modify existing knowledge and even perform assessments without prior data by incorporating local expertise.  
 
-### Specific tasks
+The application follows a structured risk assessment framework, guiding users through:  
 
+1. Establish Context – Define the environmental conditions for a lake or river.  
+2. Identify Risks – Assess potential threats to fish life processes and habitats.  
+3. Analyze Risks – Evaluate how these risks align with species timing windows.  
+4. Evaluate Risks – Determine the potential impact on fish populations and ecosystems.  
+5. Treat Risks – Develop and propose timing window adjustments as mitigation measures.  
 
+This adaptive framework ensures that scientific knowledge is directly integrated into decision-making while allowing flexibility for local conditions.  
 
-## Area of interest {#sec-aoi}
+The application is accompanied by a [technical report](https://insileco.io/TimingWindowsCalculatorManual) detailing the approach to assess risk to fish species life stages, the method used to identify optimal timing windows for interventions in aquatic ecosystems, and a user manual for the application.
 
-```{r aoiarea, echo = FALSE}
-# aoi <- sf::st_read("../../workspace/data/harvested/aoi-1.0.0/processed/aoi.gpkg", quiet = TRUE)
-# aoi_area <- aoi |>
-#   sf::st_make_valid() |>
-#   sf::st_area() |>
-#   units::set_units(km^2) |>
-#   sum() |>
-#   as.numeric() |>
-#   round(0)
-```
-
-
-## Notes & references

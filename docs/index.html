@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Project overview</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -110,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Project overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -147,12 +147,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#timing-windows-project" id="toc-timing-windows-project" class="nav-link" data-scroll-target="#timing-windows-project"><span class="header-section-number">2</span> Timing Windows Project</a>
   <ul class="collapse">
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">1.1</span> Background</a></li>
-  <li><a href="#objective-scope" id="toc-objective-scope" class="nav-link" data-scroll-target="#objective-scope"><span class="header-section-number">1.2</span> Objective &amp; scope</a></li>
-  <li><a href="#sec-aoi" id="toc-sec-aoi" class="nav-link" data-scroll-target="#sec-aoi"><span class="header-section-number">1.3</span> Area of interest</a></li>
-  <li><a href="#notes-references" id="toc-notes-references" class="nav-link" data-scroll-target="#notes-references"><span class="header-section-number">1.4</span> Notes &amp; references</a></li>
+  <li><a href="#objectives-and-key-deliverables" id="toc-objectives-and-key-deliverables" class="nav-link" data-scroll-target="#objectives-and-key-deliverables"><span class="header-section-number">2.1</span> Objectives and Key Deliverables</a></li>
+  <li><a href="#national-timing-windows-database-ntwd" id="toc-national-timing-windows-database-ntwd" class="nav-link" data-scroll-target="#national-timing-windows-database-ntwd"><span class="header-section-number">2.2</span> National Timing Windows Database (NTWD)</a></li>
+  <li><a href="#timing-windows-calculator" id="toc-timing-windows-calculator" class="nav-link" data-scroll-target="#timing-windows-calculator"><span class="header-section-number">2.3</span> Timing Windows Calculator</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -163,7 +163,6 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">National Timing Windows Dataset</h1>
-<p class="subtitle lead">Presentation of datasets</p>
 </div>
 
 
@@ -189,20 +188,74 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<section id="background" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="background"><span class="header-section-number">1.1</span> Background</h2>
+<p>The National Timing Windows Dataset (NTWD) was developed to provide a comprehensive, structured repository of freshwater fish life history, ecological, and phenological data to support the assessment and management of timing windows in Canadian water bodies. Timing windows —- periods during which human activities should be restricted to minimize ecological disruptions -— are critical for protecting key life processes such as spawning, migration, and juvenile development.</p>
+<p>This technical report provides an overview of the datasets integrated into the NTWD, details the data harmonization and integration process, and describes the relational database structure designed to facilitate efficient querying and analysis. The NTWD was developed as an SQLite relational database, consolidating information from multiple sources, including fish life history traits, habitat preferences, migration patterns, and physiological tolerances. The integration process involved standardizing taxonomic classifications, resolving discrepancies between data sources, and structuring the database into 26 interlinked tables.</p>
+<p>By centralizing these datasets within a cohesive, queryable framework, the NTWD ensures that researchers, environmental managers, and policymakers have access to high-quality, species-specific timing windows that can be used to refine conservation strategies, inform risk assessments, and support regulatory decision-making.</p>
 </section>
-<section id="objective-scope" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="objective-scope"><span class="header-section-number">1.2</span> Objective &amp; scope</h2>
-<section id="specific-tasks" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="specific-tasks"><span class="header-section-number">1.2.1</span> Specific tasks</h3>
+<section id="timing-windows-project" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Timing Windows Project</h1>
+<p>The NTWD is part of a larger initative called the The Timing Windows Project, which was initiated to provide a data-driven approach to assessing and optimizing the temporal protection of fish populations in Canadian freshwater systems. Many fish species exhibit life cycle events—such as spawning, migration, and juvenile rearing—that are closely tied to seasonal and environmental cues. These life processes are particularly vulnerable to anthropogenic disturbances such as dredging, dam operations, and other industrial activities. Timing windows have long been used as a management tool to mitigate these impacts; however, their effectiveness has been constrained by regional variability, limited data availability, and a lack of integration between scientific knowledge and regulatory applications.</p>
+<p>This project addresses these limitations by developing a National Timing Windows Database (NTWD) and an interactive Timing Windows Calculator as a Shiny web application. These tools are designed to enhance the precision of timing window recommendations, improve risk assessments for fish life processes, and empower decision-makers with a flexible and science-based framework for environmental planning.</p>
+<section id="objectives-and-key-deliverables" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="objectives-and-key-deliverables"><span class="header-section-number">2.1</span> Objectives and Key Deliverables</h2>
+<p>The project was structured around three core objectives:</p>
+<ol type="1">
+<li>Developing a National Timing Windows Database (NTWD)
+<ul>
+<li>A relational SQLite database was created to integrate comprehensive life history, ecological, and phenological data for freshwater fish across Canada.<br>
+</li>
+<li>It synthesizes species-specific timing windows for spawning, migration, and early development stages, ensuring that seasonal and ecological constraints of freshwater fish are well-represented.<br>
+</li>
+<li>The database harmonizes multiple datasets, providing a structured and consistent framework for evaluating species-specific responses to environmental changes.</li>
+</ul></li>
+<li>Implementing a Risk Assessment Framework
+<ul>
+<li>The Timing Windows Calculator guides users through a structured risk assessment framework, ensuring that recommendations are rooted in best available data and scientific methodologies.<br>
+</li>
+<li>The tool allows users to assess and refine timing windows based on both national datasets and local ecological expertise, ensuring applicability across diverse water bodies.</li>
+</ul></li>
+<li>Building an Interactive Shiny Application
+<ul>
+<li>A Shiny web application was developed to provide users with an interactive tool for exploring species-specific life stage timing, regional risk assessments, and optimal timing windows.<br>
+</li>
+<li>The application enables users to modify existing knowledge, incorporate local data, and even conduct risk assessments for waterbodies with no prior knowledge.</li>
+</ul></li>
+</ol>
 </section>
+<section id="national-timing-windows-database-ntwd" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="national-timing-windows-database-ntwd"><span class="header-section-number">2.2</span> National Timing Windows Database (NTWD)</h2>
+<p>The NTWD was built to consolidate and structure a wide range of datasets, ensuring that species-specific timing windows are represented with high accuracy. Key integration components included:</p>
+<ul>
+<li>Species Traits Integration: Incorporating habitat preferences, reproductive strategies, migration behavior, morphological adaptations, and physiological tolerances to assess how species respond to seasonal variations and anthropogenic stressors.<br>
+</li>
+<li>Phenology Integration: Capturing the timing of biological events such as migration, spawning, and larval development to define species-specific timing windows and their ecological implications.</li>
+</ul>
+<p>The NTWD is accompanied by a <a href="https://github.com/inSilecoInc/timingWindowsData">Research Compendium</a> ensuring reproducibility and a <a href="https://insileco.io/timingWindowsData">technical report</a> detailing data sources and integration process.</p>
 </section>
-<section id="sec-aoi" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="sec-aoi"><span class="header-section-number">1.3</span> Area of interest</h2>
-</section>
-<section id="notes-references" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="notes-references"><span class="header-section-number">1.4</span> Notes &amp; references</h2>
+<section id="timing-windows-calculator" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="timing-windows-calculator"><span class="header-section-number">2.3</span> Timing Windows Calculator</h2>
+<p>A Timing Windows Calculator was developed to allow users to:</p>
+<ul>
+<li>Explore species-specific life stage timing and optimal timing windows.<br>
+</li>
+<li>Conduct risk assessments for different regions based on WUA pressures (Water Use Activities).<br>
+</li>
+<li>Modify existing knowledge and even perform assessments without prior data by incorporating local expertise.</li>
+</ul>
+<p>The application follows a structured risk assessment framework, guiding users through:</p>
+<ol type="1">
+<li>Establish Context – Define the environmental conditions for a lake or river.<br>
+</li>
+<li>Identify Risks – Assess potential threats to fish life processes and habitats.<br>
+</li>
+<li>Analyze Risks – Evaluate how these risks align with species timing windows.<br>
+</li>
+<li>Evaluate Risks – Determine the potential impact on fish populations and ecosystems.<br>
+</li>
+<li>Treat Risks – Develop and propose timing window adjustments as mitigation measures.</li>
+</ol>
+<p>This adaptive framework ensures that scientific knowledge is directly integrated into decision-making while allowing flexibility for local conditions.</p>
+<p>The application is accompanied by a <a href="https://insileco.io/TimingWindowsCalculatorManual">technical report</a> detailing the approach to assess risk to fish species life stages, the method used to identify optimal timing windows for interventions in aquatic ecosystems, and a user manual for the application.</p>
 
 
 </section>

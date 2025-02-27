@@ -4,7 +4,7 @@ project:
 
 book:
   title: National Timing Windows Dataset
-  subtitle: Presentation of datasets
+  # subtitle: Presentation of datasets
   author: 
     - name: David Beauchesne
       degrees: PhD
