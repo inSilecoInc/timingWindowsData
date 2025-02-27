@@ -2,78 +2,144 @@
 title: "National Timing Windows Dataset"
 ---
 
-The **National Timing Windows Database** serves as a comprehensive repository for managing and analyzing ecological data related to the assessment of optimal timing windows for human interventions in Canadian waterbodies. This chapter details the step-by-step methodology for integrating diverse datasets into the relational database. The process ensures the data is harmonized, relationships are preserved, and schema integrity is maintained. 
+## Overview
 
-The integration relies on datasets from the following sources:
+The National Timing Windows Database is a structured relational database designed to integrate diverse ecological datasets relevant to the identification of optimal timing windows for human interventions in Canadian waterbodies. The database consolidates spatial, taxonomic, phenological, and ecological trait data into a unified format to support environmental assessments, conservation efforts, and policy decisions.
 
-- **FishBase Freshwater Species Checklist**: Provides information on species distribution and ecological traits for freshwater fish across Canada.
-- **Atlas of Canada Hydrology**: Offers geospatial data on lakes, rivers, and watersheds.
-- **National Hydro Network (NHN)**: Supplies detailed geospatial data on watersheds.
-- **GBIF Species Occurrences**: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.
-- **Species Traits & Phenology Data**: Derived from various sources, including FishBase, FishPass, and national ecological datasets, covering species' habitat, morphology, reproduction, and movement patterns.
+The database is built using SQLite and adheres to a structured schema that maintains referential integrity and optimized data retrieval. Key datasets include species distributions, fish traits, waterbody characteristics, and species phenology.
 
-## Initial Data Preparation
+## Core Data Tables
 
-The integration process begins with the preparation of core datasets:
-1. **Watersheds**: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers.
-2. **Waterbodies**: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies.
-3. **Species Data**: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species.
-4. **Species Traits & Phenology**: Traits related to morphology, spawning, habitat preferences, and migration patterns are processed for integration.
-5. **Spatial Intersections**: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.
+### 1. Watersheds (`watersheds`)
 
-## Integration Workflow
+- Description: Contains attributes describing hydrological watershed units.
+- Primary Key: `watershed_id`
+- Key Fields:
+  - `watershed_id`: Unique identifier for each watershed.
+  - `name`: Watershed name.
+  - `area_km2`: Watershed area in square kilometers.
+  
+### 2. Waterbodies (`waterbodies`)
 
-The integration is performed using the script `int_national_timing_windows_dataset`, which processes datasets and populates the SQLite relational database:
+- Description: Stores geospatial data on lakes and rivers across Canada.
+- Primary Key: `waterbody_id`
+- Key Fields:
+  - `waterbody_id`: Unique identifier for each waterbody.
+  - `name`: Waterbody name.
+  - `type`: Classification (lake, river, etc.).
+  - `area_km2`: Waterbody area (if applicable).
+  
+### 3. Species (`species`)
 
-1. **Database Initialization**:
-   - A SQLite database is created with an initial schema for tables such as `watersheds`, `waterbodies`, `species`, `waterbodies_species`, `watersheds_species`, and additional life history attributes.
+- Description: Catalog of freshwater fish species in Canada, including taxonomic and ecological attributes.
+- Primary Key: `species_id`
+- Key Fields:
+  - `species_id`: Unique identifier.
+  - `scientific_name`: Taxonomic designation.
+  - `common_name`: Commonly used name.
+  - `taxonomy`: Classification details (family, genus, etc.).
 
-2. **Watershed Data**:
-   - Watershed geometries are read from GeoPackage files and stripped of geometry for relational storage.
-   - The `watersheds` table is populated with watershed attributes such as `watershed_id`.
+### 4. Watersheds-Species Relationship (`watersheds_species`)
 
-3. **Waterbody Data**:
-   - Lakes and rivers are processed into separate datasets and concatenated into a single `waterbodies` table.
-   - Attributes include `waterbody_id` and other relevant identifiers.
+- Description: Links fish species to watersheds where they are known to occur.
+- Primary Keys: (`watershed_id`, `species_id`)
+- Foreign Keys:
+  - `watershed_id` → `watersheds`
+  - `species_id` → `species`
 
-4. **Species Data**:
-   - Fish species data is enriched with status and trait information.
-   - The `species` table is populated with `species_id`, `species`, and additional attributes such as threat categories.
+### 5. Waterbodies-Species Relationship (`waterbodies_species`)
 
-5. **Species Traits & Phenology**:
-   - Traits such as **habitat preferences, reproductive strategies, morphology, and tolerance levels** are integrated into separate tables.
-   - Phenology-related data, including **migration timing, spawning periods, and larval presence**, are structured into dedicated tables.
+- Description: Links fish species to specific lakes and rivers.
+- Primary Keys: (`waterbody_id`, `species_id`)
+- Foreign Keys:
+  - `waterbody_id` → `waterbodies`
+  - `species_id` → `species`
 
-6. **Spatial Intersections**:
-   - Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in `ana_waterbodies_species`.
-   - Similarly, relationships between species and watersheds are identified using the script `ana_watersheds_species`.
-   - Results are stored in `waterbodies_species` and `watersheds_species` tables.
+## Trait Data Tables
 
-## Database Structure and Schema
+### 6. Habitat Preferences
 
-The resulting relational database schema is visualized as part of the integration process. Using the `dm` package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include:
-- `watersheds_species`: Links species to watersheds through `watershed_id` and `species_id`.
-- `waterbodies_species`: Links species to waterbodies (lakes or rivers) through `waterbody_id` and `species_id`.
-- `species`: Serves as the central table connecting species to waterbodies, watersheds, traits, and phenology.
-- `species_traits`: Stores trait-related information such as morphology, habitat use, and reproductive characteristics.
-- `species_phenology`: Captures seasonal movement and life cycle events such as migration, spawning, and larvae presence.
+- Tables: `habitat_adult`, `habitat_juvenile`, `habitat_spawning`, `habitat_yoy`
+- Description: These tables store habitat preferences for different life stages.
+- Primary Key: `species_id`
+- Fields: Binary presence indicators for different habitat types (e.g., `riverine`, `lacustrine`).
+
+### 7. Food Items (`food_items`)
+
+- Description: Documents dietary habits of fish species.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `food_type`: Type of prey consumed.
+  - `frequency`: Occurrence frequency.
+
+### 8. Spawning Characteristics (`spawning`)
+
+- Description: Stores reproductive traits including spawning conditions and parental care.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `temperature_min`: Minimum spawning temperature.
+  - `temperature_max`: Maximum spawning temperature.
+  - `spawning_frequency`: Number of times per year.
+
+### 9. Morphological Traits (`morphology`)
+
+- Description: Describes body shape, size, and other morphological features.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `maximum_length_cm`: Maximum observed body length.
+  - `body_depth_percent_tl`: Body depth as a percentage of total length.
+
+### 10. Physiological Tolerances
+
+- Tables: `tolerance_adult`, `tolerance_embryo`, `tolerance_larvae`, `tolerance_spawner`
+- Description: Captures thermal and environmental tolerance ranges.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `temperature_max`: Maximum survivable temperature.
+  - `oxygen_min`: Minimum dissolved oxygen tolerance.
+
+## Phenology Data Tables
+
+### 11. Migration Timing (`migration_phenology`)
+
+- Description: Defines seasonal migration windows for each species.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `start_month`: Beginning of migration season.
+  - `end_month`: End of migration season.
+
+### 12. Spawning Timing (`spawning_phenology`)
+
+- Description: Stores data on spawning periods.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `start_month`: First month of spawning.
+  - `end_month`: Last month of spawning.
+
+### 13. Larval Timing (`larvae_phenology`)
+
+- Description: Tracks larval presence across seasons.
+- Primary Key: `species_id`
+- Fields:
+  - `species_id`
+  - `start_month`: First recorded larval occurrence.
+  - `end_month`: Last recorded larval occurrence.
+
+## Database Schema Diagram
+
+The database schema is designed to enforce referential integrity through primary and foreign key constraints. The entity-relationship diagram (ERD) visualizes these relationships, ensuring consistency and efficiency in data retrieval.
 
 ```{r}
-#| label: fig-data-schema
-#| fig-cap: "Relational schema of the National Timing Windows Database."
-knitr::include_graphics("../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg")
+knitr::include_graphics("../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.png")
 ```
 
-## Processed Data Overview
+## Summary
 
-Key tables in the relational database:
+The National Timing Windows Database provides a structured, relational framework for integrating and analyzing fish species data across Canadian waterbodies. The inclusion of spatial, ecological, and temporal attributes ensures that researchers and conservation practitioners can assess seasonal constraints on fish life processes, ultimately supporting science-based conservation and management decisions.
 
-- **Watersheds**: Contains metadata on watersheds across Canada, such as `watershed_id`.
-- **Waterbodies**: Includes lakes and rivers with attributes such as `waterbody_id`.
-- **Species**: Comprehensive list of fish species with ecological attributes and status.
-- **Waterbodies-Species Relationship**: Spatial relationships between species and waterbodies.
-- **Watersheds-Species Relationship**: Spatial relationships between species and watersheds.
-- **Species Traits**: Contains species-specific habitat, morphology, reproduction, and physiological attributes.
-- **Species Phenology**: Includes timing data on migration, spawning, and larvae presence.
-
-This structured integration allows for an evidence-based approach to identifying **optimal timing windows for conservation and management actions** in Canadian waterbodies.

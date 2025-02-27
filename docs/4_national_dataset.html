@@ -145,10 +145,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#initial-data-preparation" id="toc-initial-data-preparation" class="nav-link active" data-scroll-target="#initial-data-preparation"><span class="header-section-number">5.1</span> Initial Data Preparation</a></li>
-  <li><a href="#integration-workflow" id="toc-integration-workflow" class="nav-link" data-scroll-target="#integration-workflow"><span class="header-section-number">5.2</span> Integration Workflow</a></li>
-  <li><a href="#database-structure-and-schema" id="toc-database-structure-and-schema" class="nav-link" data-scroll-target="#database-structure-and-schema"><span class="header-section-number">5.3</span> Database Structure and Schema</a></li>
-  <li><a href="#processed-data-overview" id="toc-processed-data-overview" class="nav-link" data-scroll-target="#processed-data-overview"><span class="header-section-number">5.4</span> Processed Data Overview</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">5.1</span> Overview</a></li>
+  <li><a href="#core-data-tables" id="toc-core-data-tables" class="nav-link" data-scroll-target="#core-data-tables"><span class="header-section-number">5.2</span> Core Data Tables</a></li>
+  <li><a href="#trait-data-tables" id="toc-trait-data-tables" class="nav-link" data-scroll-target="#trait-data-tables"><span class="header-section-number">5.3</span> Trait Data Tables</a></li>
+  <li><a href="#phenology-data-tables" id="toc-phenology-data-tables" class="nav-link" data-scroll-target="#phenology-data-tables"><span class="header-section-number">5.4</span> Phenology Data Tables</a></li>
+  <li><a href="#database-schema-diagram" id="toc-database-schema-diagram" class="nav-link" data-scroll-target="#database-schema-diagram"><span class="header-section-number">5.5</span> Database Schema Diagram</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.6</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -174,86 +176,203 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The <strong>National Timing Windows Database</strong> serves as a comprehensive repository for managing and analyzing ecological data related to the assessment of optimal timing windows for human interventions in Canadian waterbodies. This chapter details the step-by-step methodology for integrating diverse datasets into the relational database. The process ensures the data is harmonized, relationships are preserved, and schema integrity is maintained.</p>
-<p>The integration relies on datasets from the following sources:</p>
+<section id="overview" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.1</span> Overview</h2>
+<p>The National Timing Windows Database is a structured relational database designed to integrate diverse ecological datasets relevant to the identification of optimal timing windows for human interventions in Canadian waterbodies. The database consolidates spatial, taxonomic, phenological, and ecological trait data into a unified format to support environmental assessments, conservation efforts, and policy decisions.</p>
+<p>The database is built using SQLite and adheres to a structured schema that maintains referential integrity and optimized data retrieval. Key datasets include species distributions, fish traits, waterbody characteristics, and species phenology.</p>
+</section>
+<section id="core-data-tables" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="core-data-tables"><span class="header-section-number">5.2</span> Core Data Tables</h2>
+<section id="watersheds-watersheds" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="watersheds-watersheds"><span class="header-section-number">5.2.1</span> 1. Watersheds (<code>watersheds</code>)</h3>
 <ul>
-<li><strong>FishBase Freshwater Species Checklist</strong>: Provides information on species distribution and ecological traits for freshwater fish across Canada.</li>
-<li><strong>Atlas of Canada Hydrology</strong>: Offers geospatial data on lakes, rivers, and watersheds.</li>
-<li><strong>National Hydro Network (NHN)</strong>: Supplies detailed geospatial data on watersheds.</li>
-<li><strong>GBIF Species Occurrences</strong>: Documents species observations across waterbodies, enabling spatial intersections with lakes, rivers, and watersheds.</li>
-<li><strong>Species Traits &amp; Phenology Data</strong>: Derived from various sources, including FishBase, FishPass, and national ecological datasets, covering species’ habitat, morphology, reproduction, and movement patterns.</li>
+<li>Description: Contains attributes describing hydrological watershed units.</li>
+<li>Primary Key: <code>watershed_id</code></li>
+<li>Key Fields:
+<ul>
+<li><code>watershed_id</code>: Unique identifier for each watershed.</li>
+<li><code>name</code>: Watershed name.</li>
+<li><code>area_km2</code>: Watershed area in square kilometers.</li>
+</ul></li>
 </ul>
-<section id="initial-data-preparation" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="initial-data-preparation"><span class="header-section-number">5.1</span> Initial Data Preparation</h2>
-<p>The integration process begins with the preparation of core datasets: 1. <strong>Watersheds</strong>: Extracted from the NHN GeoBase dataset and processed to standardize geometries and identifiers. 2. <strong>Waterbodies</strong>: Includes geospatial data on lakes and rivers from the Atlas of Canada Hydrology, merged into a unified dataset of Canadian waterbodies. 3. <strong>Species Data</strong>: Combines occurrence data from GBIF with ecological and status attributes derived from FishBase, including information on game and commercial species. 4. <strong>Species Traits &amp; Phenology</strong>: Traits related to morphology, spawning, habitat preferences, and migration patterns are processed for integration. 5. <strong>Spatial Intersections</strong>: Relationships between species and waterbodies or watersheds are established through spatial joins to determine species presence.</p>
 </section>
-<section id="integration-workflow" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="integration-workflow"><span class="header-section-number">5.2</span> Integration Workflow</h2>
-<p>The integration is performed using the script <code>int_national_timing_windows_dataset</code>, which processes datasets and populates the SQLite relational database:</p>
-<ol type="1">
-<li><strong>Database Initialization</strong>:
+<section id="waterbodies-waterbodies" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="waterbodies-waterbodies"><span class="header-section-number">5.2.2</span> 2. Waterbodies (<code>waterbodies</code>)</h3>
 <ul>
-<li>A SQLite database is created with an initial schema for tables such as <code>watersheds</code>, <code>waterbodies</code>, <code>species</code>, <code>waterbodies_species</code>, <code>watersheds_species</code>, and additional life history attributes.</li>
-</ul></li>
-<li><strong>Watershed Data</strong>:
+<li>Description: Stores geospatial data on lakes and rivers across Canada.</li>
+<li>Primary Key: <code>waterbody_id</code></li>
+<li>Key Fields:
 <ul>
-<li>Watershed geometries are read from GeoPackage files and stripped of geometry for relational storage.</li>
-<li>The <code>watersheds</code> table is populated with watershed attributes such as <code>watershed_id</code>.</li>
+<li><code>waterbody_id</code>: Unique identifier for each waterbody.</li>
+<li><code>name</code>: Waterbody name.</li>
+<li><code>type</code>: Classification (lake, river, etc.).</li>
+<li><code>area_km2</code>: Waterbody area (if applicable).</li>
 </ul></li>
-<li><strong>Waterbody Data</strong>:
-<ul>
-<li>Lakes and rivers are processed into separate datasets and concatenated into a single <code>waterbodies</code> table.</li>
-<li>Attributes include <code>waterbody_id</code> and other relevant identifiers.</li>
-</ul></li>
-<li><strong>Species Data</strong>:
-<ul>
-<li>Fish species data is enriched with status and trait information.</li>
-<li>The <code>species</code> table is populated with <code>species_id</code>, <code>species</code>, and additional attributes such as threat categories.</li>
-</ul></li>
-<li><strong>Species Traits &amp; Phenology</strong>:
-<ul>
-<li>Traits such as <strong>habitat preferences, reproductive strategies, morphology, and tolerance levels</strong> are integrated into separate tables.</li>
-<li>Phenology-related data, including <strong>migration timing, spawning periods, and larval presence</strong>, are structured into dedicated tables.</li>
-</ul></li>
-<li><strong>Spatial Intersections</strong>:
-<ul>
-<li>Relationships between species occurrences and waterbodies (lakes and rivers) are established using spatial joins in <code>ana_waterbodies_species</code>.</li>
-<li>Similarly, relationships between species and watersheds are identified using the script <code>ana_watersheds_species</code>.</li>
-<li>Results are stored in <code>waterbodies_species</code> and <code>watersheds_species</code> tables.</li>
-</ul></li>
-</ol>
+</ul>
 </section>
-<section id="database-structure-and-schema" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="database-structure-and-schema"><span class="header-section-number">5.3</span> Database Structure and Schema</h2>
-<p>The resulting relational database schema is visualized as part of the integration process. Using the <code>dm</code> package, primary keys and foreign keys are defined to maintain referential integrity. The key relationships include: - <code>watersheds_species</code>: Links species to watersheds through <code>watershed_id</code> and <code>species_id</code>. - <code>waterbodies_species</code>: Links species to waterbodies (lakes or rivers) through <code>waterbody_id</code> and <code>species_id</code>. - <code>species</code>: Serves as the central table connecting species to waterbodies, watersheds, traits, and phenology. - <code>species_traits</code>: Stores trait-related information such as morphology, habitat use, and reproductive characteristics. - <code>species_phenology</code>: Captures seasonal movement and life cycle events such as migration, spawning, and larvae presence.</p>
+<section id="species-species" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="species-species"><span class="header-section-number">5.2.3</span> 3. Species (<code>species</code>)</h3>
+<ul>
+<li>Description: Catalog of freshwater fish species in Canada, including taxonomic and ecological attributes.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Key Fields:
+<ul>
+<li><code>species_id</code>: Unique identifier.</li>
+<li><code>scientific_name</code>: Taxonomic designation.</li>
+<li><code>common_name</code>: Commonly used name.</li>
+<li><code>taxonomy</code>: Classification details (family, genus, etc.).</li>
+</ul></li>
+</ul>
+</section>
+<section id="watersheds-species-relationship-watersheds_species" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="watersheds-species-relationship-watersheds_species"><span class="header-section-number">5.2.4</span> 4. Watersheds-Species Relationship (<code>watersheds_species</code>)</h3>
+<ul>
+<li>Description: Links fish species to watersheds where they are known to occur.</li>
+<li>Primary Keys: (<code>watershed_id</code>, <code>species_id</code>)</li>
+<li>Foreign Keys:
+<ul>
+<li><code>watershed_id</code> → <code>watersheds</code></li>
+<li><code>species_id</code> → <code>species</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="waterbodies-species-relationship-waterbodies_species" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="waterbodies-species-relationship-waterbodies_species"><span class="header-section-number">5.2.5</span> 5. Waterbodies-Species Relationship (<code>waterbodies_species</code>)</h3>
+<ul>
+<li>Description: Links fish species to specific lakes and rivers.</li>
+<li>Primary Keys: (<code>waterbody_id</code>, <code>species_id</code>)</li>
+<li>Foreign Keys:
+<ul>
+<li><code>waterbody_id</code> → <code>waterbodies</code></li>
+<li><code>species_id</code> → <code>species</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="trait-data-tables" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="trait-data-tables"><span class="header-section-number">5.3</span> Trait Data Tables</h2>
+<section id="habitat-preferences" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="habitat-preferences"><span class="header-section-number">5.3.1</span> 6. Habitat Preferences</h3>
+<ul>
+<li>Tables: <code>habitat_adult</code>, <code>habitat_juvenile</code>, <code>habitat_spawning</code>, <code>habitat_yoy</code></li>
+<li>Description: These tables store habitat preferences for different life stages.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields: Binary presence indicators for different habitat types (e.g., <code>riverine</code>, <code>lacustrine</code>).</li>
+</ul>
+</section>
+<section id="food-items-food_items" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="food-items-food_items"><span class="header-section-number">5.3.2</span> 7. Food Items (<code>food_items</code>)</h3>
+<ul>
+<li>Description: Documents dietary habits of fish species.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>food_type</code>: Type of prey consumed.</li>
+<li><code>frequency</code>: Occurrence frequency.</li>
+</ul></li>
+</ul>
+</section>
+<section id="spawning-characteristics-spawning" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="spawning-characteristics-spawning"><span class="header-section-number">5.3.3</span> 8. Spawning Characteristics (<code>spawning</code>)</h3>
+<ul>
+<li>Description: Stores reproductive traits including spawning conditions and parental care.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>temperature_min</code>: Minimum spawning temperature.</li>
+<li><code>temperature_max</code>: Maximum spawning temperature.</li>
+<li><code>spawning_frequency</code>: Number of times per year.</li>
+</ul></li>
+</ul>
+</section>
+<section id="morphological-traits-morphology" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="morphological-traits-morphology"><span class="header-section-number">5.3.4</span> 9. Morphological Traits (<code>morphology</code>)</h3>
+<ul>
+<li>Description: Describes body shape, size, and other morphological features.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>maximum_length_cm</code>: Maximum observed body length.</li>
+<li><code>body_depth_percent_tl</code>: Body depth as a percentage of total length.</li>
+</ul></li>
+</ul>
+</section>
+<section id="physiological-tolerances" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="physiological-tolerances"><span class="header-section-number">5.3.5</span> 10. Physiological Tolerances</h3>
+<ul>
+<li>Tables: <code>tolerance_adult</code>, <code>tolerance_embryo</code>, <code>tolerance_larvae</code>, <code>tolerance_spawner</code></li>
+<li>Description: Captures thermal and environmental tolerance ranges.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>temperature_max</code>: Maximum survivable temperature.</li>
+<li><code>oxygen_min</code>: Minimum dissolved oxygen tolerance.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="phenology-data-tables" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="phenology-data-tables"><span class="header-section-number">5.4</span> Phenology Data Tables</h2>
+<section id="migration-timing-migration_phenology" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="migration-timing-migration_phenology"><span class="header-section-number">5.4.1</span> 11. Migration Timing (<code>migration_phenology</code>)</h3>
+<ul>
+<li>Description: Defines seasonal migration windows for each species.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>start_month</code>: Beginning of migration season.</li>
+<li><code>end_month</code>: End of migration season.</li>
+</ul></li>
+</ul>
+</section>
+<section id="spawning-timing-spawning_phenology" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="spawning-timing-spawning_phenology"><span class="header-section-number">5.4.2</span> 12. Spawning Timing (<code>spawning_phenology</code>)</h3>
+<ul>
+<li>Description: Stores data on spawning periods.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>start_month</code>: First month of spawning.</li>
+<li><code>end_month</code>: Last month of spawning.</li>
+</ul></li>
+</ul>
+</section>
+<section id="larval-timing-larvae_phenology" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="larval-timing-larvae_phenology"><span class="header-section-number">5.4.3</span> 13. Larval Timing (<code>larvae_phenology</code>)</h3>
+<ul>
+<li>Description: Tracks larval presence across seasons.</li>
+<li>Primary Key: <code>species_id</code></li>
+<li>Fields:
+<ul>
+<li><code>species_id</code></li>
+<li><code>start_month</code>: First recorded larval occurrence.</li>
+<li><code>end_month</code>: Last recorded larval occurrence.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="database-schema-diagram" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="database-schema-diagram"><span class="header-section-number">5.5</span> Database Schema Diagram</h2>
+<p>The database schema is designed to enforce referential integrity through primary and foreign key constraints. The entity-relationship diagram (ERD) visualizes these relationships, ensuring consistency and efficiency in data retrieval.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-data-schema" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-data-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.svg" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: Relational schema of the National Timing Windows Database.
-</figcaption>
+<div>
+<figure class="figure">
+<p><img src="../../workspace/data/analyzed/national_timing_windows_dataset-1.0.0/national_timing_windows_database.png" class="img-fluid figure-img" width="4550"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="processed-data-overview" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="processed-data-overview"><span class="header-section-number">5.4</span> Processed Data Overview</h2>
-<p>Key tables in the relational database:</p>
-<ul>
-<li><strong>Watersheds</strong>: Contains metadata on watersheds across Canada, such as <code>watershed_id</code>.</li>
-<li><strong>Waterbodies</strong>: Includes lakes and rivers with attributes such as <code>waterbody_id</code>.</li>
-<li><strong>Species</strong>: Comprehensive list of fish species with ecological attributes and status.</li>
-<li><strong>Waterbodies-Species Relationship</strong>: Spatial relationships between species and waterbodies.</li>
-<li><strong>Watersheds-Species Relationship</strong>: Spatial relationships between species and watersheds.</li>
-<li><strong>Species Traits</strong>: Contains species-specific habitat, morphology, reproduction, and physiological attributes.</li>
-<li><strong>Species Phenology</strong>: Includes timing data on migration, spawning, and larvae presence.</li>
-</ul>
-<p>This structured integration allows for an evidence-based approach to identifying <strong>optimal timing windows for conservation and management actions</strong> in Canadian waterbodies.</p>
+<section id="summary" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.6</span> Summary</h2>
+<p>The National Timing Windows Database provides a structured, relational framework for integrating and analyzing fish species data across Canadian waterbodies. The inclusion of spatial, ecological, and temporal attributes ensures that researchers and conservation practitioners can assess seasonal constraints on fish life processes, ultimately supporting science-based conservation and management decisions.</p>
 
 
 </section>
